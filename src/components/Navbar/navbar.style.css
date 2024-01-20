@@ -1,0 +1,31 @@
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: rgba(137, 88, 50, 0.49);
+    width: 593px;
+    height: 56px;
+}
+
+ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+li{
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    list-style-type: none !important;
+    text-decoration: none !important;
+}
+
+/* styles.css */
+
+.link-without-decoration {
+    text-decoration: none;
+    color: inherit; /* Pour conserver la couleur du texte par défaut */
+  }
+  
