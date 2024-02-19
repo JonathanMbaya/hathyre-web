@@ -1,0 +1,22 @@
+{
+  "products": {
+
+    "hathyre_01": {
+      "id": 1,
+      "name": "Produit 1",
+      "price": 19.99,
+      "description": "Produit à base de beurre de karité",
+      "date-uploaded": "25/01/2024"
+    },
+
+    "hathyre_02": {
+      "id": 2,
+      "name": "Produit 2",
+      "img-product": "/img-products/baobabsoap.png",
+      "price": 39.99,
+      "description": "Produit à base de beurre de karité 2",
+      "date-uploaded": "25/01/2024"
+    }
+
+  }
+}

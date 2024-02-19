@@ -1,5 +1,5 @@
 .header{
-    height: 100vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,5 +42,21 @@ header .logo-container {
     height: auto; /* La hauteur sera ajustée automatiquement pour conserver les proportions du logo */
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    margin-top: 5rem;
+}
+
+.container h2{
+    text-align: left;
+}
+
+.container p{
+    text-align: center;
 }
   

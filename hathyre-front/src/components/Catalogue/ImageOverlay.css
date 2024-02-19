@@ -1,0 +1,47 @@
+/* ImageOverlay.css */
+
+
+.catalogue{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-overlay {
+    position: relative;
+    /* width: 100%;
+    max-width: 800px; Ajuste la largeur selon tes besoins */
+    margin: auto;
+  }
+  
+  .background-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Couleur d'ombre ajustable */
+  }
+  
+  .text {
+    position: absolute;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    bottom: 5%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    color: white; /* Couleur du texte ajustable */
+    text-align: center;
+    font-size: 24px; /* Taille de la police ajustable */
+    font-weight: bold; /* Poids de la police ajustable */
+  }
+  

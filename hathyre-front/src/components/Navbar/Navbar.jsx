@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './navbar.style.css';
 
 
-const Navbar = () => {
+function Navbar() {
     return (
         <div>
             <nav>

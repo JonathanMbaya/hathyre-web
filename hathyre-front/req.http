@@ -1,0 +1,29 @@
+POST http://localhost:8000/api/add/product HTTP/1.1
+content-type: application/json
+
+[
+    {
+        "name" : "Beurre de karité",
+        "price" : 19.90,
+        "description" : "Un produit 100% naturel sans ajout industriel"
+    }
+]
+
+###
+GET http://localhost:8000/api/all/products
+
+###
+GET http://localhost:8000/api/one/product/efdgitaP95CCFZ1q
+
+###
+PATCH http://localhost:8000/api/update/product/efdgitaP95CCFZ1q
+
+[
+    {
+        "name" : "Beurre de Cacahuète"
+    }
+]
+
+
+###
+DELETE http://localhost:8000/api/update/product/efdgitaP95CCFZ1q
