@@ -1,0 +1,60 @@
+.buttonNice button {
+    padding: 10px 20px;
+    border: none;
+    background: #EACD9A;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    height: 5rem;
+    font-weight: bold;
+  }
+
+  .buttonNice button:hover {
+    background: #EACD9A;
+  }
+  .buttonNice button::before,
+  .buttonNice button::after {
+    content: "";
+    background: inherit;
+    height: 5px;
+    width: 0px;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+  }
+  .buttonNice button::before {
+    top: -10px;
+    left: -10px;
+  }
+  .buttonNice button::after {
+    bottom: -10px;
+    right: -10px;
+  }
+  .buttonNice button:hover::before,
+  .buttonNice button:hover::after {
+    width: 220px;
+  }
+
+  #g,
+  #d {
+    background: inherit;
+    height: 0px;
+    width: 5px;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+    transition-delay: 0.3s;
+  }
+  #g {
+    bottom: -10px;
+    left: -10px;
+  }
+  #d {
+    top: -10px;
+    right: -10px;
+  }
+  .buttonNice button:hover #g,
+  .buttonNice button:hover #d {
+    height: 100px;
+  }
+  

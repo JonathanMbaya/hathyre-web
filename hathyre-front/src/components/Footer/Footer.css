@@ -1,0 +1,74 @@
+.footer{
+    background-color: #895832;
+    color: white;
+    width: 100%;
+}
+
+.first-area-footer .newsletter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.first-area-footer .menu-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+
+.first-area-footer .menu-footer .one-menu-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6rem;
+}
+
+.contact-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+
+.contact-footer .contact-footer-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem;
+}
+
+.contact-footer .contact-footer-icon span{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.second-area-footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #45260D;
+    width: 100%;
+}
+.second-area-footer p {
+    text-align: center;
+}
+
+
+.second-area-footer .icon-money{
+    display: flex;
+    justify-content: flex-end;
+    right: 2rem;
+    width: 45%;
+}
+
+.second-area-footer .icon-money img {
+    width: auto;
+    height: 44px;
+    margin-right: 1rem;
+}

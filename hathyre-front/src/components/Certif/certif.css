@@ -1,0 +1,16 @@
+.certif-block{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    height: 50vh;
+}
+            
+.circle-certif{
+
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    background-color: red !important;
+
+}

@@ -6,6 +6,19 @@ function TextHome() {
         <div className='text-home'>
 
             <div className='container'>
+                <h2>
+                    “ Hathyre” 
+                </h2>
+
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+                dolore magna aliqua. Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+
+            </div>
+
+            <div className='container'>
 
                 <svg className='background-t1' xmlns="http://www.w3.org/2000/svg" width="366" height="419" viewBox="0 0 366 419" fill="none">
                     <path d="M0.467834 144.331C13.2207 98.2731 249.47 28.9195 366 0V419C238.842 346.635 -12.285 190.389 0.467834 144.331Z" fill="#EACD9A" fill-opacity="0.47"/>

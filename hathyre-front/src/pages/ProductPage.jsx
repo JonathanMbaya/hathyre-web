@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Header/Header';
+import ListProducts from '../components/Catalogue/ListProducts.jsx'
 
 function ProductPage() {
     return (
@@ -13,6 +14,8 @@ function ProductPage() {
             </div>
             
             <Navbar/>
+
+            <ListProducts/>
         </div>
     );
 };

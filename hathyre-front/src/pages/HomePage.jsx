@@ -2,11 +2,11 @@ import React from 'react';
 import Header from '../components/Header/Header';
 import TextHome from '../components/TextHome/TextHome';
 import Catalogue from '../components/Catalogue/catalogue';
-import Blog from '../components/Blog/Blog';
+import Certif from '../components/Certif/Certif';
+import Footer from '../components/Footer/Footer'
 
 
 function HomePage (){
-
 
     return (
         <div>
@@ -24,9 +24,9 @@ function HomePage (){
 
             <Catalogue/>
 
-            <Blog/>
+            <Certif/>
 
-            
+            <Footer/>
             
         </div>
     );
