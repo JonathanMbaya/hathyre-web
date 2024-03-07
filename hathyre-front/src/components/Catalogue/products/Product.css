@@ -1,0 +1,13 @@
+.list-products {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.product img {
+    width: 20rem;
+}
+
+.product p {
+    color: #895832;
+}

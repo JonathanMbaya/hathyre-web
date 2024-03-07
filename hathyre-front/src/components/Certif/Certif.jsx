@@ -5,7 +5,6 @@ function Certif () {
     return (
 
         <>
-            <h3>Nos certifictaions</h3>
 
             <div className='certif-block'>
                 

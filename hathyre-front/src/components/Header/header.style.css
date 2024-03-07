@@ -27,8 +27,7 @@
 
 /* styles/Logo.css */
 
-header .logo-container {
-    max-width: 10%; /* Le logo ne dépassera pas la largeur du conteneur parent */
+header .logo-container { /* Le logo ne dépassera pas la largeur du conteneur parent */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,5 +56,10 @@ header .logo-container {
 
 .container p{
     text-align: center;
+}
+
+h1{
+    font-weight: bolder;
+    color: violet;
 }
   

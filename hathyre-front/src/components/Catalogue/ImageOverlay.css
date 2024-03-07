@@ -1,16 +1,7 @@
 /* ImageOverlay.css */
 
-.catalogue{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 .image-overlay {
     position: relative;
-    /* width: 100%;
-    max-width: 800px; Ajuste la largeur selon tes besoins */
     margin: auto;
   }
   
@@ -43,4 +34,17 @@
     font-size: 24px; /* Taille de la police ajustable */
     font-weight: bold; /* Poids de la police ajustable */
   }
+
+
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .column {
+    flex: 1;
+    margin: 0 10px; /* Marge entre les colonnes */
+  }
+  
   

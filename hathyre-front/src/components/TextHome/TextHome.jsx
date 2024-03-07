@@ -6,9 +6,9 @@ function TextHome() {
         <div className='text-home'>
 
             <div className='container'>
-                <h2>
+                <h1>
                     “ Hathyre” 
-                </h2>
+                </h1>
 
                 <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 

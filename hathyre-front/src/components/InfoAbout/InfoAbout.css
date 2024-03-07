@@ -1,0 +1,26 @@
+.block-about-right img , .block-about-left img {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.text-about{
+    position: absolute;
+    width: 50%;
+    height: 63.4vh;
+    background-color: #EACD9A;
+}
+
+.block-about-right .text-about {
+    position: absolute;
+    justify-content: flex-end;
+    margin-left: 50%;
+    width: 50%;
+    height: 61.1vh;
+    background-color: #EACD9A;
+}
+
+.text-about p , .text-about h3{
+    padding: 2rem;
+    color: #ffffff;
+}

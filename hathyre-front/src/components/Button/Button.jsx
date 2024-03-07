@@ -1,12 +1,13 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import './Button.css';
 
-function Buttons(){
+function Buttons({text}){
     return (
         <div>
             <Button variant="primary" size="lg">
-                Découvrir +
-            </Button>{' '}
+                {text}
+            </Button>
         </div>
     );
 };

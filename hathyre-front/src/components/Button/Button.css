@@ -1,0 +1,17 @@
+button {
+    margin-top: .5rem ;
+    background-color: blanchedalmond;
+    border: none;
+    padding: 1rem;
+    font-weight: bolder;
+}
+
+
+button:hover {
+    transition: .3s;
+    background-color: #EACD9A;
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-weight: bolder;
+}

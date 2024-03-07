@@ -15,7 +15,7 @@ function Navbar() {
                         <Link to="/product" className="link-without-decoration">Catalogue</Link>
                     </li>
                     <li>
-                        <Link to="/about" className="link-without-decoration">A propos de Hathyre</Link>
+                        <Link to="/apropos" className="link-without-decoration">A propos de Hathyre</Link>
                     </li>
                 </ul>
             </nav>
