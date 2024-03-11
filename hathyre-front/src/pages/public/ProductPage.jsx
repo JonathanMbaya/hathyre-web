@@ -1,6 +1,6 @@
 import React from 'react';
-import ListProducts from '../components/Catalogue/products/ListProducts.jsx';
-import Footer from '../components/Footer/Footer';
+import ListProducts from '../../components/Catalogue/products/ListProducts.jsx';
+import Footer from '../../components/Footer/Footer';
 
 function ProductPage() {
     return (

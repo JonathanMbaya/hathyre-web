@@ -1,8 +1,8 @@
 import React from 'react';
-import TextHome from '../components/TextHome/TextHome';
-import Catalogue from '../components/Catalogue/BannerProduct/catalogue.jsx';
-import Certif from '../components/Certif/Certif';
-import Footer from '../components/Footer/Footer';
+import TextHome from '../../components/TextHome/TextHome';
+import Catalogue from '../../components/Catalogue/BannerProduct/catalogue.jsx';
+import Certif from '../../components/Certif/Certif';
+import Footer from '../../components/Footer/Footer';
 
 
 function HomePage ({currentPage}){

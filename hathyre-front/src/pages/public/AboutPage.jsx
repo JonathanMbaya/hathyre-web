@@ -1,6 +1,6 @@
 import React from 'react';
-import InfoAbout from '../components/InfoAbout/InfoAbout.jsx';
-import Footer from '../components/Footer/Footer';
+import InfoAbout from '../../components/InfoAbout/InfoAbout.jsx';
+import Footer from '../../components/Footer/Footer';
 
 function AboutPage () {
     return (
