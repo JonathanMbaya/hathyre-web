@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from './Layout';
 import AdminLogin from "./Connexion/AdminLogin.jsx";
 import Dashboard from "./Dashboard/Dashboard.jsx";
+import AddProduct from './Dashboard/AddProduct.jsx';
 
 const AdminRouter = () => {
     return (
@@ -10,7 +11,8 @@ const AdminRouter = () => {
             <Route path='/admin' element={<Layout />}>
                 {/* Utilisation du chemin relatif pour la route de connexion */}
                 <Route path='login' element={<AdminLogin />} />
-                <Route path='login/dashboard' element={<Dashboard/>} />
+                <Route path='dashboard' element={<Dashboard/>} />
+                <Route path='dashboard/product/add' element={<AddProduct/>} />
             </Route>
         </Routes>
     );

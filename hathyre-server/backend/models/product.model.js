@@ -6,16 +6,34 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
     price: {
-      type: String,
+      type: Number,
       required: true,
     },
+
     description: {
       type: String,
       required: true,
     },
+
+    promo: {
+      type: Number,
+      required: true,
+    },
+
+    stock: {
+      type: Number,
+      required: true,
+    },
+
     likes: {
-      type: [String],
+      type: [String]
+    },
+
+    stock: {
+      type: Number,
+      required: true,
     },
   },
   {
@@ -25,3 +43,4 @@ const productSchema = mongoose.Schema(
 
 const Product = mongoose.model('product', productSchema);
 module.exports = Product;
+

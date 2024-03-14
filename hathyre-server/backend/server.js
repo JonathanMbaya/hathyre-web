@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const connectDB = require("./config/db");
 const dotenv = require("dotenv").config();
 const port = 5000;
@@ -7,6 +8,9 @@ const port = 5000;
 connectDB();
 
 const app = express();
+
+// Utilisez le middleware cors
+app.use(cors());
 
 // Middleware qui permet de traiter les données de la Request
 app.use(express.json());
