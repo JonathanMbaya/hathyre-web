@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabs from "../../../components/Tabs/Tabs.jsx";
+import Tabs from "../../../components/Dashboard/Tabs/Tabs.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
