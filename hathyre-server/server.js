@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require('cors');
-const connectDB = require("./config/db");
+const connectDB = require("./backend/config/db");
 const dotenv = require("dotenv").config();
 const multer = require('multer');
 const path = require('path');
@@ -19,8 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-app.use("/api", require("./routes/product.routes"));
-app.use("/api", require("./routes/user.routes"));
+app.use("/api", require("./backend/routes/product.routes"));
+app.use("/api", require("./backend/routes/user.routes"));
 
   
 
