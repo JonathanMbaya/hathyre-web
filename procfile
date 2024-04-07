@@ -1,1 +1,2 @@
 web: npm start
+server: node server.cjs
