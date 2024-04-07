@@ -1,0 +1,54 @@
+/* navbar.style.css */
+
+.navbar {
+  position: relative; /* Ajoutez cette ligne */
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Ajoutez ces styles pour la barre de navigation fixe */
+.navbar.fixed {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 38%;
+  z-index:2000; /* Assurez-vous que la barre de navigation apparaît au-dessus du contenu */
+}
+
+/* Le reste de votre CSS reste inchangé */
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  background-color: bisque;
+  border-radius: 1rem;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.link-without-decoration {
+  text-decoration: none;
+  color: inherit; /* Pour conserver la couleur du texte par défaut */
+}
+
+/* Styles pour la navigation responsive */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  li {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+  }
+}

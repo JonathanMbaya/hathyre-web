@@ -1,0 +1,17 @@
+@import "./styles/variables.scss";
+
+body , *{
+  font-family: 'Inter Tight', sans-serif;;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+body{
+  margin: 0px !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

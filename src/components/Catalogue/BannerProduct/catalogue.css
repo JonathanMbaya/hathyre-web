@@ -1,0 +1,52 @@
+.catalogue-banner , .about-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    background-color: #EACD9A;
+    padding: 1rem;
+}
+
+h2{
+    text-align: center;
+}
+
+.text-banner h2{
+    text-align: left;
+}
+
+.text-banner{
+    width: 50%;
+    padding: 2rem;
+    text-align: left !important ;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.catalogue-banner img {
+width: 20rem;
+height: 20rem;
+}
+
+.about-banner img {
+    overflow-y: hidden;
+    width: 30rem;
+    height: 30rem;
+}
+
+.btn-plus{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #895832;
+    width: 20rem;
+}
+
+.btn-plus p{
+
+    font-weight: bolder;
+
+}
