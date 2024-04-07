@@ -1,2 +1,2 @@
 web: npm start
-server: node server.cjs
+server: nodemon server.cjs
