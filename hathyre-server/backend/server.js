@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require('cors');
 const connectDB = require("./config/db");
 const dotenv = require("dotenv").config();
+const multer = require('multer');
+const path = require('path');
 const port = 5000;
 
 // connexion à la DB
@@ -16,7 +18,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
 app.use("/api", require("./routes/product.routes"));
+app.use("/api", require("./routes/user.routes"));
+
+  
 
 // Lancer le serveur
-app.listen(port, () => console.log("Le serveur a démarré au port  " + port));
+app.listen(port, () => console.log("Le serveur a démarré au port " + port));

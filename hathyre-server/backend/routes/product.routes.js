@@ -8,6 +8,11 @@ const {
   likeProduct,
   dislikeProduct,
 } = require("../controllers/product.controller");
+
+// const {
+//   setImage
+// } = require("../controllers/image.controller");
+
 const router = express.Router();
 
 router.get("/products", getProducts);
@@ -17,5 +22,6 @@ router.put("/update/product/:id", editProduct);
 router.delete("/delete/product/:id", deleteProduct);
 router.patch("/liked/:id", likeProduct);
 router.patch("/disliked/:id", dislikeProduct);
+
 
 module.exports = router;
