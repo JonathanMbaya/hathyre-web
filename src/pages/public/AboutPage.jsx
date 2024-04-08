@@ -1,7 +1,7 @@
 import React from 'react';
-import InfoAbout from '../../components/InfoAbout/InfoAbout.jsx';
-import TextHome from '../../components/TextHome/TextHome';
-import Footer from '../../components/Footer/Footer';
+// import InfoAbout from '../../components/InfoAbout/InfoAbout.jsx';
+// import TextHome from '../../components/TextHome/TextHome';
+// import Footer from '../../components/Footer/Footer';
 
 function AboutPage () {
     return (
@@ -10,10 +10,10 @@ function AboutPage () {
                 A propos de Hathyre
             </h1>
 
-            <video autoPlay loop muted style={{ width: '50%', height: 'auto' }}>
+            {/* <video autoPlay loop muted style={{ width: '50%', height: 'auto' }}>
                 <source src={`${process.env.PUBLIC_URL}/karite.mp4`} type="video/mp4" />
                 {/* Ajoutez d'autres sources pour les différents formats de vidéo si nécessaire */}
-            </video>
+            {/*</video> */}
 
             <img 
                 src={`${process.env.PUBLIC_URL}/karite.gif`} 
@@ -21,11 +21,17 @@ function AboutPage () {
                 style={{ width: '50%', height: 'auto' }} 
             />
 
-            <InfoAbout/>
+            <img 
+                src={`${process.env.PUBLIC_URL}/karite.gif`} 
+                alt="GIF de karite" 
+                style={{ width: '50%', height: 'auto' }} 
+            />
+
+            {/* <InfoAbout/>
 
             <TextHome/>
 
-            <Footer/>
+            <Footer/> */}
             
         </>
     );
