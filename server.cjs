@@ -6,6 +6,7 @@ const connectDB = require("./backend/config/db.cjs");
 // const path = require('path');
 const port = 5000;
 
+
 // connexion à la DB
 connectDB();
 
@@ -18,10 +19,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 app.use("/api", require("./backend/routes/product.routes.cjs"));
 app.use("/api", require("./backend/routes/user.routes.cjs"));
 
+// mongodb+srv://jonathanmbaya13:hathyre1234@app-hathyre.grr5ukx.mongodb.net/
   
 
 // Lancer le serveur
