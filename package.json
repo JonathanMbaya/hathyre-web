@@ -26,9 +26,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.cjs",
+    "watch": "npm run server",
     "server": "nodemon server.cjs",
-    "heroku-postbuild": "npm run server",
+    "heroku-postbuild": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
