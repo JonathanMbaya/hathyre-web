@@ -1,7 +1,16 @@
 .burger-menu {
   position: fixed;
   height: 10vh;
-  right: 2rem;
+  right: .6rem;
+}
+
+.icons-users{
+  display: flex;
+  justify-content: center;
+}
+
+.icons-users .burger-icon, .line{
+  color: #EACD9A;
 }
 
 .burger-icon {
@@ -19,7 +28,7 @@
   width: 24px;
   height: 2px;
   margin: .1rem;
-  background-color: #333;
+  background-color: #EACD9A;
   transition: transform 0.3s ease;
 }
 
@@ -47,7 +56,9 @@
 }
 
 .menu.open {
-  transform: translateX(200px); /* Move the menu to the right */
+  transform: translateX(200px);
+  position: fixed;
+  z-index: 8000; /* Move the menu to the right */
 }
 
 .menu ul {
@@ -69,3 +80,38 @@
   color: #333;
   font-weight: bold;
 }
+
+
+  /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
+  @media only screen and (max-width: 768px) {
+    .first-area-footer, .second-area-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .icon-money{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu-footer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .one-menu-footer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    .newsletter, .menu-footer, .contact-footer {
+      flex: 1;
+    }
+  }

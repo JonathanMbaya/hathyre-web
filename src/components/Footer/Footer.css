@@ -24,7 +24,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-left: 6rem;
 }
 
 .contact-footer{
@@ -84,3 +83,44 @@
 .newsletter input {
     width: 80%;
 }
+
+.one-menu-footer{
+    width: 21rem;
+}
+
+
+  
+  /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
+  @media only screen and (max-width: 768px) {
+    .first-area-footer, .second-area-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .icon-money{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu-footer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .one-menu-footer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    .newsletter, .menu-footer, .contact-footer {
+      flex: 1;
+    }
+  }
+  

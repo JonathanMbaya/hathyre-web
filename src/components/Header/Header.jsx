@@ -10,8 +10,6 @@ function Header({ currentPage }) {
     return (
         <div className='header'>
 
-
-
             {location.pathname === '/' && 
                 <div>
                     <BurgerMenu/>
@@ -57,7 +55,6 @@ function Header({ currentPage }) {
                     </div>
 
                     <Navbar />
-                    <BurgerMenu/>
 
                 </div>
             
@@ -65,6 +62,8 @@ function Header({ currentPage }) {
             {location.pathname === '/apropos' && 
             
                 <div>
+
+                    <BurgerMenu/>
 
                     <div className='logo-container' style={{ display: 'flex', justifyContent: 'center' }}>
                         <img

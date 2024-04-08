@@ -1,5 +1,5 @@
 .buttonNice button {
-    padding: 10px 20px;
+    padding: 0px 20px;
     border: none;
     background: #EACD9A;
     font-size: 20px;
@@ -9,6 +9,12 @@
     position: relative;
     height: 5rem;
     font-weight: bold;
+  }
+
+  .buttonNice p {
+    padding: 0px;
+    margin: 0px;
+    font-size: 1rem;
   }
 
   .buttonNice button:hover {

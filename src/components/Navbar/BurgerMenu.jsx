@@ -5,6 +5,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import './BurgerMenu.css'; // Assurez-vous d'avoir un fichier CSS pour styliser le menu burger
 
 const BurgerMenu = () => {
@@ -16,22 +17,32 @@ const BurgerMenu = () => {
 
   return (
     <div className="burger-menu">
-      <button className="burger-icon" onClick={toggleMenu}>
-        <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-        <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-        <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-        {/* <div className={`line ${isOpen ? 'open' : ''}`}></div>
-        <div className={`line ${isOpen ? 'open' : ''}`}></div>
-        <div className={`line ${isOpen ? 'open' : ''}`}></div> */}
-      </button>
 
-      <button className="burger-icon" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={faBagShopping} />
-      </button>
+      <div className="icons-users">
 
-      <button className="burger-icon" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
-      </button>
+        <button className="burger-icon" onClick={toggleMenu}>
+          <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+          <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+          <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+          {/* <div className={`line ${isOpen ? 'open' : ''}`}></div>
+          <div className={`line ${isOpen ? 'open' : ''}`}></div>
+          <div className={`line ${isOpen ? 'open' : ''}`}></div> */}
+        </button>
+
+        <button className="burger-icon" onClick={toggleMenu}>
+          <FontAwesomeIcon icon={faBagShopping} />
+        </button>
+
+        <button className="burger-icon">
+          <FontAwesomeIcon icon={faUser} />
+        </button>
+
+        <button className="burger-icon" onClick={toggleMenu}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+
+      </div>
+
 
 
       <div className={`menu ${isOpen ? 'open' : ''}`}>

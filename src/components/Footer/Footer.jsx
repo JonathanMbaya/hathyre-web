@@ -8,7 +8,7 @@ function Footer() {
     return (
         <div className='footer'>
             {/* Première partie du Footer */}
-            <div className='first-area-footer col-md-12'>
+            <div className='first-area-footer'>
                 <div className='newsletter'>
                     <h3>S'abonner à la newsletter</h3>
                     <div className='newsletter'>
@@ -19,7 +19,7 @@ function Footer() {
 
                 <div className='menu-footer'>
                     {/* Catalogue */}
-                    <ul className='one-menu-footer col-md-4'>
+                    <div className='one-menu-footer'>
                         <h3>Catalogue</h3>
                         <div>
                             <li>Home</li>
@@ -29,10 +29,10 @@ function Footer() {
                             <li>FAQ</li>
                             <li>Contact</li>
                         </div>
-                    </ul>
+                    </div>
 
                     {/* Plan de site */}
-                    <ul className='one-menu-footer col-md-4'>
+                    <div className='one-menu-footer'>
                         <h3>Plan de site</h3>
                         <div>
                             <li>Home</li>
@@ -42,10 +42,10 @@ function Footer() {
                             <li>FAQ</li>
                             <li>Contact</li>
                         </div>
-                    </ul>
+                    </div>
 
                     {/* Mentions Légales */}
-                    <ul className='one-menu-footer col-md-4'>
+                    <div className='one-menu-footer'>
                         <h3>Mentions Légales</h3>
                         <div>
                             <li>Mentions Légales</li>
@@ -53,7 +53,7 @@ function Footer() {
                             <li>Paiements et Livraison</li>
                             <li>Politique de confidentialité</li>
                         </div>
-                    </ul>
+                    </div>
                 </div>
 
                 <div className='contact-footer'>

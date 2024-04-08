@@ -8,7 +8,7 @@
 }
 
 /* Ajoutez ces styles pour la barre de navigation fixe */
-.navbar.fixed {
+/* .navbar.fixed {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -16,7 +16,7 @@
   top: 0;
   left: 38%;
   z-index:2000; /* Assurez-vous que la barre de navigation apparaît au-dessus du contenu */
-}
+
 
 /* Le reste de votre CSS reste inchangé */
 nav ul {
@@ -41,9 +41,8 @@ li {
 
 /* Styles pour la navigation responsive */
 @media screen and (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
+  .navbar, .navbar .fixed {
+    display: none;
   }
 
   li {
