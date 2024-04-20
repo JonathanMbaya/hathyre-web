@@ -5,6 +5,54 @@ function InfoAbout () {
     return (
         <>
 
+<div className='block-tri-info'>
+                <div className='container tri-info'>
+                    <h2>
+                        “ Hathyre ” 
+                    </h2>
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+                        ex ea commodo consequat.
+
+                    </p>
+                </div>
+
+
+                <div className='container tri-info'>
+                    <h2>
+                        Nos produits à base de beurre de karité “ Hathyre ” 
+                    </h2>
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+                        ex ea commodo consequat.
+
+                    </p>
+                </div>
+
+
+                <div className='container tri-info'>
+                    <h2>
+                        Pourquoi faire le choix des produits  Hathyre ?
+                    </h2>
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+                        ex ea commodo consequat.
+
+                    </p>
+                </div>
+                
+
+            </div>
+
             <div className='block-about-left'>
                 <div className='text-about'>
                     <h3>Notre Histoire</h3>
@@ -15,7 +63,8 @@ function InfoAbout () {
                         maiores corporis!
                     </p>
                 </div>
-                <img src={`${process.env.PUBLIC_URL}/img-about/img-about2.png`} alt="" />
+                <div className='img-text-about-right'></div>
+
             </div>
 
             <div className='block-about-right'>
@@ -30,11 +79,10 @@ function InfoAbout () {
                     </p>
                 </div>
 
-                <img src={`${process.env.PUBLIC_URL}/img-about/img-about1.png`} alt="" />
+                <div className='img-text-about-left'></div>
                 
             </div>
 
-            
         </>
     );
 };

@@ -4,6 +4,26 @@
     align-items: center;
 }
 
+.header-home {
+    background-image: url('../../../public/present/header-background.jpg');
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 60vh;
+
+}
+
+.header-apropos video {
+    position: absolute;
+    z-index: -1000;
+    left: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+}
+
 .custom-shape-divider-top-1705679374 {
     position: absolute;
     z-index: -1000;
@@ -58,6 +78,14 @@ header .logo-container { /* Le logo ne dépassera pas la largeur du conteneur pa
 
 h1{
     font-weight: bolder;
-    color: violet;
 }
+
+.background-img-header {
+    display: flex;
+    position: absolute;
+    z-index: -1; /* Changer la valeur selon vos besoins */
+    background-image: url('/public/present/header-background.jpg'); /* Chemin relatif ou absolu vers votre image */
+    /* Autres styles */
+}
+
   

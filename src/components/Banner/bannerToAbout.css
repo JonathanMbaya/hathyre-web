@@ -1,0 +1,54 @@
+.row { 
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  margin: 2rem; 
+}
+
+.button-up{
+  position: absolute;
+  z-index: 2000000;
+}
+
+.button-up button{
+border-radius: .5rem;
+}
+
+.box2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  width:50%; 
+  height: 30vh;
+  overflow: hidden;
+}
+      
+.box2 img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: .5rem;
+  /* transform: rotate(90deg); Fait pivoter l'image de 90 degrés */
+ /* Réduit la luminosité de l'image */
+ filter:brightness(80%)
+}
+
+h2 {
+  color: #45260D;
+}
+
+
+          
+
+@media (max-width: 540px) {
+  h2 {
+    font-size: 24px;
+    color: #45260D;
+  }
+  h3 {
+    font-size: 17px;
+  }
+}

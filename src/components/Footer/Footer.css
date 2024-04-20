@@ -76,7 +76,6 @@
     display: flex !important;
     flex-direction: row;
     margin-bottom: 1rem;
-    margin-top: 1rem;
 
 }
 
@@ -86,6 +85,12 @@
 
 .one-menu-footer{
     width: 21rem;
+}
+
+.insta{
+    width: 24px;
+    height: 24px;
+    border-radius: .8rem;
 }
 
 

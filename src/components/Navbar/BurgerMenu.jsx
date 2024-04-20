@@ -10,10 +10,16 @@ import './BurgerMenu.css'; // Assurez-vous d'avoir un fichier CSS pour styliser 
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const toggleSearch = () => {
+    setIsOpenSearch(!isOpenSearch);
+  };
+
 
   return (
     <div className="burger-menu">
@@ -24,20 +30,20 @@ const BurgerMenu = () => {
           <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
           <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
           <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-          {/* <div className={`line ${isOpen ? 'open' : ''}`}></div>
-          <div className={`line ${isOpen ? 'open' : ''}`}></div>
-          <div className={`line ${isOpen ? 'open' : ''}`}></div> */}
         </button>
 
         <button className="burger-icon" onClick={toggleMenu}>
           <FontAwesomeIcon icon={faBagShopping} />
         </button>
 
-        <button className="burger-icon">
-          <FontAwesomeIcon icon={faUser} />
-        </button>
+        <Link to="/admin/login">
+          <button className="burger-icon">
+            <FontAwesomeIcon icon={faUser} />
+          </button>
+        </Link>
 
-        <button className="burger-icon" onClick={toggleMenu}>
+
+        <button className="burger-icon" onClick={toggleSearch}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
 
@@ -46,7 +52,7 @@ const BurgerMenu = () => {
 
 
       <div className={`menu ${isOpen ? 'open' : ''}`}>
-      <ul>
+        <ul>
           <li>
             <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
           </li>
@@ -57,6 +63,15 @@ const BurgerMenu = () => {
             <Link to="/apropos" className="link-without-decoration">A propos de Hathyre</Link>
           </li>
         </ul>
+      </div>
+
+      <div className={`search ${isOpenSearch ? 'openSearch': ''}`}>
+        <div className={`result-search ${isOpenSearch ? 'openSearch': ''}`}>
+
+        </div>
+
+        <input type="text" placeholder="Trouvez un produit" />
+
       </div>
     </div>
   );

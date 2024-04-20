@@ -1,35 +1,31 @@
 import React from 'react';
-// import BannerCatalogue from '../../components/Catalogue/BannerProduct/banner-catalogue.jsx';
-// import BannerAbout from '../../components/Catalogue/BannerProduct/banner-about';
-import Certif from '../../components/Certif/Certif';
+import Banner from "../../components/Banner/Banner";
+import BannerToAbout from "../../components/Banner/BannerToAbout";
+import Products from '../../components/Product/Products';
 import Footer from '../../components/Footer/Footer';
 
-  
-  
-  
   
 
 function HomePage ({currentPage}){
 
     return (
         <>
-
-            <Certif
+            <div id="shadow"></div>
+            <Products
                 title ="Découvrez nos nouveautés"
             />
 
-            <Certif
-                title ="Tous nos produits"
+            <Banner
+                title ="Toute la gamme de Hathyre"
+                src = {process.env.PUBLIC_URL + "/present/5.png"}
             />
 
-            {/* <Certif
-                title ="Découvrez l'histoire des produits Hathyre
-                et les secrets de nos fabrications"
-            /> */}
+            <BannerToAbout
+                title ="Connaître notre histoire"
+                src = {process.env.PUBLIC_URL + "/present/7.png"}
+            />
 
-            {/* <BannerAbout/> */}
-
-            <Certif
+            <Products
                 title ="Nos certifications"
             />
 

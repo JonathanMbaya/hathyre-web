@@ -2,25 +2,99 @@
     width: 100%;
     margin: 0 !important;
     padding: 0 !important;
+    height: 60vh;
+}
+
+.img-text-about-right {
+    background-image: url('../../../public/img-about/img-about2.png');
+    margin-left: 50%;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 60vh;
+}
+
+.img-text-about-left {
+    background-image: url('../../../public/img-about/img-about1.png');
+    margin-right: 50%;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 60vh;
 }
 
 .text-about{
     position: absolute;
     width: 50%;
-    height: 63.4vh;
-    background-color: #EACD9A;
+    height: 60vh;
+    background-color: white;
 }
 
 .block-about-right .text-about {
     position: absolute;
+    z-index: -1000;
     justify-content: flex-end;
     margin-left: 50%;
     width: 50%;
-    height: 61.1vh;
-    background-color: #EACD9A;
+    height: 60vh;
+    background-color: white;
+    color: black;
 }
 
 .text-about p , .text-about h3{
-    padding: 2rem;
-    color: #ffffff;
+    padding: 1rem;
+    color: black;
 }
+
+.text-about h3{
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.block-tri-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tri-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    height: 40vh;
+    margin: .5rem .5rem 8rem .5rem;
+    box-shadow: -1px 2px 5px 1px 
+    rgba(0, 0, 0, 0.7);
+    background-color: white;
+    border-radius: 1rem;
+    width: 20%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .block-tri-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: .5rem .5rem .5rem .5rem;
+    }
+
+    .tri-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: .5rem .5rem .5rem .5rem;
+        box-shadow: none;
+        background-color: white;
+        border-radius: 1rem;
+        width: 60%;
+    }
+  }

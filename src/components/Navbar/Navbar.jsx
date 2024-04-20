@@ -32,7 +32,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div className={`navbar ${isNavbarFixed ? 'fixed' : ''}`}>
+    <div className={`navbar ${isNavbarFixed ? 'fixed' : ''} animate__animated animate__fadeInUp`}>
       <nav>
         <ul>
           <li>
