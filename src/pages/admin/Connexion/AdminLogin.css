@@ -45,7 +45,6 @@ input {
 }
 
 .login-text {
-  color: white;
   font-size: 1.5rem;
   margin: 0 auto;
   max-width: 50%;
@@ -62,7 +61,6 @@ input {
   border: none; /* Supprimer les bordures par défaut */
   border-bottom: 1px solid black; /* Ajouter une ligne en bas */
   outline: none; /* Supprimer le contour */
-  color: white;
   display: block;
   margin: 1rem;
   padding: .5rem;
@@ -83,7 +81,7 @@ input {
   font-size: 75%;
   left: 0;
   opacity: 0.6;
-  padding: .5rem;
+  padding-bottom: 2rem;
   position: absolute;
   text-align: center;
   border: none; /* Supprimer les bordures par défaut */

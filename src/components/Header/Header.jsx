@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import BurgerMenu from "../Navbar/BurgerMenu";
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import './header.style.css';
 import 'animate.css';
 
@@ -56,6 +56,20 @@ function Header({ currentPage }) {
                         />
                     </div>
                     <Navbar />
+                </div>
+            }
+
+            {location.pathname === '*' && 
+                <div className="error-page">
+
+                    <h1>Erreur 404</h1>
+
+                    <h2> Cette page n'existe pas désolé ...</h2>
+
+                    <Link to="/">
+                        <button>Revenir a l'accueil</button>
+                    </Link>
+
                 </div>
             }
 

@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header.jsx';
 import HomePage from './HomePage';
 import ProductPage from './ProductPage.jsx';
 import AboutPage from './AboutPage.jsx';
+// import Error from "../../Error.jsx";
 
 function PublicRouter ()  {
 
@@ -38,7 +39,16 @@ function PublicRouter ()  {
                     return <AboutPage />;
                 }}
                 />
-                {/* Ajoutez d'autres routes au besoin. */}
+{/* 
+                <Route
+                    path="*"
+                    element={<Error />}
+                    render={() => {
+                        setCurrentPage('Error');
+                        return <Error />;
+                    }}
+                /> */}
+
             </Routes>
         </>
     );

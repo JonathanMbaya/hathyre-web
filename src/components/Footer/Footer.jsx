@@ -1,7 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import Buttons from "../Button/Button";
 import ButtonNice from '../Button/ButtonNice';
 import './Footer.css';
@@ -63,9 +60,9 @@ function Footer() {
                     <div className='contact-footer-icon'>
                         <ButtonNice text="Nous contacter sur Instagram"/> 
                         <span>|</span>
-                        <a href="https://www.instagram.com/hathyre_/" target='_blank'>
+                        {/* <a href="https://www.instagram.com/hathyre_/" target='_blank'>
                             <img className='insta' src="https://icons.iconarchive.com/icons/fa-team/fontawesome-brands/512/FontAwesome-Brands-Square-Instagram-icon.png" alt="" />
-                        </a> 
+                        </a>  */}
 
                     </div>
                 </div>

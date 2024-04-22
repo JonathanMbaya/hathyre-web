@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import Buttons from "../Button/Button.jsx";
 import './bannerToAbout.css';
 
@@ -27,4 +26,4 @@ function BannerToAbout({item1 , title, src}) {
   )
 }
 
-export default BannerToAbout
+export default BannerToAbout;
