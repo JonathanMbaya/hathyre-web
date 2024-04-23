@@ -2,7 +2,11 @@ import React, { useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import "animate.css";
 import './AdminLogin.css';
+
 
 function AdminLogin() {
 
@@ -21,6 +25,9 @@ function AdminLogin() {
             console.log('Administrateur connecté');
             console.log(response.data);
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('id', response.data.user._id);
+            localStorage.setItem('nom', response.data.user.nom);
+            localStorage.setItem('prenom', response.data.user.premon);
             navigate(`/admin/dashboard/${response.data.user._id}/${response.data.token}`);
         })
 
@@ -33,13 +40,19 @@ function AdminLogin() {
     };
 
     return (
-        <>
+        <div className="animate__animated animate__slideInRight logo-container">
             <div className='logo-container' style={{ display: 'flex', justifyContent: 'center' }}>
                 <img
                     src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
                     alt="Logo de l'application"
                     className="logo-img"
                 />
+
+                <div className="retour">
+                    <Link to="/">
+                        <FontAwesomeIcon icon={faCircleArrowLeft} size="4x"/>
+                    </Link>
+                </div>
             </div>
 
             <div className='admin-login'>
@@ -62,11 +75,11 @@ function AdminLogin() {
 
                     <input type="submit" name="Login" value="Login" className="login-submit" />
                 </form>
-                <Link to="#" className="login-forgot-pass">forgot password?</Link>
+                <Link to="#" className="login-forgot-pass">forgot password ?</Link>
                 <div className="underlay-photo" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/admin-background/form-background.png)` }}></div>
             </div>
 
-        </>
+        </div>
     );
 };
 

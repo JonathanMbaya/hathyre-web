@@ -65,14 +65,32 @@ const BurgerMenu = () => {
         </ul>
       </div>
 
-      <div className={`search ${isOpenSearch ? 'openSearch': ''}`}>
+      <div className={`page-search ${isOpenSearch ? 'openSearch': ''}`}>
+
+        <div className={`search ${isOpenSearch ? 'openSearch': ''}`}>
+          <form classNam="form-search" >
+
+            <input type="text" placeholder="Trouvez un produit" />
+
+            <button type="submit"> <FontAwesomeIcon icon={faMagnifyingGlass} /> </button>
+
+
+          </form>
+        </div>
+
         <div className={`result-search ${isOpenSearch ? 'openSearch': ''}`}>
 
         </div>
 
-        <input type="text" placeholder="Trouvez un produit" />
+        <div id="shadow" class="box-shadow-white"></div>
+
+
 
       </div>
+
+
+
+
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, Link} from 'react-router-dom';
 import './PopUp.css';
 
 function AddUser() {
@@ -11,8 +11,30 @@ function AddUser() {
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
 
+    const { id, token } = useParams();
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/user/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUser(response.data);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des informations de l'utilisateur :", error);
+            }
+        };
+
+        fetchUserData();
+    }, [id, token, navigate]);
+
+
     const handleAddUser = async (e) => {
         e.preventDefault();
+
         const newUser = {
             nom,
             prenom,
@@ -31,8 +53,9 @@ function AddUser() {
             // Afficher la pop-up de succès
             setShowPopup(true);
             // Rediriger vers une autre page après l'ajout réussi de l'utilisateur
-            navigate('/admin/dashboard');
-        } catch (error) {
+            navigate(`/admin/dashboard/${id}/${token}`);
+        } 
+        catch (error) {
             console.error("Erreur lors de l'ajout de l'utilisateur :", error);
         }
     };
@@ -83,7 +106,9 @@ function AddUser() {
                 <div className="popup">
                     <div className="popup-content">
                         <h2>L'utilisateur a été ajouté avec succès!</h2>
-                        <button onClick={() => setShowPopup(false)}>Fermer</button>
+                        <Link to={`/admin/dashboard/${user._id}/${user.token}`}>
+                            <button onClick={() => setShowPopup(false)}>Fermer</button>
+                        </Link>
                     </div>
                 </div>
             )}
