@@ -7,6 +7,7 @@ const {
   deleteProduct,
   likeProduct,
   dislikeProduct,
+  searchProducts,
 } = require("../controllers/product.controller.cjs");
 
 // const {
@@ -20,6 +21,7 @@ router.get("/product/:id", getOneProduct);
 router.post("/add/product", setProduct);
 router.put("/update/product/:id", editProduct);
 router.delete("/delete/product/:id", deleteProduct);
+router.get("/product/search/:q", searchProducts);
 router.patch("/liked/:id", likeProduct);
 router.patch("/disliked/:id", dislikeProduct);
 

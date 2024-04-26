@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import BurgerMenu from "../Navbar/BurgerMenu";
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import './header.style.css';
 import 'animate.css';
 
@@ -59,17 +59,17 @@ function Header({ currentPage }) {
                 </div>
             }
 
-            {location.pathname === '*' && 
-                <div className="error-page">
-
-                    <h1>Erreur 404</h1>
-
-                    <h2> Cette page n'existe pas désolé ...</h2>
-
-                    <Link to="/">
-                        <button>Revenir a l'accueil</button>
-                    </Link>
-
+            {location.pathname.startsWith('/product/') && 
+                <div className='header-product'>
+                    <BurgerMenu/>
+                    <div className='logo-container animate__animated animate__fadeInUp' style={{ display: 'flex', justifyContent: 'center' }}>
+                        <img
+                            src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
+                            alt="Logo de l'application"
+                            className="logo-img"
+                        />
+                    </div>
+                    <Navbar />
                 </div>
             }
 

@@ -1,0 +1,53 @@
+.area-filter{
+    display: flex;
+    position: relative;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    height: 4rem;
+    margin-bottom: 5rem;
+
+}
+
+.btn-filter {
+    position: absolute; /* Changez la position en absolue */
+    top: 100%; /* Ajoutez pour placer les boutons sous l'icône */
+    left: 0; /* Ajoutez pour placer les boutons à gauche */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+    transform: translateX(-100%); /* Changez translate en translateX */
+    transition: .3s;
+}
+  
+.area-filter.open .btn-filter {
+transform: translateX(0); /* Ajoutez ceci pour déplacer les boutons vers la droite */
+}
+
+.btn-filter select{
+    padding: 1rem;
+    border-radius: 2rem;
+    width: 20rem;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .area-filter{
+        display: flex;
+        position: relative;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        height: 4rem;
+        margin-bottom: 5rem;
+    
+    }
+
+    .btn-filter select{
+        padding: 1rem;
+        border-radius: 2rem;
+        width: 8rem;
+    }
+
+}

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import InfoAbout from '../../components/InfoAbout/InfoAbout.jsx';
 import Footer from '../../components/Footer/Footer';
+import Basket from "../../components/Basket/Basket.jsx";
 import 'animate.css';
 
 function AboutPage () {
@@ -17,25 +18,30 @@ function AboutPage () {
 
     };
 
-
-    // Fonction pour gérer le défilement de la page
-    const handleScroll = () => {
-        const scrollThreshold = 1000; // Définissez ici le niveau de scroll à partir duquel l'ombre disparaît
-        const shadow = document.getElementById('shadow'); // Remplacez 'shadow' par l'ID de votre élément ombre
-        if (window.scrollY > scrollThreshold) {
-            shadow.style.display = 'none'; // Cacher l'ombre lorsque le niveau de défilement dépasse le seuil
-        } else {
-            shadow.style.display = 'block'; // Afficher l'ombre lorsque le niveau de défilement est inférieur au seuil
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollThreshold = 1000; // Définissez ici le niveau de scroll à partir duquel l'ombre disparaît
+            const shadow = document.getElementById('shadow'); // Remplacez 'shadow' par l'ID de votre élément ombre
+            if (window.scrollY > scrollThreshold) {
+                shadow.style.display = 'none'; // Cacher l'ombre lorsque le niveau de défilement dépasse le seuil
+            }
         }
-    }
-
-    // Écouteur d'événements pour le défilement de la page
-    window.addEventListener('scroll', handleScroll);
+    
+        // Ajoute l'écouteur d'événements pour le défilement de la page
+        window.addEventListener('scroll', handleScroll);
+    
+        // Retire l'écouteur d'événements lorsque le composant est démonté
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+    
 
     
 
     return (
         <>
+            <Basket/>
 
             <div id="shadow" style={Shadow} className='box-shadow-white'></div>
 

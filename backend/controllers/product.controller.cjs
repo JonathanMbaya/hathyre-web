@@ -38,8 +38,6 @@ module.exports.getProducts = async (req, res) => {
 };
 
 
-
-
 module.exports.getOneProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -107,6 +105,21 @@ module.exports.deleteProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Assurez-vous d'importer le modèle Product si nécessaire
+
+module.exports.searchProducts = async (req, res) => {
+  try {
+    const searchTerm = req.params.q;
+    const regex = new RegExp(searchTerm, 'i'); // Expression régulière pour rechercher les noms commençant par le terme de recherche, 'i' pour insensible à la casse
+    const products = await Product.find({ name: { $regex: regex } });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 
 module.exports.likeProduct = async (req, res) => {
   try {

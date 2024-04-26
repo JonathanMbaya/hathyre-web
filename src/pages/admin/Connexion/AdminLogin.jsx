@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import "animate.css";
 import './AdminLogin.css';
 
 
@@ -40,7 +39,7 @@ function AdminLogin() {
     };
 
     return (
-        <div className="animate__animated animate__slideInRight logo-container">
+        <div className="logo-container">
             <div className='logo-container' style={{ display: 'flex', justifyContent: 'center' }}>
                 <img
                     src={process.env.PUBLIC_URL + '/hathyre-logo.png'}

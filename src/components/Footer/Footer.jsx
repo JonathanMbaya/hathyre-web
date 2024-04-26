@@ -74,9 +74,10 @@ function Footer() {
                 <p>Hathyre - Copyright 2022</p>
 
                 <div className='icon-money'>
-                    <img src={process.env.PUBLIC_URL + '/money-way/visa.png'} alt="Logo Hathyre" />
-                    <img src={process.env.PUBLIC_URL + '/money-way/mastercard.png'} alt="Logo Hathyre" />
-                    <img src={process.env.PUBLIC_URL + '/money-way/paypal.png'} alt="Logo Hathyre" />
+                    <img src={process.env.PUBLIC_URL + '/money-way/cc-visa.svg'} alt="Logo Hathyre" />
+                    <img src={process.env.PUBLIC_URL + '/money-way/cc-mastercard.svg'} alt="Logo Hathyre" />
+                    <img src={process.env.PUBLIC_URL + '/money-way/cc-paypal.svg'} alt="Logo Hathyre" />
+                    <img src={process.env.PUBLIC_URL + '/money-way/cc-stripe.svg'} alt="Logo Hathyre" />
                 </div>
 
             </div>

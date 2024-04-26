@@ -1,4 +1,5 @@
 import React, {useEffect, useState}from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import "./Product.css";
 
@@ -22,11 +23,16 @@ function ListProducts() {
         <div className="list-products">
             {product.map(product => (
                 <div key={product._id} className="product">
-                    <img
+                    <Link to={`/product/${product._id}`}>
+
+                      <img
                         className='img-fluid'
                         src={process.env.PUBLIC_URL + `${product.image}`}
                         alt=""
-                    />
+                      />
+
+                    </Link>
+
                     <p>{product.name}</p>
                     <p>{product.price}</p>
                 </div>

@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header.jsx';
 import HomePage from './HomePage';
 import ProductPage from './ProductPage.jsx';
 import AboutPage from './AboutPage.jsx';
-// import Error from "../../Error.jsx";
+import SingleProductPage from './SingleProductPage.jsx';
 
 function PublicRouter ()  {
 
@@ -39,15 +39,15 @@ function PublicRouter ()  {
                     return <AboutPage />;
                 }}
                 />
-{/* 
+
                 <Route
-                    path="*"
-                    element={<Error />}
+                    path="/product/:id"
+                    element={<SingleProductPage />}
                     render={() => {
-                        setCurrentPage('Error');
-                        return <Error />;
+                        setCurrentPage('SingleProductPage');
+                        return <SingleProductPage />;
                     }}
-                /> */}
+                />
 
             </Routes>
         </>

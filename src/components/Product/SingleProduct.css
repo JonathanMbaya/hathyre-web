@@ -1,0 +1,135 @@
+.page-product h1{
+    font-size: 54px;
+}
+
+.area-product{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.area-product img, .area-product .info-product-single {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.area-product .info-product-single span{
+    background-color: antiquewhite;
+    padding: .4rem;
+    font-size: 10px;
+}
+
+.area-product .info-product-single .important{
+    background-color: rgb(223, 218, 60);
+    padding: .4rem;
+    font-size: 10px;
+}
+
+.area-product img{
+    border-radius: .5rem;
+}
+
+.info-product-single .counter {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.info-product-single .counter input {
+    width: 2rem;
+    height: 1rem;
+    padding: .4rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+}
+
+.promo h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.promo h4 {
+    text-decoration : line-through
+}
+
+.promo h2 span{
+    margin-left: 2rem;
+}
+
+.button-action{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+}
+
+.button-action button{
+margin-right: 1rem;
+}
+
+
+
+  /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
+  @media only screen and (max-width: 768px) {
+
+    .area-product{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .page-product h1{
+        font-size: 54px;
+    }
+
+    .area-product img, .area-product .info-product-single {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0rem;
+    }
+
+    .button-action{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .button-action button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0rem;
+    }
+
+    .promo h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .promo h4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .promo h2 span {
+        margin-left: 1rem;
+    }
+
+  }

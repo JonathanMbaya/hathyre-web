@@ -1,11 +1,23 @@
 .list-products {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
 
 .product img {
     width: 20rem;
+    border-radius: .5rem;
+    /* filter: blur(5px); */
+}
+
+.product img:hover {
+    width: 19rem;
+    padding-left: 10px;
+    transition: .3s;
+    border-radius: .5rem;
+    overflow-x:hidden;
+    /* filter: blur(5px); */
 }
 
 .product p {

@@ -3,6 +3,7 @@ import Banner from "../../components/Banner/Banner";
 // import BannerToAbout from "../../components/Banner/BannerToAbout.jsx";
 import Products from '../../components/Product/Products';
 import Footer from '../../components/Footer/Footer';
+import Basket from "../../components/Basket/Basket.jsx";
 
   
 
@@ -10,6 +11,7 @@ function HomePage ({currentPage}){
 
     return (
         <>
+            <Basket/>
             <div id="shadow"></div>
             <Products
                 title ="Découvrez nos nouveautés"

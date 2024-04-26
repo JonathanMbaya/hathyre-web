@@ -6,7 +6,7 @@
 
 .button-up{
   position: absolute;
-  z-index: 2000000;
+  z-index: 200;
 }
 
 .button-up button{

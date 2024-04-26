@@ -105,6 +105,24 @@
 
     }
 
+    .second-area-footer .icon-money {
+        display: flex;
+        justify-content: center;
+        right: 0rem;
+        width: 100%;
+    }
+
+    .second-area-footer .icon-money img {
+        width: auto;
+        height: 2rem;
+        margin: .5rem;
+    }
+
+    .second-area-footer p {
+        color: black;
+    }
+    
+
     .icon-money{
         display: flex;
         justify-content: center;

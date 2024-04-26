@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Buttons from "../Button/Button.jsx";
 import './banner.css';
 
@@ -20,9 +21,16 @@ function Banner ({title, item1, src}) {
                 <img src={src} alt="Strength" />
             </div>
 
+
             <div className="button-up">
-                <Buttons text="Découvrir +"/> 
+                <Link to="/product">
+                    <Buttons text="Découvrir +"/> 
+                </Link>
             </div>
+
+
+
+            
 
         </div>
 
