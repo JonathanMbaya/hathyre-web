@@ -16,7 +16,7 @@ function EditProduct() {
 
   useEffect(() => {
     // Effectuer une requête pour récupérer les détails du produit à modifier
-    axios.get(`http://localhost:5000/api/product/${id}`)
+    axios.get(`https://hathyre-server-api.onrender.com/api/product/${id}`)
       .then((response) => {
         const product = response.data;
         // Mettre à jour les états avec les détails du produit récupéré

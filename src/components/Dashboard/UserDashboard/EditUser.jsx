@@ -15,7 +15,7 @@ function EditUser({ userId }) {
 
   useEffect(() => {
     // Effectuer une requête pour récupérer les informations de l'utilisateur à éditer
-    axios.get(`http://localhost:5000/api/user/${id}`)
+    axios.get(`https://hathyre-server-api.onrender.com/api/user/${id}`)
       .then(response => {
         const userData = response.data;
         setNom(userData.nom);

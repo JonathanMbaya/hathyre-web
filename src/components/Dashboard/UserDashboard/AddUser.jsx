@@ -17,7 +17,7 @@ function AddUser() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/user/${id}`, {
+                const response = await axios.get(`https://hathyre-server-api.onrender.com/api/user/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

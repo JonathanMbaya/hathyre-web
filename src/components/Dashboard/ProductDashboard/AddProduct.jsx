@@ -33,7 +33,7 @@ function AddProduct() {
 
     try {
       // Envoyez les données au serveur avec multipart/form-data
-      const response = await axios.post("http://localhost:5000/api/add/product", formData, {
+      const response = await axios.post("https://hathyre-server-api.onrender.com/api/add/product", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

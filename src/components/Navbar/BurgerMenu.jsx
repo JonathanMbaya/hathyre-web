@@ -14,7 +14,7 @@ const BurgerMenu = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/product/search/${encodeURIComponent(input)}`);
+        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/product/search/${encodeURIComponent(input)}`);
         const data = response.data;
         setResults(data);
       } catch (error) {

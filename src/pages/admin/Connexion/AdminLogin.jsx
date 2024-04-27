@@ -19,7 +19,7 @@ function AdminLogin() {
         e.preventDefault();
         
         // Envoi de la requête au backend pour la connexion admin
-        axios.post(`http://localhost:5000/api/admin/login`, { email, password })
+        axios.post(`https://hathyre-server-api.onrender.com/api/admin/login`, { email, password })
         .then(response => {
             console.log('Administrateur connecté');
             console.log(response.data);

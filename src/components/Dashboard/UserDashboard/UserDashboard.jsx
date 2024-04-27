@@ -11,7 +11,7 @@ const UserDashboard = () => {
 
     useEffect(() => {
         // Effectuer la requête Axios pour récupérer les utilisateurs
-        axios.get('http://localhost:5000/api/users')
+        axios.get('https://hathyre-server-api.onrender.com/api/users')
             .then(response => {
                 // Mettre à jour l'état avec les utilisateurs récupérés
                 setUsers(response.data);
@@ -22,7 +22,7 @@ const UserDashboard = () => {
     }, []);
 
     const handleDeleteUser = (id) => {
-        axios.delete(`http://localhost:5000/api/delete/user/${id}`)
+        axios.delete(`https://hathyre-server-api.onrender.com/api/delete/user/${id}`)
             .then(response => {
                 console.log('Utilisateur supprimé avec succès');
                 // Mettre à jour l'état des utilisateurs après la suppression

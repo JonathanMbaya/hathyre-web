@@ -13,7 +13,7 @@ function SingleProduct() {
     const [count, setCount] = useState(1);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/product/${id}`)
+        axios.get(`https://hathyre-server-api.onrender.com/api/product/${id}`)
         .then(response => {
             setProduct(response.data);
         })

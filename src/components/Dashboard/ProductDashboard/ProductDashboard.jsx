@@ -9,7 +9,7 @@ const ProductDashboard = () => {
 
     useEffect(() => {
         // Effectuer la requête Axios pour récupérer les produits
-        axios.get('http://localhost:5000/api/products')
+        axios.get('https://hathyre-server-api.onrender.com/api/products')
           .then(response => {
             // Mettre à jour l'état avec les produits récupérés
             setProducts(response.data);
