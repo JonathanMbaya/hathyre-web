@@ -69,10 +69,14 @@ const BurgerMenu = () => {
           <li>
             <Link to="/apropos" className="link-without-decoration">A propos de Hathyre</Link>
           </li>
-
           <Link to="/admin/login">
             <li>
               Se connecter  <FontAwesomeIcon className="burger-icon" icon={faArrowRightToBracket} />
+            </li>
+          </Link>
+          <Link className="link-without-decoration" to="https://instagram.com/hathyre_/" target="_blank">
+            <li>
+              Rejoins nous sur instagram  <img className='icon-nav' src={process.env.PUBLIC_URL + '/socialnetwork/instagram.svg'} alt="Logo Hathyre" />
             </li>
           </Link>
         </ul>

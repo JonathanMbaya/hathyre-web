@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesDown } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Navbar/Navbar';
 import BurgerMenu from "../Navbar/BurgerMenu";
 import { useLocation} from 'react-router-dom';
@@ -22,6 +24,9 @@ function Header({ currentPage }) {
                         />
                     </div>
                     <Navbar />
+
+                    <h1 className='animate__animated animate__fadeInDown'>Hathyre , le naturel qui fait la différence <FontAwesomeIcon icon={faAnglesDown} /></h1>
+
                 </div>
             }
 

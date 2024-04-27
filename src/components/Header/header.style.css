@@ -44,6 +44,17 @@
     fill: #EACD9A;
 }
 
+.header-home h1 {
+    width: 100%;
+    position: absolute;
+    bottom: 14.2rem;
+    color:#EACD9A;
+    box-shadow: 
+    rgba(0, 0, 0, 0.1);
+    font-size: 66px;
+    font-stretch: 100%;
+    text-align: center;
+}
 /* styles/Logo.css */
 
 header .logo-container { /* Le logo ne dépassera pas la largeur du conteneur parent */
@@ -86,6 +97,24 @@ h1{
     z-index: -1; /* Changer la valeur selon vos besoins */
     background-image: url('/public/present/header-background.jpg'); /* Chemin relatif ou absolu vers votre image */
     /* Autres styles */
+}
+
+@media only screen and (max-width: 768px) {
+
+    .header-home h1 {
+        width: 100%;
+        position: absolute;
+        bottom: 14.5rem;
+        left: 0rem;
+        color:#EACD9A;
+        box-shadow: 
+        rgba(0, 0, 0, 0.1);
+        font-size: 54px;
+        font-stretch: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
 }
 
   

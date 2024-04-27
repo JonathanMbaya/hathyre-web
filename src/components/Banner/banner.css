@@ -32,7 +32,21 @@ border-radius: .5rem;
   border-radius: .5rem;
   transform: rotate(90deg); /* Fait pivoter l'image de 90 degrés */
  /* Réduit la luminosité de l'image */
- filter:brightness(80%)
+ filter:blur(10px)
+ 
+}
+
+.box1 img:hover {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 120%;
+  border-radius: .5rem;
+  transform: rotate(90deg); /* Fait pivoter l'image de 90 degrés */
+  /* Réduit la luminosité de l'image */
+  filter:blur(20px);
+  transition: 2s;
+ 
 }
 
 h2 {

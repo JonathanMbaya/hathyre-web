@@ -4,6 +4,8 @@ import Banner from "../../components/Banner/Banner";
 import Products from '../../components/Product/Products';
 import Footer from '../../components/Footer/Footer';
 import Basket from "../../components/Basket/Basket.jsx";
+import Certif from '../../components/Certif/Certif.jsx';
+import Instagram from '../../components/Instagram/Instagram.jsx';
 
   
 
@@ -12,7 +14,7 @@ function HomePage ({currentPage}){
     return (
         <>
             <Basket/>
-            <div id="shadow"></div>
+
             <Products
                 title ="Découvrez nos nouveautés"
             />
@@ -21,15 +23,10 @@ function HomePage ({currentPage}){
                 title ="Toute la gamme de Hathyre"
                 src = {process.env.PUBLIC_URL + "/present/5.png"}
             />
-{/* 
-            <BannerToAbout
-                title ="Connaître notre histoire"
-                src = {process.env.PUBLIC_URL + "/present/7.png"}
-            /> */}
 
-            <Products
-                title ="Nos certifications"
-            />
+            <Instagram/>
+
+            <Certif/>
 
             <Footer/>
             

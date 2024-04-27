@@ -12,7 +12,10 @@ function Filter() {
 
   return (
     <div className={`area-filter ${isOpen ? 'open' : ''}`}>
-      <FontAwesomeIcon icon={faArrowUpShortWide} onClick={toggleFilter} />
+      <div onClick={toggleFilter}>
+        Afficher les filtres <FontAwesomeIcon icon={faArrowUpShortWide} />
+
+      </div>
 
       <div className='btn-filter'>
         <select name="filter" id="filter">

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse} from '@fortawesome/free-solid-svg-icons';
 import Buttons from "../Button/Button";
 import ButtonNice from '../Button/ButtonNice';
 import './Footer.css';
@@ -22,12 +24,7 @@ function Footer() {
                     <div className='one-menu-footer'>
                         <h3>Catalogue</h3>
                         <div>
-                            <li>Home</li>
-                            <li>Produits</li>
-                            <li>A produits</li>
-                            <li>Blog</li>
-                            <li>FAQ</li>
-                            <li>Contact</li>
+                            <li>Nos produits</li>
                         </div>
                     </div>
 
@@ -35,12 +32,12 @@ function Footer() {
                     <div className='one-menu-footer'>
                         <h3>Plan de site</h3>
                         <div>
-                            <li>Home</li>
-                            <li>Produits</li>
-                            <li>A produits</li>
-                            <li>Blog</li>
-                            <li>FAQ</li>
+                            <li><FontAwesomeIcon icon={faHouse} /></li>
+                            <li>Nos produits</li>
+                            <li>A propos de Hathyre</li>
+                            <li>Se connecter</li>
                             <li>Contact</li>
+                            <li>FAQ</li>
                         </div>
                     </div>
 

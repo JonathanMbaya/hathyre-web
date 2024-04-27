@@ -36,13 +36,22 @@ function Navbar() {
       <nav>
         <ul>
           <li>
-            <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
+            <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse}/></Link>
           </li>
           <li>
             <Link to="/product" className="link-without-decoration">Nos produits</Link>
           </li>
+          
           <li>
             <Link to="/apropos" className="link-without-decoration">A propos de Hathyre</Link>
+          </li>
+          
+          <li>
+            <Link className="link-without-decoration" to="https://instagram.com/hathyre_/" target="_blank">
+              Rejoins nous sur instagram
+            </Link>
+
+            <img className='icon-nav' src={process.env.PUBLIC_URL + '/socialnetwork/instagram.svg'} alt="Logo Hathyre" />
           </li>
         </ul>
       </nav>
