@@ -40,7 +40,7 @@ function AboutPage () {
     
 
     return (
-        <>
+        <div className='page-about'>
             <Basket/>
 
             <div id="shadow" style={Shadow} className='box-shadow-white'></div>
@@ -53,7 +53,7 @@ function AboutPage () {
 
             <Footer/>
             
-        </>
+        </div>
     );
 };
 

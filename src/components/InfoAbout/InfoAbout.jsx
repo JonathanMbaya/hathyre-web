@@ -6,7 +6,7 @@ function InfoAbout () {
         <>
 
 <div className='block-tri-info'>
-                <div className='container tri-info'>
+                <div className='tri-info'>
                     <h2>
                         “ Hathyre ” 
                     </h2>
@@ -21,7 +21,7 @@ function InfoAbout () {
                 </div>
 
 
-                <div className='container tri-info'>
+                <div className='tri-info'>
                     <h2>
                         Nos produits à base de beurre de karité “ Hathyre ” 
                     </h2>
@@ -36,7 +36,7 @@ function InfoAbout () {
                 </div>
 
 
-                <div className='container tri-info'>
+                <div className='tri-info'>
                     <h2>
                         Pourquoi faire le choix des produits  Hathyre ?
                     </h2>

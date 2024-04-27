@@ -16,7 +16,7 @@
 .area-instagram{
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     padding-top: 2rem;
     padding-bottom: 2rem;
     width: 100%;
@@ -42,7 +42,7 @@
 .area-instagram p{
     font-size: 44px;
     width: 25%;
-    padding: 3rem;
+    padding: 0rem 0rem 3rem 3rem;
 }
 
 .photo-instagram{

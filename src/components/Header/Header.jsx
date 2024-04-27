@@ -25,7 +25,7 @@ function Header({ currentPage }) {
                     </div>
                     <Navbar />
 
-                    <h1 className='animate__animated animate__fadeInDown'>Hathyre , le naturel qui fait la différence <FontAwesomeIcon icon={faAnglesDown} /></h1>
+                    <h1 className='animate__animated animate__fadeInDown'>Hathyre, votre secret de beauté au quotidien<FontAwesomeIcon icon={faAnglesDown} /></h1>
 
                 </div>
             }
