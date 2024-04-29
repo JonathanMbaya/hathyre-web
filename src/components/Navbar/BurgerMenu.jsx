@@ -102,9 +102,9 @@ const BurgerMenu = () => {
               return product.name.toLowerCase().includes(input.toLowerCase());
             })
             .map((product) => (
-              <Link to={`/product/${product._id}`}>
+              <Link className='link-without-decoration' to={`/product/${product._id}`}>
                 <div className='item-search' key={product._id}>
-                  {/* <img src={product.image} alt={product.name} /> */}
+                  <img src={product.image} alt={product.name} />
                   <p>{product.name}</p>
                 </div>
               </Link>

@@ -7,7 +7,7 @@ import './Button.css';
 function ButtonToBasket(){
     return (
         <div>
-            <Button className='btn-' variant="primary" size="lg">
+            <Button className='btn-to-basket' variant="primary" size="lg">
                 <FontAwesomeIcon  icon={faBagShopping} />  +
             </Button>
         </div>

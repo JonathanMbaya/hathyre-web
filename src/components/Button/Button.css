@@ -15,3 +15,11 @@ button:hover {
     padding: 1rem;
     font-weight: bolder;
 }
+
+
+@media (max-width: 768px) {
+
+    .btn-to-basket{
+        padding: .4rem;
+    }
+  }

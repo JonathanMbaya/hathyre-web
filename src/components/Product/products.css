@@ -106,3 +106,55 @@
   }
   
 }
+
+@media (max-width: 768px) {
+
+  .info-home-action-product{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .container h2{
+
+    font-size: 32px;
+    margin-top: 4rem;
+  
+  }
+
+  h3 {
+    font-size: 17px;
+  }
+
+  .row { 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+  }
+
+  .box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: .2rem;
+    border-radius: 1rem;
+    width: 60%;
+  }
+        
+  .box img {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width:100%; 
+    border-radius: .5rem;
+  }
+
+  .link-without-decoration {
+    text-decoration: none;
+    color: inherit; /* Pour conserver la couleur du texte par défaut */
+    padding: 0;
+    margin: 0;
+  }
+
+}

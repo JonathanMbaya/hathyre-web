@@ -24,7 +24,10 @@ function Footer() {
                     <div className='one-menu-footer'>
                         <h3>Catalogue</h3>
                         <div>
-                            <li>Nos produits</li>
+                            <Link className='link-without-decoration' to="/product" >
+                                <li>Nos produits</li>
+                            </Link>
+
                         </div>
                     </div>
 
@@ -32,10 +35,20 @@ function Footer() {
                     <div className='one-menu-footer'>
                         <h3>Plan de site</h3>
                         <div>
-                            <li><FontAwesomeIcon icon={faHouse} /></li>
-                            <li>Nos produits</li>
-                            <li>A propos de Hathyre</li>
-                            <li>Se connecter</li>
+                            <li>
+                            <Link className='link-without-decoration' to="/" >
+                                <FontAwesomeIcon icon={faHouse} />
+                            </Link> 
+                            </li>
+                            <Link className='link-without-decoration' to="/product" >
+                                <li>Nos produits</li>
+                            </Link>
+                            <Link className='link-without-decoration' to="/apropos" >
+                                <li>A propos de Hathyre</li>                            
+                            </Link>
+                            <Link className='link-without-decoration' to="/admin/login" >
+                                <li>Se connecter</li>                            
+                            </Link>
                             <li>Contact</li>
                             <li>FAQ</li>
                         </div>

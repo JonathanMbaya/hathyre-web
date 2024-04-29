@@ -93,6 +93,13 @@
     border-radius: .8rem;
 }
 
+.link-without-decoration {
+    text-decoration: none;
+    color: inherit; /* Pour conserver la couleur du texte par défaut */
+    padding: 0;
+    margin: 0;
+  }
+
 
   
   /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
