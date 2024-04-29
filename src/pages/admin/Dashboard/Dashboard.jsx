@@ -8,13 +8,11 @@ import './Dashboard.css';
 
 function Dashboard() {
     const navigate = useNavigate();
-    const { user } = useContext(LoginContext);
+    const { userConnected } = useContext(LoginContext);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('id');
-        localStorage.removeItem('nom');
-        localStorage.removeItem('prenom');
         navigate('/admin/login');
     };
 
@@ -22,8 +20,8 @@ function Dashboard() {
         <div className='dashboard underlay' style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/admin-background/form-background.png)` }}>
             <div className='head-dash'>
                 <h1 style={{ marginLeft: '5%' }}>Hathyre | Tableau de bord </h1>
-                {user && (
-                    <h2 style={{ marginLeft: '5%' }}>Bienvenue, {localStorage.getItem('nom')} {localStorage.getItem('prenom')}
+                {userConnected && (
+                    <h2 style={{ marginLeft: '5%' }}>Bienvenue, {userConnected.prenom} {userConnected.nom}
                         <FontAwesomeIcon onClick={handleLogout} icon={faPowerOff} />
                     </h2>
                 )}

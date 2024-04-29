@@ -43,7 +43,7 @@ function EditProduct() {
     };
 
     // Envoyer une requête pour mettre à jour les détails du produit
-    axios.put(`http://localhost:5000/api/update/product/${id}`, updatedProduct)
+    axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${id}`, updatedProduct)
       .then((response) => {
         console.log("Réponse du serveur :", response.data);
         // Rediriger vers la page de tableau de bord après la modification réussie

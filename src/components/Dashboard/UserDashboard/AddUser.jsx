@@ -1,36 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams, Link} from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import './PopUp.css';
+import { LoginContext } from '../../../context/login.context';
 
 function AddUser() {
+    const { userConnected } = useContext(LoginContext); // Utilisation du contexte pour obtenir l'utilisateur connecté
+    const navigate = useNavigate();
+    const { id, token } = useParams();
+
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPopup, setShowPopup] = useState(false);
-    const navigate = useNavigate();
-
-    const { id, token } = useParams();
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get(`https://hathyre-server-api.onrender.com/api/user/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setUser(response.data);
-            } catch (error) {
-                console.error("Erreur lors de la récupération des informations de l'utilisateur :", error);
-            }
-        };
-
-        fetchUserData();
-    }, [id, token, navigate]);
-
 
     const handleAddUser = async (e) => {
         e.preventDefault();
@@ -43,7 +26,7 @@ function AddUser() {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/add/user', newUser);
+            const response = await axios.post('https://hathyre-server-api.onrender.com/api/add/user', newUser);
             console.log('Réponse du serveur :', response.data);
             // Réinitialiser les champs après avoir ajouté l'utilisateur avec succès
             setNom('');
@@ -52,12 +35,17 @@ function AddUser() {
             setPassword('');
             // Afficher la pop-up de succès
             setShowPopup(true);
+
             // Rediriger vers une autre page après l'ajout réussi de l'utilisateur
-            navigate(`/admin/dashboard/${id}/${token}`);
-        } 
-        catch (error) {
+            navigate(`/admin/dashboard/${userConnected._id}/${userConnected.token}`); // Utilisation de user extrait du contexte
+        } catch (error) {
             console.error("Erreur lors de l'ajout de l'utilisateur :", error);
         }
+    };
+
+    const handleClosePopup = () => {
+        setShowPopup(false);
+        window.location.reload(); // Rafraîchir la page
     };
 
     return (
@@ -106,8 +94,8 @@ function AddUser() {
                 <div className="popup">
                     <div className="popup-content">
                         <h2>L'utilisateur a été ajouté avec succès!</h2>
-                        <Link to={`/admin/dashboard/${user._id}/${user.token}`}>
-                            <button onClick={() => setShowPopup(false)}>Fermer</button>
+                        <Link to={`/admin/dashboard/${id}/${token}`}>
+                            <button onClick={handleClosePopup}>Fermer</button>
                         </Link>
                     </div>
                 </div>

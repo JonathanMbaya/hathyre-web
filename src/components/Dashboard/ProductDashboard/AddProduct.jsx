@@ -48,14 +48,14 @@ function AddProduct() {
       setProductStock("");
       setFile(null);
 
-      navigate("/admin/dashboard");
+      navigate(`/admin/dashboard/${localStorage.getItem('id')}/${localStorage.getItem('token')}`);
     } catch (error) {
       console.error("Erreur lors de l'ajout du produit :", error);
     }
   };
 
   const returnButton = () => {
-    navigate('/admin/dashboard');
+    navigate(`/admin/dashboard/${localStorage.getItem('id')}/${localStorage.getItem('token')}`);
   }
 
   return (

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { LoginContext } from '../../../context/login.context';
 import axios from "axios";
 import AddUser from './AddUser'; // Importez le composant AddUser
 
 const UserDashboard = () => {
+    const {userConnected} = useContext(LoginContext);
     
     const [showAddUserPopup, setShowAddUserPopup] = useState(false);
     const [users, setUsers] = useState([]); // État pour gérer l'affichage de la pop-up
@@ -71,11 +73,15 @@ const UserDashboard = () => {
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </a>
                                 </td>
+                                {/* Conditionally render the delete button */}
                                 <td>
-                                    <FontAwesomeIcon onClick={() => handleDeleteUser(user._id)} icon={faTrash} />
+                                    {userConnected._id !== user._id && ( // Comparaison des IDs de l'utilisateur connecté et de l'utilisateur de la boucle
+                                        <FontAwesomeIcon onClick={() => handleDeleteUser(user._id)} icon={faTrash} />
+                                    )}
                                 </td>
                             </tr>
                         ))}
+
                     </tbody>
                 </table>
             </div>

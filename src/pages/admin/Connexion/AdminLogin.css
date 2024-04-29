@@ -88,6 +88,7 @@ input {
   border-bottom: 1px solid black; /* Ajouter une ligne en bas */
   outline: none; /* Supprimer le contour */
   width: 100%;
+  position: relative;
   &:hover {
     opacity: 1;
   }

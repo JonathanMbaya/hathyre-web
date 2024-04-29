@@ -1,4 +1,5 @@
 import React, {useEffect, useState}from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -39,9 +40,9 @@ const ProductDashboard = () => {
                 
                 <div className='head-dash'>
                     <h3 style={{ marginLeft: '5%' }}>Nos Produits</h3>
-                    <a href="dashboard/product/add">
+                    <Link to={`/admin/dashboard/product/add/${localStorage.getItem('id')}/${localStorage.getItem('token')}`}>
                         <span>Ajouter un produit <FontAwesomeIcon icon={faPlus} /></span>
-                    </a>
+                    </Link>
                 </div>
 
 
