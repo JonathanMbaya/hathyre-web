@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Buttons from "../Button/Button.jsx";
+import ButtonNice from '../Button/ButtonNice.jsx';
 import './banner.css';
 
 function Banner ({title, item1, src}) {
@@ -24,7 +25,7 @@ function Banner ({title, item1, src}) {
 
             <div className="button-up">
                 <Link to="/product">
-                    <Buttons text="Découvrir +"/> 
+                    <ButtonNice text="Découvrir +"/>
                 </Link>
             </div>
 

@@ -13,7 +13,7 @@ function Footer() {
             <div className='first-area-footer'>
                 <div className='newsletter'>
                     <h3>S'abonner à la newsletter</h3>
-                    <div className='newsletter'>
+                    <div className='newsletters'>
                         <input type="text" name="" id="" placeholder='Entrez votre adresse mail' />
                         <Buttons text="S'abonner" className='submit-newsletter' type='submit'/>
                     </div>

@@ -6,11 +6,6 @@ import './catalogue.css';
 
 function BannerCatalogue(){
     return(
-            // <ImageOverlay
-            //     imageSrc={process.env.PUBLIC_URL + '/img-products/baobabsoap.png'}
-            //     text="Texte au-dessus de l'image"
-            // />
-
             <div className="catalogue-banner">
                 <div>
                     <img src={process.env.PUBLIC_URL + "/img-products/baobabsoap.png"}  alt="" />
