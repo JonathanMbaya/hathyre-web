@@ -47,7 +47,7 @@ function EditProduct() {
       .then((response) => {
         console.log("Réponse du serveur :", response.data);
         // Rediriger vers la page de tableau de bord après la modification réussie
-        navigate("/admin/dashboard");
+        navigate(`/admin/dashboard/${localStorage.getItem('id')}/${localStorage.getItem('token')}`);
       })
       .catch((error) => {
         console.error("Erreur lors de la modification du produit :", error);
@@ -55,7 +55,7 @@ function EditProduct() {
   };
   
   const returnButton = () => {
-    navigate('/dashboard');
+    navigate(`/admin/dashboard/${localStorage.getItem('id')}/${localStorage.getItem('token')}`);
   }
 
   return (
@@ -63,8 +63,8 @@ function EditProduct() {
 
         <div>
             <h1> 
-                <a href="admin/dashboard"><FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} /></a> 
-                Modifier Produit | {productName}
+              <FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} />
+              Modifier Produit | {productName}
             </h1>
 
             <form>

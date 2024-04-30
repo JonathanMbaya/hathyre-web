@@ -60,7 +60,7 @@ const UserDashboard = () => {
                     </thead>
 
                     <tbody>
-                        {users.map(user => (
+                        {userConnected && users.map(user => (
                             <tr key={user._id}>
                                 <td>{user.nom}</td>
                                 <td>{user.prenom}</td>

@@ -1,10 +1,13 @@
 import React, {useEffect, useState}from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
+// import { LoginContext } from "../../../context/login.context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDashboard = () => {
+
+    const {id , token} = useParams();
 
     const [products, setProducts] = useState([]);
 
@@ -23,7 +26,7 @@ const ProductDashboard = () => {
     }, []);
 
     const handleDeleteProduct = (id) => {
-        axios.delete(`http://localhost:5000/api/delete/product/${id}`)
+        axios.delete(`https://hathyre-server-api.onrender.com/api/delete/product/${id}`)
             .then(response => {
                 console.log('Produit supprimé avec succès');
                 // Mettre à jour l'état des produits après la suppression
@@ -40,7 +43,7 @@ const ProductDashboard = () => {
                 
                 <div className='head-dash'>
                     <h3 style={{ marginLeft: '5%' }}>Nos Produits</h3>
-                    <Link to={`/admin/dashboard/product/add/${localStorage.getItem('id')}/${localStorage.getItem('token')}`}>
+                    <Link to={`/admin/dashboard/product/add/${id}/${token}`}>
                         <span>Ajouter un produit <FontAwesomeIcon icon={faPlus} /></span>
                     </Link>
                 </div>
