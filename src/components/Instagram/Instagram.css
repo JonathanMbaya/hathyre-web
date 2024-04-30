@@ -1,5 +1,6 @@
 .area-instagram-all h2{
     font-size: 54px;
+    color: white;
 }
 
 .area-instagram-all {
@@ -11,7 +12,13 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
     width: 100%;
+    background-image: url('https://images.unsplash.com/photo-1488197047962-b48492212cda?q=80&w=1767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    backdrop-filter: blur(50%); /* Utilisez backdrop-filter pour appliquer l'effet de flou */
 }
+
 
 .area-instagram{
     display: flex;
@@ -37,12 +44,15 @@
 
 .icon-instagram h4 {
     text-align: center;
+    color: white;
 }
 
 .area-instagram p{
     font-size: 44px;
     width: 25%;
     padding: 0rem 0rem 3rem 3rem;
+    color: white;
+    font-weight: bolder;
 }
 
 .photo-instagram{
