@@ -45,15 +45,14 @@
 }
 
 .header-home h1 {
-    width: 100%;
-    position: absolute;
-    bottom: 14.2rem;
-    color:#EACD9A;
-    box-shadow: 
-    rgba(0, 0, 0, 0.1);
+    bottom: 7.8rem;
+    box-shadow: #0000001a;
+    color: #eacd9a;
     font-size: 66px;
     font-stretch: 100%;
+    position: absolute;
     text-align: center;
+    width: 100%;
 }
 /* styles/Logo.css */
 
@@ -124,21 +123,20 @@ h1{
 @media only screen and (max-width: 500px) {
 
     .header-home h1 {
-        width: 100%;
-        position: absolute;
-        bottom: 43rem;
-        left: 0rem;
-        color:#EACD9A;
-        box-shadow: 
-        rgba(0, 0, 0, 0.1);
+        bottom: 2.8rem;
+        box-shadow: #0000001a;
+        color: #eacd9a;
         font-size: 34px;
         font-stretch: 100%;
-        text-align: center;
+        left: 0;
         margin-bottom: 2rem;
+        position: relative;
+        text-align: center;
+        width: 100%;
     }
 
-    .header-home{
-        height: 15vh;
+    .header-home {
+        height: 25vh;
     }
 
     .logo-img {
