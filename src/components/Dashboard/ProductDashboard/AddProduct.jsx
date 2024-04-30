@@ -52,7 +52,7 @@ function AddProduct() {
       const userId = localStorage.getItem('id');
       const userToken = localStorage.getItem('token');
       if (userId && userToken) {
-        navigate(`/admin/dashboard/${userId}/${userToken}`);
+        navigate(`/admin/dashboard/${localStorage.getItem('id')}/${localStorage.getItem('token')}`);
       } else {
         // Gérer le cas où les valeurs ne sont pas définies dans le stockage local
         console.error("ID utilisateur ou jeton d'authentification manquant dans le stockage local.");

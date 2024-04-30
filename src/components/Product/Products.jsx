@@ -32,14 +32,17 @@ function Products({ title }) {
                             <span>Nouveauté</span>
                             <Link className='link-without-decoration' to={`/product/${product._id}`}>
                                 <img src={process.env.PUBLIC_URL + product.image} alt={product.name} />
+                            </Link>
                                 <div className='info-home-product'>
                                     <h3>{product.name} <br /> <span>Savon</span></h3>
                                     <div className='info-home-action-product'>
                                         <h4>{product.price} EUR</h4>
-                                        <ButtonToBasket />
+                                        
+                                        <ButtonToBasket getProductId={product._id} />
+
                                     </div>
                                 </div>
-                            </Link>
+
                         </div>
                 ))}
             </div>

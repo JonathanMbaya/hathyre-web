@@ -61,7 +61,35 @@
 
 .basket-window h2 {
     color: azure;
-    padding: 5rem;
+    padding: 2rem 0 5rem 2rem;
+}
+
+.item-product-card{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: bisque;
+    padding: .5rem;
+    margin: 1rem 0 1rem 2rem;
+    width: 70%;
+}
+
+.price-total{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0 0 2rem;
+    width: 70%;
+    position: fixed;
+    bottom: 0rem;
+    color: bisque;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.products-scroll {
+    max-height: 60vh; /* ou toute autre valeur appropriée */
+    overflow-y: auto; /* afficher la barre de défilement verticale si nécessaire */
 }
 
 

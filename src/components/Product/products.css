@@ -27,7 +27,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: .5rem;
+  padding: .1rem;
   margin: 1rem;
   width: 80%;
   border-radius: 1rem;
@@ -44,15 +44,24 @@
 }  
 
 .info-home-product{
+  display: flex;
+  flex-direction: column;
   padding-left:.5rem;
   padding-right: .5rem;
-
+  width: 100%;
 }
 
 .info-home-action-product{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+}
+
+.info-home-action-product button{
+  padding: 2rem;
+  margin-right: .5rem;
+  border-radius: 0 0 1rem 0;
 }
 
 .container h2{
@@ -137,7 +146,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: .2rem;
+    padding: .2rem .2rem 0 .2rem;
     border-radius: 1rem;
     width: 60%;
   }
@@ -155,6 +164,16 @@
     color: inherit; /* Pour conserver la couleur du texte par défaut */
     padding: 0;
     margin: 0;
+  }
+
+  .info-home-action-product button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 2rem 1rem;
+    margin-right: .3rem;
+    margin-top: 1rem;
+    border-radius: 0 0 1rem 0;
   }
 
 }

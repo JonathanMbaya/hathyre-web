@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { LoginProvider } from './context/login.context.jsx'; // Importez plutôt le fournisseur de contexte LoginProvider
+import {CartProvider} from './context/card.context.jsx';
 import './index.css';
 import App from './App.js';
 import reportWebVitals from './reportWebVitals.js';
@@ -10,7 +11,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <LoginProvider>
-        <App />
+        <CartProvider>
+          <App />
+        </CartProvider>
       </LoginProvider>
     </BrowserRouter>
   </React.StrictMode>,
