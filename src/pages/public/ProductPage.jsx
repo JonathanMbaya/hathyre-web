@@ -1,6 +1,6 @@
 import React from 'react';
 import ListProducts from '../../components/Catalogue/products/ListProducts.jsx';
-import Filter from '../../components/Filter/Filter.jsx';
+// import Filter from '../../components/Filter/Filter.jsx';
 import Footer from '../../components/Footer/Footer';
 import Basket from "../../components/Basket/Basket.jsx";
 import 'animate.css';
@@ -16,7 +16,7 @@ function ProductPage() {
                 La Boutique | Hathyre 
             </h1>
 
-            <Filter/>
+            {/* <Filter/> */}
 
             <ListProducts/>
 

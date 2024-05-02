@@ -14,7 +14,7 @@ function HomePage ({currentPage}){
     return (
         <>
             <Basket/>
-
+            
             <Products
                 title ="Découvrez nos nouveautés"
             />

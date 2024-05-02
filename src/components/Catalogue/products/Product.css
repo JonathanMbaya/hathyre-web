@@ -24,13 +24,24 @@
     color: #895832;
 }
 
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-  /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
-  @media only screen and (max-width: 768px) {
-    .list-products {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-  }
+.loading img {
+    height: 4rem;
+    width: 4rem;
+}
+
+
+/* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
+@media only screen and (max-width: 768px) {
+.list-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+}
