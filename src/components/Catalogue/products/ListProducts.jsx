@@ -20,7 +20,7 @@ const ListProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/products`);
+        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products`);
         setProducts(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des produits :', error);
@@ -34,7 +34,7 @@ const ListProducts = () => {
     const fetchProducts = async () => {
       setLoading(true); // Activer le chargement
       try {
-        const response = await axios.get(`http://localhost:8080/api/products/filters/${filterCriteria.sortByName}/${filterCriteria.sortByPrice}`);
+        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products/filters/${filterCriteria.sortByName}/${filterCriteria.sortByPrice}`);
         setProducts(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des produits :', error);
