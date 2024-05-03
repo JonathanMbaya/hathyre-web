@@ -102,19 +102,24 @@ const ListProducts = () => {
         ) : 
 
         <div className="list-products">
-            {products.map(product => (
-                <div key={product._id} className="product">
-                    <Link to={`/product/${product._id}`}>
-                        <img
-                            className='img-fluid'
-                            src={process.env.PUBLIC_URL + `${product.image}`}
-                            alt=""
-                        />
-                    </Link>
-                    <p>{product.name}</p>
-                    <p>{product.price}</p>
-                </div>
-            ))}
+          {products.map(product => (
+              <div key={product._id} className="product">
+                  <Link className='image-container' to={`/product/${product._id}`}>
+                    <img
+                      className='img-fluid main-image'
+                      src={process.env.PUBLIC_URL + `${product.image}`}
+                      alt=""
+                    />
+                    <img
+                      className='img-fluid hover-image'
+                      src={process.env.PUBLIC_URL + `/baobab.png`}
+                      alt=""
+                    />
+                  </Link>
+                  <p>{product.name}</p>
+                  <p>{product.price}</p>
+              </div>
+          ))}
         </div>
       }
         
