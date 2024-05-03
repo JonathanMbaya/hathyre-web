@@ -4,38 +4,36 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ClientDashboard = () => {
     return (
-        <div>
-
-            <div className='board'>
-
-                <h3 style={{ marginLeft: '5%' }}>Nos commandes</h3>
-
-                <div className='label-column'>
-                    <span>Ref. Client</span>
-                    <span>Nom</span>
-                    <span>Prénom</span>
-                    <span>Adresse de livraison</span>
-                    <span>Email</span>
-                    <span>Tel. Mobile</span>
-                    <span>Favoris</span>
-                    <span>Montant dépensé</span>
-                    <span>Supprimer</span>
-                </div>
-
-                <div className='label-column'>
-                    <span>0009385735</span>
-                    <span>Ngannou</span>
-                    <span>Francis</span>
-                    <span>5 Allée du Port Saint-Victor, 91210 Draveil</span>
-                    <span>ngafrancis@hotmail.fr</span>
-                    <span>07 56 52 53 45</span>
-                    <span>Safari Karité</span>
-                    <span>132,57 </span>
-                    <span><FontAwesomeIcon icon={faTrash} /></span>
-                </div>
-
-            </div>
-            
+        <div className='table-responsive'>
+            <table className='users-table'>
+                <thead>
+                    <tr>
+                        <th>Ref. Client</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Adresse de livraison</th>
+                        <th>Email</th>
+                        <th>Tel. Mobile</th>
+                        <th>Favoris</th>
+                        <th>Montant dépensé</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0009385735</td>
+                        <td>Ngannou</td>
+                        <td>Francis</td>
+                        <td>5 Allée du Port Saint-Victor, 91210 Draveil</td>
+                        <td>ngafrancis@hotmail.fr</td>
+                        <td>07 56 52 53 45</td>
+                        <td>Safari Karité</td>
+                        <td>132,57 €</td>
+                        <td><FontAwesomeIcon icon={faTrash} /></td>
+                    </tr>
+                    {/* Ajoute ici d'autres lignes pour chaque commande */}
+                </tbody>
+            </table>
         </div>
     );
 };

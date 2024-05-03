@@ -12,7 +12,7 @@ function ProductPage() {
         
             <div id="shadow"></div>
      
-            <h1 className='animate__animated animate__fadeInUp' style={{ textAlign: 'center', marginBottom: '10rem', marginTop: '1rem', color : '#895832'  }}> 
+            <h1 className='animate__animated animate__fadeInUp' style={{ textAlign: 'center', marginBottom: '2rem', marginTop: '1rem', color : '#895832'  }}> 
                 La Boutique | Hathyre 
             </h1>
 

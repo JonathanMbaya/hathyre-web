@@ -113,10 +113,10 @@ input {
 }
 
 [class*="underlay"] {
+  position: absolute;
   left: 0;
-  min-height: 100%;
+  min-height: 100vh;
   min-width: 100%;
-  position: fixed;
   top: 0;
 }
 

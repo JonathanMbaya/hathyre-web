@@ -45,8 +45,9 @@ const UserDashboard = () => {
                     </span>
                 </div>
 
-                <table className="users-table">
-                    <thead>
+                <div className="table-responsive">
+                    <table className="users-table">
+                        <thead>
                         <tr>
                             <th>Nom</th>
                             <th>Prénom</th>
@@ -57,33 +58,34 @@ const UserDashboard = () => {
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
-                    </thead>
+                        </thead>
 
-                    <tbody>
+                        <tbody>
                         {userConnected && users.map(user => (
                             <tr key={user._id}>
-                                <td>{user.nom}</td>
-                                <td>{user.prenom}</td>
-                                <td>{user.email}</td>
-                                <td>{user.password}</td>
-                                <td>{user.token}</td>
-                                <td>{user.createdAt}</td>
-                                <td>
-                                    <a href={`/admin/dashboard/user/edit/${user._id}`}>
-                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                    </a>
-                                </td>
-                                {/* Conditionally render the delete button */}
-                                <td>
-                                    {userConnected._id !== user._id && ( // Comparaison des IDs de l'utilisateur connecté et de l'utilisateur de la boucle
-                                        <FontAwesomeIcon onClick={() => handleDeleteUser(user._id)} icon={faTrash} />
-                                    )}
-                                </td>
+                            <td>{user.nom}</td>
+                            <td>{user.prenom}</td>
+                            <td>{user.email}</td>
+                            <td>{user.password}</td>
+                            <td>{user.token}</td>
+                            <td>{user.createdAt}</td>
+                            <td>
+                                <a href={`/admin/dashboard/user/edit/${user._id}`}>
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                                </a>
+                            </td>
+                            {/* Conditionally render the delete button */}
+                            <td>
+                                {userConnected._id !== user._id && ( // Comparaison des IDs de l'utilisateur connecté et de l'utilisateur de la boucle
+                                <FontAwesomeIcon onClick={() => handleDeleteUser(user._id)} icon={faTrash} />
+                                )}
+                            </td>
                             </tr>
                         ))}
+                        </tbody>
+                    </table>
+                </div>
 
-                    </tbody>
-                </table>
             </div>
 
             {/* Conditionally render the AddUser component based on showAddUserPopup state */}

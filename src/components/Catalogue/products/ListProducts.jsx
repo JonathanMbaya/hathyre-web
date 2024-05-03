@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpShortWide } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import 'animate.css';
 import './Product.css';
 import '../../Filter/Filter.css';
 
@@ -111,7 +112,7 @@ const ListProducts = () => {
                       alt=""
                     />
                     <img
-                      className='img-fluid hover-image'
+                      className='img-fluid hover-image animate__animated animate__fadeInDown'
                       src={process.env.PUBLIC_URL + `/baobab.png`}
                       alt=""
                     />

@@ -49,44 +49,44 @@ const ProductDashboard = () => {
                 </div>
 
 
-                <table className="product-table">
-                    <thead>
-                        <tr>
-                        <th>Référence</th>
-                        <th>Nom du produit</th>
-                        <th>Prix du produit</th>
-                        <th>Description</th>
-                        <th>Promotion</th>
-                        <th>Likes</th>
-                        <th>Mis à jour</th>
-                        <th>Modifier</th>
-                        <th>Supprimer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map(product => (
-                        <tr key={product._id}>
-                            <td>{product._id}</td>
-                            <td>{product.name}</td>
-                            <td>{product.price}</td>
-                            <td>{product.description}</td>
-                            <td>{product.promo} %</td>
-                            <td>{product.likes}</td>
-                            <td>{product.updatedAt}</td>
-
-                            <td>
-                            <a href={`/admin/dashboard/product/edit/${product._id}`}>
-                                <FontAwesomeIcon icon={faPenToSquare} />
-                            </a>
-
-                                
-                            </td>
-
-                            <td><FontAwesomeIcon onClick={()=>handleDeleteProduct(product._id)} icon={faTrash} /></td>
-                        </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div className='table-responsive'>
+                    <table className='users-table'>
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Nom du produit</th>
+                                <th>Prix du produit</th>
+                                <th>Description</th>
+                                <th>Promotion</th>
+                                <th>Likes</th>
+                                <th>Mis à jour</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {products.map(product => (
+                                <tr key={product._id}>
+                                    <td>{product._id}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.price}</td>
+                                    <td>{product.description}</td>
+                                    <td>{product.promo} %</td>
+                                    <td>{product.likes}</td>
+                                    <td>{product.updatedAt}</td>
+                                    <td>
+                                        <a href={`/admin/dashboard/product/edit/${product._id}`}>
+                                            <FontAwesomeIcon icon={faPenToSquare} />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <FontAwesomeIcon onClick={() => handleDeleteProduct(product._id)} icon={faTrash} />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
 
             </div>

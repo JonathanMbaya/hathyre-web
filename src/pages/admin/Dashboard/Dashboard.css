@@ -1,7 +1,9 @@
-.dashboard{
-    margin: 0;
-    
+@media screen and (orientation: landscape) {
+    .dashboard{
+        margin: 0;    
 }
+}
+
 
   
 .underlay-photo {
@@ -16,23 +18,33 @@
     align-items: center;
     margin-right: 5%;
 }
-
-.board{
-    display: flex;
-    flex-direction: column;
-    align-items: space-around;
+.table-responsive {
+    overflow-x: auto;
     background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .users-table {
     width: 90%;
-    margin-left: 5%;
-    padding: 2rem 0;
-
-}
-
-td{
-    text-align: center;
-}
+    border-collapse: collapse;
+  }
+  
+  .users-table th,
+  .users-table td {
+    padding: 8px;
+    border: 1px solid #dddddd;
+    text-align: left;
+  }
+  
+  @media (max-width: 768px) {
+    .users-table th,
+    .users-table td {
+      font-size: 14px;
+    }
+  }
+  
 
 .label-column {
     display: flex;
