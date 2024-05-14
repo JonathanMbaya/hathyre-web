@@ -1,13 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../context/card.context';
+// import StripeContainer from '../Stripe/StripeContainer.jsx';
 import 'animate.css';
 import './Basket.css';
 
 function Basket() {
     const [isOpen, setIsOpen] = useState(false);
-    const { cartItems, removeFromCart} = useContext(CartContext);
+    const {cartItems, removeFromCart} = useContext(CartContext);
     const [totalPrice, setTotalPrice] = useState(0);
 
     // Calculer la somme totale des prix à chaque changement dans le panier
@@ -58,12 +60,17 @@ function Basket() {
 
                     <div className='price-total'>
                         <p>{totalPrice} EUR</p>
-                        <button>
-                            Commander
-                        </button>
+                        <Link to='/checkout'>
+                            <button>
+                                Commander
+                            </button>
+                        </Link>
+
                     </div>
                 </div>
             )}
+
+
         </div>
     );
 }
