@@ -45,7 +45,7 @@ function CheckoutForm() {
             console.log("Token Généré: ", paymentMethod);
             try {
                 const { id } = paymentMethod;
-                const response = await axios.post('http://localhost:8080/stripe/load',
+                const response = await axios.post('https://hathyre-server-api.onrender.com/stripe/load',
                     {
                         amount: totalPrice,
                         id: id,
