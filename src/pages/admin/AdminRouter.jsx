@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./Layout";
 import AdminLogin from "./Connexion/AdminLogin.jsx";
+import Login from "./Connexion/Login.jsx";
 import Dashboard from "./Dashboard/Dashboard.jsx";
 import AddProduct from "../../components/Dashboard/ProductDashboard/AddProduct.jsx";
 import EditProduct from "../../components/Dashboard/ProductDashboard/EditProduct.jsx";
@@ -21,6 +22,9 @@ function AdminRouter() {
 
   return (
     <Routes>
+      <Route>
+        <Route path="login" element={<Login/>} />
+      </Route>
       <Route path="/admin" element={<Layout />}>
         <Route path="login" element={<AdminLogin/>} />
         <Route path="dashboard/:id/:token" element={<Dashboard />} />

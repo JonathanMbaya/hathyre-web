@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faHouse, faMagnifyingGlass, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { LoginContext } from "../../context/login.context";
+import { faBars, faHouse, faMagnifyingGlass, faPowerOff, faUser, faChevronRight  } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import './BurgerMenu.css'; // Assurez-vous d'avoir un fichier CSS pour styliser le menu burger
 
@@ -10,6 +12,14 @@ const BurgerMenu = () => {
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [input, setInput] = useState('');
   const [results, setResults] = useState([]);
+  const navigate = useNavigate();
+  const { userConnected } = useContext(LoginContext);
+
+  const handleLogout = () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('id');
+      navigate('/');
+  };
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -59,26 +69,62 @@ const BurgerMenu = () => {
       </div>
 
       <div className={`menu ${isOpen ? 'open' : ''}`}>
-        <ul>
-          <li>
-            <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
+
+        <ul className="d-flex">
+          <li className="me-0 border-2 border-end border-dark-subtle connect">
+            
+            {!userConnected ? (
+              
+              <Link to="/login"> {/* Assurez-vous que le lien est correct */}
+                Se connecter <FontAwesomeIcon icon={faUser} />
+              </Link>
+              
+              ) : (
+              <span className='connect' onClick={handleLogout}>
+                {/* Assurez-vous que le lien est correct */}
+                
+                Bonjour , {userConnected.prenom } {userConnected.nom} <br />
+                <hr />
+
+                <Link to="/">
+                  Déconnexion <FontAwesomeIcon onClick={handleLogout} icon={faPowerOff} />
+                </Link>
+              </span> 
+            )}
+
           </li>
-          <li>
-            <Link to="/product" className="link-without-decoration">Nos produits</Link>
-          </li>
-          <li>
-            <Link to="/apropos" className="link-without-decoration">A propos de Hathyre</Link>
-          </li>
-          <Link to="/admin/login">
+
+          {/* {userConnected.prenom === 'Zacharie' && (
             <li>
-              Se connecter  <FontAwesomeIcon className="burger-icon" icon={faArrowRightToBracket} />
+              <Link className="dropdown-item" to="/admin/login">
+                Administration
+              </Link>
             </li>
-          </Link>
+          )}  */}
+          
+        </ul>
+
+        <ul>
+          <hr />
+          <li className='burger-li'>
+            <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </li>
+          <li className='burger-li'>
+            <Link to="/product" className="link-without-decoration">Nos produits </Link>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </li>
+          <li className='burger-li'>
+            <Link to="/apropos" className="link-without-decoration">A propos de Hathyre</Link>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </li>
+
           <Link className="link-without-decoration" to="https://instagram.com/hathyre_/" target="_blank">
             <li>
               Rejoins nous sur instagram  <img className='icon-nav' src={process.env.PUBLIC_URL + '/socialnetwork/instagram.svg'} alt="Logo Hathyre" />
             </li>
           </Link>
+          
         </ul>
       </div>
 

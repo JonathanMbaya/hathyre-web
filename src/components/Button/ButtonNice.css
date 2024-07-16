@@ -20,15 +20,15 @@
   .buttonNice button:hover {
     background: #EACD9A;
   }
-  .buttonNice button::before,
-  .buttonNice button::after {
+
+  .buttonNice button::before, .buttonNice button::after {
     content: "";
     background: inherit;
-    height: 5px;
-    width: 0px;
+    height: 0px;
+    width: 2px !important;
     position: absolute;
     transition: 0.3s ease-in-out;
-  }
+}
   .buttonNice button::before {
     top: -10px;
     left: -10px;

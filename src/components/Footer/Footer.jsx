@@ -81,7 +81,7 @@ function Footer() {
             {/* Deuxième partie footer */}
 
             <div className='second-area-footer'>
-                <p>Hathyre - Copyright 2022</p>
+                <p>Hathyre - Copyright 2024</p>
 
                 <div className='icon-money'>
                     <img src={process.env.PUBLIC_URL + '/money-way/cc-visa.svg'} alt="Logo Hathyre" />

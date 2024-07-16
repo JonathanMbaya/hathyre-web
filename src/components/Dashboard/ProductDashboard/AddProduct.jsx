@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import './Dashboard.css';
 
 function AddProduct() {
   const [productName, setProductName] = useState("");
@@ -33,7 +34,7 @@ function AddProduct() {
   
     try {
       // Envoyez les données au serveur avec multipart/form-data
-      const response = await axios.post("https://hathyre-server-api.onrender.com/api/add/product", formData, {
+      const response = await axios.post("http://localhost:8080/api/add/product", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -70,7 +71,7 @@ function AddProduct() {
   }
 
   return (
-    <div>
+    <div className="page-add-product">
       <h1> 
         <FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} /> 
         Ajouter un nouveau produit

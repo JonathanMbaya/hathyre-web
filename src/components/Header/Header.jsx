@@ -1,9 +1,9 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesDown } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Navbar/Navbar';
 import BurgerMenu from "../Navbar/BurgerMenu";
 import { useLocation} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './header.style.css';
 import 'animate.css';
 
@@ -15,6 +15,7 @@ function Header({ currentPage }) {
 
             {location.pathname === '/' && 
                 <div  className='header-home'>
+
                     <BurgerMenu/>
                     <div className='logo-container animate__animated animate__fadeInUp' style={{ display: 'flex', justifyContent: 'center' }}>
                         <img
@@ -67,13 +68,13 @@ function Header({ currentPage }) {
             {location.pathname.startsWith('/product/') && 
                 <div className='header-product'>
                     <BurgerMenu/>
-                    <div className='logo-container animate__animated animate__fadeInUp' style={{ display: 'flex', justifyContent: 'center' }}>
-                        <img
-                            src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
-                            alt="Logo de l'application"
-                            className="logo-img"
-                        />
-                    </div>
+                        <div className='logo-container animate__animated animate__fadeInUp' style={{ display: 'flex', justifyContent: 'center' }}>
+                            <img
+                                src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
+                                alt="Logo de l'application"
+                                className="logo-img"
+                            />
+                        </div>
                     <Navbar />
                 </div>
             }

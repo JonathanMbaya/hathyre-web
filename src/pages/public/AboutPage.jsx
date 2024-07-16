@@ -6,6 +6,8 @@ import 'animate.css';
 
 function AboutPage () {
 
+
+
     const Shadow = {
         
         position: 'fixed',
@@ -19,6 +21,7 @@ function AboutPage () {
     };
 
     useEffect(() => {
+
         const handleScroll = () => {
             const scrollThreshold = 1000; // Définissez ici le niveau de scroll à partir duquel l'ombre disparaît
             const shadow = document.getElementById('shadow'); // Remplacez 'shadow' par l'ID de votre élément ombre
@@ -26,7 +29,7 @@ function AboutPage () {
                 shadow.style.display = 'none'; // Cacher l'ombre lorsque le niveau de défilement dépasse le seuil
             }
         }
-    
+
         // Ajoute l'écouteur d'événements pour le défilement de la page
         window.addEventListener('scroll', handleScroll);
     
@@ -34,7 +37,12 @@ function AboutPage () {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
+
     }, []);
+
+    
+
+
     
 
     

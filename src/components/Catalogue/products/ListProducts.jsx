@@ -33,8 +33,27 @@ const ListProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true); // Activer le chargement
+
       try {
-        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products/filters/${filterCriteria.sortByName}/${filterCriteria.sortByPrice}`);
+        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products/filters/${filterCriteria.sortByName}`);
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des produits :', error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false); // Désactiver le chargement après 1,5 seconde
+        }, 1500);
+      }
+    };
+    
+    fetchProducts();
+  }, [filterCriteria]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true); // Activer le chargement
+      try {
+        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products/filters/${filterCriteria.sortByPrice}`);
         setProducts(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des produits :', error);
@@ -113,7 +132,7 @@ const ListProducts = () => {
                     />
                     <img
                       className='img-fluid hover-image animate__animated animate__fadeInDown'
-                      src={process.env.PUBLIC_URL + `/baobab.png`}
+                      src={process.env.PUBLIC_URL +  `${product.image}`}
                       alt=""
                     />
                   </Link>

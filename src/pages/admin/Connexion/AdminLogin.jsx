@@ -89,7 +89,6 @@ function AdminLogin() {
                     <input type="submit" name="Login" value="Login" className="login-submit" />
                 </form>
                 <Link to="#" className="login-forgot-pass">forgot password ?</Link>
-                <div className="underlay-photo" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/admin-background/form-background.png)` }}></div>
             </div>
         </div>
     );

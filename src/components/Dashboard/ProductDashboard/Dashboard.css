@@ -1,0 +1,15 @@
+.page-add-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-add-product h1{
+    text-align: center;
+}
+
+.page-add-product form{
+    display: flex;
+    flex-direction: column;
+}

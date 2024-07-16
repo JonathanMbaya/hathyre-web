@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './InfoAbout.css';
+import gsap from 'gsap';
 
 function InfoAbout () {
+
+    useEffect(() => {
+        gsap.to("#block", { duration: 1, y:50, opacity: 1 });
+    }, []);
+
     return (
         <>
 
-<div className='block-tri-info'>
+            <div id='block' className='block-tri-info'>
                 <div className='tri-info'>
                     <h2>
                         “ Hathyre ” 

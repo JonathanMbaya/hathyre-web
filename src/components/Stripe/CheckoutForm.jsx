@@ -4,7 +4,10 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { CartContext } from '../../context/card.context';
+import emailjs from '@emailjs/browser';
+import Popup from '../PopUp/PopUp.jsx';
+import { CartContext } from '../../context/card.context'; // Chemin corrigé
+import { contactConfig } from '../../utils/config.email.js';
 import './checkout.css';
 
 function CheckoutForm() {
@@ -21,16 +24,22 @@ function CheckoutForm() {
         address: '',
         city: '',
         postalCode: '',
-        country: ''
+        country: '',
+        loading: false,
+        show: false,
+        alertmessage: "",
+        variant: "",
     });
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setCustomerInfo({ ...customerInfo, loading: true });
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardElement),
             billing_details: {
-                name: customerInfo.firstName + ' ' + customerInfo.lastName,
+                name: `${customerInfo.firstName} ${customerInfo.lastName}`,
                 email: customerInfo.email,
                 address: {
                     line1: customerInfo.address,
@@ -41,8 +50,55 @@ function CheckoutForm() {
             }
         });
 
+        const sendConfirmationEmail = () => {
+            const templateParams = {
+                firstName: customerInfo.firstName,
+                lastName: customerInfo.lastName,
+                email: customerInfo.email,
+                address: customerInfo.address,
+                city: customerInfo.city,
+                postalCode: customerInfo.postalCode,
+                country: customerInfo.country,
+                totalPrice: totalPrice,
+                totalProduct: totalProduct,
+                cartItems: cartItems.map(item => `${item.quantity}x ${item.name}`).join(", ")
+            };
+
+            emailjs
+                .send(
+                    contactConfig.YOUR_SERVICE_ID,
+                    contactConfig.YOUR_TEMPLATE_ID,
+                    templateParams,
+                    contactConfig.YOUR_USER_ID
+                )
+                .then(
+                    (result) => {
+                        console.log(result.text);
+                        setCustomerInfo({
+                            ...customerInfo,
+                            loading: false,
+                            alertmessage: "SUCCESS! ,Thankyou for your message",
+                            variant: "success",
+                            show: true,
+                        });
+                    },
+                    (error) => {
+                        console.log(error.text);
+                        setCustomerInfo({
+                            ...customerInfo,
+                            alertmessage: `Failed to send!, ${error.text}`,
+                            variant: "danger",
+                            show: true,
+                        });
+                        document.getElementsByClassName("co_alert")[0].scrollIntoView();
+                    }
+                );
+        };
+
+        sendConfirmationEmail();
+
         if (!error) {
-            console.log("Token Généré: ", paymentMethod);
+            console.log("Token Generated: ", paymentMethod);
             try {
                 const { id } = paymentMethod;
                 const response = await axios.post('https://hathyre-server-api.onrender.com/stripe/load',
@@ -51,42 +107,43 @@ function CheckoutForm() {
                         id: id,
                     });
                 if (response.data.success)
-                    console.log("Paiement réussi");
+                    console.log("Payment successful");
+
+                    // Afficher la pop-up
+                    setShowPopup(true);
 
             } catch (error) {
-                console.log("Erreur!", error);
+                console.log("Error!", error);
             }
-        }
-
-        else {
+        } else {
             console.log(error.message);
         }
     }
 
-    // Calculer la somme totale des prix à chaque changement dans le panier
+    // Calculate total price whenever cart items change
     useEffect(() => {
         let total = 0;
         cartItems.forEach(item => {
-            total += item.price * item.quantity; // Multipliez le prix par la quantité pour obtenir le prix total de chaque produit
+            total += item.price * item.quantity; // Multiply price by quantity to get total price for each item
         });
         setTotalPrice(total);
     }, [cartItems]);
 
-    // Calculer la somme totale des quantités à chaque changement dans le panier
+    // Calculate total quantity whenever cart items change
     useEffect(() => {
         let totalP = 0;
         cartItems.forEach(item => {
-            totalP += item.quantity; // Ajouter la quantité de chaque produit
+            totalP += item.quantity; // Add the quantity of each item
         });
         setTotalProduct(totalP);
     }, [cartItems]);
 
-    // Fonction pour supprimer un produit du panier
+    // Function to remove an item from the cart
     const handleRemoveFromCart = (productId) => {
         removeFromCart(productId);
     };
 
-    // Fonction pour gérer les changements dans les champs du formulaire d'informations personnelles
+    // Function to handle changes in the personal information form fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setCustomerInfo({ ...customerInfo, [name]: value });
@@ -97,7 +154,7 @@ function CheckoutForm() {
     }
 
     return (
-        <div className='resume-checkout' style={{ Width: '100%' }}>
+        <div className='resume-checkout' style={{ width: '100%' }}>
             <div className='form-checkout' style={{ maxWidth: 400 }}>
                 <h2>Votre panier</h2>
                 <div className='recap-products'>
@@ -117,24 +174,28 @@ function CheckoutForm() {
             </div>
             <form className='form-checkout' onSubmit={handleSubmit} style={{ maxWidth: 300 }}>
                 <h2>Vos informations</h2>
-
                 <input type="text" name="firstName" value={customerInfo.firstName} onChange={handleInputChange} placeholder="Prénom" required />
                 <input type="text" name="lastName" value={customerInfo.lastName} onChange={handleInputChange} placeholder="Nom de famille" required />
                 <input type="email" name="email" value={customerInfo.email} onChange={handleInputChange} placeholder="Adresse email" required />
-
                 <h3>Adresse de livraison</h3>
                 <input type="text" name="address" value={customerInfo.address} onChange={handleInputChange} placeholder="Adresse" required />
                 <input type="text" name="city" value={customerInfo.city} onChange={handleInputChange} placeholder="Ville" required />
                 <input type="text" name="postalCode" value={customerInfo.postalCode} onChange={handleInputChange} placeholder="Code postal" required />
                 <input type="text" name="country" value={customerInfo.country} onChange={handleInputChange} placeholder="Pays (ex: FR)" required />
-                <br />
-                <br />
+                <br /><br />
                 <h3>Mode de paiement </h3>
                 <CardElement className='input-bank-card' options={{ hidePostalCode: true }} />
                 <button type="submit">Payer</button>
             </form>
+
+            {showPopup && (
+                <Popup 
+                    message="Votre commande est en route prochainement , votre paiement a été validé"
+                    onClose={() => setShowPopup(false)} 
+                />
+            )}
         </div>
-    )
+    );
 }
 
 export default CheckoutForm;
