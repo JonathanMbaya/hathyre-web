@@ -1,12 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './InfoAbout.css';
-import gsap from 'gsap';
 
 function InfoAbout () {
 
-    useEffect(() => {
-        gsap.to("#block", { duration: 1, y:50, opacity: 1 });
-    }, []);
+    // useEffect(() => {
+    //     gsap.to("#block", { duration: 1, y:50, opacity: 1 });
+    // }, []);
 
     return (
         <>

@@ -78,7 +78,22 @@ function Header({ currentPage }) {
                     <Navbar />
                 </div>
             }
-                {location.pathname.startsWith('/checkout') && 
+
+            {location.pathname.startsWith('/checkout') && 
+            <div className='header-product'>
+                <BurgerMenu/>
+                <div className='logo-container animate__animated animate__fadeInUp' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <img
+                        src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
+                        alt="Logo de l'application"
+                        className="logo-img"
+                    />
+                </div>
+            </div>
+            }
+
+
+            {location.pathname.startsWith('/faq') && 
                 <div className='header-product'>
                     <BurgerMenu/>
                     <div className='logo-container animate__animated animate__fadeInUp' style={{ display: 'flex', justifyContent: 'center' }}>

@@ -49,8 +49,10 @@ function Footer() {
                             <Link className='link-without-decoration' to="/admin/login" >
                                 <li>Se connecter</li>                            
                             </Link>
-                            <li>Contact</li>
-                            <li>FAQ</li>
+                            <Link className='link-without-decoration' to="/faq">
+                                <li>FAQ</li>
+                            </Link>
+                            
                         </div>
                     </div>
 

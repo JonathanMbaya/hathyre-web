@@ -75,7 +75,7 @@ header .logo-container { /* Le logo ne dépassera pas la largeur du conteneur pa
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5rem;
+    margin-top: 1rem;
 }
 
 .container h2{

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ButtonToBasket from '../Button/ButtonToBasket';
 import axios from 'axios';
 import './products.css';
@@ -7,6 +7,7 @@ import 'animate.css';
 
 function Products({ title }) {
     const [products, setProducts] = useState([]);
+    const location = useLocation();
 
     useEffect(() => {
         // Effectuer la requête Axios pour récupérer les produits triés par date
@@ -20,11 +21,16 @@ function Products({ title }) {
             });
     
     }, []);
+
     
 
     return (
         <div className="container animate__animated animate__fadeInUp">
             <h2>{title}</h2>
+            {location.pathname.startsWith('/product/') && 
+                <h2>Ces produits pourraient vous intéressez</h2>
+            }
+
             <div className="row">
                 {products.map(product => (
                     
@@ -46,6 +52,7 @@ function Products({ title }) {
                         </div>
                 ))}
             </div>
+
         </div>
     );
 };

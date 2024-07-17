@@ -6,6 +6,7 @@ import ProductPage from './ProductPage.jsx';
 import AboutPage from './AboutPage.jsx';
 import SingleProductPage from './SingleProductPage.jsx';
 import StripeContainer from '../../components/Stripe/StripeContainer.jsx';
+import Faq from "../../components/FAQ/Faq.jsx";
 
 function PublicRouter ()  {
 
@@ -56,6 +57,15 @@ function PublicRouter ()  {
                     render={() => {
                         setCurrentPage('StripeContainer');
                         return <StripeContainer />;
+                    }}
+                />
+
+                <Route
+                    path="/faq"
+                    element={<Faq />}
+                    render={() => {
+                        setCurrentPage('Faq');
+                        return <Faq />;
                     }}
                 />
 
