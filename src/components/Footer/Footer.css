@@ -128,6 +128,10 @@
     margin: 0;
   }
 
+.footer .first-area-footer .one-menu-footer a li, .footer .first-area-footer .one-menu-footer li {
+    color: white !important;
+}
+
 
   
   /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */

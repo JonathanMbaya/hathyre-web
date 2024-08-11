@@ -8,20 +8,12 @@ body{
   margin: 0px !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 
 .box-shadow-white{
 
   position: relative;
-  height: 20vh;
-  z-index: 70000000;
   background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
   bottom: 0px;
-
 }
 
 

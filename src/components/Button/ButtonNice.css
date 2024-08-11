@@ -3,7 +3,7 @@
   border: none;
   background: #EACD9A;
   font-size: 20px;
-  color: white;
+  color: #895832;
   cursor: pointer;
   transition: 0.3s;
   position: relative;
@@ -19,6 +19,8 @@
 
 .buttonNice button:hover {
   background: #EACD9A;
+  color: #895832;
+
 }
 
 .buttonNice button::before, .buttonNice button::after {
@@ -72,7 +74,7 @@
     border: none;
     background: #EACD9A;
     font-size: 10px !important;
-    color: white;
+    color: #895832;
     cursor: pointer;
     transition: 0.3s;
     position: relative;

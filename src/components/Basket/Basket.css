@@ -1,22 +1,19 @@
-/* .page-window-basket{
+.basket-window{
     height: 100vh;
     width: 100%;
     top: 0px;
     right: 0px;
-    position: absolute;
-    z-index: 9000000000;
-    filter: blur(10px);
-} */
-
-
-.product-basket{
     position: fixed;
+    z-index: 9000000000;
+}
+
+.product-basket {
     background-color: bisque;
-    padding: 1rem;
+    padding: .02rem;
     border-radius: 100%;
-    z-index: 900000;
-    bottom: 5rem;
-    right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-basket span {

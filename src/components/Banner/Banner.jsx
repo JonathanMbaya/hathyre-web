@@ -6,10 +6,11 @@ import './banner.css';
 function Banner ({title, item1, src}) {
     return (
 
-    <div className='block-catalogue'>
+    <div>
 
-
-        <h1 style={{ textAlign: 'center' }}>{title}</h1>
+        <div className='container'>
+            <h2>{title}</h2>
+        </div>
 
         {/* <div className="row">
             
@@ -34,7 +35,7 @@ function Banner ({title, item1, src}) {
                 <img src={src} alt="Strength" />
                 <div className="button-up">
                     <Link to="/product">
-                        <ButtonNice text="Savon"/>
+                        <ButtonNice text="Savons"/>
                     </Link>
                 </div>
             </div>
@@ -44,7 +45,7 @@ function Banner ({title, item1, src}) {
                 <img src={src} alt="Strength" />
                 <div className="button-up">
                     <Link to="/product">
-                        <ButtonNice text="Crème"/>
+                        <ButtonNice text="Beurres et Huiles"/>
                     </Link>
                 </div>
             </div>
@@ -53,7 +54,7 @@ function Banner ({title, item1, src}) {
                 <img src={src} alt="Strength" />
                 <div className="button-up">
                     <Link to="/product">
-                        <ButtonNice text="Acessoires"/>
+                        <ButtonNice text="Accessoires"/>
                     </Link>
                 </div>
             </div>
@@ -67,7 +68,6 @@ function Banner ({title, item1, src}) {
                 </div>
             </div>
         </div>
-
     </div>
 
     );

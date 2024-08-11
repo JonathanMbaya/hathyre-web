@@ -2,19 +2,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-.header-home {
-    background-image: url('../../../public/present/header-background.jpg');
+.header-home{
+    width: 100% !important;
+}
+
+.banner-home{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    height: 60vh;
-
+    background-color: #EACD9A;
+    margin-top: 20vh;
 }
 
-.header-apropos video {
+.img-home-banner{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30%;
+    right: 0rem;
+    margin: 0rem;
+    padding: 0rem;
+}
+
+.img-home-banner img{
+    width: 80%;
+    right: 0rem;
+    margin: 0rem;
+    padding: 0rem;
+}
+
+.header-home video {
     position: absolute;
     z-index: -1000;
     left: 0;
@@ -22,35 +43,13 @@
     background-position: center center;
     background-size: cover;
 
-}
-
-.custom-shape-divider-top-1705679374 {
-    position: absolute;
-    z-index: -1000;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-}
-
-.custom-shape-divider-top-1705679374 svg {
-    position: relative;
-    display: block;
-    width: calc(200% + 1.3px);
-    height:20vh;
-    transform: rotateY(180deg);
-}
-
-.custom-shape-divider-top-1705679374 .shape-fill {
-    fill: #EACD9A;
 }
 
 .header-home h1 {
     bottom: .8rem;
     box-shadow: #0000001a;
     color: #eacd9a;
-    font-size: 66px;
     font-stretch: 100%;
-    position: relative;
     text-align: center;
     width: 100%;
 }
@@ -62,7 +61,7 @@ header .logo-container { /* Le logo ne dépassera pas la largeur du conteneur pa
     align-items: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
-  }
+}
   
 .logo-img {
     width: 5rem; /* Le logo occupera 100% de la largeur du conteneur */
@@ -98,6 +97,10 @@ h1{
     /* Autres styles */
 }
 
+video, .page-about{
+    margin-top: 25vh;
+}
+
 
 
 @media only screen and (max-width: 1024px) {
@@ -115,11 +118,6 @@ h1{
         text-align: center;
         margin-bottom: 2rem;
     }
-
-    .header-home{
-        height: 35vh;
-    }
-
 }
 
 @media only screen and (max-width: 768px) {
@@ -137,8 +135,14 @@ h1{
         margin-bottom: 2rem;
     }
 
-    .header-home{
-        height: 55vh;
+    .img-home-banner{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        right: 0rem;
+        margin: 0rem;
+        padding: 0rem;
     }
 
 }
@@ -158,15 +162,24 @@ h1{
         width: 100%;
     }
 
-    .header-home {
-        height: 35vh;
+    .banner-home{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10vh;
     }
+
 
     .logo-img {
         width: 3rem;
         height: auto;
         margin-top: 2rem;
         margin-bottom: 2rem;
+    }
+
+    video, .page-about{
+        margin-top: 15vh;
     }
 
 }

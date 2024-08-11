@@ -1,20 +1,18 @@
-// Navbar.jsx
-
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './navbar.style.css';
 
 function Navbar() {
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.navbar');
       const scrollPosition = window.scrollY;
 
-      // Ajoutez ou supprimez la classe .fixed en fonction de la position de défilement
       if (scrollPosition > navbar.offsetTop) {
         setIsNavbarFixed(true);
       } else {
@@ -22,36 +20,51 @@ function Navbar() {
       }
     };
 
-    // Ajoutez un gestionnaire d'événements pour le défilement
     window.addEventListener('scroll', handleScroll);
 
-    // Nettoyez le gestionnaire d'événements lorsque le composant est démonté
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <div className={`navbar ${isNavbarFixed ? 'fixed' : ''} animate__animated animate__fadeInUp`}>
+    <div className={`navbar ${isNavbarFixed ? 'fixed' : ''}`}>
       <nav>
         <ul>
           <li>
-            <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse}/></Link>
+            <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
           </li>
-          <li>
-            <Link to="/product" className="link-without-decoration">Nos produits</Link>
+          <li
+            className="submenu-container"
+            onMouseEnter={() => setIsSubMenuOpen(true)}
+            onMouseLeave={() => setIsSubMenuOpen(false)}
+          >
+            <Link to="/product" className="link-without-decoration">
+              Nos produits <FontAwesomeIcon icon={faChevronDown} />
+            </Link>
+
+            {isSubMenuOpen ?
+
+              <ul className="submenu">
+                <li><Link to="/product" className="link-without-decoration">Savons <FontAwesomeIcon icon={faChevronRight} /></Link></li>
+                <li><Link to="/product" className="link-without-decoration">Beurres et Huiles <FontAwesomeIcon icon={faChevronRight} /></Link></li>
+                <li><Link to="/product" className="link-without-decoration">Accessoires <FontAwesomeIcon icon={faChevronRight} /></Link></li>
+              </ul> : ''
+            }
+
+
+
           </li>
-          
+
+
           <li>
             <Link to="/apropos" className="link-without-decoration">A propos de Hathyre</Link>
           </li>
-          
           <li>
             <Link className="link-without-decoration" to="https://instagram.com/hathyre_/" target="_blank">
-              Rejoins nous sur instagram
+              Nous rejoindre sur instagram
             </Link>
-
-            <img className='icon-nav' src={process.env.PUBLIC_URL + '/socialnetwork/instagram.svg'} alt="Logo Hathyre" />
+            <i className="fa-brands fa-instagram"></i>
           </li>
         </ul>
       </nav>

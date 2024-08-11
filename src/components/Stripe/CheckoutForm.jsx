@@ -190,7 +190,7 @@ function CheckoutForm() {
 
             {showPopup && (
                 <Popup 
-                    message="Votre commande est en route prochainement , votre paiement a été validé"
+                    message="Nous vous remercions pour votre commande !"
                     onClose={() => setShowPopup(false)} 
                 />
             )}

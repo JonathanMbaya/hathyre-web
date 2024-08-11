@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LoginContext } from "../../context/login.context";
 import { faBars, faHouse, faMagnifyingGlass, faPowerOff, faUser, faChevronRight  } from '@fortawesome/free-solid-svg-icons';
-import axios from "axios";
 import './BurgerMenu.css'; // Assurez-vous d'avoir un fichier CSS pour styliser le menu burger
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
-  const [input, setInput] = useState('');
-  const [results, setResults] = useState([]);
+
+
   const navigate = useNavigate();
   const { userConnected } = useContext(LoginContext);
 
@@ -21,26 +20,6 @@ const BurgerMenu = () => {
       navigate('/');
   };
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/product/search/${encodeURIComponent(input)}`);
-        const data = response.data;
-        setResults(data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des produits:', error);
-      }
-    };
-
-    fetchResults();
-  }, [input]);
-
-  const handleInputChange = (event) => {
-    setInput(event.target.value);
-    if (event.target.value.trim() === '') {
-      setResults([]);
-    }
-  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -63,10 +42,13 @@ const BurgerMenu = () => {
           <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
 
         </div>
+        
         <div className="burger-icon" onClick={toggleSearch}>
           <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
         </div>
       </div>
+
+      
 
       <div className={`menu ${isOpen ? 'open' : ''}`}>
 
@@ -94,18 +76,10 @@ const BurgerMenu = () => {
 
           </li>
 
-          {/* {userConnected.prenom === 'Zacharie' && (
-            <li>
-              <Link className="dropdown-item" to="/admin/login">
-                Administration
-              </Link>
-            </li>
-          )}  */}
-          
         </ul>
 
         <ul>
-          <hr />
+          <hr/>
           <li className='burger-li'>
             <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
             <FontAwesomeIcon icon={faChevronRight} />
@@ -126,39 +100,9 @@ const BurgerMenu = () => {
           </Link>
           
         </ul>
+
       </div>
 
-      <div className={`page-search ${isOpenSearch ? 'openSearch': ''}`}>
-        <div className='search'>
-          <form className="form-search">
-            <input
-              type="text"
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Trouvez un produit" 
-            />
-          </form>
-        </div>
-        <div className='result-search'>
-        {results.length === 0 ? (
-          <p>Aucun produit trouvé.</p>
-        ) : (
-          results
-            .filter((product) => {
-              return product.name.toLowerCase().includes(input.toLowerCase());
-            })
-            .map((product) => (
-              <Link className='link-without-decoration' to={`/product/${product._id}`}>
-                <div className='item-search' key={product._id}>
-                  <img src={product.image} alt={product.name} />
-                  <p>{product.name}</p>
-                </div>
-              </Link>
-
-            ))
-        )}
-        </div>
-      </div>
     </div>
   );
 };

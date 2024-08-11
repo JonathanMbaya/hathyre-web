@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import InfoAbout from '../../components/InfoAbout/InfoAbout.jsx';
 import Footer from '../../components/Footer/Footer';
-import Basket from "../../components/Basket/Basket.jsx";
 import 'animate.css';
 
 function AboutPage () {
@@ -49,7 +48,6 @@ function AboutPage () {
 
     return (
         <div className='page-about'>
-            <Basket/>
 
             <div id="shadow" style={Shadow} className='box-shadow-white'></div>
 

@@ -10,7 +10,7 @@ function Instagram() {
 
         <div className='area-instagram'>
 
-            <p className='animate__animated animate__slideInLeft'>Nous partageons nos expériences aux quotidiens avec notre communauté instagram </p>
+            <p className='animate__animated animate__slideInLeft'>Nous partageons nos expériences au quotidien avec notre communauté instagram </p>
 
             <div className='photo-instagram animate__animated animate__slideInRight'>
                 <div className='icon-instagram' style={{ display: 'flex', justifyContent: 'center' }}>

@@ -26,7 +26,7 @@ function Products({ title }) {
 
     return (
         <div className="container animate__animated animate__fadeInUp">
-            <h2>{title}</h2>
+            <h2 >{title}</h2>
             {location.pathname.startsWith('/product/') && 
                 <h2>Ces produits pourraient vous intéressez</h2>
             }
