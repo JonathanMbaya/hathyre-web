@@ -66,7 +66,7 @@ function SingleProduct() {
         <>
 
             {product && (
-                <div className="page-product">
+                <div style={{marginTop: '30vh'}} className="page-product">
 
                     <div className="area-product">
                         <img src={product.image} alt={product.name}/>

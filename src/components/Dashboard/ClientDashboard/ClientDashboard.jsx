@@ -1,8 +1,34 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ClientDashboard = () => {
+
+    const [clients, setClients] = useState([]);
+
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/api/clients'); // Assurez-vous que ce chemin correspond à votre backend
+                setClients(response.data);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des clients:', error);
+            }
+        };
+
+        fetchClients();
+    }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`/api/clients/${id}`);  // Ajouter une route pour la suppression
+            setClients(clients.filter(client => client._id !== id));
+        } catch (error) {
+            console.error('Erreur lors de la suppression du client:', error);
+        }
+    };
+
     return (
         <div className='table-responsive'>
             <table className='users-table'>
@@ -20,18 +46,21 @@ const ClientDashboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>0009385735</td>
-                        <td>Ngannou</td>
-                        <td>Francis</td>
-                        <td>5 Allée du Port Saint-Victor, 91210 Draveil</td>
-                        <td>ngafrancis@hotmail.fr</td>
-                        <td>07 56 52 53 45</td>
-                        <td>Safari Karité</td>
-                        <td>132,57 €</td>
-                        <td><FontAwesomeIcon icon={faTrash} /></td>
-                    </tr>
-                    {/* Ajoute ici d'autres lignes pour chaque commande */}
+                    {clients.map(client => (
+                        <tr key={client._id}>
+                            <td>{client.token}</td>
+                            <td>{client.nom}</td>
+                            <td>{client.prenom}</td>
+                            <td>{client.address}</td>
+                            <td>{client.clientEmail}</td>
+                            <td>{client.mobile}</td>
+                            <td>{client.favoris.join(', ')}</td>
+                            <td>{client.montantDepense} EUR</td>
+                            <td>
+                                <button onClick={() => handleDelete(client._id)}><FontAwesomeIcon icon={faTrash}/></button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
