@@ -23,7 +23,7 @@
 }
 
 .burger-icon, .line{
-  color: #EACD9A;
+  color: #895832;
 }
 
 .burger-icon {
@@ -43,7 +43,7 @@
   height: 2px;
   padding: 0rem;
   margin: .1rem;
-  background-color: #EACD9A;
+  background-color: #895829;
 }
 
 .open .line:nth-child(1) {

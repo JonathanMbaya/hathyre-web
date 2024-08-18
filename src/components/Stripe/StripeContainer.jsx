@@ -11,7 +11,7 @@ function StripeContainer() {
 
     return (
         <>
-            <h1 style={{textAlign: 'center'}}>Récapitulatif de votre commande</h1>
+            <h1 style={{textAlign: 'center', marginTop: '30vh'}}>Récapitulatif de votre commande</h1>
             <Elements stripe={stripeTestPromise}>
                 <CheckoutForm/> 
             </Elements>

@@ -42,16 +42,12 @@ function SingleProduct() {
 
     const faqData = [
         {
-            question: 'Comment puis-je m\'inscrire?',
+            question: 'Ingredient / Composition',
             answer: 'Pour vous inscrire, cliquez sur le bouton "S\'inscrire" en haut de la page et remplissez le formulaire d\'inscription.',
         },
         {
-            question: 'Quels sont les modes de paiement acceptés?',
+            question: "Conseils d'utilisation",
             answer: 'Nous acceptons les cartes de crédit, PayPal et les virements bancaires.',
-        },
-        {
-            question: 'Comment puis-je suivre ma commande?',
-            answer: 'Vous pouvez suivre votre commande en vous connectant à votre compte et en accédant à la section "Mes commandes".',
         },
     ];
 

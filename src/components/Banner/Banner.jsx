@@ -12,23 +12,6 @@ function Banner ({title, item1, src}) {
             <h2>{title}</h2>
         </div>
 
-        {/* <div className="row">
-            
-            <div className="box1">
-                <h3>{item1}</h3>
-                <img src={src} alt="Strength" />
-            </div>
-
-
-            <div className="button-up">
-                <Link to="/product">
-                    <ButtonNice text="Découvrir +"/>
-                </Link>
-            </div>
-
-
-        </div> */}
-
         <div class="parent">
             <div className="box1 div1">
                 <h3>{item1}</h3>

@@ -7,11 +7,11 @@ import "./Tabs.css";
 
 function Tabs() {
 
-    const [selectedTab, setSelectedTab] = useState('users');
+  const [selectedTab, setSelectedTab] = useState('users');
 
-    const handleTabChange = (tab) => {
-      setSelectedTab(tab);
-    };
+  const handleTabChange = (tab) => {
+    setSelectedTab(tab);
+  };
 
   return (
     <div className='tabs'>

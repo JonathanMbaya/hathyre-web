@@ -19,7 +19,7 @@ function NewNavbar() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/products/savon');
+                const response = await axios.get('https://hathyre-server-api.onrender.com/api/products/savon');
                 setCategory(response.data);
             } catch (error) {
                 console.error("Erreur lors de la récupération des catégories :", error);
@@ -86,7 +86,7 @@ function NewNavbar() {
 
             <div style={{ borderBottom: '.5px solid lightgray', display: 'flex', flexDirection: 'row' }} className="burger-icon" onClick={toggleSearch}>
                 <div>
-                    <p>Rechercher</p>
+                    <p>Trouver un  produit</p>
                 </div>
                 <div>
                     <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
@@ -104,11 +104,6 @@ function NewNavbar() {
             </div>
 
             <div className="icons-users">
-                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px' }} onClick={toggleMenu}>
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                </div>
 
                 <Basket />
 
@@ -116,6 +111,12 @@ function NewNavbar() {
                     <li>
                         <Link to="/login" className="link-without-decoration"><FontAwesomeIcon icon={faCircleUser} size="2x" /></Link>
                     </li>
+                </div>
+
+                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px' }} onClick={toggleMenu}>
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
                 </div>
 
                 <div className={`menu ${isOpen ? 'open' : ''}`}>
@@ -126,17 +127,19 @@ function NewNavbar() {
                             <li>
                                 <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
                             </li>
+
                             <li>
-                                        Nos produits
-                                    </li>
+                                Nos produits
+                            </li>
+
                             <li
                             
                                 // onClick={() => setIsSubMenuOpen(true)}
                                 style={{ display: "flex", flexDirection: 'column', alignItems: 'flex-start', margin: '0rem' }}
                             >
                                 
-                                    <div style={{ display: "flex", flexDirection: 'column', alignItems: 'flex-start' }}>
-                                        <div>
+                                    <div style={{ display: "flex", flexDirection: 'column', alignItems: 'flex-start', justifyContent:'flex-start', textAlign: 'left' }}>
+                                        <ul>
                                             <li>
                                                 <Link to="/product" className="link-without-decoration">
                                                     <FontAwesomeIcon icon={faSoap} /> Savons <FontAwesomeIcon icon={faChevronRight} />
@@ -149,23 +152,23 @@ function NewNavbar() {
                                                     </Link>
                                                 </li>
                                             ))}
-                                        </div>
-                                        <div>
+                                        </ul>
+                                        <ul>
                                             <li>
                                                 <Link to="/" className="link-without-decoration">
                                                     <FontAwesomeIcon icon={faDroplet} /> Beurres et Huiles <FontAwesomeIcon icon={faChevronRight} />
                                                 </Link>
                                             </li>
                                             <li>Bientôt disponible</li>
-                                        </div>
-                                        <div>
+                                        </ul>
+                                        <ul>
                                             <li>
                                                 <Link to="/" className="link-without-decoration">
                                                     <FontAwesomeIcon icon={faRing} /> Accessoires <FontAwesomeIcon icon={faChevronRight} />
                                                 </Link>
                                             </li>
                                             <li>Bientôt disponible</li>
-                                        </div>
+                                        </ul>
                                     </div>
                                 
                             </li>

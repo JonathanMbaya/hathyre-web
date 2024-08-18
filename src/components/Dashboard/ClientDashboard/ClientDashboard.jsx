@@ -10,7 +10,7 @@ const ClientDashboard = () => {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/clients'); // Assurez-vous que ce chemin correspond à votre backend
+                const response = await axios.get('https://hathyre-server-api.onrender.com/api/clients'); // Assurez-vous que ce chemin correspond à votre backend
                 setClients(response.data);
             } catch (error) {
                 console.error('Erreur lors de la récupération des clients:', error);
@@ -22,7 +22,7 @@ const ClientDashboard = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/clients/${id}`);  // Ajouter une route pour la suppression
+            await axios.delete(`https://hathyre-server-api.onrender.com/api/clients/${id}`);  // Ajouter une route pour la suppression
             setClients(clients.filter(client => client._id !== id));
         } catch (error) {
             console.error('Erreur lors de la suppression du client:', error);
@@ -31,6 +31,11 @@ const ClientDashboard = () => {
 
     return (
         <div className='table-responsive'>
+
+            <div style={{backgroundColor : 'white', borderRadius: '.5rem .5rem 0 0'}} className='head-dash'>
+                <h3 style={{margin: '.5rem'}}>Clients</h3>
+            </div>
+
             <table className='users-table'>
                 <thead>
                     <tr>
@@ -42,7 +47,6 @@ const ClientDashboard = () => {
                         <th>Tel. Mobile</th>
                         <th>Favoris</th>
                         <th>Montant dépensé</th>
-                        <th>Supprimer</th>
                     </tr>
                 </thead>
                 <tbody>

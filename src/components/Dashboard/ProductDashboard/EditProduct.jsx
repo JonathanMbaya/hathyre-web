@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
 import axios from "axios";
+import './Dashboard.css'
 
 function EditProduct() {
   const { id } = useParams(); // Récupérer l'ID du produit à partir de l'URL
@@ -13,6 +13,9 @@ function EditProduct() {
   const [productDescription, setProductDescription] = useState("");
   const [productPromo, setProductPromo] = useState("");
   const [productStock, setProductStock] = useState("");
+  const [productConseils, setProductConseils] = useState("");
+  const [productIngredients, setProductIngredients] = useState("");
+  const [productCategory, setProductCategory] = useState("");
 
   useEffect(() => {
     // Effectuer une requête pour récupérer les détails du produit à modifier
@@ -38,6 +41,9 @@ function EditProduct() {
       name: productName,
       price: productPrice,
       description: productDescription,
+      conseils: productConseils,
+      ingredients: productIngredients,
+      category: productCategory,
       promo: productPromo,
       stock: productStock,
     };
@@ -62,24 +68,27 @@ function EditProduct() {
     <>
 
         <div>
-            <h1> 
-              <FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} />
-              Modifier Produit | {productName}
-            </h1>
 
-            <form>
-                <div className="element-input">
+          <h1 style={{textAlign: 'center'}}>
+            <span> <FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} /> </span>
+            Modifier Produit | {productName}
+          </h1>
+
+          <form className="form-edit-product">
+            <div className="other-info">
+              <h2>Informations sur le produit</h2>
+
+              <div className="element-input">
                 <label htmlFor="">Nom</label>
-
                 <input
-                    type="text"
-                    placeholder="Nom du produit"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
+                  type="text"
+                  placeholder="Nom du produit"
+                  value={productName}
+                  onChange={(e) => setProductName(e.target.value)}
                 />
-                </div>
+              </div>
 
-                <div className="element-input">
+              <div className="element-input">
                 <label htmlFor="">Prix</label>
                 <input
                     type="number"
@@ -87,19 +96,21 @@ function EditProduct() {
                     value={productPrice}
                     onChange={(e) => setProductPrice(e.target.value)}
                 />
-                </div>
+              </div>
 
-                <div className="element-input">
-                <label htmlFor="">Description</label>
-                <input
-                    type="text"
-                    placeholder="description"
-                    value={productDescription}
-                    onChange={(e) => setProductDescription(e.target.value)}
-                />
-                </div>
 
-                <div className="element-input">
+              <div className="element-input">
+                <label htmlFor="">Categorie du produit</label>
+                <select value={productCategory} onChange={(e) => setProductCategory(e.target.value)}>
+                  <option value="">Sélectionner la catégorie</option>
+                  <option value="Savon">Savon</option>
+                  <option value="Savon">Beurres et huiles</option>
+                  <option value="Savon">Accessoires</option>
+
+                </select>
+              </div>
+
+              <div className="element-input">
                 <label htmlFor="">Promotion</label>
                 <input
                     type="number"
@@ -107,9 +118,9 @@ function EditProduct() {
                     value={productPromo}
                     onChange={(e) => setProductPromo(e.target.value)}
                 />
-                </div>
+              </div>
 
-                <div className="element-input">
+              <div className="element-input">
                 <label htmlFor="">Stock</label>
                 <input
                     type="text"
@@ -117,26 +128,65 @@ function EditProduct() {
                     value={productStock}
                     onChange={(e) => setProductStock(e.target.value)}
                 />
-                </div>
+              </div>
 
-                {/* <div className="element-input">
-                        <label htmlFor="">Date mis à jour </label>
-                        <input
-                            type="date"
-                            placeholder="promo"
-                            value={productDate}
-                            onChange={(e) => setProductDate(e.target.value)}
-                        />
-                    </div> */}
+            </div>
 
-                <input
-                onClick={handleEditProduct}
-                type="submit"
-                name="Mettre en ligne"
-                id=""
+            <div className="other-info">
+              <h2>Autres informations</h2>
+
+              <div className="element-input">
+                <label htmlFor="">Description du produit</label>
+                <textarea
+                  placeholder="Décrivez les caractéristiques physique du produit qui vont inciter le client à l'achat (taille, capacité, couleur , odeur, etc ...)."
+                  value={productDescription}
+                  onChange={(e) => setProductDescription(e.target.value)}
+                  cols="50"
+                  rows="10"
                 />
+              </div>
 
-            </form>
+              <div className="element-input">
+                <label htmlFor="">Ingrédients</label>
+                <textarea
+                  placeholder="Précisez les composants de produits ex: (Citron, Huiles, Beurres de Karité, ...)"
+                  value={productIngredients}
+                  onChange={(e) => setProductIngredients(e.target.value)}
+                  cols="50"
+                  rows="10"
+                />
+              </div>
+
+              <div className="element-input">
+                  <label htmlFor="">Conseils d'utilisation</label>
+                  <textarea
+                    placeholder="Donnez plus de conseils sur l'utilisation du produit afin de maximiser les résultats"
+                    value={productConseils}
+                    onChange={(e) => setProductConseils(e.target.value)}
+                    cols="50"
+                    rows="10"
+                  />
+              </div>
+
+
+
+            </div>
+
+          </form>
+
+          <div className="submit-edit-product">
+            <button
+              
+              onClick={handleEditProduct}
+              type="submit"
+              name="Mettre en ligne"
+              id=""
+            >
+              Mettre à jour
+
+            </button>
+          </div>
+
 
         </div>
       

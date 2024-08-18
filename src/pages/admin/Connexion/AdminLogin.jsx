@@ -69,7 +69,7 @@ function AdminLogin() {
             </div>
 
             <div className='admin-login'>
-                <h1>Connexion | Hathyre</h1>
+                <h1>Espace Administrateur | Hathyre</h1>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <p className="login-text">
                         <span className="fa-stack fa-lg">
@@ -86,9 +86,9 @@ function AdminLogin() {
                         <input type="password" className="login-password" required={true} placeholder="Entrez votre mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
 
-                    <input type="submit" name="Login" value="Login" className="login-submit" />
+                    <input type="submit" name="Login" value="Se connecter" className="login-submit" />
                 </form>
-                <Link to="#" className="login-forgot-pass">forgot password ?</Link>
+                <Link to="#" className="login-forgot-pass">Vous avez oublié votre mot de passe ?</Link>
             </div>
         </div>
     );

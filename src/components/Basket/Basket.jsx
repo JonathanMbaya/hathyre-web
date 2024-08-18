@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../context/card.context';
@@ -15,18 +15,10 @@ function Basket() {
     const [totalPrice, setTotalPrice] = useState(0);
     const [showPopup, setShowPopup] = useState(false);
 
-    const { user } = useContext(LoginContext);
-
-    // const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     if (!user && !localStorage.getItem('token')) {
-    //         navigate('/admin/login');
-    //     }
-    // }, [navigate, user]);
+    const { userConnected } = useContext(LoginContext);
+    const navigate = useNavigate();
 
     // Calculer la somme totale des prix à chaque changement dans le panier
-
     useEffect(() => {
         const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
         setTotalPrice(total);
@@ -41,6 +33,15 @@ function Basket() {
         removeFromCart(productId);
     };
 
+    // Gérer le clic sur le bouton Commander
+    const handleOrderClick = () => {
+        if (!userConnected) {
+            setShowPopup(true);
+        } else {
+            navigate('/checkout');
+        }
+    };
+
     return (
         <div>
             <div onClick={toggleMenu} className="product-basket animate__animated animate__fadeInUp">
@@ -49,7 +50,6 @@ function Basket() {
             </div>
             {isOpen && (
                 <div className="basket-window animate__animated animate__slideInRight">
-
                     <div onClick={toggleMenu} className="product-close animate__animated animate__fadeInUp">
                         <FontAwesomeIcon icon={faTimes} />
                     </div>
@@ -70,15 +70,11 @@ function Basket() {
                     <div className='price-total'>
                         <p>{totalPrice} EUR</p>
 
-                        {showPopup && (
-                            <PopUpLogin />
-                        )}
+                        {showPopup && <PopUpLogin />}
 
-                        <Link to={!user ?  '/' : '/checkout' }>
-                            <button onClick={!user ? () => setShowPopup(true) : undefined}>
-                                Commander
-                            </button>
-                        </Link>
+                        <button onClick={handleOrderClick}>
+                            Commander
+                        </button>
                     </div>
                 </div>
             )}

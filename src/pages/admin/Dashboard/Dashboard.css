@@ -1,63 +1,109 @@
 @media screen and (orientation: landscape) {
-    .dashboard{
-        margin: 0;    
-}
+
+  .dashboard{
+    margin: 0;
+    height: 100vh;    
+  }
+
 }
 
 
-  
 .underlay-photo {
-    animation: hue-rotate 6s infinite;
-    background-size: cover;
-    z-index: -1;
+
+  animation: hue-rotate 6s infinite;
+  background-size: cover;
+  z-index: -1;
+
 }
 
 .head-dash{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 5%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+
 }
-.table-responsive {
-    overflow-x: auto;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+
+.head-dash-tabs{
+
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  width: 90%;
+
+}
+
+.filter-admin{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  background-color: white;
+}
+
+.filter-admin input , .filter-admin .category-filters {
+  margin: .5rem;
+}
+
+.table-responsive{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
   
-  .users-table {
-    width: 90%;
-    border-collapse: collapse;
-  }
-  
+.users-table {
+
+  width: 90%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 0 0 .5rem .5rem;
+
+}
+
+.users-table th,
+.users-table td {
+
+  padding: 8px;
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+  height: 10px;
+
+}
+
+@media (max-width: 768px) {
+
   .users-table th,
   .users-table td {
-    padding: 8px;
-    border: 1px solid #dddddd;
-    text-align: left;
+    font-size: 14px;
   }
-  
-  @media (max-width: 768px) {
-    .users-table th,
-    .users-table td {
-      font-size: 14px;
-    }
-  }
+
+}
   
 
 .label-column {
-    display: flex;
-    justify-content: space-around;
-    border: none; /* Supprimer les bordures par défaut */
-    border-bottom: 1px solid black; /* Ajouter une ligne en bas */
-    outline: none; /* Supprimer le contour */
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+
+  display: flex;
+  justify-content: space-around;
+  border: none; /* Supprimer les bordures par défaut */
+  border-bottom: 1px solid black; /* Ajouter une ligne en bas */
+  outline: none; /* Supprimer le contour */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
 }
 
 .label-column span {
-    display: flex;
-    justify-content: center;
-    width: 10%
+
+  display: flex;
+  justify-content: center;
+  width: 10%
+
 }

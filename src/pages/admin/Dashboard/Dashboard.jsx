@@ -17,16 +17,18 @@ function Dashboard() {
     };
 
     return (
-        <div className='dashboard underlay' style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/admin-background/form-background.png)` }}>
+        <div className='dashboard' style={{ backgroundColor: `bisque` }}>
             <div className='head-dash'>
+
                 <h1 style={{ marginLeft: '5%' }}>Hathyre | Tableau de bord </h1>
-                {userConnected && (
-                    <h2 style={{ marginLeft: '5%' }}>Bienvenue, {userConnected.prenom} {userConnected.nom}
-                        <FontAwesomeIcon onClick={handleLogout} icon={faPowerOff} />
-                    </h2>
-                )}
+
+                <div style={{cursor: 'pointer'}} onClick={handleLogout}>
+                    {userConnected.prenom} {userConnected.nom} | Se déconnecter <FontAwesomeIcon icon={faPowerOff} />
+                </div>
+                
             </div>
-            <Tabs />
+
+            <Tabs/>
         </div>
     );
 }

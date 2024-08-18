@@ -1,15 +1,62 @@
 .page-add-product{
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .page-add-product h1{
+
     text-align: center;
+
 }
 
 .page-add-product form{
+
     display: flex;
     flex-direction: column;
+
+}
+
+.form-edit-product{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    text-align: left;
+}
+
+.other-info{
+    width: 40%;
+}
+
+.submit-edit-product{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+.submit-edit-product button {
+    width: 20%;
+}
+
+
+@media (max-width: 768px) {
+
+    .form-edit-product {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .other-info{
+        width: 90%;
+        margin-left: 2%;
+    }
+  
 }

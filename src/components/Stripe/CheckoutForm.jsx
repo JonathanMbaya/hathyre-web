@@ -7,6 +7,7 @@ import axios from 'axios';
 import emailjs from '@emailjs/browser';
 import Popup from '../PopUp/PopUp.jsx';
 import { CartContext } from '../../context/card.context'; // Chemin corrigé
+import { LoginContext } from '../../context/login.context.jsx';
 import { contactConfig } from '../../utils/config.email.js';
 import './checkout.css';
 
@@ -15,6 +16,9 @@ function CheckoutForm() {
     const elements = useElements();
     const navigate = useNavigate();
     const { cartItems, removeFromCart } = useContext(CartContext);
+    const { userConnected } = useContext(LoginContext);
+
+    const [isConnected , setIsConnected] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalProduct, setTotalProduct] = useState(0);
     const [customerInfo, setCustomerInfo] = useState({
@@ -29,6 +33,24 @@ function CheckoutForm() {
     const [loading, setLoading] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
+
+    useEffect(()=>{
+        if(userConnected) {
+
+            axios.get(`https://hathyre-server-api.onrender.com/api/client/${userConnected._id}`)
+            .then(response => {
+            // Mettre à jour l'état avec les produits récupérés
+            setIsConnected(response.data);
+            console.log(isConnected);
+            })
+
+            .catch(error => {
+            console.error('Erreur lors de la récupération des produits :', error);
+            });
+
+        }
+
+    })
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -75,7 +97,7 @@ function CheckoutForm() {
                 console.log("Paiement réussi");
 
                 // Ajout de la commande dans le système administratif
-                await axios.post('http://localhost:8080/api/neworders', {
+                await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
 
                     nom: customerInfo.lastName,
                     prenom: customerInfo.firstName,
@@ -191,9 +213,9 @@ function CheckoutForm() {
             </div>
             <form className='form-checkout' onSubmit={handleSubmit} style={{ maxWidth: 300 }}>
                 <h2>Vos informations</h2>
-                <input type="text" name="firstName" value={customerInfo.firstName} onChange={handleInputChange} placeholder="Prénom" required />
-                <input type="text" name="lastName" value={customerInfo.lastName} onChange={handleInputChange} placeholder="Nom de famille" required />
-                <input type="email" name="email" value={customerInfo.email} onChange={handleInputChange} placeholder="Adresse email" required />
+                <input type="text" name="firstName" value={!userConnected ? customerInfo.firstName : isConnected.prenom} onChange={handleInputChange} placeholder="Prénom" required />
+                <input type="text" name="lastName" value={!userConnected ? customerInfo.lastName : isConnected.nom} onChange={handleInputChange} placeholder="Nom de famille" required />
+                <input type="email" name="email" value={!userConnected ? customerInfo.email: isConnected.clientEmail} onChange={handleInputChange} placeholder="Adresse email" required />
                 <h3>Adresse de livraison</h3>
                 <input type="text" name="address" value={customerInfo.address} onChange={handleInputChange} placeholder="Adresse" required />
                 <input type="text" name="city" value={customerInfo.city} onChange={handleInputChange} placeholder="Ville" required />

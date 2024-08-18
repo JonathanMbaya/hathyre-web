@@ -38,14 +38,15 @@ const UserDashboard = () => {
     return (
         <>
             <div className='board'>
-                <div className='head-dash'>
-                    <h3 style={{ marginLeft: '5%' }}>Administrateurs</h3>
-                    <span onClick={() => setShowAddUserPopup(true)}> {/* Ajoutez un gestionnaire d'événements pour afficher la pop-up */}
-                        Ajouter un administrateur<FontAwesomeIcon icon={faPlus} />
-                    </span>
-                </div>
+
 
                 <div className="table-responsive">
+                    <div style={{backgroundColor : 'white', borderRadius: '.5rem .5rem 0 0'}} className='head-dash'>
+                        <h3 style={{margin: '.5rem'}}>Administrateurs</h3>
+                        <button style={{margin: '.5rem', borderRadius: '.5rem'}} onClick={() => setShowAddUserPopup(true)}> {/* Ajoutez un gestionnaire d'événements pour afficher la pop-up */}
+                            Ajouter un administrateur <FontAwesomeIcon icon={faPlus} />
+                        </button>
+                    </div>
                     <table className="users-table">
                         <thead>
                         <tr>
