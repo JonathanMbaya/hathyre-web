@@ -23,8 +23,8 @@ function Header({ currentPage }) {
                             <h2 className='animate__animated animate__fadeInDown'>Hathyre, <br/> votre secret de beauté <br/> au quotidien .</h2>
                         </div>
                         <div className='img-home-banner'>
-                            <img src={process.env.PUBLIC_URL + '/background-home-2.png'} alt='' />
-                            <img src={process.env.PUBLIC_URL + '/background-home.png'} alt='' />
+                            <img src={process.env.PUBLIC_URL + '/background-home-2.jpg'} alt='' />
+                            <img src={process.env.PUBLIC_URL + '/background-home.jpg'} alt='' />
                         </div>
 
                     </div>
@@ -51,9 +51,15 @@ function Header({ currentPage }) {
                 </div>
             }
 
+            {location.pathname === '/account' && 
+                <div className='header-home'>
+                    <NewNavbar/>
+                    <Navbar/>
+                </div>
+            }
+
             {location.pathname.startsWith('/product/') && 
                 <div className='header-home'>
-
                     <NewNavbar/>
                     <Navbar/>
                 </div>
@@ -70,14 +76,14 @@ function Header({ currentPage }) {
 
             {location.pathname.startsWith('/faq') && 
                 <div className='header-home'>
-                    {/* <BurgerMenu/>
-                    <div className='logo-container animate__animated animate__fadeInUp' style={{ display: 'flex', justifyContent: 'center' }}>
-                        <img
-                            src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
-                            alt="Logo de l'application"
-                            className="logo-img"
-                        />
-                    </div> */}
+
+                    <NewNavbar/>
+                    <Navbar/>
+                </div>
+            }
+
+            {location.pathname.startsWith('/mentions-legales') && 
+                <div className='header-home'>
 
                     <NewNavbar/>
                     <Navbar/>

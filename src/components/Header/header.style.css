@@ -64,9 +64,9 @@ header .logo-container { /* Le logo ne dépassera pas la largeur du conteneur pa
 }
   
 .logo-img {
-    width: 5rem; /* Le logo occupera 100% de la largeur du conteneur */
-    height: auto; /* La hauteur sera ajustée automatiquement pour conserver les proportions du logo */
-    margin-top: 2rem;
+    width: 4rem;
+    height: auto;
+    margin-top: 1rem;
     margin-bottom: 2rem;
 }
 
@@ -98,7 +98,7 @@ h1{
 }
 
 video, .page-about{
-    margin-top: 25vh;
+    margin-top: 22vh;
 }
 
 
@@ -172,10 +172,10 @@ video, .page-about{
 
 
     .logo-img {
-        width: 3rem;
+        width: 5rem;
         height: auto;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
 
     video, .page-about{

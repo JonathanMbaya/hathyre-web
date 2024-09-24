@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Grid, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl, Box, CircularProgress } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
@@ -25,10 +26,12 @@ function CheckoutForm() {
         firstName: '',
         lastName: '',
         email: '',
+        mobile: '',
         address: '',
         city: '',
         postalCode: '',
         country: '',
+        date: '',
     });
     const [loading, setLoading] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
@@ -97,22 +100,25 @@ function CheckoutForm() {
                 console.log("Paiement réussi");
 
                 // Ajout de la commande dans le système administratif
-                await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
+                await axios.post('http://localhost:8080/api/neworders', {
 
                     nom: customerInfo.lastName,
                     prenom: customerInfo.firstName,
-                    address: customerInfo.address,
                     email: customerInfo.email,
                     mobile: customerInfo.mobile,
+                    address: customerInfo.address,
+                    city: customerInfo.city,
+                    postalCode: customerInfo.postalCode,
+                    country: customerInfo.country,
                     articles: cartItems.map(item => ({
-                        productId: item._id, // Vérifiez que cette propriété existe et est correcte
+                        productId: item._id,
+                        productName: item.name, // Vérifiez que cette propriété existe et est correcte
                         quantity: item.quantity,
                         price : item.price
                     })),
                     amount: totalPrice,
                     date: new Date(),
                     status: 'En cours de préparation'
-                    
                     
                 });
 
@@ -141,6 +147,7 @@ function CheckoutForm() {
             city: customerInfo.city,
             postalCode: customerInfo.postalCode,
             country: customerInfo.country,
+            date : customerInfo.date,
             totalPrice: totalPrice,
             totalProduct: totalProduct,
             cartItems: cartItems.map(item => `${item.quantity}x ${item.name}`).join(", "),
@@ -194,6 +201,8 @@ function CheckoutForm() {
 
     return (
         <div className='resume-checkout' style={{ width: '100%' }}>
+
+            {/* Partie récapitulatif */}
             <div className='form-checkout' style={{ maxWidth: 400 }}>
                 <h2>Votre panier</h2>
                 <div className='recap-products'>
@@ -211,7 +220,10 @@ function CheckoutForm() {
                     ))}
                 </div>
             </div>
-            <form className='form-checkout' onSubmit={handleSubmit} style={{ maxWidth: 300 }}>
+
+
+            {/* Partie information sur la commande */}
+            {/* <form className='form-checkout' onSubmit={handleSubmit} style={{ maxWidth: 300 }}>
                 <h2>Vos informations</h2>
                 <input type="text" name="firstName" value={!userConnected ? customerInfo.firstName : isConnected.prenom} onChange={handleInputChange} placeholder="Prénom" required />
                 <input type="text" name="lastName" value={!userConnected ? customerInfo.lastName : isConnected.nom} onChange={handleInputChange} placeholder="Nom de famille" required />
@@ -238,7 +250,68 @@ function CheckoutForm() {
                 <h3>Mode de paiement </h3>
                 <CardElement className='input-bank-card' options={{ hidePostalCode: true }} />
                 <button type="submit" disabled={loading}>Payer</button>
-            </form>
+            </form> */}
+
+            {/* Partie informations sur la commande */}
+            <Grid item xs={12} md={6} >
+                <form className='form-checkout' onSubmit={handleSubmit} style={{ maxWidth: 300 }}>
+                    <h2>Vos informations</h2>
+                    <Box my={2}>
+                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="text" name="firstName" value={!userConnected ? customerInfo.firstName : isConnected.prenom} onChange={handleInputChange} placeholder="Prénom" required />
+                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="text" name="lastName" value={!userConnected ? customerInfo.lastName : isConnected.nom} onChange={handleInputChange} placeholder="Nom de famille" required />
+                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="email" name="email" value={!userConnected ? customerInfo.email: isConnected.clientEmail} onChange={handleInputChange} placeholder="Adresse email" required />
+                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="mobile" name="mobile" value={!userConnected ? customerInfo.mobile: isConnected.mobile} onChange={handleInputChange} placeholder="Numéro de téléphone" required />
+
+                        <h2>Adresse de livraison</h2>
+                        <TextField
+                            fullWidth
+                            label="Adresse"
+                            name="address"
+                            value={customerInfo.address}
+                            onChange={handleInputChange}
+                            required
+                            margin="normal"
+                        />
+                        <TextField
+                            fullWidth
+                            label="Ville"
+                            name="city"
+                            value={customerInfo.city}
+                            onChange={handleInputChange}
+                            required
+                            margin="normal"
+                        />
+                        <TextField
+                            fullWidth
+                            label="Code postal"
+                            name="postalCode"
+                            value={customerInfo.postalCode}
+                            onChange={handleInputChange}
+                            required
+                            margin="normal"
+                        />
+                        <FormControl fullWidth margin="normal">
+                            <InputLabel>Pays</InputLabel>
+                            <Select
+                                name="country"
+                                value={customerInfo.country}
+                                onChange={handleInputChange}
+                                required
+                            >
+                                <MenuItem value="FR">France</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+
+                    <Typography variant="h6">Paiement</Typography>
+                    <Box my={2}>
+                        <CardElement className="input-bank-card" options={{ hidePostalCode: true }} />
+                    </Box>
+                    <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                        {loading ? <CircularProgress size={24} /> : "Payer"}
+                    </Button>
+                </form>
+            </Grid>
 
             {showPopup && (
                 <Popup 

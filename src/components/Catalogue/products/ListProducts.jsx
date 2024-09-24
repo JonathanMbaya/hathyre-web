@@ -1,151 +1,170 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpShortWide } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpShortWide, faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
-import 'animate.css';
-import './Product.css';
-import '../../Filter/Filter.css';
+import {
+  Box,
+  Grid,
+  CardMedia,
+  CardContent,
+  Typography,
+  Drawer,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
+import { LoginContext } from '../../../context/login.context.jsx';  // Contexte de connexion
+import { FavoritesContext } from '../../../context/favorites.context.jsx';  // Contexte des favoris
 
 const ListProducts = () => {
+  const { userConnected } = useContext(LoginContext); // Vérifier si l'utilisateur est connecté
+  const { favoriteItems, addToFavorites, removeFromFavorites } = useContext(FavoritesContext); // Gestion des favoris
 
-  const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
-
   const [filterCriteria, setFilterCriteria] = useState({
     sortByName: '',
-    sortByPrice: ''
+    sortByPrice: '',
+    category: '',
   });
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products`);
+        const response = await axios.get(`http://localhost:8080/api/products`, {
+          params: filterCriteria,
+        });
         setProducts(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des produits :', error);
       }
     };
-    
+
     fetchProducts();
   }, [filterCriteria]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true); // Activer le chargement
-
-      try {
-        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products/filters/${filterCriteria.sortByName}`);
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des produits :', error);
-      } finally {
-        setTimeout(() => {
-          setLoading(false); // Désactiver le chargement après 1,5 seconde
-        }, 1500);
-      }
-    };
-    
-    fetchProducts();
-  }, [filterCriteria]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true); // Activer le chargement
-      try {
-        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products/filters/${filterCriteria.sortByPrice}`);
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des produits :', error);
-      } finally {
-        setTimeout(() => {
-          setLoading(false); // Désactiver le chargement après 1,5 seconde
-        }, 1500);
-      }
-    };
-    
-    fetchProducts();
-  }, [filterCriteria]);
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleFilter = () => {
-    setIsOpen(!isOpen);
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
   };
 
-  const handleNameFilterChange = (event) => {
+  const handleFilterChange = (event) => {
     const { name, value } = event.target;
-    setFilterCriteria(prevCriteria => ({
-        ...prevCriteria,
-        [name]: value
+    setFilterCriteria((prevCriteria) => ({
+      ...prevCriteria,
+      [name]: value,
     }));
   };
 
-  const handlePriceFilterChange = (event) => {
-    const { name, value } = event.target;
-    setFilterCriteria(prevCriteria => ({
-        ...prevCriteria,
-        [name]: value
-    }));
+  // Fonction pour gérer le like/unlike
+  const handleLikeToggle = (productId) => {
+    if (!userConnected) {
+      alert('Vous devez être connecté pour liker un produit.');
+      return;
+    }
+
+    // Si le produit est déjà dans les favoris, on le retire
+    if (favoriteItems.includes(productId)) {
+      removeFromFavorites(productId);
+    } else {
+      addToFavorites(productId);
+    }
   };
 
   return (
-    <div>
-      <div className={`area-filter ${isOpen ? 'open' : ''}`}>
+    <Box sx={{ display: 'flex', padding: '2rem' }}>
+      {/* Sidebar pour les filtres */}
+      <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer}>
+        <Box sx={{ width: 250, padding: '1rem' }}>
+          <Typography variant="h6">Filtres</Typography>
 
-        <div onClick={toggleFilter}>
-          Afficher les filtres <FontAwesomeIcon icon={faArrowUpShortWide} />
-        </div>
+          <FormControl fullWidth variant="outlined" sx={{ mb: 2 }}>
+            <InputLabel id="category-label">Catégorie</InputLabel>
+            <Select
+              labelId="category-label"
+              name="category"
+              value={filterCriteria.category}
+              onChange={handleFilterChange}
+              label="Catégorie"
+            >
+              <MenuItem value="">Tous</MenuItem>
+              <MenuItem value="Savon">Savon</MenuItem>
+              <MenuItem value="Beurres et Huiles">Beurres et Huiles</MenuItem>
+              <MenuItem value="Accessoires">Accessoires</MenuItem>
+            </Select>
+          </FormControl>
 
-        <div className='btn-filter'>
-          <select name="sortByName" value={filterCriteria.sortByName} onChange={handleNameFilterChange}>
-            <option value="">Par nom</option>
-            <option value="asc">A-Z</option>
-            <option value="desc">Z-A</option>
-          </select>
+          <FormControl fullWidth variant="outlined" sx={{ mb: 2 }}>
+            <InputLabel id="sortByName-label">Trier par nom</InputLabel>
+            <Select
+              labelId="sortByName-label"
+              name="sortByName"
+              value={filterCriteria.sortByName}
+              onChange={handleFilterChange}
+              label="Trier par nom"
+            >
+              <MenuItem value="">Aucun</MenuItem>
+              <MenuItem value="asc">A-Z</MenuItem>
+              <MenuItem value="desc">Z-A</MenuItem>
+            </Select>
+          </FormControl>
 
-          <select name="sortByPrice" value={filterCriteria.sortByPrice} onChange={handlePriceFilterChange}>
-            <option value="">Par prix</option>
-            <option value="asc">Croissant</option>
-            <option value="desc">Décroissant</option>
-          </select>
-        </div>
+          <FormControl fullWidth variant="outlined">
+            <InputLabel id="sortByPrice-label">Trier par prix</InputLabel>
+            <Select
+              labelId="sortByPrice-label"
+              name="sortByPrice"
+              value={filterCriteria.sortByPrice}
+              onChange={handleFilterChange}
+              label="Trier par prix"
+            >
+              <MenuItem value="">Aucun</MenuItem>
+              <MenuItem value="asc">Prix croissant</MenuItem>
+              <MenuItem value="desc">Prix décroissant</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </Drawer>
 
-      </div>
+      <Box sx={{ flexGrow: 1 }}>
+        <button onClick={toggleDrawer} sx={{ mb: 2 }}>
+          {isDrawerOpen ? 'Masquer les filtres' : 'Afficher les filtres'}{' '}
+          <FontAwesomeIcon icon={faArrowUpShortWide} />
+        </button>
 
-      {
-        loading ? (
-          <div className="loading">
-            <img  src={process.env.PUBLIC_URL + '/hathyre-logo-loading.gif'} alt="" />
-            <h4>Chargement ...</h4>
-          </div>
-        ) : 
+        <Grid container spacing={4}>
+          {products.map((product) => (
+            <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
+              <Box position="relative">
+                {/* Lien vers la page du produit */}
+                <Link className="image-container" to={`/product/${product._id}`}>
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={process.env.PUBLIC_URL + product.image}
+                    alt={product.name}
+                  />
+                  <CardContent>
+                    <h3>{product.name}</h3>
+                    <Typography variant="body2">{product.price} EUR</Typography>
+                  </CardContent>
+                </Link>
 
-        <div className="list-products">
-          {products.map(product => (
-              <div key={product._id} className="product">
-                  <Link className='image-container' to={`/product/${product._id}`}>
-                    <img
-                      className='img-fluid main-image'
-                      src={process.env.PUBLIC_URL + `${product.image}`}
-                      alt=""
-                    />
-                    <img
-                      className='img-fluid hover-image animate__animated animate__fadeInDown'
-                      src={process.env.PUBLIC_URL +  `${product.image}`}
-                      alt=""
-                    />
-                  </Link>
-                  <p>{product.name}</p>
-                  <p>{product.price}</p>
-              </div>
+                {/* Bouton pour liker/unliker */}
+                <FontAwesomeIcon
+                  icon={favoriteItems.includes(product._id) ? faSolidHeart : faRegularHeart}
+                  onClick={() => handleLikeToggle(product._id)}
+                  style={{ cursor: 'pointer', position: 'absolute', top: '10px', right: '10px', color: favoriteItems.includes(product._id) ? 'red' : 'gray' }}
+                />
+              </Box>
+            </Grid>
           ))}
-        </div>
-      }
-        
-    </div>
+        </Grid>
+      </Box>
+    </Box>
   );
-
 };
 
 export default ListProducts;

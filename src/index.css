@@ -2,10 +2,21 @@ body , *{
   font-family: 'Inter Tight', sans-serif;;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
 }
 
 body{
   margin: 0px !important;
+}
+
+h3 , .css-1nmqws6-MuiTypography-root {
+  color: rgb(137, 88, 50);
+}
+
+.sidebar ul li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 

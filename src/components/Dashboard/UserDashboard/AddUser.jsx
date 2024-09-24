@@ -1,13 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import './PopUp.css';
-import { LoginContext } from '../../../context/login.context';
+import { useNavigate, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Box, Typography } from '@mui/material';
 
 function AddUser() {
-    const { userConnected } = useContext(LoginContext); // Utilisation du contexte pour obtenir l'utilisateur connecté
     const navigate = useNavigate();
-    const { id, token } = useParams();
 
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
@@ -37,7 +36,7 @@ function AddUser() {
             setShowPopup(true);
 
             // Rediriger vers une autre page après l'ajout réussi de l'utilisateur
-            navigate(`/admin/dashboard/${userConnected._id}/${userConnected.token}`); // Utilisation de user extrait du contexte
+            navigate(`/admin/dashboard`); // Utilisation de user extrait du contexte
         } catch (error) {
             console.error("Erreur lors de l'ajout de l'utilisateur :", error);
         }
@@ -49,58 +48,79 @@ function AddUser() {
     };
 
     return (
-        <div>
-            <h1>Ajouter un Utilisateur</h1>
+        <Box sx={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
+            <Typography variant="h4" gutterBottom>
+                Ajouter un Utilisateur
+            </Typography>
             <form onSubmit={handleAddUser}>
-                <div>
-                    <label htmlFor="nom">Nom</label>
-                    <input
-                        type="text"
-                        id="nom"
-                        value={nom}
-                        onChange={(e) => setNom(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="prenom">Prénom</label>
-                    <input
-                        type="text"
-                        id="prenom"
-                        value={prenom}
-                        onChange={(e) => setPrenom(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <button type="submit">Ajouter</button>
+                <TextField
+                    fullWidth
+                    label="Nom"
+                    variant="outlined"
+                    margin="normal"
+                    value={nom}
+                    onChange={(e) => setNom(e.target.value)}
+                    required
+                />
+                <TextField
+                    fullWidth
+                    label="Prénom"
+                    variant="outlined"
+                    margin="normal"
+                    value={prenom}
+                    onChange={(e) => setPrenom(e.target.value)}
+                    required
+                />
+                <TextField
+                    fullWidth
+                    label="Email"
+                    variant="outlined"
+                    type="email"
+                    margin="normal"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <TextField
+                    fullWidth
+                    label="Password"
+                    variant="outlined"
+                    type="password"
+                    margin="normal"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <Box sx={{ textAlign: 'center', marginTop: '2rem' }}>
+                    <Button variant="contained" color="primary" type="submit">
+                        Ajouter
+                    </Button>
+                </Box>
             </form>
-            {showPopup && (
-                <div className="popup">
-                    <div className="popup-content">
-                        <h2>L'utilisateur a été ajouté avec succès!</h2>
-                        <Link to={`/admin/dashboard/${id}/${token}`}>
-                            <button onClick={handleClosePopup}>Fermer</button>
-                        </Link>
-                    </div>
-                </div>
-            )}
-        </div>
+
+            {/* Dialog (Popup) pour confirmer l'ajout d'un utilisateur */}
+            <Dialog
+                open={showPopup}
+                onClose={handleClosePopup}
+            >
+                <DialogTitle>Succès</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        L'utilisateur a été ajouté avec succès!
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClosePopup} color="primary">
+                        <FontAwesomeIcon icon={faXmark} />
+                    </Button>
+                    <Link to={`/admin/dashboard`} style={{ textDecoration: 'none' }}>
+                        <Button color="primary">
+                            Retour au Dashboard
+                        </Button>
+                    </Link>
+                </DialogActions>
+            </Dialog>
+        </Box>
     );
 }
 

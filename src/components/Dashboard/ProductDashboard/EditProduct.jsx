@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import axios from "axios";
-import './Dashboard.css'
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Grid,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl
+} from "@mui/material";
+
 
 function EditProduct() {
   const { id } = useParams(); // Récupérer l'ID du produit à partir de l'URL
@@ -32,7 +43,7 @@ function EditProduct() {
       .catch((error) => {
         console.error("Erreur lors de la récupération du produit :", error);
       });
-  }, [id]); // Utiliser l'ID comme dépendance pour recharger les détails du produit lorsque l'ID change
+  }, [id]);
 
   const handleEditProduct = (e) => {
     e.preventDefault();
@@ -48,150 +59,152 @@ function EditProduct() {
       stock: productStock,
     };
 
-    // Envoyer une requête pour mettre à jour les détails du produit
     axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${id}`, updatedProduct)
       .then((response) => {
         console.log("Réponse du serveur :", response.data);
-        // Rediriger vers la page de tableau de bord après la modification réussie
-        navigate(`/admin/dashboard/${localStorage.getItem('id')}/${localStorage.getItem('token')}`);
+        navigate(`/admin/dashboard`);
       })
       .catch((error) => {
         console.error("Erreur lors de la modification du produit :", error);
       });
   };
-  
+
   const returnButton = () => {
-    navigate(`/admin/dashboard/${localStorage.getItem('id')}/${localStorage.getItem('token')}`);
-  }
+    navigate(`/admin/dashboard`);
+  };
 
   return (
-    <>
+    <Container maxWidth="md">
+      <Typography variant="h4" align="center" gutterBottom>
+        <span>
+          <FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} style={{ cursor: 'pointer', marginRight: '10px' }} />
+        </span>
+        Modifier Produit | {productName}
+      </Typography>
 
-        <div>
+      <form onSubmit={handleEditProduct}>
+        <Grid container spacing={3}>
+          {/* Informations sur le produit */}
+          <Grid item xs={12}>
+            <Typography variant="h6">Informations sur le produit</Typography>
+          </Grid>
 
-          <h1 style={{textAlign: 'center'}}>
-            <span> <FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} /> </span>
-            Modifier Produit | {productName}
-          </h1>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Nom"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
 
-          <form className="form-edit-product">
-            <div className="other-info">
-              <h2>Informations sur le produit</h2>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              type="number"
+              label="Prix"
+              value={productPrice}
+              onChange={(e) => setProductPrice(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
 
-              <div className="element-input">
-                <label htmlFor="">Nom</label>
-                <input
-                  type="text"
-                  placeholder="Nom du produit"
-                  value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
-                />
-              </div>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Catégorie du produit</InputLabel>
+              <Select
+                value={productCategory}
+                onChange={(e) => setProductCategory(e.target.value)}
+                label="Catégorie du produit"
+              >
+                <MenuItem value="">Sélectionner la catégorie</MenuItem>
+                <MenuItem value="Savon">Savon</MenuItem>
+                <MenuItem value="Beurres et huiles">Beurres et huiles</MenuItem>
+                <MenuItem value="Accessoires">Accessoires</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
 
-              <div className="element-input">
-                <label htmlFor="">Prix</label>
-                <input
-                    type="number"
-                    placeholder="Prix"
-                    value={productPrice}
-                    onChange={(e) => setProductPrice(e.target.value)}
-                />
-              </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              type="number"
+              label="Promotion"
+              value={productPromo}
+              onChange={(e) => setProductPromo(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
 
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Stock disponible"
+              value={productStock}
+              onChange={(e) => setProductStock(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
 
-              <div className="element-input">
-                <label htmlFor="">Categorie du produit</label>
-                <select value={productCategory} onChange={(e) => setProductCategory(e.target.value)}>
-                  <option value="">Sélectionner la catégorie</option>
-                  <option value="Savon">Savon</option>
-                  <option value="Savon">Beurres et huiles</option>
-                  <option value="Savon">Accessoires</option>
+          {/* Autres informations */}
+          <Grid item xs={12}>
+            <Typography variant="h6">Autres informations</Typography>
+          </Grid>
 
-                </select>
-              </div>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              label="Description du produit"
+              placeholder="Décrivez les caractéristiques physiques du produit."
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
 
-              <div className="element-input">
-                <label htmlFor="">Promotion</label>
-                <input
-                    type="number"
-                    placeholder="promo"
-                    value={productPromo}
-                    onChange={(e) => setProductPromo(e.target.value)}
-                />
-              </div>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              label="Ingrédients"
+              placeholder="Listez les ingrédients du produit."
+              value={productIngredients}
+              onChange={(e) => setProductIngredients(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
 
-              <div className="element-input">
-                <label htmlFor="">Stock</label>
-                <input
-                    type="text"
-                    placeholder="Stock disponible"
-                    value={productStock}
-                    onChange={(e) => setProductStock(e.target.value)}
-                />
-              </div>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              label="Conseils d'utilisation"
+              placeholder="Fournissez des conseils pour maximiser l'utilisation du produit."
+              value={productConseils}
+              onChange={(e) => setProductConseils(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
 
-            </div>
-
-            <div className="other-info">
-              <h2>Autres informations</h2>
-
-              <div className="element-input">
-                <label htmlFor="">Description du produit</label>
-                <textarea
-                  placeholder="Décrivez les caractéristiques physique du produit qui vont inciter le client à l'achat (taille, capacité, couleur , odeur, etc ...)."
-                  value={productDescription}
-                  onChange={(e) => setProductDescription(e.target.value)}
-                  cols="50"
-                  rows="10"
-                />
-              </div>
-
-              <div className="element-input">
-                <label htmlFor="">Ingrédients</label>
-                <textarea
-                  placeholder="Précisez les composants de produits ex: (Citron, Huiles, Beurres de Karité, ...)"
-                  value={productIngredients}
-                  onChange={(e) => setProductIngredients(e.target.value)}
-                  cols="50"
-                  rows="10"
-                />
-              </div>
-
-              <div className="element-input">
-                  <label htmlFor="">Conseils d'utilisation</label>
-                  <textarea
-                    placeholder="Donnez plus de conseils sur l'utilisation du produit afin de maximiser les résultats"
-                    value={productConseils}
-                    onChange={(e) => setProductConseils(e.target.value)}
-                    cols="50"
-                    rows="10"
-                  />
-              </div>
-
-
-
-            </div>
-
-          </form>
-
-          <div className="submit-edit-product">
-            <button
-              
-              onClick={handleEditProduct}
+          <Grid item xs={12}>
+            <Button
+              fullWidth
               type="submit"
-              name="Mettre en ligne"
-              id=""
+              variant="contained"
+              color="primary"
             >
               Mettre à jour
-
-            </button>
-          </div>
-
-
-        </div>
-      
-    </>
-  )
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Container>
+  );
 }
 
-export default EditProduct
+export default EditProduct;

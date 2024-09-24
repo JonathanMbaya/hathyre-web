@@ -19,7 +19,7 @@ function HomePage ({currentPage}){
 
             <Banner
                 title ="Toute la gamme de Hathyre"
-                src = {process.env.PUBLIC_URL + "/present/5.png"}
+                src = {process.env.PUBLIC_URL + "/present/5.avif"}
             />
 
             <Instagram/>

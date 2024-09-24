@@ -11,7 +11,7 @@ function Products({ title }) {
 
     useEffect(() => {
         // Effectuer la requête Axios pour récupérer les produits triés par date
-        axios.get('https://hathyre-server-api.onrender.com/api/products/latest=true')
+        axios.get('http://localhost:8080/api/products/latest')
             .then(response => {
                 // Mettre à jour l'état avec les produits récupérés
                 setProducts(response.data);
@@ -26,9 +26,11 @@ function Products({ title }) {
 
     return (
         <div className="container animate__animated animate__fadeInUp">
-            <h2 >{title}</h2>
+            {location.pathname.startsWith('/') && 
+                <h2 >{title}</h2>
+            }
             {location.pathname.startsWith('/product/') && 
-                <h2>Ces produits pourraient vous intéresser</h2>
+                <h2>Ces nouveautés pourraient vous intéresser</h2>
             }
 
             <div className="row">
@@ -39,15 +41,16 @@ function Products({ title }) {
                             <Link className='link-without-decoration' to={`/product/${product._id}`}>
                                 <img src={process.env.PUBLIC_URL + product.image} alt={product.name} />
                             </Link>
-                                <div className='info-home-product'>
-                                    <h3>{product.name} <br /> <span>Savon</span></h3>
-                                    <div className='info-home-action-product'>
-                                        <h4>{product.price} EUR</h4>
-                                        
-                                        <ButtonToBasket getProductId={product._id} />
 
-                                    </div>
+                            <div className='info-home-product'>
+                                <h3>{product.name} <br /> <span>Savon</span></h3>
+                                <div className='info-home-action-product'>
+                                    <h4>{product.price} EUR</h4>
+                                    
+                                    <ButtonToBasket getProductId={product._id} />
+
                                 </div>
+                            </div>
 
                         </div>
                 ))}

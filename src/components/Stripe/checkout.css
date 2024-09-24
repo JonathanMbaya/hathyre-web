@@ -1,7 +1,8 @@
-.resume-checkout{
+.resume-checkout {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 .form-checkout{
@@ -9,7 +10,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     margin-top: 0rem;
 }
 

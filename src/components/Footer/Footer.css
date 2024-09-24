@@ -14,7 +14,7 @@
 .first-area-footer .menu-footer {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
 }
 
@@ -113,6 +113,10 @@
 
 .one-menu-footer{
     width: 21rem;
+}
+
+.one-menu-footer li {
+    text-align: left;
 }
 
 .insta{

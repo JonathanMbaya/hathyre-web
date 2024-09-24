@@ -51,7 +51,7 @@ function AboutPage () {
 
             <div id="shadow" style={Shadow} className='box-shadow-white'></div>
 
-            <h1 className='animate__animated animate__fadeInUp'  style={{ textAlign: 'center', marginBottom: '5rem', marginTop: '1rem', color : 'white'  }}> 
+            <h1 className='animate__animated animate__fadeInUp'  style={{ textAlign: 'center', marginBottom: '2rem', paddingTop: '5rem', color : 'white'  }}> 
                 A propos de Hathyre
             </h1>
 

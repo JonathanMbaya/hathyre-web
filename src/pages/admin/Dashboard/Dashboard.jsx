@@ -1,34 +1,55 @@
-import React, { useContext } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from "react-router-dom"; // Assurez-vous que react-router-dom est installé
 import { LoginContext } from "../../../context/login.context";
-import Tabs from '../../../components/Dashboard/Tabs/Tabs.jsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import TabsDashboard from '../../../components/Dashboard/Tabs/Tabs.jsx'; // Composant des onglets
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import './Dashboard.css';
 
 function Dashboard() {
-    const navigate = useNavigate();
-    const { userConnected } = useContext(LoginContext);
+    const { userConnected } = useContext(LoginContext); // Récupérer l'utilisateur connecté
+    const navigate = useNavigate(); // Utilisé pour la redirection
 
+    // Fonction de déconnexion
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('id');
-        navigate('/admin/login');
+        localStorage.removeItem('token'); // Supprimer le token
+        navigate('/admin/login'); // Rediriger vers la page de connexion
     };
 
+    // Vérification si l'utilisateur est connecté
+    useEffect(() => {
+        if (!userConnected) {
+            // Si l'utilisateur n'est pas connecté, redirection vers la page de connexion
+            navigate('/admin/login');
+        }
+    }, [userConnected, navigate]); // L'effet s'exécute lorsque l'état de `userConnected` change
+
+    // Si l'utilisateur n'est pas défini ou n'est pas connecté, on ne montre rien ou un message de chargement
+    if (!userConnected) {
+        return <div>Chargement...</div>; // Optionnel : un écran de chargement temporaire
+    }
+
     return (
-        <div className='dashboard' style={{ backgroundColor: `bisque` }}>
-            <div className='head-dash'>
+        <div className='dashboard'>
+            {/* Barre de navigation supérieure */}
+            <AppBar position="static" color="bisque">
+                <Toolbar>
+                    <Typography variant="h6" color='#895832' component="div" sx={{ flexGrow: 1 }}>
+                        <img 
+                            style={{ width: '40px', height: '40px' }} 
+                            src={process.env.PUBLIC_URL + '/hathyre-logo.png'} 
+                            alt="Logo Hathyre" 
+                        /> 
+                    </Typography>
+                    <Button color="#895832" onClick={handleLogout}>
+                        Se déconnecter
+                    </Button>
+                </Toolbar>
+            </AppBar>
 
-                <h1 style={{ marginLeft: '5%' }}>Hathyre | Tableau de bord </h1>
-
-                <div style={{cursor: 'pointer'}} onClick={handleLogout}>
-                    {userConnected.prenom} {userConnected.nom} | Se déconnecter <FontAwesomeIcon icon={faPowerOff} />
-                </div>
-                
-            </div>
-
-            <Tabs/>
+            {/* Contenu principal avec les onglets */}
+            <Box>
+                <TabsDashboard /> {/* Composant des onglets avec utilisateurs, produits, etc. */}
+            </Box>
         </div>
     );
 }

@@ -1,44 +1,67 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import UserDashboard from "../UserDashboard/UserDashboard";
-import ProductDashboard from "../ProductDashboard/ProductDashboard.jsx";
+import ProductDashboard from "../ProductDashboard/ProductDashboard";
 import OrderDashboard from "../OrderDashboard/OrderDashboard";
 import ClientDashboard from "../ClientDashboard/ClientDashboard";
-import "./Tabs.css";
+import { Box, Tabs, Tab, Typography, AppBar } from '@mui/material';
 
-function Tabs() {
+function TabsDashboard() {
+  const [selectedTab, setSelectedTab] = useState(0); // Change to track by index
 
-  const [selectedTab, setSelectedTab] = useState('users');
-
-  const handleTabChange = (tab) => {
-    setSelectedTab(tab);
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
   };
 
   return (
-    <div className='tabs'>
-
-      <div className='onglets'>
-        <button onClick={() => handleTabChange('users')}>
-          Administrateurs
-        </button>
-        <button onClick={() => handleTabChange('products')}>
-            Produits
-        </button>
-        <button onClick={() => handleTabChange('order')}>
-            Commandes
-        </button>
-        <button onClick={() => handleTabChange('client')}>
-            Nos Clients
-        </button>
-      </div>
-
-
-      {selectedTab === 'users' && <UserDashboard />}
-      {selectedTab === 'products' && <ProductDashboard />}
-      {selectedTab === 'order' && <OrderDashboard />}
-      {selectedTab === 'client' && <ClientDashboard />}
-    
-    </div>
-  )
+    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={selectedTab}
+          onChange={handleTabChange}
+          indicatorColor="#895832"
+          textColor="#895832"
+          variant="fullWidth"
+        >
+          <Tab label="Admin ." />
+          <Tab label="Produits" />
+          <Tab label="Commandes" />
+          <Tab label="Clients" />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={selectedTab} index={0}>
+        <UserDashboard />
+      </TabPanel>
+      <TabPanel value={selectedTab} index={1}>
+        <ProductDashboard />
+      </TabPanel>
+      <TabPanel value={selectedTab} index={2}>
+        <OrderDashboard />
+      </TabPanel>
+      <TabPanel value={selectedTab} index={3}>
+        <ClientDashboard />
+      </TabPanel>
+    </Box>
+  );
 }
 
-export default Tabs
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+export default TabsDashboard;

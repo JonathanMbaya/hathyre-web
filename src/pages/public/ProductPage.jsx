@@ -14,8 +14,6 @@ function ProductPage() {
                 La Boutique | Hathyre 
             </h1>
 
-            {/* <Filter/> */}
-
             <ListProducts/>
 
             <Footer/>

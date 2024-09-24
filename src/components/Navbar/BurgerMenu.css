@@ -62,9 +62,9 @@
   position: fixed !important;
   z-index: 10000;
   top: 0;
-  left: -300px; /* Initial hidden position */
-  background-color:#EACD9A;
-  width: 300px;
+  left: -400px; /* Initial hidden position */
+  background-color:#ffffff;
+  width: 0px;
   height: 100vh;
   transition: transform 0.3s ease;
   box-shadow: -1px 2px 5px 1px 
@@ -73,11 +73,32 @@
 
 .menu.open {
   transform: translateX(300px);
+  left: -300px; 
   position: fixed;
   z-index: 10000;
+  width: 100%;
   height: 100vh; /* Move the menu to the right */
 }
 
+.menu.open ul li {
+  width: 350px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+
+}
+
+.menu.open ul li a {
+  color: #895832;
+  width: 300px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: .8rem;
+}
 
 form{
   display: flex;
@@ -102,7 +123,7 @@ form{
   z-index: 800;
   transition: transform 0.3s ease;
   height: 100vh;
-  width: 100vw; 
+  width: 100%; 
   transition: all 0.3s ease 0s;
   transform: translateY(0vh);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 1),rgba(255, 255, 255, 1),rgba(255, 255, 255, .8),rgba(255, 255, 255, .5), rgba(255, 255, 255, 0)) !important;
@@ -116,26 +137,29 @@ form{
   justify-content: space-around;
   align-items: space-around;
   width: 100%;
+  margin-top: 2rem;
 }
 
-.item-search{
+.item-search {
   display: flex;
-  justify-content: center;
-  width: 25%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 250px;
+  border-radius: .5rem;
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.4);
+  background-color: white;
 }
 
 .item-search img {
-  width: 6rem;
-  padding-right: 4rem;
+  width: 100px;
+  height: 100px;
+  padding-right: 1rem;
   border-radius: .5rem;
 }
-
 
 .form-search input{
   padding: 1rem;
 }
-
-
 
 .menu ul {
   list-style: none;
@@ -198,20 +222,21 @@ hr{
       width: 100%;
     }
 
-    .item-search{
+    .item-search {
       display: flex;
       justify-content: flex-start;
-      align-items: center;
-      width: 20rem;
-      left: 0rem;
-      margin-bottom: 1rem;
+      align-items: flex-start;
+      width: 250px;
+      border-radius: .5rem;
+      box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.4);
+      background-color: white;
+      margin-bottom: .5rem;
     }
 
     .item-search img {
-      display: flex;
-      justify-content: flex-start;
-      width: 4rem;
-      left: 0rem;
+      width: 100px;
+      height: 100px;
+      padding-right: 1rem;
       border-radius: .5rem;
     }
 

@@ -21,11 +21,12 @@ function Footer() {
 
                 <div className='menu-footer'>
                     {/* Catalogue */}
-                    <div className='one-menu-footer'>
-                        <h3>Catalogue</h3>
-                        <div>
-                            <Link className='link-without-decoration' to="/product" >
-                                <li>Nos produits</li>
+                    <div className='contact-footer'>
+                        <img src={process.env.PUBLIC_URL + '/hathyre-logo-white.png'} alt="Logo Hathyre" />
+                        <div className='contact-footer-icon'>
+
+                            <Link to="https://www.instagram.com/hathyre_/" target="_blank">
+                                <ButtonNice text="Nous contacter sur Instagram"/> 
                             </Link>
 
                         </div>
@@ -46,7 +47,7 @@ function Footer() {
                             <Link className='link-without-decoration' to="/apropos" >
                                 <li>A propos de Hathyre</li>                            
                             </Link>
-                            <Link className='link-without-decoration' to="/admin/login" >
+                            <Link className='link-without-decoration' to="/login" >
                                 <li>Se connecter</li>                            
                             </Link>
                             <Link className='link-without-decoration' to="/faq">
@@ -59,8 +60,10 @@ function Footer() {
                     {/* Mentions Légales */}
                     <div className='one-menu-footer'>
                         <h3>Mentions Légales</h3>
-                        <div>
-                            <li>Mentions Légales</li>
+                        <div style={{textAlign: "left"}}>
+                            <Link to="/mentions-legales">
+                                <li>Mentions Légales</li>
+                            </Link>
                             <li>CGV</li>
                             <li>Paiements et Livraison</li>
                             <li>Politique de confidentialité</li>
@@ -68,16 +71,6 @@ function Footer() {
                     </div>
                 </div>
 
-                <div className='contact-footer'>
-                    <img src={process.env.PUBLIC_URL + '/hathyre-logo-white.png'} alt="Logo Hathyre" />
-                    <div className='contact-footer-icon'>
-
-                        <Link to="https://www.instagram.com/hathyre_/" target="_blank">
-                            <ButtonNice text="Nous contacter sur Instagram"/> 
-                        </Link>
-
-                    </div>
-                </div>
             </div>
 
             {/* Deuxième partie footer */}

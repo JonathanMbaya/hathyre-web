@@ -117,12 +117,6 @@ function Login() {
                     <p>Connectez vous à votre compte existant</p>
 
                     <form className="login-form" onSubmit={handleSubmit}>
-                        <p className="login-text">
-                            <span className="fa-stack fa-lg">
-                                <i className="fa fa-circle fa-stack-2x"></i>
-                                <i className="fa fa-lock fa-stack-1x"></i>
-                            </span>
-                        </p>
 
                         <div className='input-form'>
                             <label htmlFor="Email">Email</label>
@@ -146,12 +140,6 @@ function Login() {
                     <p>Créez votre espace Hathyre pour une expérience d'achat personnalisée.</p>
 
                     <form className="login-form" onSubmit={handleAddUser}>
-                        <p className="login-text">
-                            <span className="fa-stack fa-lg">
-                                <i className="fa fa-circle fa-stack-2x"></i>
-                                <i className="fa fa-lock fa-stack-1x"></i>
-                            </span>
-                        </p>
                         <div className='input-form'>
                             <label htmlFor="Name">Votre nom *</label>
                             <input type="text" className="login-username" autoFocus={true} required={true} placeholder="ex: Smith" value={nom} onChange={(e) => setNom(e.target.value)} />

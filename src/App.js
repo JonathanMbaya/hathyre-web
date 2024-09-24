@@ -1,16 +1,23 @@
 import React from 'react';
-import PublicRouter from '../src/pages/public/PublicRouter.jsx';
-import AdminRouter from '../src/pages/admin/AdminRouter.jsx';
+import PublicRouter from './pages/public/PublicRouter.jsx';
+import AdminRouter from './pages/admin/AdminRouter.jsx';
 
 function App() {
-
   return (
-   <>
-      <PublicRouter />
-      <AdminRouter />
-   </>
+    <>
+    
+    
+    {/* Route pour les pages publiques */}
+    <PublicRouter/>
+
+    {/* Route pour les pages administratives */}
+    <AdminRouter/>
 
 
+
+    </>
+    
+    
   );
 }
 

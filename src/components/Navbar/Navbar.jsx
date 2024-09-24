@@ -33,7 +33,7 @@ function Navbar() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://hathyre-server-api.onrender.com/api/products/savon');
+        const response = await axios.get('http://localhost:8080/api/products/savon');
         setCategory(response.data); // Mettre à jour l'état avec les données de la catégorie
       } catch (error) {
         console.error("Erreur lors de la récupération des catégories :", error);
