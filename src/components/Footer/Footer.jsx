@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse} from '@fortawesome/free-solid-svg-icons';
-import Buttons from "../Button/Button";
+import Button from "../Button/Button";
 import ButtonNice from '../Button/ButtonNice';
 import './Footer.css';
 
@@ -15,7 +15,7 @@ function Footer() {
                     <h3>S'abonner à la newsletter</h3>
                     <div className='newsletters'>
                         <input type="text" name="" id="" placeholder='Entrez votre adresse mail' />
-                        <Buttons text="S'abonner" className='submit-newsletter' type='submit'/>
+                        <Button text="S'abonner" className='submit-newsletter' type='submit'/>
                     </div>
                 </div>
 
