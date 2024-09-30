@@ -7,7 +7,7 @@ const Popup = ({ message, onClose }) => {
     <div className="popup-overlay">
       <div className="popup-content">
         <h2>{message}</h2>
-        <Link to='/checkout'>
+        <Link to='/'>
             <button onClick={onClose}>Fermer</button>
         </Link>
       </div>

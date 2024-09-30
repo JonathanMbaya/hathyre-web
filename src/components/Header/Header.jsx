@@ -90,6 +90,20 @@ function Header({ currentPage }) {
                 </div>
             }
 
+            {location.pathname.startsWith('/politique-de-confidentialite') && 
+                <div className='header-home'>
+                    <NewNavbar/>
+                    <Navbar/>
+                </div>
+            }
+
+            {location.pathname.startsWith('/conditions-ventes') && 
+                <div className='header-home'>
+                    <NewNavbar/>
+                    <Navbar/>
+                </div>
+            }
+
         </div>
     );
 };

@@ -18,13 +18,6 @@ function AdminRouter() {
     return userConnected ? <Outlet /> : <Navigate to="/admin/login" /> ;  // Redirection si non authentifié
   }
 
-  // Rediriger vers la page de connexion si l'utilisateur n'est pas authentifié
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     navigate('/admin/login');
-  //   }
-  // }, [navigate]);
 
   return (
     <Routes>

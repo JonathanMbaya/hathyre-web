@@ -10,6 +10,8 @@ import SingleProductPage from './SingleProductPage.jsx';
 import StripeContainer from '../../components/Stripe/StripeContainer.jsx';
 import Faq from "../../components/FAQ/Faq.jsx";
 import LegalMentions from "./LegalMentions.jsx";
+import PolitiqueConfidentialite from './PolitiqueConfidentialite.jsx';
+import TermsConditions from './TermsConditions.jsx';
 
 function PublicRouter ()  {
 
@@ -96,6 +98,24 @@ function PublicRouter ()  {
                     render={() => {
                         setCurrentPage('LegalMentions');
                         return <LegalMentions />;
+                    }}
+                />
+
+                <Route
+                    path="/politique-de-confidentialite"
+                    element={<PolitiqueConfidentialite/>}
+                    render={() => {
+                        setCurrentPage('PolitiqueConfidentialite');
+                        return <PolitiqueConfidentialite />;
+                    }}
+                />
+
+                <Route
+                    path="/conditions-ventes"
+                    element={<TermsConditions/>}
+                    render={() => {
+                        setCurrentPage('PolitiqueConfidentialite');
+                        return <TermsConditions />;
                     }}
                 />
 

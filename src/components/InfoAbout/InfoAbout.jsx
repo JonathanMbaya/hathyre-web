@@ -3,9 +3,6 @@ import './InfoAbout.css';
 
 function InfoAbout () {
 
-    // useEffect(() => {
-    //     gsap.to("#block", { duration: 1, y:50, opacity: 1 });
-    // }, []);
 
     return (
         <>

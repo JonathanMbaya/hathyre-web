@@ -9,13 +9,13 @@
     width: 100% !important;
 }
 
-.banner-home{
+.banner-home {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     background-color: #EACD9A;
-    margin-top: 20vh;
+    margin-top: 15vh;
 }
 
 .img-home-banner{

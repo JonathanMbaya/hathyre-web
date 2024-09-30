@@ -41,7 +41,7 @@ function EditUser({ userId }) {
     };
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/update/user/${id}`, updatedUser);
+      const response = await axios.put(`https://hathyre-server-api.onrender.com/api/update/user/${id}`, updatedUser);
       console.log('Réponse du serveur :', response.data);
       // Afficher la pop-up de succès
       setShowPopup(true);

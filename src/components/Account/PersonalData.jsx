@@ -51,7 +51,7 @@ function PersonalData() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/update/client/${userConnected._id}`,
+        `https://hathyre-server-api.onrender.com/api/update/client/${userConnected._id}`,
         updatedUser,
         {
           headers: {

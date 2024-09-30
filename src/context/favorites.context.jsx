@@ -20,7 +20,7 @@ export const FavoritesProvider = ({ children }) => {
         const loadFavorites = async () => {
             if (userConnected) {
                 try {
-                    const response = await axios.get(`http://localhost:8080/api/favorites/${userConnected._id}`);
+                    const response = await axios.get(`https://hathyre-server-api.onrender.com/api/favorites/${userConnected._id}`);
                     setFavoriteItems(response.data.favorites);
                 } catch (error) {
                     console.error("Erreur lors de la récupération des favoris :", error);
@@ -33,7 +33,7 @@ export const FavoritesProvider = ({ children }) => {
     // Ajouter un produit aux favoris
     const addToFavorites = async (productId) => {
         try {
-            await axios.post(`http://localhost:8080/api/favorites/${userConnected._id}/add`, { productId });
+            await axios.post(`https://hathyre-server-api.onrender.com/api/favorites/${userConnected._id}/add`, { productId });
             setFavoriteItems([...favoriteItems, productId]);
         } catch (error) {
             console.error("Erreur lors de l'ajout du produit aux favoris :", error);
@@ -43,7 +43,7 @@ export const FavoritesProvider = ({ children }) => {
     // Supprimer un produit des favoris
     const removeFromFavorites = async (productId) => {
         try {
-            await axios.delete(`http://localhost:8080/api/favorites/${userConnected._id}/remove/${productId}`);
+            await axios.delete(`https://hathyre-server-api.onrender.com/api/favorites/${userConnected._id}/remove/${productId}`);
             setFavoriteItems(favoriteItems.filter(item => item !== productId));
         } catch (error) {
             console.error("Erreur lors de la suppression du produit des favoris :", error);

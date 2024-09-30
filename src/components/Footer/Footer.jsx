@@ -64,9 +64,12 @@ function Footer() {
                             <Link to="/mentions-legales">
                                 <li>Mentions Légales</li>
                             </Link>
-                            <li>CGV</li>
-                            <li>Paiements et Livraison</li>
-                            <li>Politique de confidentialité</li>
+                            <Link to="/politique-de-confidentialite">
+                                <li>Politique de confidentialité</li>
+                            </Link>
+                            <Link to="/conditions-ventes">
+                                <li>CGV</li>
+                            </Link>
                         </div>
                     </div>
                 </div>

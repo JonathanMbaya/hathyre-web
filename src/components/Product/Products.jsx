@@ -11,7 +11,7 @@ function Products({ title }) {
 
     useEffect(() => {
         // Effectuer la requête Axios pour récupérer les produits triés par date
-        axios.get('http://localhost:8080/api/products/latest')
+        axios.get('https://hathyre-server-api.onrender.com/api/products/latest')
             .then(response => {
                 // Mettre à jour l'état avec les produits récupérés
                 setProducts(response.data);

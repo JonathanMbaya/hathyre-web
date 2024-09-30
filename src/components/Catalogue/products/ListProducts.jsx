@@ -34,7 +34,7 @@ const ListProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/products`, {
+        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products`, {
           params: filterCriteria,
         });
         setProducts(response.data);

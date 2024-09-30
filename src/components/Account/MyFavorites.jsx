@@ -19,12 +19,12 @@ function MyFavorites() {
             try {
                 if (userConnected) {
                     // Étape 1 : Récupérer les IDs des favoris de l'utilisateur
-                    const response = await axios.get(`http://localhost:8080/api/favorites/${userConnected._id}`);
+                    const response = await axios.get(`https://hathyre-server-api.onrender.com/api/favorites/${userConnected._id}`);
                     const favoriteIds = response.data.favorites; // Tableau d'IDs des produits favoris
 
                     // Étape 2 : Récupérer les détails de chaque produit favori
                     const productDetailsPromises = favoriteIds.map(async (productId) => {
-                        const productResponse = await axios.get(`http://localhost:8080/api/product/${productId}`);
+                        const productResponse = await axios.get(`https://hathyre-server-api.onrender.com/api/product/${productId}`);
                         return productResponse.data;
                     });
 

@@ -17,7 +17,7 @@ export const LoginProvider = ({ children }) => { // Utilisez children comme argu
             const id = localStorage.getItem('id');
             if (storedToken && id) {
                 try {
-                    const response = await axios.get(`http://localhost:8080/api/user/${id}`, {
+                    const response = await axios.get(`https://hathyre-server-api.onrender.com/api/user/${id}`, {
                         headers: {
                             Authorization: `Bearer ${storedToken}`
                         }

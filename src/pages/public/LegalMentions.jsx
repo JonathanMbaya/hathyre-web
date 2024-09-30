@@ -1,10 +1,8 @@
 import React from 'react';
-import { Grid, Typography, Container, Box } from '@mui/material';
+import { Typography, Container, Box } from '@mui/material';
 import Footer from '../../components/Footer/Footer.jsx';
-import 'animate.css';
 
 function LegalMentions() {
-
     // Date dynamique pour la dernière mise à jour des mentions légales
     const lastUpdated = new Date().toLocaleDateString('fr-FR', {
         day: '2-digit',
@@ -15,96 +13,112 @@ function LegalMentions() {
     return (
         <div className='page-about'>
             <Container maxWidth="md">
-                <Typography 
-                    variant="h4" 
-                    align="center" 
-                    gutterBottom 
-                    className='animate__animated animate__fadeInUp' 
-                    style={{ marginTop: '5rem', color: 'black' }}
+                {/* Titre principal */}
+                <Typography
+                    variant="h4"
+                    align="center"
+                    gutterBottom
+                    style={{ marginTop: '4rem', marginBottom: '2rem', fontWeight: 'bold', color: '#333' }}
                 >
-                    Mentions Légales
+                    Mentions légales
                 </Typography>
 
-                <Box sx={{ padding: '1rem', color: 'black', borderRadius: '10px', fontSize : "10px" }}>
-                    <Grid container spacing={4}>
-                        {/* Section Gauche */}
-                        <Grid item xs={12} sm={6}>
-                            <Typography variant="h6" gutterBottom>Informations Générales</Typography>
-                            <Typography><strong>Nom de l’entreprise :</strong> KEKELI</Typography>
-                            <Typography><strong>Forme juridique :</strong> SASU</Typography>
-                            <Typography><strong>Capital social :</strong> 2000€</Typography>
-                            <Typography><strong>Adresse du siège social :</strong> 50 avenue des Champs Elysees</Typography>
-                            <Typography><strong>Immatriculation :</strong> 92479472000012</Typography>
-                            <Typography><strong>Numéro de TVA :</strong> FR66924794720</Typography>
+                {/* Bloc de contenu pour les mentions légales */}
+                <Box sx={{ padding: '2rem', backgroundColor: '#fff', color: '#333' }}>
+                    {/* Première section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        1. Informations Générales
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Nom de l’entreprise : <strong>KEKELI</strong><br />
+                        Forme juridique : SASU<br />
+                        Capital social : 2000€<br />
+                        Adresse du siège social : 50 avenue des Champs Elysées<br />
+                        Immatriculation : 92479472000012<br />
+                        Numéro de TVA intracommunautaire : FR66924794720
+                    </Typography>
 
-                            <Typography variant="h6" gutterBottom style={{ marginTop: '1.5rem' }}>Coordonnées de Contact</Typography>
-                            <Typography><strong>Email :</strong> info@welovekekeli.com</Typography>
-                            <Typography><strong>Téléphone :</strong> (à compléter)</Typography>
-                            <Typography>
-                                <strong>Formulaire de contact :</strong> 
-                                <a href="https://welovekekeli.com/pages/contact" style={{ color: '#fff', textDecoration: 'underline' }}> Contactez-nous</a>
-                            </Typography>
+                    {/* Deuxième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        2. Coordonnées de Contact
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Email : info@welovekekel.com<br />
+                        Formulaire de contact : <a href="https://welovekekeli.com/pages/contact" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff' }}>Contactez-nous</a>
+                    </Typography>
 
-                            <Typography variant="h6" gutterBottom style={{ marginTop: '1.5rem' }}>Hébergeur</Typography>
-                            <Typography><strong>Nom :</strong> Shopify Inc.</Typography>
-                            <Typography><strong>Adresse :</strong> 150 Elgin Street, Suite 800, Ottawa, Ontario, K2P 1L4, Canada</Typography>
-                            <Typography><strong>Téléphone :</strong> 1-888-746-7439</Typography>
-                        </Grid>
+                    {/* Troisième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        3. Hébergeur
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Nom de l’hébergeur : Shopify Inc.<br />
+                        Adresse de l’hébergeur : 150 Elgin Street, Suite 800, Ottawa, Ontario, K2P 1L4, Canada<br />
+                        Téléphone de l’hébergeur : 1-888-746-7439
+                    </Typography>
 
-                        {/* Section Droite */}
-                        <Grid item xs={12} sm={6}>
-                            <Typography variant="h6" gutterBottom>Directeur de la Publication</Typography>
-                            <Typography><strong>Nom :</strong> Anthony-Lafa Myléna</Typography>
-                            <Typography><strong>Email :</strong> myle.efua@gmail.com</Typography>
+                    {/* Quatrième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        4. Directeur de la Publication
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Nom du directeur de la publication : Anthony-Lafa Myléna<br />
+                        Email : myle.efua@gmail.com
+                    </Typography>
 
-                            <Typography variant="h6" gutterBottom style={{ marginTop: '1.5rem' }}>Propriété Intellectuelle</Typography>
-                            <Typography>
-                                Le contenu du site (textes, images, graphismes, logo, etc.) est la propriété exclusive de Kekeli. Toute reproduction, 
-                                distribution, modification, adaptation, retransmission ou publication est interdite sans l'accord préalable de Kekeli.
-                            </Typography>
+                    {/* Cinquième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        5. Propriété Intellectuelle
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Le contenu du site (textes, images, graphismes, logo, etc.) est la propriété exclusive de Kekeli, sauf mention contraire. Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord écrit préalable de Kekeli.
+                    </Typography>
 
-                            <Typography variant="h6" gutterBottom style={{ marginTop: '1.5rem' }}>Données Personnelles</Typography>
-                            <Typography>
-                                Conformément à la loi Informatique et Libertés du 6 janvier 1978, vous disposez d'un droit d'accès, de rectification 
-                                et de suppression des données personnelles. Pour exercer ces droits, contactez-nous à info@welovekekeli.com.
-                            </Typography>
+                    {/* Sixième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        6. Données Personnelles
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée et au Règlement Général sur la Protection des Données (RGPD) du 27 avril 2016, vous disposez d'un droit d'accès, de rectification, de suppression, de limitation, de portabilité et d'opposition aux données personnelles vous concernant. Pour exercer ces droits, vous pouvez contacter Kekeli à l'adresse suivante : info@welovekekeli.com.
+                    </Typography>
 
-                            <Typography variant="h6" gutterBottom style={{ marginTop: '1.5rem' }}>Cookies</Typography>
-                            <Typography>
-                                Le site utilise des cookies pour améliorer l'expérience utilisateur. Vous pouvez paramétrer votre navigateur 
-                                pour refuser les cookies.
-                            </Typography>
-                        </Grid>
-                    </Grid>
+                    {/* Septième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        7. Cookies
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Le site utilise des cookies pour améliorer l'expérience utilisateur, pour des mesures d’audience et des fonctionnalités de partage sur les réseaux sociaux. Vous pouvez paramétrer votre navigateur pour refuser les cookies.
+                    </Typography>
 
-                    {/* Section globale (s'étend sur les deux colonnes) */}
-                    <Grid container spacing={4} sx={{ marginTop: '2rem' }}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" gutterBottom>Responsabilité</Typography>
-                            <Typography>
-                                Kekeli s'efforce de fournir des informations précises sur le site. Toutefois, Kekeli ne peut être tenue responsable 
-                                des omissions, inexactitudes ou carences dans la mise à jour.
-                            </Typography>
+                    {/* Huitième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        8. Responsabilité
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Kekeli s'efforce de fournir sur le site des informations aussi précises que possible. Cependant, Kekeli ne pourra être tenue responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.
+                    </Typography>
 
-                            <Typography variant="h6" gutterBottom style={{ marginTop: '1.5rem' }}>Droit Applicable</Typography>
-                            <Typography>
-                                Les présentes mentions légales sont régies par le droit français. En cas de litige, compétence est attribuée 
-                                aux tribunaux français.
-                            </Typography>
+                    {/* Neuvième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        9. Droit Applicable
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Les présentes mentions légales sont régies par le droit français. En cas de litige, et après tentative de recherche d'une solution amiable, compétence expresse est attribuée aux tribunaux français.
+                    </Typography>
 
-                            <Typography variant="h6" gutterBottom style={{ marginTop: '1.5rem' }}>Modification des Mentions Légales</Typography>
-                            <Typography>
-                                Kekeli se réserve le droit de modifier les présentes mentions légales à tout moment. Nous vous invitons à les consulter 
-                                régulièrement pour rester informé des éventuelles modifications.
-                            </Typography>
+                    {/* Dixième section */}
+                    <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+                        10. Modification des Mentions Légales
+                    </Typography>
+                    <Typography paragraph style={{ textAlign: 'justify' }}>
+                        Kekeli se réserve le droit de modifier les présentes mentions légales à tout moment. L'utilisateur est invité à les consulter régulièrement afin de prendre connaissance de modifications éventuelles.
+                    </Typography>
 
-                            <Typography gutterBottom style={{ marginTop: '1.5rem' }}>
-                                <strong>Date de dernière mise à jour :</strong> {lastUpdated}
-                            </Typography>
-                        </Grid>
-                    </Grid>
+                    {/* Date de mise à jour */}
+                    <Typography gutterBottom style={{ marginTop: '1.5rem', fontStyle: 'italic' }}>
+                        <strong>Date de dernière mise à jour :</strong> {lastUpdated}
+                    </Typography>
                 </Box>
-
             </Container>
 
             <Footer />
