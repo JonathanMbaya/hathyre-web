@@ -72,7 +72,7 @@ function NewNavbar() {
 
             <div style={{ display: 'flex', flexDirection: 'row', width: '20%' }} className="burger-icon" onClick={toggleSearch}>
                 <button style={{borderRadius: "1rem", display: "flex", alignItems: "center"}}>
-                    Rechercher__<FontAwesomeIcon icon={faMagnifyingGlass} size="1.5x" />
+                    __<FontAwesomeIcon icon={faMagnifyingGlass} size="1.5x" />
                 </button>
             </div>
 

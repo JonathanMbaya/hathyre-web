@@ -81,19 +81,18 @@
 }
 
 .menu.open ul li {
-  width: 350px;
+  width: 300px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 1rem;
   margin-top: .5rem;
   margin-bottom: .5rem;
-
 }
 
 .menu.open ul li a {
   color: #895832;
-  width: 300px;
+  width: 200px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

@@ -37,7 +37,7 @@ function Products({ title }) {
     
 
     return (
-        <div className="container animate__animated animate__fadeInUp">
+        <div  className="container animate__animated animate__fadeInUp">
             {location.pathname.startsWith('/') && 
                 <h2 >{title}</h2>
             }
@@ -51,12 +51,12 @@ function Products({ title }) {
                 <button className="scroll-button right" onClick={() => scroll('right')}>→</button>
             </div>
 
-            <div className="slider-container" ref={sliderRef}>
+            <div style={{backgroundImage : "url(./bg-review.jpg)"}} className="slider-container" ref={sliderRef}>
 
                 <div className="slider-row">
                     {products.map(product => (
                         
-                            <div key={product._id} className="box">
+                            <div key={product._id} style={{backgroundColor: "white"}} className="box">
                                 <span>Nouveauté</span>
                                 <Link className='link-without-decoration' to={`/product/${product._id}`}>
                                     <img src={process.env.PUBLIC_URL + product.image} alt={product.name} />

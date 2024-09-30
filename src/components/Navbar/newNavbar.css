@@ -9,6 +9,8 @@
     z-index: 400;
 }
 
+
+
 .icons-users{
     display: flex;
     justify-content: center;
@@ -120,6 +122,18 @@
         color: #895832;
         margin-left: 0rem;
         background-color: white;
+    }
+
+    .nav-high{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #EACD9A;
+        background-color: white;
+        width: 100%;
+        position: fixed;
+        z-index: 400;
+        box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.4);
     }
 }
 
