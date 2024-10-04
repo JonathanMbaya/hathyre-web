@@ -11,7 +11,7 @@ function LegalMentions() {
     });
 
     return (
-        <div className='page-about'>
+        <div className='page-mentions'>
             <Container maxWidth="md">
                 {/* Titre principal */}
                 <Typography

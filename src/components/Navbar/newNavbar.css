@@ -72,6 +72,17 @@
     backdrop-filter: blur(10px);
 }
 
+.item-search{
+    margin: 1rem;
+}
+
+.searchbar-nav{
+    border-top: 0px;
+    border-right:0px ;
+    border-left: 0px ;
+    border-bottom: .2px solid #ccc;
+}
+
 @media only screen and (max-width: 768px) {
 
     .icons-users{

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse} from '@fortawesome/free-solid-svg-icons';
-import Button from "../Button/Button";
 import ButtonNice from '../Button/ButtonNice';
 import './Footer.css';
 
@@ -34,39 +33,67 @@ function Footer() {
 
                     {/* Plan de site */}
                     <div className='one-menu-footer'>
-                        <h3>Plan de site</h3>
-                        <div>
+                        <div style={{textAlign: "left"}}>
+                            <h4 style={{ textAlign: "left"}}>Plan de site</h4>
+
                             <li>
                             <Link className='link-without-decoration' to="/" >
                                 <FontAwesomeIcon icon={faHouse} />
                             </Link> 
                             </li>
-                            <Link className='link-without-decoration' to="/product" >
-                                <li>Nos produits</li>
+
+                            <li>
+                            <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+
+                                Nos produits
                             </Link>
-                            <Link className='link-without-decoration' to="/apropos" >
-                                <li>A propos de Hathyre</li>                            
-                            </Link>
-                            <Link className='link-without-decoration' to="/faq">
-                                <li>FAQ</li>
-                            </Link>
+                            </li>
+                            
+                            <li>
+                            <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+
+                                A propos de Hathyre
+                                </Link>
+                            </li> 
+                                                       
+                            <li>
+                                <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+
+                                    FAQ
+                                </Link>
+
+                            </li>
+                            
                             
                         </div>
                     </div>
 
                     {/* Mentions Légales */}
                     <div className='one-menu-footer'>
-                        <h3>Mentions Légales</h3>
                         <div style={{textAlign: "left"}}>
-                            <Link to="/mentions-legales">
-                                <li>Mentions Légales</li>
+                            <h4>Mentions Légales</h4>
+
+                            <li>
+                            <Link className='link-without-decoration' style={{textAlign: "left"}} to="/mentions-legales">
+                                Mentions Légales
                             </Link>
-                            <Link to="/politique-de-confidentialite">
-                                <li>Politique de confidentialité</li>
+                            </li>
+
+                            <li>
+                                
+                            <Link className='link-without-decoration' style={{textAlign: "left"}} to="/politique-de-confidentialite">
+                                Politique de confidentialité
                             </Link>
-                            <Link to="/conditions-ventes">
-                                <li>CGV</li>
+
+                            </li>
+                            <li>
+                            <Link className='link-without-decoration' style={{textAlign: "left"}} to="/conditions-ventes">
+                                CGV
                             </Link>
+
+                            </li>
+
+
                         </div>
                     </div>
                 </div>

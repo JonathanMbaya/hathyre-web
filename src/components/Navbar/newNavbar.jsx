@@ -48,6 +48,7 @@ function NewNavbar() {
                         value={input}
                         onChange={handleInputChange}
                         placeholder="Trouvez un produit"
+                        className="searchbar-nav"
                     />
                     </form>
                     <div onClick={toggleSearch} className="product-close animate__animated animate__fadeInUp">
@@ -59,21 +60,32 @@ function NewNavbar() {
                     <p>Aucun produit trouvé.</p>
                     ) : (
                     results.map((product) => (
-                        <div  to={`/product/${product._id}`} key={product._id}>
+                        <Link className="link-without-decoration" to={`/product/${product._id}`} key={product._id}>
                             <div className='item-search'>
                                 <img src={product.image} alt={product.name} />
-                                <p style={{fontSize: "12px"}}>{product.name}</p>
+                                <div style={{display: "flex", flexDirection:"column"}}>
+                                <p style={{fontSize: "12px"}}>{product.name}</p> <br />
+                                <p style={{fontSize: "8px"}}>{product.description}</p>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                     )}
                 </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', width: '20%' }} className="burger-icon" onClick={toggleSearch}>
-                <button style={{borderRadius: "1rem", display: "flex", alignItems: "center"}}>
+            <div style={{ display: 'flex', flexDirection: 'row', width: '20%' }} className="burger-icon">
+
+                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px' }} onClick={toggleMenu}>
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                </div>
+
+                <button onClick={toggleSearch} style={{borderRadius: "1rem", display: "flex", alignItems: "center"}}>
                     __<FontAwesomeIcon icon={faMagnifyingGlass} size="1.5x" />
                 </button>
+
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center', width: '50%' }}>
@@ -88,10 +100,8 @@ function NewNavbar() {
 
             <div className="icons-users">
 
-                <Basket />
-
                 <div>
-                    {   !userConnected ?
+                    { !userConnected ?
 
                         <li>
                             <Link to="/login" className="link-without-decoration"><FontAwesomeIcon icon={faCircleUser} size="2x" /></Link>
@@ -104,11 +114,10 @@ function NewNavbar() {
 
                 </div>
 
-                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px' }} onClick={toggleMenu}>
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                </div>
+                <Basket />
+
+
+
 
                 <div className={`menu ${isOpen ? 'open' : ''}`}>
 

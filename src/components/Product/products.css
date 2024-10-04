@@ -4,7 +4,6 @@
   overflow: hidden;
   position: relative;
   scroll-behavior: smooth;
-  transition: transform 0.2s ease; /* Animation lors du scroll */
 }
  
 

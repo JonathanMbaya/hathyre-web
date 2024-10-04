@@ -24,6 +24,10 @@ h3 , .css-1nmqws6-MuiTypography-root {
   align-items: "flex-start" ;
 }
 
+.page-mentions, .page-politique {
+  margin-top: 24vh;
+}
+
 @media only screen and (max-width: 600px) {
 
   .sidebar {

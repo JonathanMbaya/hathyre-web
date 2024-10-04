@@ -61,6 +61,36 @@ transition: .3s;
 
 }
 
+.category-filter{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 80%;
+}
+
+
+.sort-buttons{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 80%;
+    margin: 1rem;
+}
+
+.sort-buttons button , .category-filter button
+{
+    border: .2px solid #895832;
+    border-radius: 1rem;
+}
+
+.search-bar {
+    border-bottom: .2px solid #ccc;
+    width: 60%;
+    padding: 1rem;
+}
+
 
 /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
 @media only screen and (max-width: 768px) {

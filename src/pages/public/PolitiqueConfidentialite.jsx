@@ -11,7 +11,7 @@ function PolitiqueConfidentialite() {
     });
 
     return (
-        <div className='page-about'>
+        <div className='page-politique'>
             <Container maxWidth="md">
                 {/* Titre principal */}
                 <Typography
