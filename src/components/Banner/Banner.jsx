@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ButtonNice from '../Button/ButtonNice.jsx';
 import './banner.css';
 
-function Banner ({title, item1, src}) {
+function Banner ({title, item1, src1 , src2, src3}) {
     return (
 
     <div>
@@ -15,7 +15,7 @@ function Banner ({title, item1, src}) {
         <div class="parent">
             <div className="box1 div1">
                 <h3>{item1}</h3>
-                <img src={src} alt="Strength" />
+                <img src={src1} alt="Strength" />
                 <div className="button-up">
                     <Link to="/product">
                         <ButtonNice text="Savons"/>
@@ -23,25 +23,25 @@ function Banner ({title, item1, src}) {
                 </div>
             </div>
             
-            <div className="box1 div2">
+            <div className="box2 div2">
                 <h3>{item1}</h3>
-                <img src={src} alt="Strength" />
+                <img src={src2} alt="Strength" />
                 <div className="button-up">
                     <Link to="/product">
                         <ButtonNice text="Beurres et Huiles"/>
                     </Link>
                 </div>
             </div>
-            <div className="box1 div3">
+            <div className="box2 div3">
                 <h3>{item1}</h3>
-                <img src={src} alt="Strength" />
+                <img src={src3} alt="Strength" />
                 <div className="button-up">
                     <Link to="/product">
                         <ButtonNice text="Accessoires"/>
                     </Link>
                 </div>
             </div>
-            <div className="box1 div4">
+            <div className="box3 div4">
                 <h3>{item1}</h3>
                 {/* <img src={src} alt="Strength" /> */}
                 <div className="button-up">

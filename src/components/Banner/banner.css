@@ -13,6 +13,31 @@
 border-radius: .5rem;
 }
 
+.box3 {
+  align-items: center;
+  border-radius: 1rem;
+  display: flex;
+  height: 30vh;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem;
+  width: 80%;
+
+}
+
+.box2 {
+  align-items: center;
+  border-radius: 1rem;
+  display: flex;
+  height: 30vh;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem;
+  width: 80%;
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.4);
+
+}
+
 .box1 {
   align-items: center;
   border-radius: 1rem;
@@ -22,6 +47,20 @@ border-radius: .5rem;
   overflow: hidden;
   padding: 2rem;
   width: 80%;
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.4);
+
+}
+
+.box2 img {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 120%;
+  border-radius: .5rem;
+  /* transform: rotate(90deg); Fait pivoter l'image de 90 degrés */
+ /* Réduit la luminosité de l'image */
+ filter:blur(8px)
+ 
 }
       
 .box1 img {
@@ -32,7 +71,7 @@ border-radius: .5rem;
   border-radius: .5rem;
   transform: rotate(90deg); /* Fait pivoter l'image de 90 degrés */
  /* Réduit la luminosité de l'image */
- filter:blur(10px)
+ filter:blur(8px)
  
 }
 
@@ -44,7 +83,19 @@ border-radius: .5rem;
   border-radius: .5rem;
   transform: rotate(90deg); /* Fait pivoter l'image de 90 degrés */
   /* Réduit la luminosité de l'image */
-  filter:blur(20px);
+  filter:blur(10px);
+  transition: 2s;
+ 
+}
+
+.box2 img:hover {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 130%;
+  border-radius: .5rem;
+  /* Réduit la luminosité de l'image */
+  filter:blur(10px);
   transition: 2s;
  
 }
@@ -96,6 +147,28 @@ h2 {
     }
     
     .box1 {
+      align-items: center;
+      border-radius: 1rem;
+      display: flex;
+      height: 10vh;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1rem;
+      width: 80%;
+    }
+
+    .box2 {
+      align-items: center;
+      border-radius: 1rem;
+      display: flex;
+      height: 10vh;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1rem;
+      width: 80%;
+    }
+
+    .box3 {
       align-items: center;
       border-radius: 1rem;
       display: flex;

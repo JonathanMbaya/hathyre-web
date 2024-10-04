@@ -3,7 +3,13 @@
   width: 100%;
   overflow: hidden;
   position: relative;
+  scroll-behavior: smooth;
+  transition: transform 0.2s ease; /* Animation lors du scroll */
+}
+ 
 
+.slider-container.animate-scroll {
+  transform: scale(1.01); /* Effet léger d'agrandissement */
 }
 
 /* Ligne contenant les éléments à slider */
@@ -151,9 +157,10 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: .2rem;
+    padding: 0rem;
     border-radius: 1rem;
-    width: 80%;
+    width: 100%;
+    min-width: 200px;
   }
         
   .box img {
@@ -209,8 +216,9 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: 0rem .1rem .1rem .1rem;
+    padding: 0rem;
     border-radius: 1rem;
+    margin: .5rem;
     width: 100%;
   }
         
@@ -229,15 +237,13 @@
     margin: 0;
   }
 
-  .info-home-action-product button{
+  .info-home-action-product button {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 1rem 1rem 1rem;
-    margin-right: .3rem;
     margin-top: 1rem;
     border-radius: 0 0 1rem 0;
-  }
+}
   
 
 }

@@ -11,13 +11,13 @@ function Footer() {
         <div className='footer'>
             {/* Première partie du Footer */}
             <div className='first-area-footer'>
-                <div className='newsletter'>
+                {/* <div className='newsletter'>
                     <h3>S'abonner à la newsletter</h3>
                     <div className='newsletters'>
                         <input type="text" name="" id="" placeholder='Entrez votre adresse mail' />
                         <Button text="S'abonner" className='submit-newsletter' type='submit'/>
                     </div>
-                </div>
+                </div> */}
 
                 <div className='menu-footer'>
                     {/* Catalogue */}
@@ -46,9 +46,6 @@ function Footer() {
                             </Link>
                             <Link className='link-without-decoration' to="/apropos" >
                                 <li>A propos de Hathyre</li>                            
-                            </Link>
-                            <Link className='link-without-decoration' to="/login" >
-                                <li>Se connecter</li>                            
                             </Link>
                             <Link className='link-without-decoration' to="/faq">
                                 <li>FAQ</li>
