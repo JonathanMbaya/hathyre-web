@@ -10,9 +10,29 @@ function ProductPage() {
         
             <div id="shadow"></div>
      
-            <h1 className='animate__animated animate__fadeInUp' style={{ textAlign: 'center', marginBottom: '2rem',  color : '#895832', marginTop:'30vh'  }}> 
+            <h1 
+                className='animate__animated animate__fadeInUp' 
+                style={{
+
+                backgroundColor: "blanchedalmond", 
+                textAlign: 'center', 
+                paddingBottom: '2rem',  
+                color : '#895832', 
+                height:'25vh',
+                display:"flex",
+                alignItems:"flex-end" ,
+                justifyContent: "center"
+
+                }}
+            > 
                 La Boutique | Hathyre 
             </h1>
+
+            <p style={{width:"90%", textAlign:"center", fontSize:"18px", paddingLeft: "5%"}}>
+                Découvrez notre boutique Hathyre et laissez-vous séduire par 
+                notre sélection de soins naturels, conçus pour sublimer votre 
+                peau _/
+            </p>
 
             <ListProducts/>
 

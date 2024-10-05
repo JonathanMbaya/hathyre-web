@@ -120,6 +120,15 @@ function CheckoutForm() {
 
                 await sendConfirmationEmail();
 
+                // Mise à jour du stock pour chaque produit
+                for (const item of cartItems) {
+                    const updatedStock = item.stock - item.quantity;
+                    
+                    await axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${item._id}`, {
+                        stock: updatedStock,
+                    });
+                }
+
                 if (userConnected) {
                     const updatedMontDepense = isConnected.montantDepense + totalPrice;
 
@@ -156,6 +165,8 @@ function CheckoutForm() {
             totalProduct: totalProduct,
             cartItems: cartItems.map(item => `${item.quantity}x ${item.name}`).join(", "),
         };
+
+        console.log(templateParams);
 
         try {
             await emailjs.send(
@@ -215,6 +226,7 @@ function CheckoutForm() {
                             </div>
                             <p className='name'>{item.name}</p>
                             <p>{item.price}</p>
+                            
                             <FontAwesomeIcon className='icon' icon={faTrash} onClick={() => handleRemoveFromCart(item._id)} />
                         </div>
                     ))}

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDroplet, faRing, faBars, faMagnifyingGlass, faCircleUser, faTimes, faChevronRight, faHouse, faSoap } from '@fortawesome/free-solid-svg-icons';
 import Basket from "../Basket/Basket.jsx";
 import {LoginContext} from "../../context/login.context.jsx"
+import Navbar from "./Navbar.jsx";
 import "./newNavbar.css";
 import "./BurgerMenu.css";
 
@@ -39,6 +40,8 @@ function NewNavbar() {
     const handleInputChange = (event) => setInput(event.target.value);
 
     return (
+        <>
+        <Navbar/>
         <div className="nav-high">
             <div className={`page-search ${isOpenSearch ? 'openSearch' : ''}`}>
                 <div className='search'>
@@ -82,21 +85,21 @@ function NewNavbar() {
                     <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
                 </div>
 
-                <button onClick={toggleSearch} style={{borderRadius: "1rem", display: "flex", alignItems: "center"}}>
+                <button onClick={toggleSearch} style={{borderRadius: "1rem",marginLeft:".5rem", display: "flex", alignItems: "center"}}>
                     __<FontAwesomeIcon icon={faMagnifyingGlass} size="1.5x" />
                 </button>
 
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'center', width: '50%' }}>
-                <Link to='/'>
-                    <img
-                        src={`${process.env.PUBLIC_URL}/hathyre-logo.png`}
-                        alt="Logo de l'application"
-                        className="logo-img"
-                    />
-                </Link>
-            </div>
+        
+            <Link to='/'>
+                <img
+                    src={`${process.env.PUBLIC_URL}/hathyre-logo.png`}
+                    alt="Logo de l'application"
+                    className="logo-img"
+                />
+            </Link>
+            
 
             <div className="icons-users">
 
@@ -200,6 +203,8 @@ function NewNavbar() {
                 </div>
             </div>
         </div>
+        </>
+        
     );
 }
 

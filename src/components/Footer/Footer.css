@@ -14,7 +14,7 @@
 .first-area-footer .menu-footer {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
 }
 
@@ -185,12 +185,13 @@
     }
 
 
-    .first-area-footer .menu-footer .one-menu-footer{
+    .first-area-footer .menu-footer .one-menu-footer {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
         padding: 1rem;
+        width: 90%;
     }
   
     .newsletter, .menu-footer, .contact-footer {

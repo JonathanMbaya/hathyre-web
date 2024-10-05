@@ -71,7 +71,7 @@ function Footer() {
                     {/* Mentions Légales */}
                     <div className='one-menu-footer'>
                         <div style={{textAlign: "left"}}>
-                            <h4>Mentions Légales</h4>
+                            <h4>Nos services</h4>
 
                             <li>
                             <Link className='link-without-decoration' style={{textAlign: "left"}} to="/mentions-legales">

@@ -5,7 +5,6 @@ import './header.style.css';
 import 'animate.css';
 import React from "react";
 import NewNavbar from '../Navbar/newNavbar';
-import Navbar from '../Navbar/Navbar';
 
 function Header({ currentPage }) {
     const location = useLocation();
@@ -17,10 +16,9 @@ function Header({ currentPage }) {
             {location.pathname === '/' && 
                 <div  className='header-home'>
                     <NewNavbar/>
-                    <Navbar/>
                     <div className='banner-home'>
                         <div className='container'>
-                            <h2 className='animate__animated animate__fadeInDown'>Hathyre, <br/> votre secret de beauté <br/> au quotidien .</h2>
+                            <h2 style={{textAlign: "left" , paddingLeft : "1rem"}} className='animate__animated animate__fadeInDown'>Hathyre, <br/> votre secret de beauté <br/> au quotidien .</h2>
                         </div>
                         <div className='img-home-banner'>
                             <img src={process.env.PUBLIC_URL + '/background-home-2.jpg'} alt='' />
@@ -34,7 +32,6 @@ function Header({ currentPage }) {
             {location.pathname === '/product' && 
                 <div className='header-home'>
                     <NewNavbar/>
-                    <Navbar/>
                 </div>
             }
 
@@ -42,7 +39,6 @@ function Header({ currentPage }) {
                 <div className='header-home'>
                     
                     <NewNavbar/>
-                    <Navbar/>
                     
                     <video autoPlay loop muted style={{ width: '100%', height: 'auto' }}>
                         <source src={`${process.env.PUBLIC_URL}/karité.mp4`} type="video/mp4" />
@@ -54,22 +50,21 @@ function Header({ currentPage }) {
             {location.pathname === '/account' && 
                 <div className='header-home'>
                     <NewNavbar/>
-                    <Navbar/>
                 </div>
             }
 
             {location.pathname.startsWith('/product/') && 
                 <div className='header-home'>
                     <NewNavbar/>
-                    <Navbar/>
                 </div>
             }
 
             {location.pathname.startsWith('/checkout') && 
             <div className='header-home'>
 
-                <NewNavbar/>
-                <Navbar/>
+                <div>
+                    <img src={process.env.PUBLIC_URL + '/hathyre-logo.png'} alt='' />
+                </div>
             </div>
             }
 
@@ -78,7 +73,6 @@ function Header({ currentPage }) {
                 <div className='header-home'>
 
                     <NewNavbar/>
-                    <Navbar/>
                 </div>
             }
 
@@ -86,21 +80,18 @@ function Header({ currentPage }) {
                 <div className='header-home'>
 
                     <NewNavbar/>
-                    <Navbar/>
                 </div>
             }
 
             {location.pathname.startsWith('/politique-de-confidentialite') && 
                 <div className='header-home'>
                     <NewNavbar/>
-                    <Navbar/>
                 </div>
             }
 
             {location.pathname.startsWith('/conditions-ventes') && 
                 <div className='header-home'>
                     <NewNavbar/>
-                    <Navbar/>
                 </div>
             }
 

@@ -85,6 +85,33 @@ li:hover {
 }
 
 /* Styles pour la navigation responsive */
+@media screen and (max-width: 968px) {
+
+  .navbar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    width: 100%;
+    position: fixed;
+    z-index: 390;
+    top: 8vh;
+    box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.4);
+  }
+
+  .banner-home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #EACD9A;
+    margin-top: 10vh;
+  }
+
+}
+
+
+/* Styles pour la navigation responsive */
 @media screen and (max-width: 768px) {
   .navbar, .navbar .fixed {
     display: none;
@@ -98,6 +125,8 @@ li:hover {
 
 
 }
+
+
 
 
 @media only screen and (max-width: 468px) {

@@ -95,11 +95,11 @@
 
 @media only screen and (max-width: 468px) {
 
-    .icons-users{
+    .icons-users {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 25%;
+        width: 30%;
     }
 
     

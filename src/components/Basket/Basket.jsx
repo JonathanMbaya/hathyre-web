@@ -58,7 +58,11 @@ function Basket() {
 
                     <div className='products-scroll'>
                         {cartItems.map((item, index) => (
-                            <div className='item-product-card' key={index}>
+                            <div style={{borderRadius : ".5rem"}} className='item-product-card' key={index}>
+                                {   item.promo > 0 ?
+                                    <p>-{item.promo}%</p>:
+                                    <p>{item.promo}</p> 
+                                }
                                 <p>{item.price} EUR</p>
                                 <p>{item.name}</p>
                                 <p>{item.quantity} X</p>

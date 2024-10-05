@@ -105,8 +105,6 @@
 .info-home-product{
   display: flex;
   flex-direction: column;
-  padding-left:.5rem;
-  padding-right: .5rem;
   width: 100%;
 }
 
@@ -119,7 +117,6 @@
 
 .info-home-action-product button{
   padding: 2rem;
-  margin-right: .5rem;
   border-radius: 0 0 1rem 0;
 }
 
@@ -130,7 +127,7 @@
   padding-left: 2rem;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 940px) {
   .container h2{
 
     font-size: 32px;
@@ -186,7 +183,7 @@
   
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
 
   .info-home-action-product{
     display: flex;
@@ -200,8 +197,8 @@
     text-align: center;
 }
 
-  h3 {
-    font-size: 17px;
+  .info-home-product h3 {
+    font-size: 12px;
   }
 
   .row { 

@@ -19,6 +19,12 @@ export const CartProvider = ({ children }) => {
             const response = await axios.get(`https://hathyre-server-api.onrender.com/api/product/${productId}`);
             const product = response.data; // Récupérer les données du produit depuis la réponse
 
+            // Appliquer la promotion si elle existe (promo > 0)
+            let finalPrice = product.price;
+            if (product.promo && product.promo > 0) {
+                finalPrice = product.price - (product.price * (product.promo / 100));
+            }
+
             // Vérifier si le produit existe déjà dans le panier
             const existingProductIndex = cartItems.findIndex(item => item._id === product._id);
             if (existingProductIndex !== -1) {
@@ -28,7 +34,7 @@ export const CartProvider = ({ children }) => {
                 setCartItems(updatedCartItems);
             } else {
                 // Sinon, ajoutez le nouveau produit au panier
-                setCartItems([...cartItems, { ...product, quantity: 1 }]);
+                setCartItems([...cartItems, { ...product, price: finalPrice, quantity: 1 }]);
             }
         } catch (error) {
             console.error("Erreur lors de la récupération des informations du produit :", error);
@@ -50,10 +56,9 @@ export const CartProvider = ({ children }) => {
             }
             return item;
         }).filter(Boolean); // Filtrer les éléments null (c'est-à-dire ceux dont la quantité est devenue 0)
-        
+
         setCartItems(updatedCartItems);
     };
-    
 
     return (
         <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>

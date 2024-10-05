@@ -10,6 +10,11 @@ function Banner ({title, item1, src1 , src2, src3}) {
 
         <div className='container'>
             <h2>{title}</h2>
+            <p style={{width:"88%", textAlign:"justify", fontSize:"18px"}}>
+                Explorez la gamme Hathyre et offrez à votre peau une expérience 
+                de soin unique, alliant les bienfaits du beurre de karité à des 
+                ingrédients naturels pour révéler votre beauté authentique_/
+            </p>
         </div>
 
         <div class="parent">

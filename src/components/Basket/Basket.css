@@ -74,14 +74,14 @@
     width: 70%;
 }
 
-.price-total{
+.price-total {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2rem 0 0 2rem;
     width: 85%;
     position: fixed;
-    bottom: 0rem;
+    bottom: 4rem;
     color: bisque;
     font-size: 30px;
     font-weight: bolder;

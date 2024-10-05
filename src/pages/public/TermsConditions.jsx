@@ -11,7 +11,7 @@ function TermsConditions() {
     });
 
     return (
-        <div className='terms-page'>
+        <div className='page-terms'>
             <Container maxWidth="md">
                 {/* Titre principal */}
                 <Typography

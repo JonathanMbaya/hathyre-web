@@ -80,6 +80,9 @@ const OrderDashboard = () => {
         prenom: order.prenom,
         email: order.email,
         address: order.address,
+        postalCode: order.postalCode,
+        city: order.city,
+        country: order.country,
         mobile: order.mobile,
         montant: order.montantTotal,
         articles: order.articles.map((article) => `${article.quantity}x ${article.productName}`).join(', '),
@@ -192,7 +195,7 @@ const OrderDashboard = () => {
               <TableCell>Référence</TableCell>
               <TableCell>Nom</TableCell>
               <TableCell>Prénom</TableCell>
-              <TableCell>Adresse</TableCell>
+              <TableCell>Ville</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Téléphone</TableCell>
               <TableCell>Montant</TableCell>
@@ -211,7 +214,7 @@ const OrderDashboard = () => {
                   <TableCell>{order._id}</TableCell>
                   <TableCell>{order.nom}</TableCell>
                   <TableCell>{order.prenom}</TableCell>
-                  <TableCell>{order.address}</TableCell>
+                  <TableCell>{order.city}</TableCell>
                   <TableCell>{order.email}</TableCell>
                   <TableCell>{order.mobile}</TableCell>
                   <TableCell>{order.montantTotal} EUR</TableCell>
@@ -229,7 +232,8 @@ const OrderDashboard = () => {
                   </TableCell>
                   <TableCell>
                     <FontAwesomeIcon 
-                        style={{color: 'gray', cursor: 'pointer'}} icon={faEllipsis}
+                        style={{color: 'gray', cursor: 'pointer'}} 
+                        icon={faEllipsis}
                         onClick={() => handleStatusChange({ target: { value: order.status } }, order._id)} 
                     />
                   </TableCell>
@@ -249,11 +253,12 @@ const OrderDashboard = () => {
         </Table>
       </TableContainer>
 
+      {/* Pagination */}
       <Pagination
         currentPage={currentPage}
         totalCount={filteredOrders.length}
         pageSize={ordersPerPage}
-        onPageChange={handlePageChange}
+        onPageChange={page => handlePageChange(page)}
       />
 
       {/* Popup de suivi */}

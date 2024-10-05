@@ -16,12 +16,12 @@ function ButtonToBasket({getProductId}){
     };
 
     return (
-        <div>
+        <>
             {/* Associez la fonction de gestionnaire d'événements au clic sur le bouton */}
             <Button id={getProductId} onClick={handleAddToCart} className='btn-to-basket' variant="primary" size="lg">
                 <FontAwesomeIcon  icon={faBagShopping} /> <FontAwesomeIcon  icon={faPlus} /> 
             </Button>
-        </div>
+        </>
     );
 };
 

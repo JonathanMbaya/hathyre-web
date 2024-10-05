@@ -24,8 +24,19 @@ h3 , .css-1nmqws6-MuiTypography-root {
   align-items: "flex-start" ;
 }
 
-.page-mentions, .page-politique {
+.page-mentions, .page-politique, .page-terms {
   margin-top: 24vh;
+}
+
+.title-shop {
+  background-color: "blanchedalmond";
+  text-align: 'center'; 
+  padding-bottom: '2rem'; 
+  color : '#895832';
+  height:'30vh' !important;
+  display:"flex";
+  align-items:"flex-end";
+  justify-content: "center"
 }
 
 @media only screen and (max-width: 600px) {

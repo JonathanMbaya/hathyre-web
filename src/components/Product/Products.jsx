@@ -66,7 +66,14 @@ function Products({ title }) {
     return (
         <div className="container animate__animated animate__fadeInUp">
             {location.pathname.startsWith('/') && 
+            <>
                 <h2>{title}</h2>
+                <p style={{width:"88%", textAlign:"justify", fontSize:"18px"}}>
+                    Explorez nos dernières créations chez Hathyre et offrez à votre peau des soins innovants 
+                    et éthiques, qui allient douceur et efficacité _/
+                </p>
+            </>
+
             }
             {location.pathname.startsWith('/product/') && 
                 <h2>Ces nouveautés pourraient vous intéresser</h2>
@@ -90,13 +97,13 @@ function Products({ title }) {
                     {products.map(product => (
                         <div key={product._id} style={{ backgroundColor: "white" }} className="box">
                             <span>Nouveauté</span>
-                            <Link className="link-without-decoration" to={`/product/${product._id}`}>
+                            <Link to={`/product/${product._id}`}>
                                 <img src={process.env.PUBLIC_URL + product.image} alt={product.name} />
                             </Link>
                             <div className="info-home-product">
-                                <h3>{product.name} <br /> <span>Savon</span></h3>
+                                <h3 style={{paddingLeft: ".5rem"}}>{product.name} <br /> <span>Savon</span></h3>
                                 <div className="info-home-action-product">
-                                    <h4>{product.price} EUR</h4>
+                                    <h4 style={{paddingLeft: ".5rem", paddingTop: ".5rem"}}>{product.price} EUR</h4>
                                     <ButtonToBasket getProductId={product._id} />
                                 </div>
                             </div>
