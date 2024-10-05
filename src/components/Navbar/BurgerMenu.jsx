@@ -101,6 +101,10 @@ function BurgerMenu() {
               <ListItemText primary="À propos de Hathyre" />
             </ListItem>
 
+            <ListItem button component={Link} to="/admin/login">
+              <ListItemText primary="Admin." />
+            </ListItem>
+
             {/* Instagram */}
             <ListItem button component="a" href="https://instagram.com/hathyre_/" target="_blank" rel="noopener noreferrer">
               <ListItemText primary="Nous rejoindre sur Instagram" />

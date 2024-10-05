@@ -6,6 +6,27 @@ function InfoAbout () {
         <>
             <div id='block' className='block-tri-info'>
                 <div className='tri-info'>
+                        <h2>Notre mission</h2>
+                        <p>
+                            La mission de <strong>Hathyre</strong> est de créer des produits qui subliment la <strong>peau</strong>, 
+                            tout en restant respectueux de l'<strong>environnement</strong>. Nous offrons des solutions saines et efficaces, 
+                            que vous ayez besoin d’une <strong>crème hydratante</strong>, d’un baume ou d’un soin régénérant. 
+                            Avec <strong>Hathyre</strong>, prenez soin de votre peau naturellement.
+                        </p>
+                </div>
+
+                <div className='tri-info'>
+                        <h2>Secret de fabrication</h2>
+                        <p>
+                            Chaque produit <strong>Hathyre</strong> est conçu avec des <strong>ingrédients naturels</strong>, sélectionnés 
+                            avec soin pour garantir leur qualité. Notre processus artisanal et respectueux de l'<strong>environnement</strong> 
+                            nous permet de créer des soins doux pour la peau, tout en préservant les richesses naturelles.
+                        </p>
+                </div>
+            </div>
+            
+            <div id='block' className='block-tri-info'>
+                <div className='tri-info'>
                     <h2>
                         Hathyre : Soins naturels pour la peau et le corps
                     </h2>
@@ -42,27 +63,6 @@ function InfoAbout () {
                         les <strong>pratiques durables</strong> et le <strong>commerce équitable</strong>. Avec Hathyre, 
                         vous respectez la planète tout en prenant soin de votre <strong>peau</strong>.
                     </p>
-                </div>
-            </div>
-
-            <div id='block' className='block-tri-info'>
-                <div className='tri-info'>
-                        <h2>Notre mission</h2>
-                        <p>
-                            La mission de <strong>Hathyre</strong> est de créer des produits qui subliment la <strong>peau</strong>, 
-                            tout en restant respectueux de l'<strong>environnement</strong>. Nous offrons des solutions saines et efficaces, 
-                            que vous ayez besoin d’une <strong>crème hydratante</strong>, d’un baume ou d’un soin régénérant. 
-                            Avec <strong>Hathyre</strong>, prenez soin de votre peau naturellement.
-                        </p>
-                </div>
-
-                <div className='tri-info'>
-                        <h2>Secret de fabrication</h2>
-                        <p>
-                            Chaque produit <strong>Hathyre</strong> est conçu avec des <strong>ingrédients naturels</strong>, sélectionnés 
-                            avec soin pour garantir leur qualité. Notre processus artisanal et respectueux de l'<strong>environnement</strong> 
-                            nous permet de créer des soins doux pour la peau, tout en préservant les richesses naturelles.
-                        </p>
                 </div>
             </div>
         </>
