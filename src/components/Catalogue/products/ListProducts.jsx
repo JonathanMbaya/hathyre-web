@@ -17,7 +17,7 @@ import {
 import { useQuery } from 'react-query';
 import { LoginContext } from '../../../context/login.context.jsx';
 import { FavoritesContext } from '../../../context/favorites.context.jsx';
-import PopLogin from '../../PopLogin.jsx/PopLogin.jsx'; // Import du composant PopLogin
+import PopLogin from '../../PopLogin/PopLogin.jsx'; // Import du composant PopLogin
 import './Product.css';
 
 // Fonction pour récupérer les produits
