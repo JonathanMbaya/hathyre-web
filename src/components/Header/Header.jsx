@@ -21,8 +21,8 @@ function Header({ currentPage }) {
                             <h2 style={{textAlign: "left" , paddingLeft : "1rem"}} className='animate__animated animate__fadeInDown'>Hathyre, <br/> votre secret de beauté <br/> au quotidien .</h2>
                         </div>
                         <div className='img-home-banner'>
-                            <img src={process.env.PUBLIC_URL + '/background-home-2.jpg'} alt='' />
-                            <img src={process.env.PUBLIC_URL + '/background-home.jpg'} alt='' />
+                            <img src={process.env.PUBLIC_URL + '/background-home-2.webp'} alt='header-hathyre-product' />
+                            <img src={process.env.PUBLIC_URL + '/background-home.webp'} alt='header-hathyre-product' />
                         </div>
 
                     </div>

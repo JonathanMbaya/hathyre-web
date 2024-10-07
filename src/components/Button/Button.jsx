@@ -2,14 +2,14 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import './Button.css';
 
-function Buttons({text}){
+function Button({text}){
     return (
         <div>
-            <Button variant="primary" size="lg">
+            <Button role="button" aria-labelledby={text} variant="primary" size="lg">
                 {text}
             </Button>
         </div>
     );
 };
 
-export default Buttons;
+export default Button;

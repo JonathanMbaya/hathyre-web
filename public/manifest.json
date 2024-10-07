@@ -3,19 +3,24 @@
   "name": "Hathyre",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "hathyre-logo-ico-16x.ico",
+      "sizes": "16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "hathyre-logo.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "hathyre-logo-ico-32x.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
     },
     {
-      "src": "hathyre-logo.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "hathyre-logo-png-150x.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },
+    {
+      "src": "hathyre-logo-png-512x.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": ".",

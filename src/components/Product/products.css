@@ -7,10 +7,6 @@
 }
  
 
-.slider-container.animate-scroll {
-  transform: scale(1.01); /* Effet léger d'agrandissement */
-}
-
 /* Ligne contenant les éléments à slider */
 .slider-row {
   display: flex;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons';
@@ -12,37 +12,36 @@ import {
   Typography,
   FormControl,
   InputBase,
+  Skeleton,
 } from '@mui/material';
+import { useQuery } from 'react-query';
 import { LoginContext } from '../../../context/login.context.jsx';
 import { FavoritesContext } from '../../../context/favorites.context.jsx';
+import PopLogin from '../../PopLogin.jsx/PopLogin.jsx'; // Import du composant PopLogin
 import './Product.css';
+
+// Fonction pour récupérer les produits
+const fetchProducts = async () => {
+  const { data } = await axios.get('https://hathyre-server-api.onrender.com/api/products');
+  return data;
+};
 
 const ListProducts = () => {
   const { userConnected } = useContext(LoginContext);
   const { favoriteItems, addToFavorites, removeFromFavorites } = useContext(FavoritesContext);
 
-  const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [sortByName, setSortByName] = useState('');
   const [sortByPrice, setSortByPrice] = useState('');
+  const [openLogin, setOpenLogin] = useState(false); // État pour ouvrir/fermer la modale
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`https://hathyre-server-api.onrender.com/api/products`);
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des produits :', error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  // Utilisation de React Query pour récupérer les produits
+  const { data: products = [], isLoading, isError } = useQuery('products', fetchProducts);
 
   const handleLikeToggle = (productId) => {
     if (!userConnected) {
-      alert('Vous devez être connecté pour liker un produit.');
+      setOpenLogin(true); // Ouvrir la modale de connexion si l'utilisateur n'est pas connecté
       return;
     }
 
@@ -53,18 +52,19 @@ const ListProducts = () => {
     }
   };
 
+  const handleCloseLogin = () => {
+    setOpenLogin(false); // Fermer la modale
+  };
+
   // Filtrage et tri des produits
   const filteredProducts = products
     .filter((product) => {
-      // Filtrer par recherche
       return product.name.toLowerCase().includes(searchTerm.toLowerCase());
     })
     .filter((product) => {
-      // Filtrer par catégorie
       return selectedCategory ? product.category === selectedCategory : true;
     })
     .sort((a, b) => {
-      // Tri par nom
       if (sortByName) {
         return sortByName === 'asc'
           ? a.name.localeCompare(b.name)
@@ -73,7 +73,6 @@ const ListProducts = () => {
       return 0;
     })
     .sort((a, b) => {
-      // Tri par prix
       if (sortByPrice) {
         return sortByPrice === 'asc' ? a.price - b.price : b.price - a.price;
       }
@@ -81,7 +80,7 @@ const ListProducts = () => {
     });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', padding: '2rem', alignItems:'center' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', padding: '2rem', alignItems: 'center' }}>
       <hr />
       {/* Filtres de catégories */}
       <Box className="category-filter">
@@ -127,7 +126,7 @@ const ListProducts = () => {
       <hr />
 
       {/* Barre de recherche */}
-      <FormControl fullWidth  sx={{ mb: 2 }}>
+      <FormControl fullWidth sx={{ mb: 2 }}>
         <InputBase
           placeholder="Rechercher un produit"
           value={searchTerm}
@@ -137,39 +136,58 @@ const ListProducts = () => {
       </FormControl>
 
       <Grid container spacing={4}>
-        {filteredProducts.map((product) => (
-          <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
-            <Box position="relative">
-              <Link className="image-container" to={`/product/${product._id}`}>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={process.env.PUBLIC_URL + product.image}
-                  alt={product.name}
-                />
-                <CardContent>
-                  <h3>{product.name}</h3>
-                  <Typography variant="body2">{product.price} EUR</Typography>
-                </CardContent>
-              </Link>
+        {isLoading ? (
+          // Afficher les Skeletons lors du chargement
+          [1, 2, 3, 4].map((_, index) => (
+            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+              <Skeleton variant="rectangular" width={300} height={200} />
+              <Skeleton variant="text" width={150} />
+              <Skeleton variant="text" width={100} />
+            </Grid>
+          ))
+        ) : isError ? (
+          <Typography variant="body1" color="error">
+            Erreur lors de la récupération des produits
+          </Typography>
+        ) : (
+          filteredProducts.map((product) => (
+            <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
+              <Box position="relative">
+                <Link className="image-container" to={`/product/${product._id}`}>
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={process.env.PUBLIC_URL + product.image}
+                    alt={product.name}
+                  />
+                  <CardContent>
+                    <h3>{product.name}</h3>
+                    <Typography variant="body2">{product.price} EUR</Typography>
+                  </CardContent>
+                </Link>
 
-              <FontAwesomeIcon
-                icon={favoriteItems.includes(product._id) ? faSolidHeart : faRegularHeart}
-                onClick={() => handleLikeToggle(product._id)}
-                style={{
-                  cursor: 'pointer',
-                  position: 'absolute',
-                  top: '10px',
-                  right: '10px',
-                  color: favoriteItems.includes(product._id) ? 'red' : 'gray',
-                }}
-              />
-            </Box>
-          </Grid>
-        ))}
+                <FontAwesomeIcon
+                  icon={favoriteItems.includes(product._id) ? faSolidHeart : faRegularHeart}
+                  onClick={() => handleLikeToggle(product._id)}
+                  style={{
+                    cursor: 'pointer',
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    color: favoriteItems.includes(product._id) ? 'red' : 'gray',
+                  }}
+                />
+              </Box>
+            </Grid>
+          ))
+        )}
       </Grid>
+
+      {/* Affichage du pop-up de connexion */}
+      <PopLogin open={openLogin} handleClose={handleCloseLogin} />
     </Box>
   );
 };
 
 export default ListProducts;
+

@@ -6,17 +6,13 @@ function App() {
   return (
     <>
     
-    
-    {/* Route pour les pages publiques */}
-    <PublicRouter/>
+      {/* Route pour les pages publiques */}
+      <PublicRouter/>
 
-    {/* Route pour les pages administratives */}
-    <AdminRouter/>
-
-
+      {/* Route pour les pages administratives */}
+      <AdminRouter/>
 
     </>
-    
     
   );
 }

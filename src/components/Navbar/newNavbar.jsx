@@ -86,7 +86,7 @@ function NewNavbar() {
                 </div>
 
                 <button onClick={toggleSearch} style={{borderRadius: "1rem",marginLeft:".5rem", display: "flex", alignItems: "center"}}>
-                    __<FontAwesomeIcon icon={faMagnifyingGlass} size="1.5x" />
+                    __<FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
                 </button>
 
             </div>

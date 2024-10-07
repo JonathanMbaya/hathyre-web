@@ -1,37 +1,42 @@
-import React from 'react';
-import Banner from "../../components/Banner/Banner";
-// import BannerToAbout from "../../components/Banner/BannerToAbout.jsx";
-import Products from '../../components/Product/Products';
-import Footer from '../../components/Footer/Footer';
+import React, { Suspense } from 'react';
+import { Skeleton } from "@mui/material";
 
-import Certif from '../../components/Certif/Certif.jsx';
-import Instagram from '../../components/Instagram/Instagram.jsx';
+// Utilisation de React.lazy pour charger les composants de manière paresseuse
+const Banner = React.lazy(() => import('../../components/Banner/Banner'));
+const Products = React.lazy(() => import('../../components/Product/Products'));
+const Footer = React.lazy(() => import('../../components/Footer/Footer'));
+const Certif = React.lazy(() => import('../../components/Certif/Certif'));
+const Instagram = React.lazy(() => import('../../components/Instagram/Instagram'));
 
-  
-
-function HomePage ({currentPage}){
-
+function HomePage({ currentPage }) {
     return (
-        <>     
-            <Products
-                title ="Découvrez nos nouveautés"
-            />
+        <>
+            <Suspense fallback={<Skeleton variant="rectangular" width={210} height={218} />}>
+                <Products title="Découvrez nos nouveautés" />
+            </Suspense>
 
-            <Banner
-                title ="Toute la gamme de Hathyre"
-                src1 = {process.env.PUBLIC_URL + "/bannerhome/5.avif"}
-                src2 = {process.env.PUBLIC_URL + "/bannerhome/huile.webp"}
-                src3 = {process.env.PUBLIC_URL + "/bannerhome/accessoire.avif"}
-            />
+            <Suspense fallback={<Skeleton variant="rectangular" width="100%" height={300} />}>
+                <Banner
+                    title="Toute la gamme de Hathyre"
+                    src1={process.env.PUBLIC_URL + "/bannerhome/5.avif"}
+                    src2={process.env.PUBLIC_URL + "/bannerhome/huile.webp"}
+                    src3={process.env.PUBLIC_URL + "/bannerhome/accessoire.avif"}
+                />
+            </Suspense>
 
-            <Instagram/>
+            <Suspense fallback={<Skeleton variant="rectangular" width={210} height={118} />}>
+                <Instagram />
+            </Suspense>
 
-            <Certif/>
+            <Suspense fallback={<Skeleton variant="rectangular" width={210} height={118} />}>
+                <Certif />
+            </Suspense>
 
-            <Footer/>
-            
+            <Suspense fallback={<Skeleton variant="rectangular" width="100%" height={100} />}>
+                <Footer />
+            </Suspense>
         </>
     );
-};
+}
 
 export default HomePage;
