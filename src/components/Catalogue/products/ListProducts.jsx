@@ -151,9 +151,9 @@ const ListProducts = () => {
           </Typography>
         ) : (
           filteredProducts.map((product) => (
-            <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={product._id} xs={6} sm={6} md={4} lg={3}>
               <Box position="relative">
-                <Link className="image-container" to={`/product/${product._id}`}>
+                <Link className="link-without-decoration image-container" to={`/product/${product._id}`}>
                   <CardMedia
                     component="img"
                     height="200"

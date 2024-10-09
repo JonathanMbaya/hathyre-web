@@ -40,8 +40,7 @@ function NewNavbar() {
     const handleInputChange = (event) => setInput(event.target.value);
 
     return (
-        <>
-        <Navbar/>
+        <div className="nav">
         <div className="nav-high">
             <div className={`page-search ${isOpenSearch ? 'openSearch' : ''}`}>
                 <div className='search'>
@@ -77,31 +76,12 @@ function NewNavbar() {
                 </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', width: '20%' }} className="burger-icon">
+            <div style={{ width: '25%' }} className="icons-users">
 
-                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px' }} onClick={toggleMenu}>
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
-                </div>
-
-                <button onClick={toggleSearch} style={{borderRadius: "1rem",marginLeft:".5rem", display: "flex", alignItems: "center"}}>
+                    
+                <button onClick={toggleSearch} style={{borderRadius: "1rem", display: "flex", alignItems: "center"}}>
                     __<FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
                 </button>
-
-            </div>
-
-        
-            <Link to='/'>
-                <img
-                    src={`${process.env.PUBLIC_URL}/hathyre-logo.png`}
-                    alt="Logo de l'application"
-                    className="logo-img"
-                />
-            </Link>
-            
-
-            <div className="icons-users">
 
                 <div>
                     { !userConnected ?
@@ -117,7 +97,33 @@ function NewNavbar() {
 
                 </div>
 
+
+
+
+            </div>
+
+        
+            <Link to='/'>
+                <img
+                    src={`${process.env.PUBLIC_URL}/hathyre-logo.png`}
+                    alt="Logo de l'application"
+                    className="logo-img"
+                />
+            </Link>
+            
+
+            <div className="icons-users">
+
+
+
                 <Basket />
+
+
+                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px' }} onClick={toggleMenu}>
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                    <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
+                </div>
 
 
 
@@ -203,7 +209,9 @@ function NewNavbar() {
                 </div>
             </div>
         </div>
-        </>
+        <Navbar/>
+
+        </div>
         
     );
 }

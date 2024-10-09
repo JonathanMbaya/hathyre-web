@@ -1,102 +1,148 @@
-// import Navbar from '../Navbar/Navbar';
-// import BurgerMenu from "../Navbar/BurgerMenu";
-import { useLocation} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck, faVialCircleCheck, faLeaf} from "@fortawesome/free-solid-svg-icons";
 import './header.style.css';
 import 'animate.css';
-import React from "react";
-import NewNavbar from '../Navbar/newNavbar';
+import NewNavbar from '../Navbar/newNavbar'; // Assurez-vous que ce composant existe
 
-function Header({ currentPage }) {
-    const location = useLocation();
+const images = [
+  '/background-home-2.webp',
+  '/background-home.webp',
+  // Ajoutez plus d'images ici
+];
 
+const Header = ({ currentPage }) => {
+  const location = useLocation();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    return (
-        <div className='header'>
+  // Carousel dynamique pour changer d'image toutes les 3 secondes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 6000); // Change d'image toutes les 3 secondes
 
-            {location.pathname === '/' && 
-                <div  className='header-home'>
-                    <NewNavbar/>
-                    <div className='banner-home'>
-                        <div className='container'>
-                            <h2 style={{textAlign: "left" , paddingLeft : "1rem"}} className='animate__animated animate__fadeInDown'>Hathyre, <br/> votre secret de beauté <br/> au quotidien .</h2>
-                        </div>
-                        <div className='img-home-banner'>
-                            <img src={process.env.PUBLIC_URL + '/background-home-2.webp'} alt='header-hathyre-product' />
-                            <img src={process.env.PUBLIC_URL + '/background-home.webp'} alt='header-hathyre-product' />
-                        </div>
+    return () => clearInterval(interval); // Nettoie l'intervalle
+  }, []);
 
-                    </div>
-                </div>
-            }
+//   const nextImage = () => {
+//     setCurrentImageIndex((currentImageIndex + 1) % images.length);
+//   };
 
-            {location.pathname === '/product' && 
-                <div className='header-home'>
-                    <NewNavbar/>
-                </div>
-            }
+//   const prevImage = () => {
+//     setCurrentImageIndex(
+//       (currentImageIndex - 1 + images.length) % images.length
+//     );
+//   };
 
-            {location.pathname === '/apropos' && 
-                <div className='header-home'>
-                    
-                    <NewNavbar/>
-                    
-                    <video autoPlay loop muted style={{ width: '100%', height: 'auto' }}>
-                        <source src={`${process.env.PUBLIC_URL}/karité.mp4`} type="video/mp4" />
-                        {/* Ajoutez d'autres sources pour les différents formats de vidéo si nécessaire */}
-                    </video>
-                </div>
-            }
+  return (
+    <div className='header'>
+      {location.pathname === '/' && (
+        <div className='header-home'>
+          <NewNavbar />
+          <div className='banner-home'>
+            <div className='text-banner-home'>
+                <h2
+                    className='animate__animated animate__fadeInDown'
+                    style={{ textAlign: 'left', fontSize: "30px" }}
+                >
+                    Hathyre,<br />
+                    votre secret de beauté au quotidien.
+                </h2>
 
-            {location.pathname === '/account' && 
-                <div className='header-home'>
-                    <NewNavbar/>
-                </div>
-            }
+              
+                <p className='fakebutton'>100% Bio <FontAwesomeIcon icon={faLeaf} /></p>
+                <p className='fakebutton'>A base de Beurre de Karité <FontAwesomeIcon icon={faCircleCheck} /></p>
+                <p className='fakebutton'>Certifié par un laboratoire <FontAwesomeIcon icon={faVialCircleCheck} /></p>
+            
 
-            {location.pathname.startsWith('/product/') && 
-                <div className='header-home'>
-                    <NewNavbar/>
-                </div>
-            }
-
-            {location.pathname.startsWith('/checkout') && 
-            <div className='header-home'>
-
-                <div>
-                    <img src={process.env.PUBLIC_URL + '/hathyre-logo.png'} alt='' />
-                </div>
             </div>
-            }
-
-
-            {location.pathname.startsWith('/faq') && 
-                <div className='header-home'>
-
-                    <NewNavbar/>
+            <div className='carousel-container'>
+                <div className='carousel-image'>
+                    <img
+                    src={process.env.PUBLIC_URL + images[currentImageIndex]}
+                    alt='Carousel Product'
+                    className='slider-image'
+                    />
                 </div>
-            }
 
-            {location.pathname.startsWith('/mentions-legales') && 
-                <div className='header-home'>
-
-                    <NewNavbar/>
-                </div>
-            }
-
-            {location.pathname.startsWith('/politique-de-confidentialite') && 
-                <div className='header-home'>
-                    <NewNavbar/>
-                </div>
-            }
-
-            {location.pathname.startsWith('/conditions-ventes') && 
-                <div className='header-home'>
-                    <NewNavbar/>
-                </div>
-            }
-
+                {/* Boutons de contrôle du carousel */}
+                {/* <button className='carousel-control prev' onClick={prevImage}>
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                </button>
+                <button className='carousel-control next' onClick={nextImage}>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                </button> */}
+            </div>
+          </div>
         </div>
-    );
+      )}
+
+      {/* Sections spécifiques à certaines routes */}
+      {location.pathname === '/product' && (
+        <div className='header-home'>
+          <NewNavbar />
+        </div>
+      )}
+
+      {location.pathname === '/apropos' && (
+        <div className='header-home'>
+          <NewNavbar />
+          <video autoPlay loop muted style={{ width: '100%', height: 'auto' }}>
+            <source
+              src={`${process.env.PUBLIC_URL}/karité.mp4`}
+              type='video/mp4'
+            />
+            {/* Ajoutez d'autres formats de vidéo si nécessaire */}
+          </video>
+        </div>
+      )}
+
+      {location.pathname === '/account' && (
+        <div className='header-home'>
+          <NewNavbar />
+        </div>
+      )}
+
+      {location.pathname.startsWith('/product/') && (
+        <div className='header-home'>
+          <NewNavbar />
+        </div>
+      )}
+
+      {location.pathname.startsWith('/checkout') && (
+        <div className='header-home'>
+          <div>
+            <img src={process.env.PUBLIC_URL + '/hathyre-logo.png'} alt='' />
+          </div>
+        </div>
+      )}
+
+      {location.pathname.startsWith('/faq') && (
+        <div className='header-home'>
+          <NewNavbar />
+        </div>
+      )}
+
+      {location.pathname.startsWith('/mentions-legales') && (
+        <div className='header-home'>
+          <NewNavbar />
+        </div>
+      )}
+
+      {location.pathname.startsWith('/politique-de-confidentialite') && (
+        <div className='header-home'>
+          <NewNavbar />
+        </div>
+      )}
+
+      {location.pathname.startsWith('/conditions-ventes') && (
+        <div className='header-home'>
+          <NewNavbar />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Header;

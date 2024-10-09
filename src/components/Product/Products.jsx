@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Skeleton, Grid } from '@mui/material';
 import { useQuery } from 'react-query'; // Importation de useQuery
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChevronRight, faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import 'animate.css';
 import './products.css';
 
@@ -95,8 +97,12 @@ function Products({ title }) {
             }
 
             <div className="slider-controls">
-                <button className="scroll-button left" onClick={() => scroll('left')}>←</button>
-                <button className="scroll-button right" onClick={() => scroll('right')}>→</button>
+                <button className="scroll-button left" onClick={() => scroll('left')}>
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                </button>
+                <button className="scroll-button right" onClick={() => scroll('right')}>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                </button>
             </div>
 
             <div

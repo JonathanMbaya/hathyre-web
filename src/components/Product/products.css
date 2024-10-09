@@ -5,6 +5,12 @@
   position: relative;
   scroll-behavior: smooth;
 }
+
+.slider-controls{
+
+  display: flex;
+  align-items: center;
+}
  
 
 /* Ligne contenant les éléments à slider */
