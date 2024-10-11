@@ -7,8 +7,8 @@ import 'animate.css';
 import NewNavbar from '../Navbar/newNavbar'; // Assurez-vous que ce composant existe
 
 const images = [
-  '/background-home-2.webp',
-  '/background-home.webp',
+  '/background-home-2.jpg',
+  '/background-home.jpg',
   // Ajoutez plus d'images ici
 ];
 
@@ -42,15 +42,15 @@ const Header = ({ currentPage }) => {
           <NewNavbar />
           <div className='banner-home'>
             <div className='text-banner-home'>
+
                 <h2
                     className='animate__animated animate__fadeInDown'
-                    style={{ textAlign: 'left', fontSize: "30px" }}
+                    style={{ textAlign: 'left', fontSize: "30px", paddingLeft:".5rem" }}
                 >
                     Hathyre,<br />
                     votre secret de beauté au quotidien.
                 </h2>
 
-              
                 <p className='fakebutton'>100% Bio <FontAwesomeIcon icon={faLeaf} /></p>
                 <p className='fakebutton'>A base de Beurre de Karité <FontAwesomeIcon icon={faCircleCheck} /></p>
                 <p className='fakebutton'>Certifié par un laboratoire <FontAwesomeIcon icon={faVialCircleCheck} /></p>
@@ -63,6 +63,7 @@ const Header = ({ currentPage }) => {
                     src={process.env.PUBLIC_URL + images[currentImageIndex]}
                     alt='Carousel Product'
                     className='slider-image'
+                    style={{borderRadius: "1rem 0rem 0rem 1rem"}}
                     />
                 </div>
 

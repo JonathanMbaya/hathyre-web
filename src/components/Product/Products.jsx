@@ -1,14 +1,13 @@
 import React, { useRef, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Skeleton, Grid } from '@mui/material';
-import { useQuery } from 'react-query'; // Importation de useQuery
+import { useQuery } from 'react-query';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faChevronRight, faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import 'animate.css';
 import './products.css';
 
-// Utilisation de React.lazy pour le chargement paresseux des composants
 const ButtonToBasket = React.lazy(() => import('../Button/ButtonToBasket'));
 
 // Fonction pour récupérer les produits via Axios
@@ -64,15 +63,31 @@ function Products({ title }) {
 
     if (isLoading) {
         return (
-            <Grid container spacing={2}>
-                {[1, 2, 3, 4].map((_, index) => (
-                    <Grid item xs={6} sm={3} key={index}>
-                        <Skeleton variant="rectangular" width={310} height={218} />
-                        <Skeleton variant="text" width={310} />
-                        <Skeleton variant="text" width={310} />
-                    </Grid>
-                ))}
-            </Grid>
+            <div className="container animate__animated animate__fadeInUp">
+                {location.pathname === '/' && 
+                <>
+                    <h2>{title}</h2>
+                    <p style={{ width: "88%", textAlign: "justify", fontSize: "18px" }}>
+                        Explorez nos dernières créations chez Hathyre et offrez à votre peau des soins innovants 
+                        et éthiques, qui allient douceur et efficacité _/
+                    </p>
+                </>
+                }
+
+                {location.pathname.startsWith('/product/') && 
+                    <h2>Ces nouveautés pourraient vous intéresser</h2>
+                }
+
+                <Grid container spacing={2}>
+                    {[1, 2, 3, 4].map((_, index) => (
+                        <Grid item xs={6} sm={3} key={index}>
+                            <Skeleton variant="rectangular" width={310} height={218} />
+                            <Skeleton variant="text" width={310} />
+                            <Skeleton variant="text" width={310} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </div>
         );
     }
 
@@ -82,10 +97,10 @@ function Products({ title }) {
 
     return (
         <div className="container animate__animated animate__fadeInUp">
-            {location.pathname.startsWith('/') && 
+            {location.pathname === '/' && 
             <>
                 <h2>{title}</h2>
-                <p style={{width:"88%", textAlign:"justify", fontSize:"18px"}}>
+                <p style={{ width: "88%", textAlign: "justify", fontSize: "18px" }}>
                     Explorez nos dernières créations chez Hathyre et offrez à votre peau des soins innovants 
                     et éthiques, qui allient douceur et efficacité _/
                 </p>
@@ -121,11 +136,10 @@ function Products({ title }) {
                                 <img src={process.env.PUBLIC_URL + product.image} alt={product.name} />
                             </Link>
                             <div className="info-home-product">
-                                <h3 style={{paddingLeft: ".5rem"}}>{product.name} <br /> <span>Savon</span></h3>
+                                <h3 style={{ paddingLeft: ".5rem" }}>{product.name} <br /> <span>Savon</span></h3>
                                 <div className="info-home-action-product">
-                                    <h4 style={{paddingLeft: ".5rem", paddingTop: ".5rem"}}>{product.price} EUR</h4>
+                                    <h4 style={{ paddingLeft: ".5rem", paddingTop: ".5rem" }}>{product.price} EUR</h4>
 
-                                    {/* Chargement paresseux du bouton avec fallback Skeleton */}
                                     <Suspense fallback={<Skeleton variant="rectangular" width={100} height={40} />}>
                                         <ButtonToBasket getProductId={product._id} />
                                     </Suspense>

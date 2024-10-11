@@ -27,7 +27,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #EACD9A;
-    margin-top: 15vh;
+    margin-top: 16vh;
     /* Tu peux ajouter une image de fond, des couleurs ou autres */
 }
 
@@ -147,7 +147,7 @@ video, .page-about{
   .fakebutton{
     background-color: #45260D ;
     padding: 1.5rem;
-    max-width: 100%;
+    max-width: 60%;
     border-radius: 2rem;
     color:  #EACD9A;
   }
@@ -156,6 +156,14 @@ video, .page-about{
   @media (max-width: 768px) {
     .banner-carousel {
       flex-direction: column;
+    }
+
+    .fakebutton{
+        background-color: #45260D ;
+        padding: 1.5rem;
+        max-width: 100%;
+        border-radius: 2rem;
+        color:  #EACD9A;
     }
   
     .text-banner-home {

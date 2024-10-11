@@ -91,6 +91,10 @@
         align-items: center;
         width: 25%;
     }
+
+    .burger-menu{
+        visibility: visible;
+    }
 }
 
 @media only screen and (max-width: 468px) {
@@ -102,10 +106,6 @@
         width: 25%;
     }
 
-    
-    .burger-menu{
-        visibility: visible;
-    }
 
     .submenu {
         display: flex;

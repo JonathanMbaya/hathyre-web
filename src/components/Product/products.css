@@ -124,9 +124,6 @@
 
 .container h2 {
   font-size: 50px;
-  text-align: left;
-  width: 90%;
-  padding-left: 2rem;
 }
 
 @media (max-width: 940px) {

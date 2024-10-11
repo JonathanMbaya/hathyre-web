@@ -12,21 +12,26 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
     width: 100%;
-    background-image: url('https://images.unsplash.com/photo-1488197047962-b48492212cda?q=80&w=1767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-image: url('../../../public/background-commu.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     backdrop-filter: blur(50%); /* Utilisez backdrop-filter pour appliquer l'effet de flou */
+    filter: brightness(20px);
 }
 
 
 .area-instagram{
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    width: 100%;
+    width: 50%;
+    /* background-color: rgba(0, 0, 0, .5); */
+    width: 80%;
+    border-radius: 1rem;
 }
 
 .icon-instagram{
@@ -49,10 +54,11 @@
 
 .area-instagram p{
     font-size: 44px;
-    width: 25%;
+    width: 50%;
     padding: 0rem 0rem 3rem 3rem;
     color: white;
     font-weight: bolder;
+    color: rgb(69, 38, 13);
 }
 
 .photo-instagram{
@@ -121,9 +127,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        align-items: flex-start;
         width: 100%;
     }
 
@@ -138,7 +142,7 @@
     .area-instagram p{
         font-size: 34px;
         width: 80%;
-        padding: 0rem;
+        padding-left: 2rem;
         margin-left: 0rem;
     }
 
@@ -148,6 +152,10 @@
         justify-content: center;
         align-items: center;
         margin-top: 2rem;
+    }
+
+    .area-instagram a button{
+        margin-left: 2rem;
     }
 
     

@@ -45,7 +45,7 @@ function Navbar() {
 
   return (
     <div className={`navbar ${isNavbarFixed ? 'fixed' : ''}`}>
-      <nav>
+      <nav style={{borderRadius: "0rem 0rem 2rem 2rem"}}>
         <ul>
           <li>
             <Link to="/" className="link-without-decoration"><FontAwesomeIcon icon={faHouse} /></Link>
@@ -74,6 +74,11 @@ function Navbar() {
                       </Link>
                     </li>
                   ))}
+                  {/* <li>
+                    <Link to={`/product`} className="link-without-decoration">
+                      Voir plus +
+                    </Link>
+                  </li> */}
                 </div>
 
                 <div>

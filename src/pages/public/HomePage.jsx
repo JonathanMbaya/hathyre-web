@@ -11,9 +11,7 @@ const Instagram = React.lazy(() => import('../../components/Instagram/Instagram'
 function HomePage({ currentPage }) {
     return (
         <>
-            <Suspense fallback={<Skeleton variant="rectangular" width={210} height={218} />}>
-                <Products title="Découvrez nos nouveautés" />
-            </Suspense>
+            <Products title="Découvrez nos nouveautés" />
 
             <Suspense fallback={<Skeleton variant="rectangular" width="100%" height={300} />}>
                 <Banner

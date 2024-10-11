@@ -10,14 +10,6 @@ function Footer() {
         <div className='footer'>
             {/* Première partie du Footer */}
             <div className='first-area-footer'>
-                {/* <div className='newsletter'>
-                    <h3>S'abonner à la newsletter</h3>
-                    <div className='newsletters'>
-                        <input type="text" name="" id="" placeholder='Entrez votre adresse mail' />
-                        <Button text="S'abonner" className='submit-newsletter' type='submit'/>
-                    </div>
-                </div> */}
-
                 <div className='menu-footer'>
                     {/* Catalogue */}
                     <div className='contact-footer'>
@@ -34,35 +26,34 @@ function Footer() {
                     {/* Plan de site */}
                     <div className='one-menu-footer'>
                         <div style={{textAlign: "left"}}>
-                            <h4 style={{ textAlign: "left"}}>Plan de site</h4>
+                            <ul>
+                                <h4 style={{ textAlign: "left"}}>Plan de site</h4>
 
-                            <li>
-                            <Link className='link-without-decoration' to="/" >
-                                <FontAwesomeIcon icon={faHouse} />
-                            </Link> 
-                            </li>
+                                <li>
+                                    <Link className='link-without-decoration' to="/" >
+                                        <FontAwesomeIcon icon={faHouse} />
+                                    </Link> 
+                                </li>
 
-                            <li>
-                            <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+                                <li>
+                                    <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+                                        Nos produits
+                                    </Link>
+                                </li>
+                                
+                                <li>
+                                    <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+                                        A propos de Hathyre
+                                    </Link>
+                                </li> 
+                                                        
+                                <li>
+                                    <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+                                        FAQ
+                                    </Link>
+                                </li>
 
-                                Nos produits
-                            </Link>
-                            </li>
-                            
-                            <li>
-                            <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
-
-                                A propos de Hathyre
-                                </Link>
-                            </li> 
-                                                       
-                            <li>
-                                <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
-
-                                    FAQ
-                                </Link>
-
-                            </li>
+                            </ul>
                             
                             
                         </div>
@@ -71,29 +62,30 @@ function Footer() {
                     {/* Mentions Légales */}
                     <div className='one-menu-footer'>
                         <div style={{textAlign: "left"}}>
-                            <h4>Nos services</h4>
 
-                            <li>
-                            <Link className='link-without-decoration' style={{textAlign: "left"}} to="/mentions-legales">
-                                Mentions Légales
-                            </Link>
-                            </li>
+                            <ul>
+                                <h4>Nos services</h4>
 
-                            <li>
-                                
-                            <Link className='link-without-decoration' style={{textAlign: "left"}} to="/politique-de-confidentialite">
-                                Politique de confidentialité
-                            </Link>
+                                <li>
+                                    <Link className='link-without-decoration' style={{textAlign: "left"}} to="/mentions-legales">
+                                        Mentions Légales
+                                    </Link>
+                                </li>
 
-                            </li>
-                            <li>
-                            <Link className='link-without-decoration' style={{textAlign: "left"}} to="/conditions-ventes">
-                                CGV
-                            </Link>
+                                <li>
+                                    <Link className='link-without-decoration' style={{textAlign: "left"}} to="/politique-de-confidentialite">
+                                        Politique de confidentialité
+                                    </Link>
+                                </li>
 
-                            </li>
+                                <li>
+                                    <Link className='link-without-decoration' style={{textAlign: "left"}} to="/conditions-ventes">
+                                        CGV
+                                    </Link>
+                                </li>
 
-
+                            </ul>
+                            
                         </div>
                     </div>
                 </div>

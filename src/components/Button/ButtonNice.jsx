@@ -5,7 +5,7 @@ function ButtonNice ({text}) {
     return (
         <div className='buttonNice'>
             <button>
-                <div id="g"></div><p>{text}</p><div id="d"></div>
+                <div id="g"></div>{text}<div id="d"></div>
             </button>
         </div>
 

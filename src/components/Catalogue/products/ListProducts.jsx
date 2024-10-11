@@ -162,7 +162,7 @@ const ListProducts = () => {
                   />
                   <CardContent>
                     <h3>{product.name}</h3>
-                    <Typography variant="body2">{product.price} EUR</Typography>
+                    <p>{product.price} EUR</p>
                   </CardContent>
                 </Link>
 

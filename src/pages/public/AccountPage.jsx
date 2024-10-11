@@ -41,7 +41,16 @@ function AccountPage() {
         <>
             {/* Bouton burger en mode mobile */}
             {isMobile && (
-                <div style={{ position: 'fixed', top: '7rem', left: '1rem', zIndex: 101 }}>
+                <div style={{
+                    position: "fixed",
+                    top: "5rem",
+                    /* left: 1rem; */
+                    zIndex: "101",
+                    width: "100%",
+                    color: "#895832",
+                    background: "white",
+                    boxShadow : "-1px 2px 5px 1px rgba(0, 0, 0, 0.4)"
+                }}>
                     <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: "black" }}>
                         {isSidebarOpen ? <FontAwesomeIcon icon={faTimes} size="1x" /> : <FontAwesomeIcon icon={faBars} size="1x" />} Mon compte
                     </button>

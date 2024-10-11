@@ -105,8 +105,7 @@ li:hover {
     width: 100%;
     position: fixed;
     z-index: 390;
-    top: 8vh;
-    box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.4);
+    top: 15vh;
   }
 
   .banner-home {
@@ -114,7 +113,7 @@ li:hover {
     justify-content: space-between;
     align-items: center;
     background-color: #EACD9A;
-    margin-top: 8vh;
+    margin-top: 17vh;
   }
 
 }
@@ -131,6 +130,19 @@ li:hover {
     display: flex;
     justify-content: center;
   }
+
+  .burger-menu{
+    visibility: visible;
+}
+
+.banner-home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #EACD9A;
+  margin-top: 15vh;
+}
+
 
 
 }
@@ -170,5 +182,14 @@ li:hover {
     color: #895832;
     margin-left: 0rem;
     background-color: white;
+  }
+
+
+  .banner-home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EACD9A;
+    margin-top: 9vh;
   }
 }

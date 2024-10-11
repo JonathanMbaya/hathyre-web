@@ -119,7 +119,7 @@ function NewNavbar() {
                 <Basket />
 
 
-                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px' }} onClick={toggleMenu}>
+                <div className="burger-menu" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '24px', padding:"1rem" }} onClick={toggleMenu}>
                     <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
                     <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
                     <FontAwesomeIcon className={`line ${isOpen ? 'open' : ''}`} icon={faBars} />
