@@ -27,7 +27,7 @@ function AdminLogin() {
             
             // Stocker le token dans le localStorage
             const token = response.data.user.token;
-            localStorage.setItem('token', token);
+            localStorage.setItem('tokenAdmin', token);
 
             // Mettre à jour le contexte avec les données de l'utilisateur
             setUserConnected(response.data.user); // Mettre à jour le contexte

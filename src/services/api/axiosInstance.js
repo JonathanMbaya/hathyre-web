@@ -1,7 +1,9 @@
 import axios from "axios";
-import { getUser } from "../session/session";
+import { getUser } from "../session/session.js";
 
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = "http://localhost:8080/api";
+
+// https://hathyre-server-api.onrender.com/api
 
 /**
  * Instance d'axios avec la configuration de base pour l'application.

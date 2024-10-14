@@ -12,12 +12,11 @@ import { LoginContext } from '../../context/login.context.jsx';
 import { contactConfig } from '../../utils/config.email.js';
 import './checkout.css';
 
-
 function CheckoutForm() {
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
-    const { cartItems , removeFromCart } = useContext(CartContext);
+    const { cartItems, removeFromCart } = useContext(CartContext);
     const { userConnected } = useContext(LoginContext);
 
     const [isConnected, setIsConnected] = useState(null);
@@ -123,7 +122,7 @@ function CheckoutForm() {
                 // Mise à jour du stock pour chaque produit
                 for (const item of cartItems) {
                     const updatedStock = item.stock - item.quantity;
-                    
+
                     await axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${item._id}`, {
                         stock: updatedStock,
                     });
@@ -226,7 +225,7 @@ function CheckoutForm() {
                             </div>
                             <p className='name'>{item.name}</p>
                             <p>{item.price}</p>
-                            
+
                             <FontAwesomeIcon className='icon' icon={faTrash} onClick={() => handleRemoveFromCart(item._id)} />
                         </div>
                     ))}
@@ -234,15 +233,48 @@ function CheckoutForm() {
             </div>
 
             {/* Partie informations sur la commande */}
-            <Grid item xs={12} md={6} >
+            <Grid item xs={12} md={6}>
                 <form className='form-checkout' onSubmit={handleSubmit} style={{ maxWidth: 300 }}>
                     <h2>Vos informations</h2>
                     <Box my={2}>
-                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="text" name="firstName" value={customerInfo.firstName} onChange={handleInputChange} placeholder="Prénom" required />
-                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="text" name="lastName" value={customerInfo.lastName} onChange={handleInputChange} placeholder="Nom de famille" required />
-                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="email" name="email" value={customerInfo.email} onChange={handleInputChange} placeholder="Adresse email" required />
-                        <input style={{padding: "1rem", width:"85%", marginTop:".5rem"}} type="mobile" name="mobile" value={customerInfo.mobile} onChange={handleInputChange} placeholder="Numéro de téléphone" required />
-
+                        <TextField
+                            fullWidth
+                            label="Prénom"
+                            name="firstName"
+                            value={customerInfo.firstName}
+                            onChange={handleInputChange}
+                            required
+                            margin="normal"
+                        />
+                        <TextField
+                            fullWidth
+                            label="Nom de famille"
+                            name="lastName"
+                            value={customerInfo.lastName}
+                            onChange={handleInputChange}
+                            required
+                            margin="normal"
+                        />
+                        <TextField
+                            fullWidth
+                            label="Adresse email"
+                            name="email"
+                            value={customerInfo.email}
+                            onChange={handleInputChange}
+                            required
+                            type="email"
+                            margin="normal"
+                        />
+                        <TextField
+                            fullWidth
+                            label="Numéro de téléphone"
+                            name="mobile"
+                            value={customerInfo.mobile}
+                            onChange={handleInputChange}
+                            required
+                            type="tel"
+                            margin="normal"
+                        />
                         <h2>Adresse de livraison</h2>
                         <TextField
                             fullWidth
@@ -280,6 +312,7 @@ function CheckoutForm() {
                                 required
                             >
                                 <MenuItem value="FR">France</MenuItem>
+                                {/* Ajoutez d'autres pays si nécessaire */}
                             </Select>
                         </FormControl>
                     </Box>
@@ -288,7 +321,7 @@ function CheckoutForm() {
                     <Box my={2}>
                         <CardElement className="input-bank-card" options={{ hidePostalCode: true }} />
                     </Box>
-                    <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                    <Button type="submit" variant="contained" color="primary" disabled={loading} fullWidth>
                         {loading ? <CircularProgress size={24} /> : "Payer"}
                     </Button>
                 </form>
@@ -297,14 +330,11 @@ function CheckoutForm() {
             {showPopup && (
                 <Link to='/'>
                     <Popup message={popupMessage} onClose={() => setShowPopup(false)}>
-
-                        <button >
+                        <Button variant="contained" color="primary" onClick={() => setShowPopup(false)}>
                             Fermer
-                        </button>
-
-                    </Popup> 
-                </Link>   
-                
+                        </Button>
+                    </Popup>
+                </Link>
             )}
         </div>
     );

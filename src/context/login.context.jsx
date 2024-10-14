@@ -1,15 +1,21 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
+
+
+
 
 // Créer le contexte de connexion
 export const LoginContext = createContext({
-    userConnected: null,
+    userConnected: [],
     setUserConnected: () => {},
 });
 
 // Créer le fournisseur de contexte
-export const LoginProvider = ({ children }) => { // Utilisez children comme argument au lieu de user et setUser
-    const [loggedInUser, setLoggedInUser] = useState(null); // Utilisez un nom différent pour éviter la redéclaration de user et setUser
+export const LoginProvider = ({ children }) => {
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -17,25 +23,27 @@ export const LoginProvider = ({ children }) => { // Utilisez children comme argu
             const id = localStorage.getItem('id');
             if (storedToken && id) {
                 try {
-                    const response = await axios.get(`https://hathyre-server-api.onrender.com/api/user/${id}`, {
+                    const response = await axios.get(`https://hathyre-server-api.onrender.com/api/client/${id}`, {
                         headers: {
                             Authorization: `Bearer ${storedToken}`
                         }
                     });
-                    setLoggedInUser(response.data); // Utilisez setLoggedInUser pour mettre à jour l'état
+                    setLoggedInUser(response.data);
+
                 } catch (error) {
                     console.error("Erreur lors de la récupération des informations de l'utilisateur :", error);
-                    // En cas d'erreur, déconnectez l'utilisateur et supprimez les informations de connexion du stockage local
-                    setLoggedInUser(null); // Utilisez setLoggedInUser pour mettre à jour l'état
+                    // Déconnexion en cas d'erreur
                     localStorage.removeItem('token');
                     localStorage.removeItem('id');
+                    setLoggedInUser(null);
                 }
             }
+            
+            // else(!storedToken ? navigate('/') : navigate('/error'))
         };
 
         fetchUserData();
-
-    }, []);
+    }, [navigate]);
 
     return (
         <LoginContext.Provider value={{ userConnected: loggedInUser, setUserConnected: setLoggedInUser }}>

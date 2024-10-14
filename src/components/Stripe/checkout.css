@@ -13,22 +13,22 @@
     padding-left: 5%;
     padding-right: 5%;
     margin-top: 0rem;
+    border-left: .5 solid red;
 }
 
-.input-bank-card{
-
+.input-bank-card {
     border: 0px !important;
     margin: 0px !important;
     padding: 0px !important;
-    width: 400px !important;
-    min-width: 400px !important;
+    width: 300px !important;
+    min-width: 200px !important;
     overflow: hidden !important;
     display: block !important;
+    -webkit-user-select: none !important;
     user-select: none !important;
     transform: translate(0px) !important;
     color-scheme: light only !important;
-    height: 16.8px;
-
+    height: 20.8px;
 }
 
 .recap-products{

@@ -11,7 +11,7 @@ function Dashboard() {
 
     // Fonction de déconnexion
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Supprimer le token
+        localStorage.removeItem('tokenAdmin'); // Supprimer le token
         navigate('/admin/login'); // Rediriger vers la page de connexion
     };
 

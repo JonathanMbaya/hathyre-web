@@ -113,7 +113,7 @@ const Header = ({ currentPage }) => {
 
       {location.pathname.startsWith('/checkout') && (
         <div className='header-home'>
-          <div>
+          <div style={{display:"flex" , justifyContent:"center", width:"100%"}}>
             <img src={process.env.PUBLIC_URL + '/hathyre-logo.png'} alt='' />
           </div>
         </div>

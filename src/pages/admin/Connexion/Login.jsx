@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { LoginContext } from '../../../context/login.context.jsx';
+import { signup, login } from '../../../services/api/user.js'; 
+import emailjs from '@emailjs/browser';
+
 import './AdminLogin.css';
+
 
 // Validation pour le formulaire d'inscription
 const validationSchemaSignUp = Yup.object().shape({
@@ -29,40 +32,67 @@ function Login() {
     const { userConnected, setUserConnected } = useContext(LoginContext);
     const navigate = useNavigate();
     
-    // État pour gérer l'affichage de la pop-up et les erreurs
     const [showPopup, setShowPopup] = useState(false);
     const [loginError, setLoginError] = useState('');
 
-    // Formik pour le formulaire d'inscription
-    const formikSignUp = useFormik({
-        initialValues: {
-            nom: '',
-            prenom: '',
-            clientEmail: '',
-            clientPassword: '',
-            confirmPassword: '',
-        },
-        validationSchema: validationSchemaSignUp,
-        onSubmit: async (values) => {
-            try {
-                const response = await axios.post('https://hathyre-server-api.onrender.com/api/add/client', values);
-                console.log('Réponse du serveur :', response.data);
-                
-                // Afficher la pop-up après avoir ajouté l'utilisateur avec succès
-                setShowPopup(true);
-                
-                // Réinitialiser les champs après avoir ajouté l'utilisateur avec succès
-                formikSignUp.resetForm();
+    // Fonction pour envoyer l'e-mail de confirmation
+    const sendConfirmationEmail = async (clientEmail, token) => {
+        const templateParams = {
+            clientEmail: clientEmail,
+            token: token, // Le token de confirmation généré pour l'utilisateur
+        };
 
-                // Rediriger vers une autre page après l'ajout réussi de l'utilisateur
+        try {
+            await emailjs.send('service_llonc98', 'template_b1ubafd', templateParams, 'BiPjs_8oO8Jd_jRhR');
+            console.log("E-mail de confirmation envoyé");
+        } catch (error) {
+            console.error("Erreur lors de l'envoi de l'e-mail de confirmation:", error);
+        }
+    };
+
+// Formik pour le formulaire d'inscription
+const formikSignUp = useFormik({
+    initialValues: {
+        nom: '',
+        prenom: '',
+        clientEmail: '',
+        clientPassword: '',
+        confirmPassword: '',
+    },
+    validationSchema: validationSchemaSignUp,
+    onSubmit: async (values) => {
+        try {
+            const response = await signup({
+                clientEmail: values.clientEmail,
+                nom: values.nom,
+                prenom: values.prenom,
+                clientPassword: values.clientPassword,
+            });
+
+            console.log('Réponse du serveur :', response.data);
+
+            const token = response.data.emailVerificationToken
+
+            // Envoyer l'e-mail de confirmation avec le token de l'utilisateur
+            sendConfirmationEmail(values.clientEmail , token);
+
+            // Afficher la pop-up après avoir ajouté l'utilisateur avec succès
+            setShowPopup(true);
+
+            // Réinitialiser les champs après avoir ajouté l'utilisateur avec succès
+            formikSignUp.resetForm();
+
+            // Rediriger vers la page d'accueil après un délai
+            setTimeout(() => {
                 navigate(`/`);
+            }, 10000); // Redirige après 3 secondes
+
             } catch (error) {
                 console.error("Erreur lors de l'ajout de l'utilisateur :", error);
             }
         },
     });
 
-    // Formik pour le formulaire de connexion
     const formikLogin = useFormik({
         initialValues: {
             clientEmail: '',
@@ -71,17 +101,26 @@ function Login() {
         validationSchema: validationSchemaLogin,
         onSubmit: async (values) => {
             try {
-                // Modification ici pour correspondre à l'API
-                const response = await axios.post('https://hathyre-server-api.onrender.com/api/login/client', {
+                // Utilisation de la fonction login déjà définie
+                const response = await login({
                     email: values.clientEmail, 
                     password: values.clientPassword,
                 });
-                console.log('Réponse du serveur :', response.data);
-                
-                // Stockez le token dans le localStorage ou gérez le contexte ici
-                localStorage.setItem('token', response.data.token);
-                setUserConnected(response.data.client);
-                navigate(`/`); // Redirection après la connexion réussie
+    
+                // Vérifiez si l'e-mail est confirmé
+                if (response.data.isEmailVerified === false) {
+                    setLoginError("Vous devez confirmer votre email, vérifier votre boîte de réception.");
+                    return;
+                }
+    
+                // Stocker le token et l'utilisateur connecté dans le localStorage
+                localStorage.setItem('token', response.data.client.token);
+                localStorage.setItem('id', response.data.client._id);
+
+                setUserConnected(response.data.client); // Ajuster en fonction de la réponse
+    
+                // Rediriger après connexion réussie
+                navigate(`/`);
             } catch (error) {
                 console.error("Erreur lors de la connexion :", error);
                 if (error.response) {
@@ -94,7 +133,6 @@ function Login() {
     });
 
     useEffect(() => {
-        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
         if (!userConnected || !localStorage.getItem('token')) {
             navigate("/login");
         }
@@ -127,8 +165,7 @@ function Login() {
                             <input
                                 type="email"
                                 className="login-username"
-                                autoFocus={true}
-                                required={true}
+                                required
                                 placeholder="xxxx@example.com"
                                 {...formikLogin.getFieldProps('clientEmail')}
                             />
@@ -141,7 +178,7 @@ function Login() {
                             <input
                                 type="password"
                                 className="login-password"
-                                required={true}
+                                required
                                 placeholder="Entrez votre mot de passe"
                                 {...formikLogin.getFieldProps('clientPassword')}
                             />
@@ -149,13 +186,18 @@ function Login() {
                                 <div className="error">{formikLogin.errors.clientPassword}</div>
                             ) : null}
                         </div>
-                        {/* Affichage de l'erreur de connexion */}
                         {loginError && <div className="error">{loginError}</div>}
 
                         <input type="submit" name="Login" value="M'identifier" className="login-submit" />
                     </form>
-
                     <Link to="#" className="login-forgot-pass">Mot de passe oublié ?</Link>
+                    
+                    {/* Affichage de la pop-up si showPopup est vrai */}
+                    {loginError && (
+                        <div style={{color:"red"}} className="popup">
+                            <p>{loginError}</p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Formulaire d'Inscription */}
@@ -230,17 +272,17 @@ function Login() {
                             ) : null}
                         </div>
 
-                        <input type="submit" name="Register" value="S'inscrire" className="login-submit" />
+                        <input type="submit" name="SignUp" value="M'inscrire" className="login-submit" />
                     </form>
+
+                    {/* Affichage de la pop-up si showPopup est vrai */}
+                    {showPopup && (
+                        <div style={{color:"red"}}  className="popup">
+                            <p>Inscription réussie ! Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception.</p>
+                        </div>
+                    )}
                 </div>
             </div>
-
-            {showPopup && (
-                <div className="popup">
-                    <p>Votre compte a été créé avec succès !</p>
-                    <button onClick={() => setShowPopup(false)}>Fermer</button>
-                </div>
-            )}
         </div>
     );
 }

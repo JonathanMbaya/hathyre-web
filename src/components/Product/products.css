@@ -29,11 +29,6 @@
   transition: transform 0.3s ease-in-out;
 }
 
-/* Effet zoom au survol */
-.slider-box:hover {
-  transform: scale(1.05);
-}
-
 /* Style des boutons de navigation */
 .scroll-button {
   position: absolute;
@@ -240,5 +235,76 @@
     border-radius: 0 0 1rem 0;
 }
   
+
+}
+
+
+
+
+
+@media (max-width: 468px) {
+
+
+/* Conteneur principal du slider */
+.slider-container {
+  width: 100%;
+  overflow-x: scroll; /* Assurez-vous que le défilement est horizontal */
+  position: relative;
+  scroll-behavior: smooth;
+  white-space: nowrap; /* Empêche le retour à la ligne des éléments */
+}
+
+.slider-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Permet de ne pas bloquer le défilement lors des interactions */
+}
+
+.scroll-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  pointer-events: all; /* Permet aux boutons d'être cliquables */
+  z-index: 1;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+/* Ligne contenant les éléments à slider */
+.slider-row {
+  display: inline-flex;
+  scroll-behavior: smooth;
+  gap: 10px; /* Espace entre les items */
+}
+
+.slider-box {
+  min-width: 200px; /* La largeur minimum d'un produit */
+  flex-shrink: 0; /* Pour éviter que les produits ne se réduisent */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Masquer la scrollbar sur les navigateurs modernes */
+.slider-container {
+  -ms-overflow-style: none;  /* Masquer la scrollbar sur Internet Explorer et Edge */
+  scrollbar-width: none;     /* Masquer la scrollbar sur Firefox */
+}
+
+.slider-container::-webkit-scrollbar {
+  display: none;  /* Masquer la scrollbar sur Chrome, Safari et Opera */
+}
 
 }

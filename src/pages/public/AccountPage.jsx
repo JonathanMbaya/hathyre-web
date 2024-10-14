@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PersonalData from "../../components/Account/PersonalData.jsx";
 import MyFavorites from "../../components/Account/MyFavorites.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo, faHeart, faArrowRightFromBracket, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useMediaQuery } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; // Importer useNavigate
+import { LoginContext } from "../../context/login.context.jsx";
 
 function AccountPage() {
-    const [activeTab, setActiveTab] = useState('personalData');  // Onglet par défaut
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);   // État pour gérer l'ouverture de la sidebar
-    const isMobile = useMediaQuery('(max-width:600px)');  // Utiliser useMediaQuery pour détecter les petits écrans
+    const { userConnected, setUserConnected } = useContext(LoginContext);
+    const [activeTab, setActiveTab] = useState('personalData'); // Onglet par défaut
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // État pour gérer l'ouverture de la sidebar
+    const isMobile = useMediaQuery('(max-width:600px)'); // Détecter les petits écrans
+    const navigate = useNavigate(); // Initialiser useNavigate
 
     // Fonction pour afficher le contenu basé sur l'onglet sélectionné
     const renderContent = () => {
@@ -31,10 +35,23 @@ function AccountPage() {
         width: '100%',
         height: '100%',
         backgroundColor: '#fff',
-        zIndex: 100,  // Assurez-vous que la sidebar est au-dessus du contenu
-        transform: isSidebarOpen ? 'translateX(0)' : 'translateX(-100%)',  // Utilisation de transform pour une animation plus fluide
+        zIndex: 100,
+        transform: isSidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
         transition: 'transform 0.3s ease',
         padding: '1rem',
+    };
+
+    const logout = () => {
+        // Correction de la méthode pour supprimer des éléments du localStorage
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+
+        if (userConnected) {
+            setUserConnected(null);
+        }
+
+        // Rediriger vers la page de connexion
+        navigate('/login'); // Redirection après déconnexion
     };
 
     return (
@@ -44,12 +61,11 @@ function AccountPage() {
                 <div style={{
                     position: "fixed",
                     top: "5rem",
-                    /* left: 1rem; */
                     zIndex: "101",
                     width: "100%",
                     color: "#895832",
                     background: "white",
-                    boxShadow : "-1px 2px 5px 1px rgba(0, 0, 0, 0.4)"
+                    boxShadow: "-1px 2px 5px 1px rgba(0, 0, 0, 0.4)"
                 }}>
                     <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: "black" }}>
                         {isSidebarOpen ? <FontAwesomeIcon icon={faTimes} size="1x" /> : <FontAwesomeIcon icon={faBars} size="1x" />} Mon compte
@@ -76,7 +92,7 @@ function AccountPage() {
                     </ul>
 
                     <ul style={{ margin: "0", padding: "0" }}>
-                        <li style={{ marginTop: '20px' , cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left'  }}>
+                        <li onClick={logout} style={{ marginTop: '20px', cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
                             <span style={{ padding: ".5rem" }}>
                                 <FontAwesomeIcon icon={faArrowRightFromBracket} />
                             </span>
@@ -86,14 +102,12 @@ function AccountPage() {
                 </div>
             )}
 
-
-            <div style={{display: "flex"}}>
-                
+            <div style={{ display: "flex" }}>
                 {/* Sidebar Desktop */}
                 {!isMobile && (
                     <div style={{ width: '250px', backgroundColor: '#fff', boxShadow: '2px 0 5px rgba(0, 0, 0, 0.1)', padding: '1rem' }}>
                         <ul style={{ marginTop: "15rem", padding: "0" }}>
-                            <h2 style={{marginTop: '20px' , cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
+                            <h2 style={{ marginTop: '20px', cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
                                 Mon Compte
                             </h2>
                             <li onClick={() => setActiveTab('personalData')} style={{ cursor: 'pointer', marginBottom: '10px', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
@@ -102,7 +116,7 @@ function AccountPage() {
                                 </span>
                                 Données personnelles
                             </li>
-                            <li onClick={() => setActiveTab('favorites')} style={{ cursor: 'pointer', marginBottom: '10px', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left'}}>
+                            <li onClick={() => setActiveTab('favorites')} style={{ cursor: 'pointer', marginBottom: '10px', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
                                 <span style={{ padding: ".5rem" }}>
                                     <FontAwesomeIcon icon={faHeart} />
                                 </span>
@@ -111,7 +125,7 @@ function AccountPage() {
                         </ul>
 
                         <ul style={{ margin: "0", padding: "0" }}>
-                            <li style={{ marginTop: '20px' , cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left'  }}>
+                            <li onClick={logout} style={{ marginTop: '20px', cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
                                 <span style={{ padding: ".5rem" }}>
                                     <FontAwesomeIcon icon={faArrowRightFromBracket} />
                                 </span>
@@ -125,11 +139,7 @@ function AccountPage() {
                 <div style={{ padding: '1rem', marginLeft: !isMobile ? '50px' : '0', transition: 'margin-left 0.3s ease', marginTop: '10rem' }}>
                     {renderContent()}
                 </div>
-
             </div>
-
-
-
 
             <Footer />
         </>

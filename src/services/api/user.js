@@ -1,4 +1,4 @@
-import { adminInstance, instance } from "./axiosInstance";
+import { adminInstance, instance } from "./axiosInstance.js";
 
 /**
  * Inscrit un nouvel utilisateur en envoyant une requête POST à l'API.
@@ -12,8 +12,8 @@ import { adminInstance, instance } from "./axiosInstance";
  * @returns {Promise<Object>} La réponse de l'API après l'inscription de l'utilisateur.
  * @throws {Error} Si la requête échoue, une erreur est renvoyée.
  */
-export async function singup(user) {
-   const response = await instance.post("signup/", user);
+export async function signup(user) {
+   const response = await instance.post("add/client", user);
    return response;
 }
 
@@ -29,7 +29,7 @@ export async function singup(user) {
  * @throws {Error} Si la requête échoue, une erreur est renvoyée.
  */
 export async function login(credentials) {
-    const response = await instance.post("login/", credentials);
+    const response = await instance.post("login/client", credentials);
     return response;
 }
 

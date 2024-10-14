@@ -99,7 +99,7 @@
 
     .product-basket{
         background-color: bisque;
-        padding: 0rem;
+        margin: .5rem;
         border-radius: 100%;
         z-index: 900000;
         bottom: 3rem;

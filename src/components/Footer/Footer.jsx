@@ -27,7 +27,6 @@ function Footer() {
                     <div className='one-menu-footer'>
                         <div style={{textAlign: "left"}}>
                             <ul>
-                                <h4 style={{ textAlign: "left"}}>Plan de site</h4>
 
                                 <li>
                                     <Link className='link-without-decoration' to="/" >
@@ -64,7 +63,6 @@ function Footer() {
                         <div style={{textAlign: "left"}}>
 
                             <ul>
-                                <h4>Nos services</h4>
 
                                 <li>
                                     <Link className='link-without-decoration' style={{textAlign: "left"}} to="/mentions-legales">
@@ -85,7 +83,7 @@ function Footer() {
                                 </li>
 
                             </ul>
-                            
+
                         </div>
                     </div>
                 </div>

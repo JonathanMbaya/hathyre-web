@@ -100,9 +100,9 @@ function Products({ title }) {
             {location.pathname === '/' && 
             <>
                 <h2>{title}</h2>
-                <p style={{ width: "88%", textAlign: "justify", fontSize: "18px" }}>
+                <p style={{ width: "88%", textAlign: "center", fontSize: "18px" }}>
                     Explorez nos dernières créations chez Hathyre et offrez à votre peau des soins innovants 
-                    et éthiques, qui allient douceur et efficacité _/
+                    et éthiques, qui allient douceur et efficacité.
                 </p>
             </>
             }

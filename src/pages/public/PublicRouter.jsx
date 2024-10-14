@@ -12,6 +12,7 @@ import Faq from "../../components/FAQ/Faq.jsx";
 import LegalMentions from "./LegalMentions.jsx";
 import PolitiqueConfidentialite from './PolitiqueConfidentialite.jsx';
 import TermsConditions from './TermsConditions.jsx';
+import Error from './Error.jsx';
 
 function PublicRouter ()  {
 
@@ -116,6 +117,15 @@ function PublicRouter ()  {
                     render={() => {
                         setCurrentPage('PolitiqueConfidentialite');
                         return <TermsConditions />;
+                    }}
+                />
+
+                <Route
+                    path="/error"
+                    element={<Error/>}
+                    render={() => {
+                        setCurrentPage('Error');
+                        return <Error/>;
                     }}
                 />
 

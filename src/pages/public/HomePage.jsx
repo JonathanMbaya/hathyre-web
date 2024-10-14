@@ -17,7 +17,7 @@ function HomePage({ currentPage }) {
                 <Banner
                     title="Toute la gamme de Hathyre"
                     src1={process.env.PUBLIC_URL + "/bannerhome/5.avif"}
-                    src2={process.env.PUBLIC_URL + "/bannerhome/huile.webp"}
+                    src2={process.env.PUBLIC_URL + "/bannerhome/beurrehuile.webp"}
                     src3={process.env.PUBLIC_URL + "/bannerhome/accessoire.avif"}
                 />
             </Suspense>

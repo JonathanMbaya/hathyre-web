@@ -29,7 +29,7 @@ function ProductPage() {
             <p style={{ width: "90%", textAlign: "center", fontSize: "18px", paddingLeft: "5%" }}>
                 Découvrez notre boutique Hathyre et laissez-vous séduire par
                 notre sélection de soins naturels, conçus pour sublimer votre
-                peau _/
+                peau.
             </p>
 
             {/* Lazy loaded components */}
