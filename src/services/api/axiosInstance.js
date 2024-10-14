@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getUser } from "../session/session.js";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://hathyre-server-api.onrender.com/api";
 
 // https://hathyre-server-api.onrender.com/api
 
