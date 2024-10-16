@@ -10,6 +10,7 @@ import Popup from '../PopUp/PopUp.jsx';
 import { CartContext } from '../../context/card.context';
 import { LoginContext } from '../../context/login.context.jsx';
 import { contactConfig } from '../../utils/config.email.js';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"; // Importation de PayPal
 import './checkout.css';
 
 function CheckoutForm() {
@@ -30,7 +31,7 @@ function CheckoutForm() {
         address: '',
         city: '',
         postalCode: '',
-        country: 'FR', // valeur par défaut
+        country: 'FR', // Valeur par défaut
         date: '',
     });
     const [loading, setLoading] = useState(false);
@@ -57,10 +58,10 @@ function CheckoutForm() {
                     console.error('Erreur lors de la récupération des informations client :', error);
                 });
         }
-    }, [userConnected]); // Enlever `isConnected` de la dépendance
+    }, [userConnected]);
 
-    // Gestion de la soumission du formulaire et du paiement
-    const handleSubmit = async (event) => {
+    // Gestion de la soumission du formulaire et du paiement Stripe
+    const handleStripeSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
 
@@ -95,58 +96,56 @@ function CheckoutForm() {
             });
 
             if (response.data.success) {
-                console.log("Paiement réussi");
-
-                await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
-                    nom: customerInfo.lastName,
-                    prenom: customerInfo.firstName,
-                    email: customerInfo.email,
-                    mobile: customerInfo.mobile,
-                    address: customerInfo.address,
-                    city: customerInfo.city,
-                    postalCode: customerInfo.postalCode,
-                    country: customerInfo.country,
-                    articles: cartItems.map(item => ({
-                        productId: item._id,
-                        productName: item.name,
-                        quantity: item.quantity,
-                        price: item.price
-                    })),
-                    amount: totalPrice,
-                    date: new Date(),
-                    status: 'En cours de préparation'
-                });
-
-                await sendConfirmationEmail();
-
-                // Mise à jour du stock pour chaque produit
-                for (const item of cartItems) {
-                    const updatedStock = item.stock - item.quantity;
-
-                    await axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${item._id}`, {
-                        stock: updatedStock,
-                    });
-                }
-
-                if (userConnected) {
-                    const updatedMontDepense = isConnected.montantDepense + totalPrice;
-
-                    await axios.put(`https://hathyre-server-api.onrender.com/api/update/client/${userConnected._id}`, {
-                        montantDepense: updatedMontDepense,
-                    });
-
-                    console.log("Montant dépensé mis à jour :", updatedMontDepense);
-                }
-
+                await processOrder();
                 setPopupMessage("Merci pour votre commande !");
                 setShowPopup(true);
-                setLoading(false);
             }
         } catch (error) {
             console.log("Erreur lors du traitement de la commande ou du paiement:", error);
-            setLoading(false);
             setPopupMessage("Une erreur est survenue. Veuillez réessayer.");
             setShowPopup(true);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Gestion de la soumission de la commande
+    const processOrder = async () => {
+        await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
+            nom: customerInfo.lastName,
+            prenom: customerInfo.firstName,
+            email: customerInfo.email,
+            mobile: customerInfo.mobile,
+            address: customerInfo.address,
+            city: customerInfo.city,
+            postalCode: customerInfo.postalCode,
+            country: customerInfo.country,
+            articles: cartItems.map(item => ({
+                productId: item._id,
+                productName: item.name,
+                quantity: item.quantity,
+                price: item.price
+            })),
+            amount: totalPrice,
+            date: new Date(),
+            status: 'En cours de préparation'
+        });
+
+        await sendConfirmationEmail();
+
+        // Mise à jour du stock pour chaque produit
+        for (const item of cartItems) {
+            const updatedStock = item.stock - item.quantity;
+            await axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${item._id}`, {
+                stock: updatedStock,
+            });
+        }
+
+        if (userConnected) {
+            const updatedMontDepense = isConnected.montantDepense + totalPrice;
+            await axios.put(`https://hathyre-server-api.onrender.com/api/update/client/${userConnected._id}`, {
+                montantDepense: updatedMontDepense,
+            });
         }
     };
 
@@ -165,8 +164,6 @@ function CheckoutForm() {
             cartItems: cartItems.map(item => `${item.quantity}x ${item.name}`).join(", "),
         };
 
-        console.log(templateParams);
-
         try {
             await emailjs.send(
                 contactConfig.YOUR_SERVICE_ID,
@@ -174,7 +171,6 @@ function CheckoutForm() {
                 templateParams,
                 contactConfig.YOUR_USER_ID
             );
-            console.log("Email de confirmation envoyé");
         } catch (error) {
             console.log("Erreur lors de l'envoi de l'email de confirmation:", error);
         }
@@ -211,12 +207,11 @@ function CheckoutForm() {
 
     return (
         <div className='resume-checkout' style={{ width: '100%' }}>
-
             {/* Partie récapitulatif */}
             <div className='form-checkout' style={{ maxWidth: 400 }}>
                 <h2>Votre panier</h2>
                 <div className='recap-products'>
-                    <h2 className='total-price'>{totalPrice} EUR</h2>
+                    <h2 className='total-price'>{parseFloat(totalPrice.toFixed(2))} EUR</h2>
                     {totalProduct > 1 ? <p>{totalProduct} Articles</p> : <p>{totalProduct} Article</p>}
                     {cartItems.map((item, index) => (
                         <div className='recap-product-card' key={index}>
@@ -234,9 +229,10 @@ function CheckoutForm() {
 
             {/* Partie informations sur la commande */}
             <Grid item xs={12} md={6}>
-                <form className='form-checkout' onSubmit={handleSubmit} style={{ maxWidth: 300 }}>
-                    <h2>Vos informations</h2>
+                <form className='form-checkout' onSubmit={handleStripeSubmit} style={{ maxWidth: 300 }}>
+                    
                     <Box my={2}>
+                        <h2>Vos informations</h2>
                         <TextField
                             fullWidth
                             label="Prénom"
@@ -248,7 +244,7 @@ function CheckoutForm() {
                         />
                         <TextField
                             fullWidth
-                            label="Nom de famille"
+                            label="Nom"
                             name="lastName"
                             value={customerInfo.lastName}
                             onChange={handleInputChange}
@@ -317,14 +313,92 @@ function CheckoutForm() {
                         </FormControl>
                     </Box>
 
-                    <Typography variant="h6">Paiement</Typography>
+                    {/* Section pour le paiement par carte */}
+                    <Typography variant="h6">Paiement par carte</Typography>
                     <Box my={2}>
                         <CardElement className="input-bank-card" options={{ hidePostalCode: true }} />
                     </Box>
                     <Button type="submit" variant="contained" color="primary" disabled={loading} fullWidth>
-                        {loading ? <CircularProgress size={24} /> : "Payer"}
+                        {loading ? <CircularProgress size={24} /> : "Payer par carte"}
                     </Button>
                 </form>
+                
+                {/* Section pour le paiement PayPal */}
+                <div id="paypal-button-container" style={{ marginTop: '20px' }}></div>
+                <PayPalScriptProvider options={{ "client-id": "YOUR_PAYPAL_CLIENT_ID" }}>
+                    <PayPalButtons
+                        style={{
+                            shape: 'rect',
+                            layout: 'vertical',
+                            color: 'gold',
+                            label: 'paypal',
+                        }}
+                        createOrder={async () => {
+                            try {
+                                const response = await fetch("/api/orders", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        cart: cartItems.map(item => ({
+                                            id: item._id,
+                                            quantity: item.quantity,
+                                        })),
+                                        totalPrice: totalPrice.toFixed(2) // Format du prix à deux décimales
+                                    }),
+                                });
+
+                                const orderData = await response.json();
+
+                                if (orderData.id) {
+                                    return orderData.id;
+                                }
+                                const errorDetail = orderData?.details?.[0];
+                                const errorMessage = errorDetail
+                                    ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+                                    : JSON.stringify(orderData);
+
+                                throw new Error(errorMessage);
+                            } catch (error) {
+                                console.error(error);
+                                setPopupMessage(`Erreur lors de la création de la commande PayPal : ${error.message}`);
+                                setShowPopup(true);
+                            }
+                        }}
+                        onApprove={async (data, actions) => {
+                            try {
+                                const response = await fetch(`/api/orders/${data.orderID}/capture`, {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                });
+
+                                const orderData = await response.json();
+                                const errorDetail = orderData?.details?.[0];
+
+                                if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
+                                    return actions.restart();
+                                } else if (errorDetail) {
+                                    throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
+                                } else if (!orderData.purchase_units) {
+                                    throw new Error(JSON.stringify(orderData));
+                                } else {
+                                    const transaction =
+                                        orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
+                                        orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
+                                    setPopupMessage(`Transaction ${transaction.status}: ${transaction.id}`);
+                                    setShowPopup(true);
+                                }
+                            } catch (error) {
+                                console.error(error);
+                                setPopupMessage(`Désolé, votre transaction n'a pas pu être traitée...<br><br>${error}`);
+                                setShowPopup(true);
+                            }
+                        }}
+                    />
+                </PayPalScriptProvider>
             </Grid>
 
             {showPopup && (

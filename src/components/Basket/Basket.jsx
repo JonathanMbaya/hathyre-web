@@ -72,7 +72,7 @@ function Basket() {
                     </div>
 
                     <div className='price-total'>
-                        <p>{totalPrice} EUR</p>
+                        <p>{parseFloat(totalPrice.toFixed(2))} EUR</p>
 
                         {showPopup && <PopUpLogin />}
 

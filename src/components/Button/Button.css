@@ -13,8 +13,11 @@ button:hover {
     background-color: #EACD9A;
     color: rgb(69, 38, 13);
     border: none;
-    padding: .8rem;
     font-weight: bolder;
+}
+
+.btn-to-basket{
+    padding: .8rem;
 }
 
 .active {

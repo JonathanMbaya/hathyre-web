@@ -53,7 +53,12 @@ h3 , .css-1nmqws6-MuiTypography-root {
     flex-direction: "column";
     align-items: "flex-start" ;
   }
-  
+
+  .logo-container{
+    background-color: white;
+    margin-top: 20vh;
+  }
+
 } 
 
 

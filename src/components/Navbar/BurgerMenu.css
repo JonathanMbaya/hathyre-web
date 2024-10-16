@@ -74,7 +74,7 @@
   left: -300px; 
   position: fixed;
   z-index: 10000;
-  width: 100%;
+  width: 300px;
   height: 100vh; /* Move the menu to the right */
 }
 
@@ -88,7 +88,7 @@
 
 .menu.open ul li a {
   color: #895832;
-  width: 300px;
+  width: 200px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

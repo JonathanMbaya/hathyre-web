@@ -16,6 +16,8 @@ const fetchLatestProducts = async () => {
     return data;
 };
 
+// https://hathyre-server-api.onrender.com
+
 function Products({ title }) {
     const location = useLocation();
     const sliderRef = useRef(null);
@@ -77,16 +79,20 @@ function Products({ title }) {
                 {location.pathname.startsWith('/product/') && 
                     <h2>Ces nouveautés pourraient vous intéresser</h2>
                 }
-
-                <Grid container spacing={2}>
-                    {[1, 2, 3, 4].map((_, index) => (
-                        <Grid item xs={6} sm={3} key={index}>
-                            <Skeleton variant="rectangular" width={310} height={218} />
-                            <Skeleton variant="text" width={310} />
-                            <Skeleton variant="text" width={310} />
+                <div className="slider-row">
+                    <div className="box" >
+                        <Grid container spacing={2}>
+                            {[1, 2, 3, 4].map((_, index) => (
+                                <Grid item xs={6} sm={3} key={index}>
+                                    <Skeleton variant="rectangular" width={310} height={218} />
+                                    <Skeleton variant="text" width={310} />
+                                    <Skeleton variant="text" width={310} />
+                                </Grid>
+                            ))}
                         </Grid>
-                    ))}
-                </Grid>
+                    </div>
+                </div>
+
             </div>
         );
     }
