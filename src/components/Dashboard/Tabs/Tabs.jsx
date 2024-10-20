@@ -3,10 +3,10 @@ import UserDashboard from "../UserDashboard/UserDashboard";
 import ProductDashboard from "../ProductDashboard/ProductDashboard";
 import OrderDashboard from "../OrderDashboard/OrderDashboard";
 import ClientDashboard from "../ClientDashboard/ClientDashboard";
-import { Box, Tabs, Tab, Typography, AppBar } from '@mui/material';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
 
 function TabsDashboard() {
-  const [selectedTab, setSelectedTab] = useState(0); // Change to track by index
+  const [selectedTab, setSelectedTab] = useState(0);
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
@@ -14,30 +14,52 @@ function TabsDashboard() {
 
   return (
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={selectedTab}
-          onChange={handleTabChange}
-          indicatorColor="#895832"
-          textColor="#895832"
-          variant="fullWidth"
-        >
-          <Tab label="Admin ." />
-          <Tab label="Produits" />
-          <Tab label="Commandes" />
-          <Tab label="Clients" />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={selectedTab} index={0}>
+      <Tabs
+        value={selectedTab}
+        onChange={handleTabChange}
+        variant="fullWidth"
+        TabIndicatorProps={{
+          style: { backgroundColor: '#895832' } // La couleur de l'indicateur (ligne sous l'onglet actif)
+        }}
+      >
+        <Tab
+          label="Admin"
+          sx={{
+            borderBottom: selectedTab === 0 ? '4px solid #895832' : 'none', // Border marron si sélectionné
+            color: Tab === '#1976d2' ? '#895832' : 'none', 
+          }}
+        />
+        <Tab
+          label="Produits"
+          sx={{
+            borderBottom: selectedTab === 1 ? '4px solid #895832' : 'none',
+          }}
+        />
+        <Tab
+          label="Commandes"
+          sx={{
+            borderBottom: selectedTab === 2 ? '4px solid #895832' : 'none',
+          }}
+        />
+        <Tab
+          label="Clients"
+          sx={{
+            borderBottom: selectedTab === 3 ? '4px solid #895832' : 'none',
+          }}
+        />
+      </Tabs>
+
+      {/* Contenu des onglets */}
+      <TabPanel className="order-dashboard-container" value={selectedTab} index={0}>
         <UserDashboard />
       </TabPanel>
-      <TabPanel value={selectedTab} index={1}>
+      <TabPanel className="order-dashboard-container" value={selectedTab} index={1}>
         <ProductDashboard />
       </TabPanel>
-      <TabPanel value={selectedTab} index={2}>
+      <TabPanel className="order-dashboard-container" value={selectedTab} index={2}>
         <OrderDashboard />
       </TabPanel>
-      <TabPanel value={selectedTab} index={3}>
+      <TabPanel className="order-dashboard-container" value={selectedTab} index={3}>
         <ClientDashboard />
       </TabPanel>
     </Box>

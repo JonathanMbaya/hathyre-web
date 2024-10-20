@@ -14,7 +14,12 @@ function AddProduct() {
   const [productConseils, setProductConseils] = useState("");
   const [productPromo, setProductPromo] = useState("");
   const [productStock, setProductStock] = useState("");
+  
+  // State for images and preview
   const [file, setFile] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [preview1, setPreview1] = useState(null);
+  const [preview2, setPreview2] = useState(null);
 
   // State for Snackbar notifications
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -23,11 +28,20 @@ function AddProduct() {
 
   const navigate = useNavigate();
 
+  // Handle image change and preview
+  const handleFileChange = (e, setFileState, setPreviewState) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFileState(selectedFile);
+      setPreviewState(URL.createObjectURL(selectedFile));
+    }
+  };
+
   const handleAddProduct = async (e) => {
     e.preventDefault();
 
-    if (!file) {
-      setSnackbarMessage("Veuillez sélectionner une image.");
+    if (!file || !file2) {
+      setSnackbarMessage("Veuillez sélectionner deux images.");
       setSnackbarSeverity("error");
       setSnackbarOpen(true);
       return;
@@ -43,9 +57,10 @@ function AddProduct() {
     formData.append("promo", productPromo);
     formData.append("stock", productStock);
     formData.append("image", file);
+    formData.append("image2", file2); // Add second image
 
     try {
-      const response = await axios.post("https://hathyre-server-api.onrender.com/api/add/product", formData, {
+      const response = await axios.post("http://localhost:8080/api/add/product", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -63,15 +78,17 @@ function AddProduct() {
       setProductPromo("");
       setProductStock("");
       setFile(null);
+      setFile2(null);
+      setPreview1(null);
+      setPreview2(null);
 
       setSnackbarMessage("Produit ajouté avec succès !");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
 
-      const userId = localStorage.getItem('id');
-      const userToken = localStorage.getItem('token');
-      if (userId && userToken) {
-        navigate(`/admin/dashboard/${userId}/${userToken}`);
+      const userToken = localStorage.getItem('tokenAdmin');
+      if (userToken) {
+        navigate(`/admin/dashboard`);
       } else {
         console.error("ID utilisateur ou jeton d'authentification manquant dans le stockage local.");
         setSnackbarMessage("Erreur lors de la navigation. Veuillez réessayer.");
@@ -200,20 +217,39 @@ function AddProduct() {
             />
           </Grid>
 
-          <Grid item xs={12}>
+          {/* Image upload and preview */}
+          <Grid item xs={12} sm={6}>
             <Button
               variant="contained"
               component="label"
               color="primary"
               fullWidth
             >
-              Télécharger une image
+              Télécharger une première image
               <input
                 type="file"
                 hidden
-                onChange={(e) => e.target.files && setFile(e.target.files[0])}
+                onChange={(e) => handleFileChange(e, setFile, setPreview1)}
               />
             </Button>
+            {preview1 && <img src={preview1} alt="Preview 1" style={{ width: '100%', marginTop: '10px' }} />}
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <Button
+              variant="contained"
+              component="label"
+              color="primary"
+              fullWidth
+            >
+              Télécharger une deuxième image
+              <input
+                type="file"
+                hidden
+                onChange={(e) => handleFileChange(e, setFile2, setPreview2)}
+              />
+            </Button>
+            {preview2 && <img src={preview2} alt="Preview 2" style={{ width: '100%', marginTop: '10px' }} />}
           </Grid>
 
           <Grid item xs={12}>

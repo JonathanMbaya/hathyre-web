@@ -199,11 +199,6 @@ function NewNavbar() {
                                     FAQ
                                 </Link>
                             </li>
-                            <li>
-                                <Link className="link-without-decoration" to="/">
-                                    Se déconnecter
-                                </Link>
-                            </li>
                         </ul>
                     </nav>
                 </div>

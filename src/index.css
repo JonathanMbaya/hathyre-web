@@ -56,10 +56,21 @@ h3 , .css-1nmqws6-MuiTypography-root {
 
   .logo-container{
     background-color: white;
-    margin-top: 20vh;
-  }
+    margin-top: 10vh;  }
+
+    .order-dashboard-container {
+      margin: 0rem !important;
+    }
 
 } 
+
+.order-dashboard-container {
+  margin: 1rem;
+}
+
+.css-b239nh-MuiButtonBase-root-MuiTab-root.Mui-selected, .css-1o6s5zf-MuiButtonBase-root-MuiTab-root.Mui-selected  {
+  color: #895832 !important;
+}
 
 
 .sidebar ul li {

@@ -79,7 +79,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 2rem 0 0 2rem;
-    width: 85%;
+    width: 80%;
     position: fixed;
     bottom: 4rem;
     color: bisque;
@@ -94,8 +94,8 @@
 
 
 
-  /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
-  @media only screen and (max-width: 768px) {
+/* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
+@media only screen and (max-width: 768px) {
 
     .product-basket{
         background-color: bisque;
@@ -136,4 +136,14 @@
         right: 1rem;
     }
 
-  }
+    .item-product-card {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: bisque;
+        padding: .5rem;
+        margin: 1rem 0 1rem 1rem;
+        width: 80%;
+    }
+
+}

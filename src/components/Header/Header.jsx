@@ -7,8 +7,8 @@ import 'animate.css';
 import NewNavbar from '../Navbar/newNavbar'; // Assurez-vous que ce composant existe
 
 const images = [
+  '/background-home-hathyre.png',
   '/background-home-2.jpg',
-  '/background-home.jpg',
   // Ajoutez plus d'images ici
 ];
 
@@ -25,16 +25,6 @@ const Header = ({ currentPage }) => {
     return () => clearInterval(interval); // Nettoie l'intervalle
   }, []);
 
-//   const nextImage = () => {
-//     setCurrentImageIndex((currentImageIndex + 1) % images.length);
-//   };
-
-//   const prevImage = () => {
-//     setCurrentImageIndex(
-//       (currentImageIndex - 1 + images.length) % images.length
-//     );
-//   };
-
   return (
     <div className='header'>
       {location.pathname === '/' && (
@@ -45,7 +35,7 @@ const Header = ({ currentPage }) => {
 
                 <h2
                     className='animate__animated animate__fadeInDown'
-                    style={{ textAlign: 'left', fontSize: "30px", paddingLeft:".5rem" }}
+                    style={{ textAlign: 'left', fontSize: "25px", paddingLeft:".5rem" }}
                 >
                     Hathyre,<br />
                     votre secret de beauté au quotidien.

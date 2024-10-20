@@ -4,7 +4,6 @@ import { faTrash, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import emailjs from '@emailjs/browser';
 import { contactNotif } from '../../../utils/config.email.js';
-import Pagination from '../../Pagination/Pagination.jsx';
 import {
   Paper,
   Table,
@@ -23,22 +22,31 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  TablePagination
 } from '@mui/material';
+import OrderDetailsDialog from "./OrderDetailsDialog.jsx";
 
 const OrderDashboard = () => {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(5);
   const [trackingNumber, setTrackingNumber] = useState('');
   const [showTrackingPopup, setShowTrackingPopup] = useState(false);
   const [filteredStatus, setFilteredStatus] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [openDetailsModal, setOpenDetailsModal] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [clientToDelete, setClientToDelete] = useState(null);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+  const [selectedCarrier, setSelectedCarrier] = useState('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [loading, setLoading] = useState(false); // Indicateur de chargement
+
+  const carriers = ['Colissimo', 'Chronopost', 'DHL', 'FedEx', 'UPS', 'TNT'];
 
   const fetchOrders = async () => {
+    setLoading(true);
     try {
       const response = await axios.get('https://hathyre-server-api.onrender.com/api/orders');
       setOrders(response.data);
@@ -46,6 +54,7 @@ const OrderDashboard = () => {
     } catch (error) {
       console.error('Erreur lors de la récupération des commandes:', error);
     }
+    setLoading(false);
   };
 
   const deleteOrder = async (orderId) => {
@@ -59,10 +68,53 @@ const OrderDashboard = () => {
     }
   };
 
+  const handleRefund = (order) => {
+    const amount = prompt('Entrez le montant à rembourser (en EUR) :');
+    if (!amount || isNaN(amount)) {
+      alert("Veuillez entrer un montant valide.");
+      return;
+    }
+
+    const refundData = {
+      paymentIntentId: order.paymentIntentId,
+      amount: parseFloat(amount),
+      orderId: "pi_3QBNM0LEHh2o4Mgi1ZRwWsgH",
+      userEmail: order.userEmail,
+    };
+
+    processRefund(refundData);
+  };
+
+  const processRefund = async (refundData) => {
+    try {
+      const response = await axios.post('http://localhost:8080/stripe/refund', refundData);
+      if (response.data.success) {
+        alert('Remboursement effectué avec succès');
+        setOrders(prevOrders => prevOrders.map(order => 
+          order._id === refundData.orderId ? { ...order, status: 'Remboursé' } : order
+        ));
+      } else {
+        alert('Erreur lors du remboursement : ' + response.data.error);
+      }
+    } catch (error) {
+      console.error('Erreur lors du remboursement', error);
+      alert('Erreur lors du remboursement.');
+    }
+  };
+
   const updateOrderStatus = async (orderId, newStatus, trackingNumber = '') => {
     try {
-      await axios.patch(`https://hathyre-server-api.onrender.com/api/orders/${orderId}/status`, { status: newStatus, trackingNumber });
-      setOrders(orders.map((order) => (order._id === orderId ? { ...order, status: newStatus, trackingNumber } : order)));
+      await axios.put(`https://hathyre-server-api.onrender.com/api/orders/${orderId}/status`, { status: newStatus, orderNumber: trackingNumber, deliver: selectedCarrier });
+
+      if (newStatus === 'Remboursé') {
+        const order = orders.find((order) => order._id === orderId);
+        if (order) {
+          const amountInCents = Math.round(order.montantTotal * 100);
+          await processRefund({ paymentIntentId: order.paymentIntentId, amount: amountInCents });
+        }
+      }
+
+      setOrders(orders.map((order) => (order._id === orderId ? { ...order, status: newStatus, orderNumber: trackingNumber, deliver: selectedCarrier } : order)));
       sendEmailNotification(orderId, newStatus, trackingNumber);
     } catch (error) {
       console.error('Erreur lors de la mise à jour du statut de la commande:', error);
@@ -87,7 +139,8 @@ const OrderDashboard = () => {
         montant: order.montantTotal,
         articles: order.articles.map((article) => `${article.quantity}x ${article.productName}`).join(', '),
         status: newStatus,
-        orderNumber: trackingNumber,
+        orderNumber: trackingNumber || order.orderNumber,
+        deliver: selectedCarrier || order.deliver,
       };
 
       await emailjs.send(
@@ -109,11 +162,9 @@ const OrderDashboard = () => {
 
   useEffect(() => {
     let filtered = orders;
-
     if (filteredStatus) {
       filtered = filtered.filter(order => order.status === filteredStatus);
     }
-
     if (searchTerm) {
       filtered = filtered.filter(order =>
         order.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -122,20 +173,22 @@ const OrderDashboard = () => {
         order.email.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
     setFilteredOrders(filtered);
   }, [filteredStatus, searchTerm, orders]);
 
-  const handlePageChange = (page) => setCurrentPage(page);
-
   const handleStatusChange = (e, orderId) => {
     const status = e.target.value;
+    const order = orders.find((o) => o._id === orderId);
 
-    if (status === 'Expédié') {
+    if (status === 'Expédié' && order.status !== 'Livré') {
       setSelectedOrderId(orderId);
       setShowTrackingPopup(true);
-    } else {
-      updateOrderStatus(orderId, status);
+    } else if (status === 'Livré' && order.status === 'Expédié') {
+      updateOrderStatus(orderId, 'Livré');
+    } else if (status === 'Remboursé') {
+      handleRefund(order);
+    } else if (status === 'Annulé' && order.status !== 'Livré') {
+      updateOrderStatus(orderId, 'Annulé');
     }
   };
 
@@ -150,17 +203,61 @@ const OrderDashboard = () => {
   };
 
   const handleTrackingSubmit = () => {
-    if (trackingNumber && selectedOrderId) {
-      updateOrderStatus(selectedOrderId, 'Expédié', trackingNumber);
-      setShowTrackingPopup(false);
-      setTrackingNumber('');
-    } else {
+    if (!trackingNumber) {
       alert('Veuillez entrer un numéro de suivi.');
+      return;
+    }
+    if (!selectedCarrier) {
+      alert('Veuillez sélectionner un transporteur.');
+      return;
+    }
+    updateOrderStatus(selectedOrderId, 'Expédié', trackingNumber);
+    setShowTrackingPopup(false);
+    setTrackingNumber('');
+    setSelectedCarrier('');
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleOpenDetailsModal = (order) => {
+    setSelectedOrder(order);
+    setOpenDetailsModal(true);
+  };
+
+  const handleCloseDetailsModal = () => {
+    setOpenDetailsModal(false);
+    setSelectedOrder(null);
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'En cours de préparation':
+        return 'yellow';
+      case 'Expédié':
+        return 'orange';
+      case 'Livré':
+        return 'green';
+      case 'Annulé':
+        return 'red';
+      case 'Remboursé':
+        return 'gray';
+      default:
+        return 'white';
     }
   };
 
+
   return (
-    <Paper elevation={3} sx={{ padding: 2 }}>
+    <div className="order-dashboard-container">
+      {loading ? <p>Chargement des commandes...</p> : null}
+
       <h1>Commandes</h1>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
@@ -184,112 +281,124 @@ const OrderDashboard = () => {
             <MenuItem value="Expédié">Expédié</MenuItem>
             <MenuItem value="Livré">Livré</MenuItem>
             <MenuItem value="Annulé">Annulé</MenuItem>
+            <MenuItem value="Remboursé">Remboursé</MenuItem>
           </Select>
         </FormControl>
       </div>
 
-      <TableContainer>
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>Info</TableCell>
               <TableCell>Référence</TableCell>
               <TableCell>Nom</TableCell>
               <TableCell>Prénom</TableCell>
-              <TableCell>Ville</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Téléphone</TableCell>
-              <TableCell>Montant</TableCell>
-              <TableCell>Date</TableCell>
+              <TableCell>Montant Total</TableCell>
               <TableCell>Statut</TableCell>
-              <TableCell>Modifier</TableCell>
-              <TableCell>Supprimer</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
-
           <TableBody>
+
             {filteredOrders
-              .slice((currentPage - 1) * ordersPerPage, currentPage * ordersPerPage)
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) // Pagination
               .map((order) => (
                 <TableRow key={order._id}>
+                  <TableCell>
+                    <div
+                      style={{ 
+                        backgroundColor: getStatusColor(order.status), 
+                        width:"10px" ,
+                        height:"10px",
+                        borderRadius: "100%"
+                      }}>
+                    </div>
+                  </TableCell>
                   <TableCell>{order._id}</TableCell>
                   <TableCell>{order.nom}</TableCell>
                   <TableCell>{order.prenom}</TableCell>
-                  <TableCell>{order.city}</TableCell>
                   <TableCell>{order.email}</TableCell>
-                  <TableCell>{order.mobile}</TableCell>
-                  <TableCell>{order.montantTotal} EUR</TableCell>
-                  <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
+                  <TableCell>{order.montantTotal}€</TableCell>
                   <TableCell>
-                    <Select
-                      value={order.status}
-                      onChange={(e) => handleStatusChange(e, order._id)}
-                    >
+                    <Select value={order.status} onChange={(e) => handleStatusChange(e, order._id)}>
                       <MenuItem value="En cours de préparation">En cours de préparation</MenuItem>
                       <MenuItem value="Expédié">Expédié</MenuItem>
                       <MenuItem value="Livré">Livré</MenuItem>
                       <MenuItem value="Annulé">Annulé</MenuItem>
+                      <MenuItem value="Remboursé">Remboursé</MenuItem>
                     </Select>
                   </TableCell>
                   <TableCell>
-                    <FontAwesomeIcon 
-                        style={{color: 'gray', cursor: 'pointer'}} 
-                        icon={faEllipsis}
-                        onClick={() => handleStatusChange({ target: { value: order.status } }, order._id)} 
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => handleOpenConfirmDialog(order)}
-                      startIcon={<FontAwesomeIcon icon={faTrash} />}
-                    >
-                      Supprimer
+                    <Button onClick={() => handleOpenDetailsModal(order)}>
+                      <FontAwesomeIcon icon={faEllipsis} />
+                    </Button>
+                    <Button onClick={() => handleOpenConfirmDialog(order)}>
+                      <FontAwesomeIcon icon={faTrash} />
                     </Button>
                   </TableCell>
                 </TableRow>
               ))}
           </TableBody>
         </Table>
+
+        <TablePagination
+          component="div"
+          count={filteredOrders.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
 
-      {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalCount={filteredOrders.length}
-        pageSize={ordersPerPage}
-        onPageChange={page => handlePageChange(page)}
-      />
-
-      {/* Popup de suivi */}
+      {/* Pop-up pour le numéro de suivi */}
       <Dialog open={showTrackingPopup} onClose={() => setShowTrackingPopup(false)}>
-        <DialogTitle>Entrez le numéro de suivi</DialogTitle>
+        <DialogTitle>Entrez le numéro de suivi et le transporteur</DialogTitle>
         <DialogContent>
           <TextField
-            label="Numéro de suivi"
-            fullWidth
+            label="Numéro de Suivi"
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
+            fullWidth
+            margin="normal"
           />
+          <FormControl fullWidth>
+            <InputLabel>Transporteur</InputLabel>
+            <Select
+              value={selectedCarrier}
+              onChange={(e) => setSelectedCarrier(e.target.value)}
+            >
+              {carriers.map((carrier) => (
+                <MenuItem key={carrier} value={carrier}>{carrier}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleTrackingSubmit}>Envoyer</Button>
           <Button onClick={() => setShowTrackingPopup(false)}>Annuler</Button>
+          <Button onClick={handleTrackingSubmit} color="primary">Valider</Button>
         </DialogActions>
       </Dialog>
 
-      {/* Popup de confirmation de suppression */}
+      {/* Détails de la commande */}
+      <OrderDetailsDialog open={openDetailsModal} onClose={handleCloseDetailsModal} order={selectedOrder} />
+
+      {/* Confirmation de suppression */}
       <Dialog open={openConfirmDialog} onClose={handleCloseConfirmDialog}>
-        <DialogTitle>Confirmation de suppression</DialogTitle>
-        <DialogContent>
-          Êtes-vous sûr de vouloir supprimer cette commande ?
-        </DialogContent>
+        <DialogTitle>Confirmer la suppression</DialogTitle>
+        <DialogContent>Voulez-vous vraiment supprimer cette commande ?</DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseConfirmDialog}>Annuler</Button>
-          <Button onClick={() => deleteOrder(clientToDelete._id)}>Supprimer</Button>
+          <Button onClick={handleCloseConfirmDialog} color="primary">
+            Annuler
+          </Button>
+          <Button onClick={() => deleteOrder(clientToDelete._id)} color="secondary">
+            Supprimer
+          </Button>
         </DialogActions>
       </Dialog>
-    </Paper>
+    </div>
   );
 };
 

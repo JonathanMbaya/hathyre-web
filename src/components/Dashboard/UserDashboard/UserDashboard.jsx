@@ -88,8 +88,7 @@ const UserDashboard = () => {
                         <div className='head-dash' style={{backgroundColor: 'white', borderRadius: '.5rem .5rem 0 0'}}>
                             <h1 style={{margin: '.5rem'}}>Administrateurs</h1>
                         </div>
-
-                        <button style={{margin: '.5rem', borderRadius: '.5rem'}} onClick={() => setShowAddUserPopup(true)}>
+                        <button onClick={() => setShowAddUserPopup(true)} style={{ padding: '1rem', margin: '.5rem', borderRadius: '.5rem', border:"none", backgroundColor:"blanchedalmond"  }}>
                             Ajouter un administrateur <FontAwesomeIcon icon={faPlus} />
                         </button>
                         <TableContainer sx={{ maxHeight: 440 }}>

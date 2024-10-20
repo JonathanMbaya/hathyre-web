@@ -1,5 +1,5 @@
 .page-product{
-    margin-top: 25vh;
+    margin-top: 15vh;
 }
 
 .page-product h1{
@@ -13,13 +13,21 @@
     width: 100%;
 }
 
+.image{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+}
+
 .area-product img, .area-product .info-product-single {
-    width: 50%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: 2rem;
+    margin: .5rem;
 }
 
 .area-product .info-product-single span{
@@ -80,10 +88,18 @@
 margin-right: 1rem;
 }
 
+.info-product{
+    width: 80%;
+}
+
 
 
   /* Utilisez Media Queries pour appliquer des styles différents en fonction de la largeur de l'écran */
   @media only screen and (max-width: 768px) {
+
+    .title-product, .info-product h3{
+        text-align: center;
+    }
 
     .area-product{
         display: flex;
@@ -93,11 +109,19 @@ margin-right: 1rem;
     }
 
     .page-product h1{
-        font-size: 54px;
+        font-size: 34px;
+    }
+
+    .image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: .5rem;
     }
 
     .area-product img, .area-product .info-product-single {
-        width: 90%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;

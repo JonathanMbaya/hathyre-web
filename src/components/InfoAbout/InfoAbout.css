@@ -5,25 +5,6 @@
     height: 60vh;
 }
 
-.img-text-about-right {
-    background-image: url('../../../public/img-about/img-about2.png');
-    margin-left: 50%;
-    width: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    height: 60vh;
-}
-
-.img-text-about-left {
-    background-image: url('../../../public/img-about/img-about1.png');
-    margin-right: 50%;
-    width: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    height: 60vh;
-}
 
 .text-about{
     position: absolute;

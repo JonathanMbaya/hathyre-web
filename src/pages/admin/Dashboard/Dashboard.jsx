@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom"; // Assurez-vous que react-router-dom est installé
 import { LoginContext } from "../../../context/login.context";
 import TabsDashboard from '../../../components/Dashboard/Tabs/Tabs.jsx'; // Composant des onglets
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import './Dashboard.css';
 
 function Dashboard() {
@@ -40,9 +40,11 @@ function Dashboard() {
                             alt="Logo Hathyre" 
                         /> 
                     </Typography>
-                    <Button color="#895832" onClick={handleLogout}>
+
+                    <button onClick={handleLogout} style={{ padding: '1rem', margin: '.5rem', borderRadius: '.5rem', border:"none", backgroundColor:"blanchedalmond"  }}>
                         Se déconnecter
-                    </Button>
+                    </button>
+
                 </Toolbar>
             </AppBar>
 

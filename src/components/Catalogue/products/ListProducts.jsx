@@ -36,6 +36,8 @@ const ListProducts = () => {
   const [sortByPrice, setSortByPrice] = useState('');
   const [openLogin, setOpenLogin] = useState(false); // État pour ouvrir/fermer la modale
 
+  const [hoveredProductId, setHoveredProductId] = useState(null); // État pour le produit survolé
+
   // Utilisation de React Query pour récupérer les produits
   const { data: products = [], isLoading, isError } = useQuery('products', fetchProducts);
 
@@ -157,8 +159,12 @@ const ListProducts = () => {
                   <CardMedia
                     component="img"
                     height="200"
-                    image={process.env.PUBLIC_URL + product.image}
+                    image={hoveredProductId === product._id 
+                      ? process.env.PUBLIC_URL + product.image2 // Affiche la deuxième image au survol
+                      : process.env.PUBLIC_URL + product.image} // Affiche la première image par défaut
                     alt={product.name}
+                    onMouseEnter={() => setHoveredProductId(product._id)}
+                    onMouseLeave={() => setHoveredProductId(null)}
                   />
                   <CardContent>
                     <h3>{product.name}</h3>
@@ -190,4 +196,3 @@ const ListProducts = () => {
 };
 
 export default ListProducts;
-

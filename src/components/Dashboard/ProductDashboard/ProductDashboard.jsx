@@ -105,7 +105,7 @@ const ProductDashboard = () => {
 
                         <div>
                             <Link to={`/admin/dashboard/product/add`}>
-                                <button style={{ margin: '.5rem', borderRadius: '.5rem' }}>
+                                <button style={{ padding: '1rem', margin: '.5rem', borderRadius: '.5rem', border:"none", backgroundColor:"blanchedalmond"  }}>
                                     Ajouter un produit <FontAwesomeIcon icon={faPlus} />
                                 </button>
                             </Link>

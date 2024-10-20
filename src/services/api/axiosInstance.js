@@ -14,7 +14,6 @@ export const instance = axios.create({
    headers: {
       "Content-Type": "application/json",
    },
-   timeout: 5000, // 5 secondes de délai d'attente
 });
 
 /**

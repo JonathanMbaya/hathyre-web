@@ -85,7 +85,6 @@ input {
   position: absolute;
   text-align: center;
   border: none; /* Supprimer les bordures par défaut */
-  border-bottom: 1px solid black; /* Ajouter une ligne en bas */
   outline: none; /* Supprimer le contour */
   width: 100%;
   position: relative;
@@ -136,13 +135,13 @@ input {
 }
 
 
-.admin-login{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 80vh;
+.admin-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60vh;
 }
 
 .login{

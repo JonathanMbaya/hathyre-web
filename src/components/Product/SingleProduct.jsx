@@ -60,12 +60,16 @@ function SingleProduct() {
     return (
         <>
             {product && (
-                <div style={{ marginTop: '30vh' }} className="page-product">
+                <div className="page-product">
                     <div className="area-product">
-                        <img src={product.image} alt={product.name} />
+                        <div className="image">
+                            <img src={product.image} alt={product.name} />
+                            <img style={{width:"50px", height: "auto"}} src={product.image2} alt={product.name} />
+                        </div>
+
 
                         <div className="info-product-single">
-                            <div>
+                            <div className="title-product">
                                 <h1>{product.name}</h1>
                                 {!product.promo ? (
                                     <h2>{product.price} EUR</h2>
@@ -79,15 +83,10 @@ function SingleProduct() {
                                 )}
                             </div>
 
-                            <div>
-                                <h3>Description</h3>
-                                <p>{product.description}</p>
-                            </div>
-
                             {/* Gestion du compteur */}
                             <div className="counter">
                                 <button onClick={decrement}><FontAwesomeIcon icon={faMinus} /></button>
-                                <input value={count} readOnly />
+                                    <p style={{width: "30px", textAlign:"center"}}>{count}</p>
                                 <button onClick={increment}><FontAwesomeIcon icon={faPlus} /></button>
                             </div>
 
@@ -107,8 +106,13 @@ function SingleProduct() {
                                 </button>
                             </div>
 
+                            <div>
+                                <h3>Description</h3>
+                                <p>{product.description}</p>
+                            </div>
+
                             {/* Informations supplémentaires avec Accordion */}
-                            <div style={{width: '100%'}}>
+                            <div className="info-product">
                                 <h3>Informations sur le produit</h3>
                                 
                                 <Accordion>

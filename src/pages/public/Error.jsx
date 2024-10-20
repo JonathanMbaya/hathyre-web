@@ -1,6 +1,6 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import { Container, Typography, Button } from "@mui/material";
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'; // Icône pour l'erreur
 
 function Error({ currentPage }) {
   
@@ -12,21 +12,23 @@ function Error({ currentPage }) {
 
   return (
     <Container sx={{ textAlign: 'center', marginTop: '5rem' }}>
-      <ErrorOutlineIcon sx={{ fontSize: 80, color: 'error.main' }} />
-      <Typography variant="h4" color="error" gutterBottom>
-        Erreur de navigation
+      <Typography variant="h4" color="success" gutterBottom>
+        Inscription confirmé 
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-        La page <strong>{currentPage}</strong> que vous cherchez semble être introuvable ou a rencontré une erreur.
+        Vous avez confirmé votre compte Hathyre. Vous pouvez vous connecter à présent.
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleRefresh}
-        sx={{ marginTop: '1rem' }}
-      >
-        Rafraîchir et retourner à l'accueil
-      </Button>
+      <Link to="/login">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleRefresh}
+          sx={{ marginTop: '1rem' }}
+        >
+          Se connecter
+        </Button>
+      </Link>
+
     </Container>
   );
 }

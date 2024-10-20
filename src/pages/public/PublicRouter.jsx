@@ -23,47 +23,50 @@ function PublicRouter ()  {
             <Header currentPage={currentPage} />
 
             <Routes>
+
                 <Route
-                path="/"
-                element={<HomePage />}
-                render={() => {
-                    setCurrentPage('home');
-                    return <HomePage />;
-                }}
-                />
-                <Route
-                path="/product"
-                element={<ProductPage />}
-                render={() => {
-                    setCurrentPage('product');
-                    return <ProductPage />;
-                }}
-                />
-                <Route
-                path="/apropos"
-                element={<AboutPage />}
-                render={() => {
-                    setCurrentPage('about');
-                    return <AboutPage />;
-                }}
+                    path="/"
+                    element={<HomePage />}
+                    render={() => {
+                        setCurrentPage('home');
+                        return <HomePage />;
+                    }}
                 />
 
                 <Route
-                path="/login"
-                element={<Login/>}
-                render={() => {
-                    setCurrentPage('account');
-                    return <Login/>;
-                }}
+                    path="/product"
+                    element={<ProductPage />}
+                    render={() => {
+                        setCurrentPage('product');
+                        return <ProductPage />;
+                    }}
                 />
 
                 <Route
-                path="/account"
-                element={<AccountPage />}
-                render={() => {
-                    setCurrentPage('account');
-                    return <AccountPage/>;
-                }}
+                    path="/apropos"
+                    element={<AboutPage />}
+                    render={() => {
+                        setCurrentPage('about');
+                        return <AboutPage />;
+                    }}
+                />
+
+                <Route
+                    path="/login"
+                    element={<Login/>}
+                    render={() => {
+                        setCurrentPage('account');
+                        return <Login/>;
+                    }}
+                />
+
+                <Route
+                    path="/account"
+                    element={<AccountPage />}
+                    render={() => {
+                        setCurrentPage('account');
+                        return <AccountPage/>;
+                    }}
                 />
 
                 <Route
@@ -121,7 +124,7 @@ function PublicRouter ()  {
                 />
 
                 <Route
-                    path="/error"
+                    path="/confirm-account"
                     element={<Error/>}
                     render={() => {
                         setCurrentPage('Error');
