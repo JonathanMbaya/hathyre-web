@@ -59,7 +59,7 @@ function EditProduct() {
       stock: productStock,
     };
 
-    axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${id}`, updatedProduct)
+    axios.put(`https://hathyre-server-api.onrender.com/api/api/update/product/${id}`, updatedProduct)
       .then((response) => {
         console.log("Réponse du serveur :", response.data);
         navigate(`/admin/dashboard`);

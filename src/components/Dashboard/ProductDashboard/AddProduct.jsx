@@ -60,7 +60,7 @@ function AddProduct() {
     formData.append("image2", file2); // Add second image
 
     try {
-      const response = await axios.post("http://localhost:8080/api/add/product", formData, {
+      const response = await axios.post("https://hathyre-server-api.onrender.com/api/add/product", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

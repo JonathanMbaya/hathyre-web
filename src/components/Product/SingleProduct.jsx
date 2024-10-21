@@ -16,6 +16,11 @@ function SingleProduct() {
     const navigate = useNavigate(); // Pour la navigation
     const [product, setProduct] = useState(null); // Stocke les détails du produit
     const [loading, setLoading] = useState(true); // État de chargement
+
+    // Utilisation de l'état pour gérer l'image principale et secondaire
+    const [mainImage, setMainImage] = useState("");
+    const [secondaryImage, setSecondaryImage] = useState("");
+
     const [count, setCount] = useState(1); // Nombre d'articles à ajouter au panier
 
     // Fonction de gestion du clic pour ajouter au panier
@@ -28,7 +33,13 @@ function SingleProduct() {
         const fetchProduct = async () => {
             try {
                 const response = await axios.get(`https://hathyre-server-api.onrender.com/api/product/${id}`);
-                setProduct(response.data); // Mise à jour de l'état avec les données du produit
+                const productData = response.data;
+                setProduct(productData); // Mise à jour de l'état avec les données du produit
+
+                // Initialiser les images une fois que le produit est chargé
+                setMainImage(productData.image);
+                setSecondaryImage(productData.image2);
+
             } catch (error) {
                 console.error('Erreur lors de la récupération du produit:', error);
                 navigate('/error'); // Redirection vers une page d'erreur en cas de problème
@@ -52,6 +63,15 @@ function SingleProduct() {
         }
     };
 
+    // Fonction pour échanger les images
+    const swapImages = () => {
+        setMainImage(prevMain => {
+            const newMain = secondaryImage;
+            setSecondaryImage(prevMain); // Mettre l'ancienne image principale en secondaire
+            return newMain;
+        });
+    };
+
     // Si le produit est encore en cours de chargement, afficher un message
     if (loading) {
         return <div>Chargement...</div>; // Message de chargement
@@ -63,10 +83,18 @@ function SingleProduct() {
                 <div className="page-product">
                     <div className="area-product">
                         <div className="image">
-                            <img src={product.image} alt={product.name} />
-                            <img style={{width:"50px", height: "auto"}} src={product.image2} alt={product.name} />
-                        </div>
+                            {/* Image principale */}
+                            <img src={mainImage} alt={product.name} />
 
+                            {/* Image secondaire, cliquable pour échanger */}
+                            <img
+                                style={{ width: "50px", height: "auto", cursor: 'pointer' }}
+                                src={secondaryImage}
+                                alt={product.name}
+                                onClick={swapImages}
+                            />
+                            <p style={{color:"lightgray" , fontSize: "10px"}}>Cliquez pour voir l'autre photo</p>
+                        </div>
 
                         <div className="info-product-single">
                             <div className="title-product">
@@ -86,17 +114,13 @@ function SingleProduct() {
                             {/* Gestion du compteur */}
                             <div className="counter">
                                 <button onClick={decrement}><FontAwesomeIcon icon={faMinus} /></button>
-                                    <p style={{width: "30px", textAlign:"center"}}>{count}</p>
+                                <p style={{ width: "30px", textAlign: "center" }}>{count}</p>
                                 <button onClick={increment}><FontAwesomeIcon icon={faPlus} /></button>
                             </div>
 
                             {/* Affichage du stock faible */}
                             <div>
-                                <h3>
-                                    {product.stock < 100 && (
-                                        <span className="important">Bientôt en rupture</span>
-                                    )}
-                                </h3>
+                                <h3>{product.stock < 100 && <span className="important">Bientôt en rupture</span>}</h3>
                             </div>
 
                             {/* Bouton pour ajouter au panier */}
@@ -114,18 +138,16 @@ function SingleProduct() {
                             {/* Informations supplémentaires avec Accordion */}
                             <div className="info-product">
                                 <h3>Informations sur le produit</h3>
-                                
+
                                 <Accordion>
                                     <AccordionSummary
-                                        expandIcon={<FontAwesomeIcon icon={faChevronDown}/>}
+                                        expandIcon={<FontAwesomeIcon icon={faChevronDown} />}
                                         aria-controls="panel1a-content"
                                         id="panel1a-header"
                                     >
-                                        Ingredients
+                                        Ingrédients
                                     </AccordionSummary>
-                                    <AccordionDetails>
-                                        {product.ingredients}
-                                    </AccordionDetails>
+                                    <AccordionDetails>{product.ingredients}</AccordionDetails>
                                 </Accordion>
 
                                 <Accordion>
@@ -136,9 +158,7 @@ function SingleProduct() {
                                     >
                                         Conseils
                                     </AccordionSummary>
-                                    <AccordionDetails>
-                                        {product.conseils}
-                                    </AccordionDetails>
+                                    <AccordionDetails>{product.conseils}</AccordionDetails>
                                 </Accordion>
                             </div>
                         </div>

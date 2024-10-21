@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { LoginContext } from '../../../context/login.context';
 import axios from "axios";
-import AddUser from './AddUser'; // Importez le composant AddUser
+import AddUser from './AddUser'; 
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,25 +13,22 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from '@mui/material';
+import { Snackbar, Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
 const UserDashboard = () => {
     const { userConnected } = useContext(LoginContext);
     
     const [showAddUserPopup, setShowAddUserPopup] = useState(false);
-    const [users, setUsers] = useState([]); // État pour gérer la liste des utilisateurs
-    const [page, setPage] = useState(0); // Page pour la pagination
-    const [rowsPerPage, setRowsPerPage] = useState(10); // Nombre de lignes par page
-    const [openConfirmDialog, setOpenConfirmDialog] = useState(false); // Pour la popup de confirmation
-    const [userToDelete, setUserToDelete] = useState(null); // Utilisateur sélectionné pour suppression
+    const [users, setUsers] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+    const [userToDelete, setUserToDelete] = useState(null);
 
-    // Récupérer les utilisateurs avec axios
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+
     useEffect(() => {
         axios.get('https://hathyre-server-api.onrender.com/api/users')
             .then(response => {
@@ -39,45 +36,52 @@ const UserDashboard = () => {
             })
             .catch(error => {
                 console.error('Erreur lors de la récupération des utilisateurs :', error);
+                setSnackbarMessage("Erreur lors de la récupération des utilisateurs.");
+                setSnackbarSeverity("error");
+                setSnackbarOpen(true);
             });
     }, []);
 
-    // Ouvrir la boîte de dialogue de confirmation
     const handleOpenConfirmDialog = (user) => {
-        setUserToDelete(user); // Définir l'utilisateur à supprimer
-        setOpenConfirmDialog(true); // Ouvrir la popup de confirmation
+        setUserToDelete(user);
+        setOpenConfirmDialog(true);
     };
 
-    // Fermer la boîte de dialogue de confirmation
     const handleCloseConfirmDialog = () => {
         setOpenConfirmDialog(false);
-        setUserToDelete(null); // Réinitialiser l'utilisateur sélectionné
+        setUserToDelete(null);
     };
 
-    // Supprimer un utilisateur
     const handleDeleteUser = () => {
         if (userToDelete) {
             axios.delete(`https://hathyre-server-api.onrender.com/api/delete/user/${userToDelete._id}`)
                 .then(() => {
-                    // Mettre à jour l'état après suppression
                     setUsers(users.filter(user => user._id !== userToDelete._id));
-                    handleCloseConfirmDialog(); // Fermer la boîte de dialogue
+                    setSnackbarMessage("Utilisateur supprimé avec succès.");
+                    setSnackbarSeverity("success");
+                    setSnackbarOpen(true);
+                    handleCloseConfirmDialog();
                 })
                 .catch(error => {
                     console.error('Erreur lors de la suppression de l\'utilisateur :', error);
+                    setSnackbarMessage("Erreur lors de la suppression de l'utilisateur.");
+                    setSnackbarSeverity("error");
+                    setSnackbarOpen(true);
                 });
         }
     };
 
-    // Gestion du changement de page
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
-    // Gestion du changement du nombre de lignes par page
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
+    };
+
+    const handleCloseSnackbar = () => {
+        setSnackbarOpen(false);
     };
 
     return (
@@ -121,7 +125,7 @@ const UserDashboard = () => {
                                                 <TableCell>
                                                     {userConnected._id !== user._id && (
                                                         <Button
-                                                            onClick={() => handleOpenConfirmDialog(user)} // Ouvrir la popup de confirmation
+                                                            onClick={() => handleOpenConfirmDialog(user)}
                                                             variant="contained"
                                                             color="error"
                                                             startIcon={<FontAwesomeIcon icon={faTrash} />}
@@ -178,6 +182,17 @@ const UserDashboard = () => {
                     </div>
                 </div>
             )}
+
+            {/* Snackbar for success or error messages */}
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+            >
+                <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </>
     );
 };
