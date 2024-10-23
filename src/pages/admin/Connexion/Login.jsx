@@ -43,7 +43,7 @@ function Login() {
         };
 
         try {
-            await emailjs.send('service_llonc98', 'template_b1ubafd', templateParams, 'BiPjs_8oO8Jd_jRhR');
+            await emailjs.send('service_zfgh8eu', 'template_0tvhtgg', templateParams, 'lHgH8IdU-rW5KqZ9m');
             console.log("E-mail de confirmation envoyé");
         } catch (error) {
             console.error("Erreur lors de l'envoi de l'e-mail de confirmation:", error);

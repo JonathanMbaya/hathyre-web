@@ -13,17 +13,19 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
-import { Snackbar, Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Snackbar, Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
+import EditUser from './EditUser';
 
 const UserDashboard = () => {
     const { userConnected } = useContext(LoginContext);
-    
-    const [showAddUserPopup, setShowAddUserPopup] = useState(false);
+    const [showAddUserPopup, setShowAddUserPopup] = useState(false); // Contrôle de la modale d'ajout d'utilisateur
     const [users, setUsers] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
+    const [showEditUserPopup, setShowEditUserPopup] = useState(false);
+    const [currentUserId, setCurrentUserId] = useState(null);
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -84,6 +86,15 @@ const UserDashboard = () => {
         setSnackbarOpen(false);
     };
 
+    function SlideTransition(props) {
+        return <Slide {...props} direction="down" />;
+    }
+
+    const handleEditUserClick = (userId) => {
+        setCurrentUserId(userId);
+        setShowEditUserPopup(true);
+    };
+
     return (
         <>
             <div className='board'>
@@ -117,10 +128,8 @@ const UserDashboard = () => {
                                                 <TableCell>{user.email}</TableCell>
                                                 <TableCell>{user.token}</TableCell>
                                                 <TableCell>{new Date(user.createdAt).toLocaleDateString()}</TableCell>
-                                                <TableCell>
-                                                    <a style={{color: 'black'}} href={`/admin/dashboard/user/edit/${user._id}`}>
-                                                        <FontAwesomeIcon style={{color: 'gray'}} icon={faEllipsis} />
-                                                    </a>
+                                                <TableCell onClick={() => handleEditUserClick(user._id)}>
+                                                    <FontAwesomeIcon style={{color: 'gray'}} icon={faEllipsis} />
                                                 </TableCell>
                                                 <TableCell>
                                                     {userConnected._id !== user._id && (
@@ -173,21 +182,40 @@ const UserDashboard = () => {
                 </DialogActions>
             </Dialog>
 
-            {/* Afficher la pop-up pour ajouter un utilisateur */}
-            {showAddUserPopup && (
-                <div className="popup">
-                    <div className="popup-content">
-                        <button onClick={() => setShowAddUserPopup(false)}>Fermer</button>
-                        <AddUser />
-                    </div>
-                </div>
-            )}
+            {/* Afficher la fenêtre modale pour ajouter un utilisateur */}
+            <Dialog
+                open={showAddUserPopup}
+                onClose={() => setShowAddUserPopup(false)}
+                aria-labelledby="add-user-dialog-title"
+                fullWidth
+                maxWidth="sm" // Ajuste la taille de la fenêtre modale
+            >
+                <DialogTitle id="add-user-dialog-title">
+                    Ajouter un Administrateur
+                    <Button
+                        onClick={() => setShowAddUserPopup(false)}
+                        sx={{ position: 'absolute', right: 8, top: 8 }}
+                    >
+                        <FontAwesomeIcon icon={faPlus} />
+                    </Button>
+                </DialogTitle>
+                <DialogContent dividers>
+                    <AddUser />
+                </DialogContent>
+            </Dialog>
 
-            {/* Snackbar for success or error messages */}
+            {/* Modal pour l'édition d'un utilisateur */}
+                {showEditUserPopup && (
+                    <EditUser id={currentUserId} open={showEditUserPopup} onClose={() => setShowEditUserPopup(false)} />
+                )}
+            {/* Snackbar pour les messages de succès ou d'erreur */}
+
             <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 open={snackbarOpen}
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
+                TransitionComponent={SlideTransition}  // Utilise SlideTransition pour gérer la direction
             >
                 <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
                     {snackbarMessage}

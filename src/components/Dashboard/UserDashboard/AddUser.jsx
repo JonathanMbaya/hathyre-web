@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Box, Typography } from '@mui/material';
+import { TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Box, Typography, IconButton } from '@mui/material';
 
 function AddUser() {
     const navigate = useNavigate();
@@ -49,10 +49,10 @@ function AddUser() {
 
     return (
         <Box sx={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
-            <Typography variant="h4" gutterBottom>
+            <Typography style={{textAlign: "center"}} variant="h4" gutterBottom>
                 Ajouter un Utilisateur
             </Typography>
-            <form onSubmit={handleAddUser}>
+            <form style={{display:"flex", flexDirection:"column"}} onSubmit={handleAddUser}>
                 <TextField
                     fullWidth
                     label="Nom"
@@ -83,7 +83,7 @@ function AddUser() {
                 />
                 <TextField
                     fullWidth
-                    label="Password"
+                    label="Mot de passe"
                     variant="outlined"
                     type="password"
                     margin="normal"
@@ -92,9 +92,9 @@ function AddUser() {
                     required
                 />
                 <Box sx={{ textAlign: 'center', marginTop: '2rem' }}>
-                    <Button variant="contained" color="primary" type="submit">
+                    <button style={{ padding: "1rem 3rem", backgroundColor: "blanchedalmond", border: "none" , borderRadius: ".5rem" }} type="submit">
                         Ajouter
-                    </Button>
+                    </button>
                 </Box>
             </form>
 
@@ -103,16 +103,27 @@ function AddUser() {
                 open={showPopup}
                 onClose={handleClosePopup}
             >
-                <DialogTitle>Succès</DialogTitle>
+                <DialogTitle>
+                    Succès
+                    <IconButton
+                        aria-label="close"
+                        onClick={handleClosePopup}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faXmark} />
+                    </IconButton>
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         L'utilisateur a été ajouté avec succès!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClosePopup} color="primary">
-                        <FontAwesomeIcon icon={faXmark} />
-                    </Button>
                     <Link to={`/admin/dashboard`} style={{ textDecoration: 'none' }}>
                         <Button color="primary">
                             Retour au Dashboard

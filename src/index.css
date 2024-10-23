@@ -87,6 +87,14 @@ h3 , .css-1nmqws6-MuiTypography-root {
   bottom: 0px;
 }
 
+.popup {
+  position: absolute;
+  z-index: 200000000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
 

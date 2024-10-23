@@ -1,115 +1,151 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate} from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { TextField, Button, Snackbar, Alert, Box, CircularProgress, Dialog, DialogContent, DialogTitle } from '@mui/material';
 
-function EditUser({ userId }) {
-  const navigate = useNavigate();
-  const { id } = useParams(); // Récupérer l'ID du produit à partir de l'URL
-  const [nom, setNom] = useState('');
-  const [prenom, setPrenom] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
+function EditUser({ open, onClose, id }) {
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    // Effectuer une requête pour récupérer les informations de l'utilisateur à éditer
-    axios.get(`https://hathyre-server-api.onrender.com/api/user/${id}`)
-      .then(response => {
-        const userData = response.data;
-        setNom(userData.nom);
-        setPrenom(userData.prenom);
-        setEmail(userData.email);
-        setEmail(userData.password);
-        // Ne récupérez pas le mot de passe depuis le backend pour des raisons de sécurité
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des informations de l\'utilisateur :', error);
-      });
-  }, [id]); // Utilisez userId comme dépendance pour effectuer la requête lorsque l'ID de l'utilisateur change
+    const [nom, setNom] = useState('');
+    const [prenom, setPrenom] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  const handleEditUser = async (e) => {
-    e.preventDefault();
+    const [loading, setLoading] = useState(true); // État pour le chargement
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
-    const updatedUser = {
-      nom,
-      prenom,
-      email,
-      password
-      // Vous pouvez choisir de mettre à jour le mot de passe ici si nécessaire
+    // Récupérer les données de l'utilisateur via l'API
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await axios.get(`https://hathyre-server-api.onrender.com/api/user/${id}`);
+                const userData = response.data;
+                setNom(userData.nom);
+                setPrenom(userData.prenom);
+                setEmail(userData.email);
+            } catch (error) {
+                console.error('Erreur lors de la récupération de l\'utilisateur :', error);
+                setSnackbarMessage("Erreur lors du chargement des données.");
+                setSnackbarSeverity("error");
+                setSnackbarOpen(true);
+            } finally {
+                setLoading(false); // Fin du chargement
+            }
+        };
+
+        fetchUser();
+    }, [id]);
+
+    // Gérer la soumission du formulaire de mise à jour
+    const handleEditUser = async (e) => {
+        e.preventDefault();
+
+        const updatedUser = {
+            nom,
+            prenom,
+            email,
+            password
+        };
+
+        try {
+            await axios.put(`https://hathyre-server-api.onrender.com/api/update/user/${id}`, updatedUser);
+            setSnackbarMessage("Utilisateur mis à jour avec succès.");
+            setSnackbarSeverity("success");
+            setSnackbarOpen(true);
+            setTimeout(() => {
+                onClose(); // Ferme la modale après la mise à jour
+                navigate('/admin/dashboard'); // Rediriger vers le tableau de bord après la mise à jour
+            }, 2000);
+        } catch (error) {
+            console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+            setSnackbarMessage("Erreur lors de la mise à jour.");
+            setSnackbarSeverity("error");
+            setSnackbarOpen(true);
+        }
     };
 
-    try {
-      const response = await axios.put(`https://hathyre-server-api.onrender.com/api/update/user/${id}`, updatedUser);
-      console.log('Réponse du serveur :', response.data);
-      // Afficher la pop-up de succès
-      setShowPopup(true);
-    } catch (error) {
-      console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+    const handleCloseSnackbar = () => {
+        setSnackbarOpen(false);
+    };
+
+    if (loading) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </Box>
+        ); // Affichage d'un indicateur de chargement
     }
-  };
 
+    return (
+        <Dialog open={open} onClose={onClose}>
+          <DialogTitle style={{textAlign: "center"}}>Éditer l'utilisateur</DialogTitle>
+            <DialogContent>
+              <Box sx={{ padding: '1rem' }}>
+                <form style={{display:"flex", flexDirection:"column"}} onSubmit={handleEditUser}>
+                      <TextField
+                        fullWidth
+                        label="Nom"
+                        variant="outlined"
+                        margin="normal"
+                        value={nom}
+                        onChange={(e) => setNom(e.target.value)}
+                        required
+                      />
 
-  const returnButton = () => {
-    navigate('/dashboard');
-  }
+                      <TextField
+                          fullWidth
+                          label="Prénom"
+                          variant="outlined"
+                          margin="normal"
+                          value={prenom}
+                          onChange={(e) => setPrenom(e.target.value)}
+                          required
+                      />
+                      <TextField
+                        fullWidth
+                        label="Email"
+                        variant="outlined"
+                        type="email"
+                        margin="normal"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
 
-  return (
-    <div>
-      <h1> 
-        <a href="admin/dashboard"><FontAwesomeIcon onClick={returnButton} icon={faCircleArrowLeft} /></a> 
-        Modifier l'utilisateur
-      </h1>
-      <form onSubmit={handleEditUser}>
-        <div>
-          <label htmlFor="nom">Nom</label>
-          <input
-            type="text"
-            id="nom"
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="prenom">Prénom</label>
-          <input
-            type="text"
-            id="prenom"
-            value={prenom}
-            onChange={(e) => setPrenom(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Modifier</button>
-      </form>
-      {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h2>L'utilisateur a été modifié avec succès!</h2>
-            <button onClick={() => setShowPopup(false)}>Fermer</button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+                      <TextField
+                        fullWidth
+                        label="password"
+                        variant="outlined"
+                        type="password"
+                        margin="normal"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                      <Box sx={{ textAlign: 'center', marginTop: '2rem' }}>
+                          <Button variant="contained" color="primary" type="submit">
+                              Mettre à jour
+                          </Button>
+                      </Box>
+                    </form>
+                </Box>
+            </DialogContent>
+
+            {/* Snackbar pour les messages de succès ou d'erreur */}
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+            >
+                <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
+        </Dialog>
+    );
 }
 
 export default EditUser;

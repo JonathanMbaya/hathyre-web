@@ -60,11 +60,10 @@ function CheckoutForm() {
         }
     }, [userConnected]);
 
-    // Gestion de la soumission du formulaire et du paiement Stripe
     const handleStripeSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
-
+    
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardElement),
@@ -79,7 +78,7 @@ function CheckoutForm() {
                 },
             },
         });
-
+    
         if (error) {
             console.log(error.message);
             setLoading(false);
@@ -87,19 +86,57 @@ function CheckoutForm() {
             setShowPopup(true);
             return;
         }
-
+    
         try {
             const { id } = paymentMethod;
-            const response = await axios.post('https://hathyre-server-api.onrender.com/stripe/load', {
+    
+            // Envoyer la requête pour créer la commande avec le paiement
+            const response = await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
+                nom: customerInfo.lastName,
+                prenom: customerInfo.firstName,
+                email: customerInfo.email,
+                mobile: customerInfo.mobile,
+                address: customerInfo.address,
+                city: customerInfo.city,
+                postalCode: customerInfo.postalCode,
+                country: customerInfo.country,
+                articles: cartItems.map(item => ({
+                    productId: item._id,
+                    productName: item.name,
+                    quantity: item.quantity,
+                    price: item.price
+                })),
                 amount: totalPrice,
-                id: id,
+                date: new Date(),
+                status: 'En cours de préparation',
+                paymentMethod: id, // Envoyer l'ID de la méthode de paiement
             });
 
-            if (response.data.success) {
-                await processOrder();
+            
+
+            if (response.data.order) {
+                await sendConfirmationEmail(response.data.order._id);
                 setPopupMessage("Merci pour votre commande !");
                 setShowPopup(true);
             }
+
+            // Mise à jour du stock pour chaque produit
+            for (const item of cartItems) {
+                const updatedStock = item.stock - item.quantity;
+                await axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${item._id}`, {
+                    stock: updatedStock,
+                });
+            }
+    
+            if (userConnected) {
+                const updatedMontDepense = isConnected.montantDepense + totalPrice;
+                await axios.put(`https://hathyre-server-api.onrender.com/api/update/client/${userConnected._id}`, {
+                    montantDepense: updatedMontDepense,
+                });
+            }
+
+
+
         } catch (error) {
             console.log("Erreur lors du traitement de la commande ou du paiement:", error);
             setPopupMessage("Une erreur est survenue. Veuillez réessayer.");
@@ -108,49 +145,11 @@ function CheckoutForm() {
             setLoading(false);
         }
     };
+    
 
-    // Gestion de la soumission de la commande
-    const processOrder = async () => {
-        await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
-            nom: customerInfo.lastName,
-            prenom: customerInfo.firstName,
-            email: customerInfo.email,
-            mobile: customerInfo.mobile,
-            address: customerInfo.address,
-            city: customerInfo.city,
-            postalCode: customerInfo.postalCode,
-            country: customerInfo.country,
-            articles: cartItems.map(item => ({
-                productId: item._id,
-                productName: item.name,
-                quantity: item.quantity,
-                price: item.price
-            })),
-            amount: totalPrice,
-            date: new Date(),
-            status: 'En cours de préparation'
-        });
-
-        await sendConfirmationEmail();
-
-        // Mise à jour du stock pour chaque produit
-        for (const item of cartItems) {
-            const updatedStock = item.stock - item.quantity;
-            await axios.put(`https://hathyre-server-api.onrender.com/api/update/product/${item._id}`, {
-                stock: updatedStock,
-            });
-        }
-
-        if (userConnected) {
-            const updatedMontDepense = isConnected.montantDepense + totalPrice;
-            await axios.put(`https://hathyre-server-api.onrender.com/api/update/client/${userConnected._id}`, {
-                montantDepense: updatedMontDepense,
-            });
-        }
-    };
-
-    const sendConfirmationEmail = async () => {
+    const sendConfirmationEmail = async (orderIdEmail) => {
         const templateParams = {
+            id : orderIdEmail,
             firstName: customerInfo.firstName,
             lastName: customerInfo.lastName,
             email: customerInfo.email,

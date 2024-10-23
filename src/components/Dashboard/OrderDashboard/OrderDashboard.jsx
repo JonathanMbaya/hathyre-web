@@ -76,10 +76,10 @@ const OrderDashboard = () => {
     }
 
     const refundData = {
-      paymentIntentId: order.paymentIntentId,
+      paymentIntentId: order.paymentIntentId.split('_secret_')[0],
       amount: parseFloat(amount),
-      orderId: "pi_3QBNM0LEHh2o4Mgi1ZRwWsgH",
-      userEmail: order.userEmail,
+      orderId: order._id,
+      userEmail: order.email,
     };
 
     processRefund(refundData);
@@ -87,10 +87,10 @@ const OrderDashboard = () => {
 
   const processRefund = async (refundData) => {
     try {
-      const response = await axios.post('http://localhost:8080/stripe/refund', refundData);
+      const response = await axios.post('https://hathyre-server-api.onrender.com/api/stripe/refund', refundData);
       if (response.data.success) {
         alert('Remboursement effectué avec succès');
-        setOrders(prevOrders => prevOrders.map(order => 
+        setOrders(prevOrders => prevOrders.map(order =>
           order._id === refundData.orderId ? { ...order, status: 'Remboursé' } : order
         ));
       } else {
@@ -110,7 +110,7 @@ const OrderDashboard = () => {
         const order = orders.find((order) => order._id === orderId);
         if (order) {
           const amountInCents = Math.round(order.montantTotal * 100);
-          await processRefund({ paymentIntentId: order.paymentIntentId, amount: amountInCents });
+          await processRefund({ paymentIntentId: order.id_stripe, amount: amountInCents });
         }
       }
 
