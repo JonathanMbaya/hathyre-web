@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: flex-start;
+    margin-bottom: 4rem ;
 }
 
 .form-checkout{
@@ -10,10 +11,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 5%;
-    padding-right: 5%;
     margin-top: 0rem;
-    border-left: .5 solid red;
 }
 
 .input-bank-card {
@@ -37,13 +35,16 @@
     justify-content: center;
     align-items: center;
     max-width: 400px;
+    background-color: blanchedalmond;
+    padding: 5%;
+    border-radius: 1rem;
 }
 
-.recap-product-card{
+.recap-product-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 250px;
+    min-width: 300px;
 }
 
 .recap-product-card p , .recap-product-card .icon  {
@@ -58,5 +59,4 @@
     text-align: center;
     font-size: 40px;
     font-weight: 900;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1));
 }

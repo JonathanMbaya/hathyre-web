@@ -56,14 +56,6 @@ const Header = ({ currentPage }) => {
                     style={{borderRadius: "1rem 0rem 0rem 1rem"}}
                     />
                 </div>
-
-                {/* Boutons de contrôle du carousel */}
-                {/* <button className='carousel-control prev' onClick={prevImage}>
-                    <FontAwesomeIcon icon={faChevronLeft} />
-                </button>
-                <button className='carousel-control next' onClick={nextImage}>
-                    <FontAwesomeIcon icon={faChevronRight} />
-                </button> */}
             </div>
           </div>
         </div>

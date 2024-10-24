@@ -13,6 +13,7 @@ import LegalMentions from "./LegalMentions.jsx";
 import PolitiqueConfidentialite from './PolitiqueConfidentialite.jsx';
 import TermsConditions from './TermsConditions.jsx';
 import Error from './Error.jsx';
+import ValidationPayment from './ValidationPayment.jsx';
 
 function PublicRouter ()  {
 
@@ -132,6 +133,15 @@ function PublicRouter ()  {
                     }}
                 />
 
+
+                <Route
+                    path="/payment-validate/3D-secure/"
+                    element={<ValidationPayment/>}
+                    render={() => {
+                        setCurrentPage('Error');
+                        return <ValidationPayment/>;
+                    }}
+                />
             </Routes>
         </>
     );

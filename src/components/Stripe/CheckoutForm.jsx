@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { Grid, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl, Box, CircularProgress } from '@mui/material';
+import { Container, Grid, Typography, AccordionDetails, Accordion, AccordionSummary, TextField, Button, Select, MenuItem, InputLabel, FormControl, Box, CircularProgress } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faArrowCircleDown } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import emailjs from '@emailjs/browser';
 import Popup from '../PopUp/PopUp.jsx';
 import { CartContext } from '../../context/card.context';
 import { LoginContext } from '../../context/login.context.jsx';
 import { contactConfig } from '../../utils/config.email.js';
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"; // Importation de PayPal
+// import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"; // Importation de PayPal
 import './checkout.css';
 
 function CheckoutForm() {
@@ -91,7 +91,7 @@ function CheckoutForm() {
             const { id } = paymentMethod;
     
             // Envoyer la requête pour créer la commande avec le paiement
-            const response = await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
+            const response = await axios.post('http://localhost:8080/api/neworders', {
                 nom: customerInfo.lastName,
                 prenom: customerInfo.firstName,
                 email: customerInfo.email,
@@ -112,7 +112,14 @@ function CheckoutForm() {
                 paymentMethod: id, // Envoyer l'ID de la méthode de paiement
             });
 
-            
+            if (response.data.success) {
+                console.log('Paiement réussi !');
+            } else if (response.data.requires_action) {
+                // Rediriger l'utilisateur vers l'URL d'authentification
+                window.location.href = response.data.next_action.redirect_to_url.url;
+            } else {
+                console.log('Erreur lors du paiement');
+            }
 
             if (response.data.order) {
                 await sendConfirmationEmail(response.data.order._id);
@@ -134,8 +141,6 @@ function CheckoutForm() {
                     montantDepense: updatedMontDepense,
                 });
             }
-
-
 
         } catch (error) {
             console.log("Erreur lors du traitement de la commande ou du paiement:", error);
@@ -205,17 +210,33 @@ function CheckoutForm() {
     };
 
     return (
-        <div className='resume-checkout' style={{ width: '100%' }}>
+        <div className='resume-checkout'>
+
             {/* Partie récapitulatif */}
-            <div className='form-checkout' style={{ maxWidth: 400 }}>
+            <div className='form-checkout recap' style={{ maxWidth: 400 }}>
                 <h2>Votre panier</h2>
                 <div className='recap-products'>
                     <h2 className='total-price'>{parseFloat(totalPrice.toFixed(2))} EUR</h2>
                     {totalProduct > 1 ? <p>{totalProduct} Articles</p> : <p>{totalProduct} Article</p>}
                     {cartItems.map((item, index) => (
                         <div className='recap-product-card' key={index}>
+
                             <div>
-                                <p>{item.quantity} X</p>
+                                <div style={{
+                                    position: 'relative',
+                                    display:'flex',
+                                    justifyContent:'center',
+                                    alignItems:'center',
+                                    zIndex:'10000 !important',
+                                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                                    borderRadius: '12px',
+                                    padding: '4px',
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                    height:'10px',
+                                    width:'10px',
+                                }}>{item.quantity}</div>
+                                <img style={{width: '30px', height: '30px', objectFit: 'cover', borderRadius: '4px'}} src={item.image} alt={item.name}/>
                             </div>
                             <p className='name'>{item.name}</p>
                             <p>{item.price}</p>
@@ -225,179 +246,193 @@ function CheckoutForm() {
                     ))}
                 </div>
             </div>
-
+            
             {/* Partie informations sur la commande */}
             <Grid item xs={12} md={6}>
-                <form className='form-checkout' onSubmit={handleStripeSubmit} style={{ maxWidth: 300 }}>
-                    
-                    <Box my={2}>
-                        <h2>Vos informations</h2>
-                        <TextField
-                            fullWidth
-                            label="Prénom"
-                            name="firstName"
-                            value={customerInfo.firstName}
-                            onChange={handleInputChange}
-                            required
-                            margin="normal"
-                        />
-                        <TextField
-                            fullWidth
-                            label="Nom"
-                            name="lastName"
-                            value={customerInfo.lastName}
-                            onChange={handleInputChange}
-                            required
-                            margin="normal"
-                        />
-                        <TextField
-                            fullWidth
-                            label="Adresse email"
-                            name="email"
-                            value={customerInfo.email}
-                            onChange={handleInputChange}
-                            required
-                            type="email"
-                            margin="normal"
-                        />
-                        <TextField
-                            fullWidth
-                            label="Numéro de téléphone"
-                            name="mobile"
-                            value={customerInfo.mobile}
-                            onChange={handleInputChange}
-                            required
-                            type="tel"
-                            margin="normal"
-                        />
-                        <h2>Adresse de livraison</h2>
-                        <TextField
-                            fullWidth
-                            label="Adresse"
-                            name="address"
-                            value={customerInfo.address}
-                            onChange={handleInputChange}
-                            required
-                            margin="normal"
-                        />
-                        <TextField
-                            fullWidth
-                            label="Ville"
-                            name="city"
-                            value={customerInfo.city}
-                            onChange={handleInputChange}
-                            required
-                            margin="normal"
-                        />
-                        <TextField
-                            fullWidth
-                            label="Code postal"
-                            name="postalCode"
-                            value={customerInfo.postalCode}
-                            onChange={handleInputChange}
-                            required
-                            margin="normal"
-                        />
-                        <FormControl fullWidth margin="normal">
-                            <InputLabel>Pays</InputLabel>
-                            <Select
-                                name="country"
-                                value={customerInfo.country}
+                <Accordion>
+                    <AccordionSummary expandIcon={<FontAwesomeIcon icon={faArrowCircleDown}/>}>
+                        <Typography variant="h6">1. Coordonnées</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <form className='form-checkout' onSubmit={handleStripeSubmit}>
+                            <Box my={2}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField
+                                            fullWidth
+                                            label="Prénom"
+                                            name="firstName"
+                                            value={customerInfo.firstName}
+                                            onChange={handleInputChange}
+                                            required
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField
+                                            fullWidth
+                                            label="Nom"
+                                            name="lastName"
+                                            value={customerInfo.lastName}
+                                            onChange={handleInputChange}
+                                            required
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            label="Adresse email"
+                                            name="email"
+                                            value={customerInfo.email}
+                                            onChange={handleInputChange}
+                                            required
+                                            type="email"
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            label="Numéro de téléphone"
+                                            name="mobile"
+                                            value={customerInfo.mobile}
+                                            onChange={handleInputChange}
+                                            required
+                                            type="tel"
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                </Grid>
+                                
+                            </Box>
+                        </form>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion>
+                    <AccordionSummary expandIcon={<FontAwesomeIcon icon={faArrowCircleDown}/>}>
+                        <Typography variant="h6">2. Livraison</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Box my={2}>
+                            <TextField
+                                fullWidth
+                                label="Adresse"
+                                name="address"
+                                value={customerInfo.address}
                                 onChange={handleInputChange}
                                 required
-                            >
-                                <MenuItem value="FR">France</MenuItem>
-                                {/* Ajoutez d'autres pays si nécessaire */}
-                            </Select>
-                        </FormControl>
-                    </Box>
+                                margin="normal"
+                            />
+                            <TextField
+                                fullWidth
+                                label="Complément (Appart, Bis ...)"
+                                name="complement"
+                                value={customerInfo.complement}
+                                onChange={handleInputChange}
+                                margin="normal"
+                            />
+                            <TextField
+                                fullWidth
+                                label="Ville"
+                                name="city"
+                                value={customerInfo.city}
+                                onChange={handleInputChange}
+                                required
+                                margin="normal"
+                            />
+                            <TextField
+                                fullWidth
+                                label="Code postal"
+                                name="postalCode"
+                                value={customerInfo.postalCode}
+                                onChange={handleInputChange}
+                                required
+                                margin="normal"
+                            />
+                            <FormControl fullWidth margin="normal">
+                                <InputLabel>Pays</InputLabel>
+                                <Select
+                                    name="country"
+                                    value={customerInfo.country}
+                                    onChange={handleInputChange}
+                                    required
+                                >
+                                    <MenuItem value="FR">France</MenuItem>
+                                    <MenuItem value="BE">Belgique</MenuItem>
+                                    <MenuItem value="CH">Suisse</MenuItem>
+                                    {/* Ajoutez d'autres pays si nécessaire */}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </AccordionDetails>
+                </Accordion>
 
-                    {/* Section pour le paiement par carte */}
-                    <Typography variant="h6">Paiement par carte</Typography>
-                    <Box my={2}>
-                        <CardElement className="input-bank-card" options={{ hidePostalCode: true }} />
-                    </Box>
-                    <Button type="submit" variant="contained" color="primary" disabled={loading} fullWidth>
-                        {loading ? <CircularProgress size={24} /> : "Payer par carte"}
-                    </Button>
-                </form>
-                
-                {/* Section pour le paiement PayPal */}
-                <div id="paypal-button-container" style={{ marginTop: '20px' }}></div>
-                <PayPalScriptProvider options={{ "client-id": "YOUR_PAYPAL_CLIENT_ID" }}>
-                    <PayPalButtons
-                        style={{
-                            shape: 'rect',
-                            layout: 'vertical',
-                            color: 'gold',
-                            label: 'paypal',
-                        }}
-                        createOrder={async () => {
-                            try {
-                                const response = await fetch("/api/orders", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify({
-                                        cart: cartItems.map(item => ({
-                                            id: item._id,
-                                            quantity: item.quantity,
-                                        })),
-                                        totalPrice: totalPrice.toFixed(2) // Format du prix à deux décimales
-                                    }),
-                                });
+                <Accordion>
+                    <AccordionSummary expandIcon={<FontAwesomeIcon icon={faArrowCircleDown}/>}>
+                        <Typography variant="h6">3. Moyen de paiement</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Box my={2}>
+                            <CardElement className="input-bank-card" options={{ hidePostalCode: true }} />
+                        </Box>
+                        <Button style={{marginBottom: "2rem"}} type="submit" variant="contained" color="primary" disabled={loading} fullWidth>
+                            {loading ? <CircularProgress size={24} /> : "Payer par carte"}
+                        </Button>
+                        <div className='second-area-footer'>
+                            <div className='icon-money'>
+                                <img src={process.env.PUBLIC_URL + '/money-way/cc-visa.svg'} alt="Logo Hathyre" />
+                                <img src={process.env.PUBLIC_URL + '/money-way/cc-mastercard.svg'} alt="Logo Hathyre" />
+                                <img src={process.env.PUBLIC_URL + '/money-way/cc-paypal.svg'} alt="Logo Hathyre" />
+                                <img src={process.env.PUBLIC_URL + '/money-way/cc-stripe.svg'} alt="Logo Hathyre" />
+                            </div>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
 
-                                const orderData = await response.json();
+                <Container maxWidth="md" style={{ margin: '1rem auto' }}>
 
-                                if (orderData.id) {
-                                    return orderData.id;
-                                }
-                                const errorDetail = orderData?.details?.[0];
-                                const errorMessage = errorDetail
-                                    ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
-                                    : JSON.stringify(orderData);
-
-                                throw new Error(errorMessage);
-                            } catch (error) {
-                                console.error(error);
-                                setPopupMessage(`Erreur lors de la création de la commande PayPal : ${error.message}`);
-                                setShowPopup(true);
-                            }
-                        }}
-                        onApprove={async (data, actions) => {
-                            try {
-                                const response = await fetch(`/api/orders/${data.orderID}/capture`, {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                });
-
-                                const orderData = await response.json();
-                                const errorDetail = orderData?.details?.[0];
-
-                                if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
-                                    return actions.restart();
-                                } else if (errorDetail) {
-                                    throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
-                                } else if (!orderData.purchase_units) {
-                                    throw new Error(JSON.stringify(orderData));
-                                } else {
-                                    const transaction =
-                                        orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
-                                        orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
-                                    setPopupMessage(`Transaction ${transaction.status}: ${transaction.id}`);
-                                    setShowPopup(true);
-                                }
-                            } catch (error) {
-                                console.error(error);
-                                setPopupMessage(`Désolé, votre transaction n'a pas pu être traitée...<br><br>${error}`);
-                                setShowPopup(true);
-                            }
-                        }}
-                    />
-                </PayPalScriptProvider>
+                    <Typography 
+                        variant="body2" 
+                        paragraph 
+                        style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                    >
+                        En créant un compte ou en passant commande sur Hathyre, vous acceptez nos
+                        <Link to="/conditions-ventes" color="primary" style={{ marginLeft: '0.5rem' }}>
+                            Conditions Générales de Vente
+                        </Link>. <br /> 
+                        Vous consentez au traitement de vos données personnelles, conformément à notre 
+                        <Link to="/politique-de-confidentialite" color="primary" style={{ marginLeft: '0.5rem' }}>
+                            Politique de Confidentialité
+                        </Link>.
+                    </Typography>
+                    <Typography 
+                        variant="body2" 
+                        paragraph 
+                        style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                    >
+                        Les informations vous concernant sont destinées à notre société Hathyre, responsable du traitement, afin de traiter vos commandes et de vous envoyer des offres et communications Hathyre par email ou SMS.
+                    </Typography>
+                    <Typography 
+                        variant="body2" 
+                        paragraph 
+                        style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                    >
+                        Conformément à la réglementation sur les données personnelles, vous disposez d’un droit d’accès, de rectification et d’opposition au traitement de vos données. Pour exercer vos droits, il vous suffit de nous contacter via ce formulaire en indiquant votre nom, prénom, adresse, email et un justificatif d’identité. Vous pouvez vous désinscrire à tout moment en cliquant sur le lien de désinscription inclus dans toutes nos communications.
+                    </Typography>
+                    <Typography 
+                        variant="body2" 
+                        paragraph 
+                        style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                    >
+                        Pour plus d’informations, n’hésitez pas à consulter notre page 
+                        <Link to="/faq" color="primary" style={{ marginLeft: '0.5rem' }}>
+                            Questions Fréquemment Posées
+                        </Link>.
+                    </Typography>
+                </Container>
+            
             </Grid>
 
             {showPopup && (

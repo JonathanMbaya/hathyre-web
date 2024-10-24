@@ -37,7 +37,15 @@ export const CartProvider = ({ children }) => {
                 setCartItems(updatedCartItems);
             } else {
                 // Sinon, ajoutez le nouveau produit au panier avec la quantité spécifiée
-                setCartItems([...cartItems, { ...product, price: parseFloat(finalPrice.toFixed(2)), quantity: count }]);
+                setCartItems([
+                    ...cartItems, 
+                    { 
+                        ...product, 
+                        price: parseFloat(finalPrice.toFixed(2)), 
+                        quantity: count,
+                        imageUrl: product.imageUrl // Assurez-vous d'inclure l'URL de l'image ici
+                    }
+                ]);
             }
         } catch (error) {
             console.error("Erreur lors de la récupération des informations du produit :", error);
