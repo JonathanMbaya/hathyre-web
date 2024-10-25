@@ -42,6 +42,7 @@ input {
     padding: 2rem;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
 }
 
 .login-text {
@@ -152,6 +153,15 @@ input {
   height: 80vh;
 }
 
+
+.signup{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .input-form{
     display: flex;
     flex-direction: column;
@@ -163,6 +173,16 @@ input {
   position: absolute;
   left: 2rem;
   top: 2rem;
+}
+
+.backgroundBlock{
+  position: fixed;
+  top: 0rem;
+  right: 0rem;
+  z-index: -200000;
+  height: 100%;
+  width: 50%;
+  background-color: #EACD9A;
 }
 
 

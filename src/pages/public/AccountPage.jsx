@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import PersonalData from "../../components/Account/PersonalData.jsx";
 import MyFavorites from "../../components/Account/MyFavorites.jsx";
+import MyPurchases from '../../components/Account/MyPurchases.jsx';
 import Footer from "../../components/Footer/Footer.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo, faHeart, faArrowRightFromBracket, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faHeart, faArrowRightFromBracket, faBars, faTimes, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Importer useNavigate
 import { LoginContext } from "../../context/login.context.jsx";
@@ -22,6 +23,8 @@ function AccountPage() {
                 return <PersonalData />;
             case 'favorites':
                 return <MyFavorites />;
+            case 'purchases':
+                return <MyPurchases/>;
             default:
                 return <PersonalData />;
         }
@@ -89,6 +92,12 @@ function AccountPage() {
                             </span>
                             Mes favoris
                         </li>
+                        <li onClick={() => { setActiveTab('purchases'); setIsSidebarOpen(false); }} style={{ cursor: 'pointer', marginBottom: '10px', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
+                            <span style={{ padding: ".5rem" }}>
+                                <FontAwesomeIcon icon={faHeart} />
+                            </span>
+                            Mes commandes
+                        </li>
                     </ul>
 
                     <ul style={{ margin: "0", padding: "0" }}>
@@ -121,6 +130,12 @@ function AccountPage() {
                                     <FontAwesomeIcon icon={faHeart} />
                                 </span>
                                 Mes favoris
+                            </li>
+                            <li onClick={() => { setActiveTab('purchases'); setIsSidebarOpen(false); }} style={{ cursor: 'pointer', marginBottom: '10px', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
+                                <span style={{ padding: ".5rem" }}>
+                                    <FontAwesomeIcon icon={faTruck} />                                
+                                </span>
+                                Mes commandes
                             </li>
                         </ul>
 

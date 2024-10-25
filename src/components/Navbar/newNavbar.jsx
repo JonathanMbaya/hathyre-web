@@ -91,6 +91,12 @@ function NewNavbar() {
                         </li> :
                         <li>
                             <Link to="/account" className="link-without-decoration"><FontAwesomeIcon icon={faCircleUser} size="2x" /></Link>
+                            <span style={{
+                                height:'5px',
+                                width: '5px',
+                                backgroundColor: 'green',
+                                borderRadius: '100%'
+                            }}></span>
                         </li>
 
                     }

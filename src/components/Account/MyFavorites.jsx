@@ -61,9 +61,9 @@ function MyFavorites() {
 
     return (
         <Box sx={{ padding: '2rem' }}>
-            <Typography variant="h4" gutterBottom>
+            <h2>
                 Mes favoris
-            </Typography>
+            </h2>
 
             {favoriteProducts.length > 0 ? (
                 <Grid container spacing={10}>

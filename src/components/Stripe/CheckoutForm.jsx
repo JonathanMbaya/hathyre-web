@@ -29,9 +29,10 @@ function CheckoutForm() {
         email: '',
         mobile: '',
         address: '',
+        complement: '',
         city: '',
         postalCode: '',
-        country: 'FR', // Valeur par défaut
+        country: '',
         date: '',
     });
     const [loading, setLoading] = useState(false);
@@ -72,6 +73,7 @@ function CheckoutForm() {
                 email: customerInfo.email,
                 address: {
                     line1: customerInfo.address,
+                    line2: customerInfo.complement,
                     city: customerInfo.city,
                     postal_code: customerInfo.postalCode,
                     country: customerInfo.country,
@@ -97,12 +99,14 @@ function CheckoutForm() {
                 email: customerInfo.email,
                 mobile: customerInfo.mobile,
                 address: customerInfo.address,
+                complement: customerInfo.complement,
                 city: customerInfo.city,
                 postalCode: customerInfo.postalCode,
                 country: customerInfo.country,
                 articles: cartItems.map(item => ({
                     productId: item._id,
                     productName: item.name,
+                    productImage: item.imageUrl,
                     quantity: item.quantity,
                     price: item.price
                 })),
@@ -110,6 +114,7 @@ function CheckoutForm() {
                 date: new Date(),
                 status: 'En cours de préparation',
                 paymentMethod: id, // Envoyer l'ID de la méthode de paiement
+                userId: userConnected?._id,
             });
 
             if (response.data.success) {
@@ -159,6 +164,7 @@ function CheckoutForm() {
             lastName: customerInfo.lastName,
             email: customerInfo.email,
             address: customerInfo.address,
+            complement: customerInfo.complement,
             city: customerInfo.city,
             postalCode: customerInfo.postalCode,
             country: customerInfo.country,
@@ -377,7 +383,7 @@ function CheckoutForm() {
                         <Box my={2}>
                             <CardElement className="input-bank-card" options={{ hidePostalCode: true }} />
                         </Box>
-                        <Button style={{marginBottom: "2rem"}} type="submit" variant="contained" color="primary" disabled={loading} fullWidth>
+                        <Button onClick={handleStripeSubmit} style={{marginBottom: "2rem"}} type="submit" variant="contained" color="primary" disabled={loading} fullWidth>
                             {loading ? <CircularProgress size={24} /> : "Payer par carte"}
                         </Button>
                         <div className='second-area-footer'>

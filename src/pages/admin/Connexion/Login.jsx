@@ -7,6 +7,8 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { LoginContext } from '../../../context/login.context.jsx';
 import { signup, login } from '../../../services/api/user.js'; 
 import emailjs from '@emailjs/browser';
+import { Container, Typography } from '@mui/material';
+
 
 import './AdminLogin.css';
 
@@ -139,151 +141,217 @@ const formikSignUp = useFormik({
     }, [userConnected, navigate]);
 
     return (
-        <div className="logo-container">
-            <div className='logo-container' style={{ display: 'flex', justifyContent: 'center' }}>
-                <img
-                    src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
-                    alt="Logo de l'application"
-                    className="logo-img"
-                />
-                <div className="retour">
-                    <Link to="/">
-                        <FontAwesomeIcon icon={faCircleArrowLeft} size="4x"/>
-                    </Link>
+        <>
+            <div className='backgroundBlock'>
+
+            </div>
+        
+            <div>
+
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <img
+                        src={process.env.PUBLIC_URL + '/hathyre-logo.png'}
+                        alt="Logo de l'application"
+                        className="logo-img"
+                    />
+                    <div className="retour">
+                        <Link to="/">
+                            <FontAwesomeIcon icon={faCircleArrowLeft} size="4x"/>
+                        </Link>
+                    </div>
+                </div>
+
+                <div className='login'>
+                    {/* Formulaire de Connexion */}
+                    <div>
+                        <h1>J'ai déjà un compte</h1>
+                        <p>Connectez-vous à votre compte existant</p>
+
+                        <form className="login-form" onSubmit={formikLogin.handleSubmit}>
+                            <div className='input-form'>
+                                <label htmlFor="Email">Email</label>
+                                <input
+                                    type="email"
+                                    className="login-username"
+                                    required
+                                    placeholder="@example.com"
+                                    {...formikLogin.getFieldProps('clientEmail')}
+                                />
+                                {formikLogin.touched.clientEmail && formikLogin.errors.clientEmail ? (
+                                    <div className="error">{formikLogin.errors.clientEmail}</div>
+                                ) : null}
+                            </div>
+                            <div className='input-form'>
+                                <label htmlFor="Password">Mot de passe</label>
+                                <input
+                                    type="password"
+                                    className="login-password"
+                                    required
+                                    placeholder="Entrez votre mot de passe"
+                                    {...formikLogin.getFieldProps('clientPassword')}
+                                />
+                                {formikLogin.touched.clientPassword && formikLogin.errors.clientPassword ? (
+                                    <div className="error">{formikLogin.errors.clientPassword}</div>
+                                ) : null}
+                            </div>
+                            {loginError && <div className="error">{loginError}</div>}
+
+                            <input type="submit" name="Login" value="M'identifier" className="login-submit" />
+                        </form>
+                        
+                        {/* Affichage de la pop-up si showPopup est vrai */}
+                        {loginError && (
+                            <div style={{color:"red"}} className="popup">
+                                <p>{loginError}</p>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Formulaire d'Inscription */}
+                    <div className='signup'>
+                        <h1>Nouveau Client</h1>
+                        <p>Créez votre espace Hathyre pour une expérience d'achat personnalisée.</p>
+
+                        <form className="login-form" onSubmit={formikSignUp.handleSubmit}>
+                            <div className='input-form'>
+                                <label htmlFor="Name">Votre nom *</label>
+                                <input
+                                    type="text"
+                                    className="login-username"
+                                    required={true}
+                                    placeholder="Smith"
+                                    {...formikSignUp.getFieldProps('nom')}
+                                />
+                                {formikSignUp.touched.nom && formikSignUp.errors.nom ? (
+                                    <div style={{ color: "red", maxWidth: '300px', fontSize: '10px' }} className="error">{formikSignUp.errors.nom}</div>
+                                ) : null}
+                            </div>
+                            <div className='input-form'>
+                                <label htmlFor="prenom">Votre prénom *</label>
+                                <input
+                                    type="text"
+                                    className="login-username"
+                                    required={true}
+                                    placeholder="John"
+                                    {...formikSignUp.getFieldProps('prenom')}
+                                />
+                                {formikSignUp.touched.prenom && formikSignUp.errors.prenom ? (
+                                    <div style={{ color: "red", maxWidth: '300px', fontSize: '10px' }} className="error">{formikSignUp.errors.prenom}</div>
+                                ) : null}
+                            </div>
+                            <div className='input-form'>
+                                <label htmlFor="Email">Email *</label>
+                                <input
+                                    type="email"
+                                    className="login-username"
+                                    required={true}
+                                    placeholder="@example.com"
+                                    {...formikSignUp.getFieldProps('clientEmail')}
+                                />
+                                {formikSignUp.touched.clientEmail && formikSignUp.errors.clientEmail ? (
+                                    <div style={{ color: "red", maxWidth: '300px', fontSize: '10px' }} className="error">{formikSignUp.errors.clientEmail}</div>
+                                ) : null}
+                            </div>
+                            <div className='input-form'>
+                                <label htmlFor="Password">Mot de passe *</label>
+                                <input
+                                    type="password"
+                                    className="login-password"
+                                    required={true}
+                                    placeholder="Entrez votre mot de passe"
+                                    {...formikSignUp.getFieldProps('clientPassword')}
+                                />
+                                {formikSignUp.touched.clientPassword && formikSignUp.errors.clientPassword ? (
+                                    <div style={{ color: "red", maxWidth: '300px', fontSize: '10px' }} className="error">{formikSignUp.errors.clientPassword}</div>
+                                ) : null}
+                            </div>
+                            <div className='input-form'>
+                                <label htmlFor="confirmPassword">Confirmer votre mot de passe *</label>
+                                <input
+                                    type="password"
+                                    className="login-password"
+                                    required={true}
+                                    placeholder="Confirmez votre mot de passe"
+                                    {...formikSignUp.getFieldProps('confirmPassword')}
+                                />
+                                {formikSignUp.touched.confirmPassword && formikSignUp.errors.confirmPassword ? (
+                                    <div style={{ color: "red", maxWidth: '300px', fontSize: '10px' }} className="error">{formikSignUp.errors.confirmPassword}</div>
+                                ) : null}
+                            </div>
+
+                            {/* Case à cocher pour accepter les termes et conditions */}
+                            <div style={{ maxWidth: '300px', fontSize: '10px', margin: '1rem 0', textAlign:'center' }} className='input-form'>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="terms"
+                                        required={true}
+                                        {...formikSignUp.getFieldProps('terms')}
+                                    />
+                                    J'accepte les <a href="/terms" target="_blank">Conditions Générales</a> et la <a href="/privacy" target="_blank">Politique de confidentialité</a>.
+                                </label>
+                                {formikSignUp.touched.terms && formikSignUp.errors.terms ? (
+                                    <div style={{ color: "red", maxWidth: '300px', fontSize: '10px' }} className="error">{formikSignUp.errors.terms}</div>
+                                ) : null}
+                            </div>
+
+                            <input type="submit" name="SignUp" value="M'inscrire" className="login-submit" />
+
+                            {/* Affichage de la pop-up si showPopup est vrai */}
+                            {showPopup && (
+                                <div style={{ color: "red", maxWidth: '300px', fontSize: '10px' }} className="popup">
+                                    <p>Inscription réussie ! Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception.</p>
+                                </div>
+                            )}
+
+                            <Container maxWidth="md" style={{ margin: '1rem auto', maxWidth:'400px' }}>
+
+                            <Typography 
+                                variant="body2" 
+                                paragraph 
+                                style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                            >
+                                En créant un compte ou en passant commande sur Hathyre, vous acceptez nos
+                                <Link to="/conditions-ventes" color="primary" style={{ marginLeft: '0.5rem' }}>
+                                    Conditions Générales de Vente
+                                </Link>. <br /> 
+                                Vous consentez au traitement de vos données personnelles, conformément à notre 
+                                <Link to="/politique-de-confidentialite" color="primary" style={{ marginLeft: '0.5rem' }}>
+                                    Politique de Confidentialité
+                                </Link>.
+                            </Typography>
+                            <Typography 
+                                variant="body2" 
+                                paragraph 
+                                style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                            >
+                                Les informations vous concernant sont destinées à notre société Hathyre, responsable du traitement, afin de traiter vos commandes et de vous envoyer des offres et communications Hathyre par email ou SMS.
+                            </Typography>
+                            <Typography 
+                                variant="body2" 
+                                paragraph 
+                                style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                            >
+                                Conformément à la réglementation sur les données personnelles, vous disposez d’un droit d’accès, de rectification et d’opposition au traitement de vos données. Pour exercer vos droits, il vous suffit de nous contacter via ce formulaire en indiquant votre nom, prénom, adresse, email et un justificatif d’identité. Vous pouvez vous désinscrire à tout moment en cliquant sur le lien de désinscription inclus dans toutes nos communications.
+                            </Typography>
+                            <Typography 
+                                variant="body2" 
+                                paragraph 
+                                style={{ fontSize: '0.5rem', lineHeight: '1.2' }} // Ajustement de la taille de la police
+                            >
+                                Pour plus d’informations, n’hésitez pas à consulter notre page 
+                                <Link to="/faq" color="primary" style={{ marginLeft: '0.5rem' }}>
+                                    Questions Fréquemment Posées
+                                </Link>.
+                            </Typography>
+                            </Container>
+                        </form>
+
+                    </div>
                 </div>
             </div>
+        </>
 
-            <div className='login'>
-                {/* Formulaire de Connexion */}
-                <div>
-                    <h1>J'ai déjà un compte</h1>
-                    <p>Connectez-vous à votre compte existant</p>
-
-                    <form className="login-form" onSubmit={formikLogin.handleSubmit}>
-                        <div className='input-form'>
-                            <label htmlFor="Email">Email</label>
-                            <input
-                                type="email"
-                                className="login-username"
-                                required
-                                placeholder="xxxx@example.com"
-                                {...formikLogin.getFieldProps('clientEmail')}
-                            />
-                            {formikLogin.touched.clientEmail && formikLogin.errors.clientEmail ? (
-                                <div className="error">{formikLogin.errors.clientEmail}</div>
-                            ) : null}
-                        </div>
-                        <div className='input-form'>
-                            <label htmlFor="Password">Mot de passe</label>
-                            <input
-                                type="password"
-                                className="login-password"
-                                required
-                                placeholder="Entrez votre mot de passe"
-                                {...formikLogin.getFieldProps('clientPassword')}
-                            />
-                            {formikLogin.touched.clientPassword && formikLogin.errors.clientPassword ? (
-                                <div className="error">{formikLogin.errors.clientPassword}</div>
-                            ) : null}
-                        </div>
-                        {loginError && <div className="error">{loginError}</div>}
-
-                        <input type="submit" name="Login" value="M'identifier" className="login-submit" />
-                    </form>
-                    <Link to="#" className="login-forgot-pass">Mot de passe oublié ?</Link>
-                    
-                    {/* Affichage de la pop-up si showPopup est vrai */}
-                    {loginError && (
-                        <div style={{color:"red"}} className="popup">
-                            <p>{loginError}</p>
-                        </div>
-                    )}
-                </div>
-
-                {/* Formulaire d'Inscription */}
-                <div>
-                    <h1>Nouveau Client</h1>
-                    <p>Créez votre espace Hathyre pour une expérience d'achat personnalisée.</p>
-
-                    <form className="login-form" onSubmit={formikSignUp.handleSubmit}>
-                        <div className='input-form'>
-                            <label htmlFor="Name">Votre nom *</label>
-                            <input
-                                type="text"
-                                className="login-username"
-                                required={true}
-                                placeholder="ex: Smith"
-                                {...formikSignUp.getFieldProps('nom')}
-                            />
-                            {formikSignUp.touched.nom && formikSignUp.errors.nom ? (
-                                <div className="error">{formikSignUp.errors.nom}</div>
-                            ) : null}
-                        </div>
-                        <div className='input-form'>
-                            <label htmlFor="Name">Votre prénom *</label>
-                            <input
-                                type="text"
-                                className="login-username"
-                                required={true}
-                                placeholder="ex: John"
-                                {...formikSignUp.getFieldProps('prenom')}
-                            />
-                            {formikSignUp.touched.prenom && formikSignUp.errors.prenom ? (
-                                <div className="error">{formikSignUp.errors.prenom}</div>
-                            ) : null}
-                        </div>
-                        <div className='input-form'>
-                            <label htmlFor="Email">Email *</label>
-                            <input
-                                type="email"
-                                className="login-username"
-                                required={true}
-                                placeholder="xxxx@example.com"
-                                {...formikSignUp.getFieldProps('clientEmail')}
-                            />
-                            {formikSignUp.touched.clientEmail && formikSignUp.errors.clientEmail ? (
-                                <div className="error">{formikSignUp.errors.clientEmail}</div>
-                            ) : null}
-                        </div>
-                        <div className='input-form'>
-                            <label htmlFor="Password">Mot de passe *</label>
-                            <input
-                                type="password"
-                                className="login-password"
-                                required={true}
-                                placeholder="Entrez votre mot de passe"
-                                {...formikSignUp.getFieldProps('clientPassword')}
-                            />
-                            {formikSignUp.touched.clientPassword && formikSignUp.errors.clientPassword ? (
-                                <div className="error">{formikSignUp.errors.clientPassword}</div>
-                            ) : null}
-                        </div>
-                        <div className='input-form'>
-                            <label htmlFor="Password">Confirmer votre mot de passe *</label>
-                            <input
-                                type="password"
-                                className="login-password"
-                                required={true}
-                                placeholder="Entrez votre mot de passe"
-                                {...formikSignUp.getFieldProps('confirmPassword')}
-                            />
-                            {formikSignUp.touched.confirmPassword && formikSignUp.errors.confirmPassword ? (
-                                <div className="error">{formikSignUp.errors.confirmPassword}</div>
-                            ) : null}
-                        </div>
-
-                        <input type="submit" name="SignUp" value="M'inscrire" className="login-submit" />
-                    </form>
-
-                    {/* Affichage de la pop-up si showPopup est vrai */}
-                    {showPopup && (
-                        <div style={{color:"red"}}  className="popup">
-                            <p>Inscription réussie ! Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception.</p>
-                        </div>
-                    )}
-                </div>
-            </div>
-        </div>
     );
 }
 

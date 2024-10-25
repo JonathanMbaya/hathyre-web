@@ -28,6 +28,9 @@ export const CartProvider = ({ children }) => {
             // Arrondir le prix final à 2 chiffres après la virgule
             finalPrice = parseFloat(finalPrice.toFixed(2));
 
+            // Compléter l'URL de l'image si nécessaire
+            const imageUrl = product.image;
+
             // Vérifier si le produit existe déjà dans le panier
             const existingProductIndex = cartItems.findIndex(item => item._id === product._id);
             if (existingProductIndex !== -1) {
@@ -43,7 +46,7 @@ export const CartProvider = ({ children }) => {
                         ...product, 
                         price: parseFloat(finalPrice.toFixed(2)), 
                         quantity: count,
-                        imageUrl: product.imageUrl // Assurez-vous d'inclure l'URL de l'image ici
+                        imageUrl: imageUrl // Assurez-vous d'inclure l'URL de l'image ici
                     }
                 ]);
             }

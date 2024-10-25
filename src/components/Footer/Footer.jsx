@@ -41,13 +41,13 @@ function Footer() {
                                 </li>
                                 
                                 <li>
-                                    <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+                                    <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/apropos" >
                                         A propos de Hathyre
                                     </Link>
                                 </li> 
                                                         
                                 <li>
-                                    <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/product" >
+                                    <Link className='link-without-decoration'  style={{textAlign: "left"}} to="/faq" >
                                         FAQ
                                     </Link>
                                 </li>

@@ -123,13 +123,12 @@ function PersonalData() {
 
   return (
     <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Typography variant="h4" align="left" gutterBottom>
+      <h2>
         Données personnelles
-      </Typography>
+      </h2>
 
       <Box component="form" noValidate autoComplete="off">
         <Grid container spacing={3}>
-          {/* Sexe */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <InputLabel id="civilite-label">Civilité</InputLabel>

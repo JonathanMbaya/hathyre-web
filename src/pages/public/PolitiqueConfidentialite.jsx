@@ -30,7 +30,7 @@ function PolitiqueConfidentialite() {
                         1. Introduction
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
-                        La présente Politique de confidentialité décrit la façon dont vos informations personnelles sont recueillies, utilisées et partagées lorsque vous vous rendez sur <strong>welovekekeli.com</strong> (le « Site ») ou que vous y effectuez un achat.
+                        La présente Politique de confidentialité décrit la façon dont vos informations personnelles sont recueillies, utilisées et partagées lorsque vous vous rendez sur <strong>hathyre.com</strong> (le « Site ») en vous connectant ou  que vous y effectuez un achat.
                     </Typography>
 
                     {/* Deuxième section */}
@@ -52,12 +52,10 @@ function PolitiqueConfidentialite() {
                         Voici une liste des fichiers témoins que nous utilisons. Nous les avons énumérés ici pour que vous puissiez choisir si vous souhaitez les autoriser ou non :
                     </Typography>
                     <Typography component="ul" style={{ textAlign: 'justify', marginLeft: '1rem' }}>
-                        <li><strong>_session_id</strong> : identificateur unique de session, permet à Shopify de stocker les informations relatives à votre session (référent, page de renvoi, etc.).</li>
-                        <li><strong>_shopify_visit</strong> : aucune donnée retenue, persiste pendant 30 minutes depuis la dernière visite.</li>
-                        <li><strong>_shopify_uniq</strong> : aucune donnée retenue, expire à minuit (selon l’emplacement du visiteur) le jour suivant.</li>
-                        <li><strong>cart</strong> : identificateur unique, persiste pendant 2 semaines, stocke l’information relative à votre panier d’achat.</li>
-                        <li><strong>_secure_session_id</strong> : identificateur unique de session.</li>
-                        <li><strong>storefront_digest</strong> : identificateur unique, utilisé pour savoir si le visiteur actuel a accès à la boutique.</li>
+                        <p><strong>id & token</strong> : identificateur unique de session, permet à notre serveur de stocker les informations relatives à votre session (référent, nom , prénom et favoris , commandes, etc.).</p>
+                        <p><strong>Les données sessions</strong> : aucune donnée retenue, ne persiste plus d'une 1H, au bout d'une heure vous serez amener à vous reconnecter de nouveau</p>
+                        <p><strong>Les données du panier</strong> : identificateur unique, persiste pendant 2 semaines, stocke l’information relative à votre panier d’achat.</p>
+                        <p><strong>Token Client</strong> : identificateur unique , a pour but est de nous permettre à savoir qui est connecté et d'assurer la sécurité de vos données.</p>
                     </Typography>
 
                     {/* Troisième section */}
@@ -68,9 +66,9 @@ function PolitiqueConfidentialite() {
                         En général, nous utilisons les Informations sur la commande que nous recueillons pour traiter les commandes passées via le Site (y compris le traitement des informations de paiement, l'organisation de l'expédition et la fourniture de factures et/ou de confirmations de commande). En outre, nous utilisons ces informations pour :
                     </Typography>
                     <Typography component="ul" style={{ textAlign: 'justify', marginLeft: '1rem' }}>
-                        <li>Communiquer avec vous ;</li>
-                        <li>Évaluer les fraudes ou risques potentiels ;</li>
-                        <li>Vous fournir des informations ou des publicités liées à nos produits ou services, selon les préférences que vous avez partagées avec nous.</li>
+                        <p>- Communiquer avec vous via Stripe;</p>
+                        <p>- Évaluer les fraudes ou risques potentiels avec Stripe ;</p>
+                        <p>- Vous fournir des informations ou des publicités liées à nos produits ou services, selon les préférences que vous avez partagées avec nous.</p>
                     </Typography>
 
                     {/* Quatrième section */}
@@ -78,7 +76,8 @@ function PolitiqueConfidentialite() {
                         4. Partage de vos informations personnelles
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
-                        Nous partageons vos informations personnelles avec des tiers pour nous aider à les utiliser comme décrit ci-dessus. Par exemple, nous utilisons Shopify pour héberger notre boutique en ligne. Pour plus de détails sur l'utilisation de vos informations personnelles par Shopify, consultez cette page : <a href="https://www.shopify.fr/legal/confidentialite" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff' }}>Politique de confidentialité de Shopify</a>.
+                        Nous partageons vos informations personnelles avec des tiers pour nous aider à les utiliser comme décrit ci-dessus. Par exemple, nous utilisons IONOS pour héberger notre boutique en ligne. Pour plus de détails sur l'utilisation de vos informations personnelles par IONOS, consultez cette page : <a href="https://www.ionos.fr/terms-gtc/clause-de-confidentialite/?source=termsandconditions" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff' }}>Politique de confidentialité de IONOS</a>.
+                        De plus pour nous perrmettre de sécuriser toutes les transactions d'argent, et nous permettre de faire un suivi complet sur toutes les données nécessaires à l'amélioration de nos services nous octroyaosn le droit de à Stripe de récolter vos données pour réaliser les paienements.
                     </Typography>
 
                     {/* Cinquième section */}
@@ -125,8 +124,8 @@ function PolitiqueConfidentialite() {
                         9. Nous contacter
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
-                        Pour en savoir plus sur nos pratiques de confidentialité, si vous avez des questions ou si vous souhaitez déposer une plainte, veuillez nous contacter par e-mail à <strong>kekeliassistance@gmail.com</strong>, ou par courrier à l’adresse suivante :<br />
-                        50 avenue des Champs Elysées, 75008 Paris, France.
+                        Pour en savoir plus sur nos pratiques de confidentialité, si vous avez des questions ou si vous souhaitez déposer une plainte, veuillez nous contacter par e-mail à <strong>hathyre-assistance@gmail.com</strong>, ou par courrier à l’adresse suivante :<br />
+                        8 Passage Edith Piaf , 91390 Morsang-sur-Orge.
                     </Typography>
 
                     {/* Date de mise à jour */}

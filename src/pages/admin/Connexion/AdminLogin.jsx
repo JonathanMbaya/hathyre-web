@@ -67,7 +67,7 @@ function AdminLogin() {
                             className="login-username" 
                             autoFocus={true} 
                             required={true} 
-                            placeholder="xxxx@example.com" 
+                            placeholder="@example.com" 
                             value={email} 
                             onChange={(e) => setEmail(e.target.value)} 
                         />

@@ -20,7 +20,7 @@ export const PurchaseProvider = ({ children }) => {
         const loadPurchaseHistory = async () => {
             if (userConnected) {
                 try {
-                    const response = await axios.get(`https://hathyre-server-api.onrender.com/api/purchases/${userConnected._id}`);
+                    const response = await axios.get(`https://hathyre-server-api.onrender.com/api/${userConnected._id}`);
                     setPurchaseHistory(response.data.purchases);
                 } catch (error) {
                     console.error("Erreur lors de la récupération des achats :", error);
@@ -40,8 +40,25 @@ export const PurchaseProvider = ({ children }) => {
         }
     };
 
+    // Demander un remboursement
+    const requestRefund = async (orderId) => {
+        try {
+            const response = await axios.post(`https://hathyre-server-api.onrender.com/api/purchases/${userConnected._id}/${orderId}/refund`);
+            const updatedOrder = response.data.updatedOrder;
+
+            // Mettre à jour l'historique des achats
+            setPurchaseHistory((prevHistory) =>
+                prevHistory.map((purchase) =>
+                    purchase._id === orderId ? updatedOrder : purchase
+                )
+            );
+        } catch (error) {
+            console.error("Erreur lors de la demande de remboursement :", error);
+        }
+    };
+
     return (
-        <PurchaseContext.Provider value={{ purchaseHistory, placeOrder }}>
+        <PurchaseContext.Provider value={{ purchaseHistory, placeOrder, requestRefund }}>
             {children}
         </PurchaseContext.Provider>
     );

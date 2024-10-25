@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../context/card.context';
 import { LoginContext } from '../../context/login.context';
-// import StripeContainer from '../Stripe/StripeContainer.jsx';
 import 'animate.css';
 import './Basket.css';
 import PopUpLogin from '../PopUp/PopUpLogin';
@@ -57,22 +56,39 @@ function Basket() {
                     <h2>Votre panier</h2>
 
                     <div className='products-scroll'>
-                        {cartItems.map((item, index) => (
-                            <div style={{borderRadius : ".5rem"}} className='item-product-card' key={index}>
-                                {   item.promo > 0 ?
-                                    <p>-{item.promo}%</p>:
-                                    <p>{item.promo}</p> 
-                                }
-                                <p>{item.price} EUR</p>
-                                <p>{item.name}</p>
-                                <p>{item.quantity} X</p>
-                                <FontAwesomeIcon icon={faTrash} onClick={() => handleRemoveFromCart(item._id)} />
-                            </div>
-                        ))}
+                        {cartItems.length === 0 ? (
+                            <p>Votre panier est vide.</p>
+                        ) : (
+                            cartItems.map((item, index) => (
+                                <div style={{borderRadius : ".5rem"}} className='item-product-card' key={index}>
+                                    {item.promo > 0 && 
+                                        <span style={{
+                                            position:'absolute',
+                                            zIndex: '1000',
+                                            height:'30px',
+                                            width:'30px',
+                                            display:'flex',
+                                            justifyContent:'center',
+                                            alignItems:'center',
+                                            borderRadius: '100%',
+                                            background:'yellow',
+                                            fontSize:'10px',
+                                            left:'1rem',
+                                            marginBottom:'4rem'
+                                        }}>-{item.promo}%</span>
+                                    }
+                                    <img src={item.imageUrl} alt={item.name} style={{ maxWidth: '50px', height: '50px', objectFit: 'contain', borderRadius:'.5rem' }} />
+                                    <p>{item.price} EUR</p>
+                                    <p>{item.name}</p>
+                                    <p>{item.quantity} X</p>
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => handleRemoveFromCart(item._id)} />
+                                </div>
+                            ))
+                        )}
                     </div>
 
                     <div className='price-total'>
-                        <p>{parseFloat(totalPrice.toFixed(2))} EUR</p>
+                        <p>{parseFloat(totalPrice.toFixed(2)).toLocaleString('fr-FR')} EUR</p>
 
                         {showPopup && <PopUpLogin />}
 

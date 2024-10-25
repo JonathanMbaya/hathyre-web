@@ -47,6 +47,7 @@ function TermsConditions() {
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
                         Les commandes peuvent être passées directement sur le site internet. L’acheteur recevra une confirmation de commande par e-mail après validation.
+                        Ainsi qu'un suivi constant sur l'acheminement de sa commande soit par mail soit via les sites de nos transporteurs partenaires.
                     </Typography>
 
                     {/* Section 4 */}
@@ -62,7 +63,7 @@ function TermsConditions() {
                         5. Paiement
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
-                        Le paiement est exigible immédiatement à la commande. Les moyens de paiement acceptés sont la carte bancaire et PayPal. Toutes les transactions sont sécurisées.
+                        Le paiement est exigible immédiatement à la commande. Les moyens de paiement acceptés sont la carte bancaire via Stripe et PayPal. Toutes les transactions sont sécurisées et avec validation 3D Secure.
                     </Typography>
 
                     {/* Section 6 */}
