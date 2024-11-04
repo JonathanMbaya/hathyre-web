@@ -21,8 +21,8 @@ const ProductSkeleton = () => (
     <div>
         <Grid item xs={4} sm={4}>
             <Skeleton variant="rectangular" width={310} height={218} />
-            <Skeleton variant="text" width={310} />
-            <Skeleton variant="text" width={310} />
+            <Skeleton variant="text" width={210} />
+            <Skeleton variant="text" width={110} />
         </Grid>
     </div>
 );

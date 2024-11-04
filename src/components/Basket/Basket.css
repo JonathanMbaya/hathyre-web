@@ -7,6 +7,26 @@
     z-index: 9000000000;
 }
 
+.backScreenBasket{
+    height: 100vh;
+    width: 100%;
+    top: 0px;
+    right: 0px;
+    position: fixed;
+    z-index: 90000;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.basketEmpty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: larger;
+    color: white;
+    width: 100%;
+}
+
 .product-basket {
     background-color: bisque;
     padding: .02rem;
@@ -81,7 +101,7 @@
     padding: 2rem 0 0 2rem;
     width: 80%;
     position: fixed;
-    bottom: 4rem;
+    bottom: 2rem;
     color: bisque;
     font-size: 30px;
     font-weight: bolder;

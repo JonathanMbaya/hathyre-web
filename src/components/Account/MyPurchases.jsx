@@ -6,39 +6,21 @@ import { LoginContext } from '../../context/login.context.jsx'; // Contexte util
 function MyPurchases() {
     const { userConnected } = useContext(LoginContext); // Récupérer l'utilisateur connecté
     const [purchaseHistory, setPurchaseHistory] = useState([]); // Stocker l'historique des commandes
-    // const [articles, setArticles] = useState([]); // Stocker l'historique des commandes
 
-
-    // Charger l'historique des commandes de l'utilisateur à partir de l'API
     useEffect(() => {
         const fetchPurchases = async () => {
             try {
                 if (userConnected) {
-                    // Appel API pour récupérer l'historique des commandes
                     const response = await axios.get(`https://hathyre-server-api.onrender.com/api/client/${userConnected._id}`);                    
                     const purchaseIds = response.data.purchases;
-                    // Étape 2 : Récupérer les détails de chaque commandes passées
                     const purchaseDetailsPromises = purchaseIds.map(async (purchaseId) => {
                         const purchaseResponse = await axios.get(`https://hathyre-server-api.onrender.com/api/orders/${purchaseId}`);
                         return purchaseResponse.data;
                     });
 
-                    // Attendre que toutes les requêtes soient terminées
-                    const purchase = await Promise.all(purchaseDetailsPromises);
-                    setPurchaseHistory(purchase); // Mettre à jour les produits favoris avec les informations complètes
-
-                    console.log(purchase);
-
-                    // const articleDetailsPromises = purchase.map(async (articleId) => {
-                    //     const articleData = await axios.get(`https://hathyre-server-api.onrender.com/api/product/${articleId.productId}`);
-                    //     return articleData.data;
-
-                    // });
-
-                    // // Attendre que toutes les requêtes soient terminées
-                    // const articleDatas = await Promise.all(articleDetailsPromises);
-                    // setArticles(articleDatas); // Mettre à jour les produits favoris avec les informations complètes
-
+                    const purchases = await Promise.all(purchaseDetailsPromises);
+                    setPurchaseHistory(purchases);
+                    console.log(purchases);
                 }
                 
             } catch (error) {
@@ -53,10 +35,26 @@ function MyPurchases() {
         return <Typography variant="h6">Veuillez vous connecter pour voir vos commandes.</Typography>;
     }
 
-    // Fonction pour demander un remboursement
-    const handleRefundRequest = async (orderId) => {
+    const handleRefundRequest = async (purchase) => {
+        const currentDate = new Date();
+        const orderDate = new Date(purchase.date);
+        const daysSincePurchase = Math.floor((currentDate - orderDate) / (1000 * 60 * 60 * 24));
+
+        // Vérifier si la demande de remboursement est dans la période de 14 jours
+        if (daysSincePurchase > 14) {
+            alert("La période de remboursement de 14 jours est expirée.");
+            return;
+        }
+
         try {
-            const response = await axios.post(`https://hathyre-server-api.onrender.com/api/purchases/${orderId}/refund`);
+            const refundData = {
+                paymentIntentId: purchase.paymentIntentId.split('_secret_')[0],
+                amount: parseFloat(purchase.montantTotal),
+                orderId: purchase._id,
+                userEmail: purchase.email,
+            };
+
+            const response = await axios.post(`https://hathyre-server-api.onrender.com/api/stripe/refund`, refundData);
             if (response.data.success) {
                 alert('Votre demande de remboursement a été envoyée.');
                 // Mettre à jour l'historique des commandes localement si nécessaire
@@ -67,18 +65,43 @@ function MyPurchases() {
     };
 
     return (
-        <Box sx={{ padding: '2rem' }}>
+        <Box sx={{ padding: '0rem' }}>
             <h2>Mes commandes</h2>
 
             {purchaseHistory.length > 0 ? (
                 <Grid container spacing={10}>
                     {purchaseHistory.map((purchase) => (
-                        <Grid item key={purchase._id} xs={12} sm={6} md={4} lg={3}>
-                            <Card sx={{ minWidth: "400px" }}>
+                        <Grid item key={purchase._id} xs={12} sm={12} md={12} lg={12}>
+                            <Card>
                                 <CardContent>
                                     <Typography variant="h6" component="div">
                                         Commande #{purchase._id}
                                     </Typography>
+
+                                    {purchase.articles.map((article) => (
+                                        <Box 
+                                            key={article._id} 
+                                            sx={{ 
+                                                display: "flex",
+                                                justifyContent: "space-around",
+                                                alignItems: "center",
+                                                backgroundColor: "blanchedalmond",
+                                                padding: ".5rem",
+                                                borderRadius: ".3rem",
+                                                marginBottom: ".5rem"
+                                            }}
+                                        >
+                                            <img 
+                                                style={{ width: '60px', height: '60px', borderRadius: '.3rem' }} 
+                                                src={article.productImage} 
+                                                alt={article.productName} 
+                                            />
+                                            <Typography>{article.quantity}</Typography>
+                                            <Typography>{article.productName}</Typography>
+                                            <Typography>{article.price} EUR</Typography>
+                                        </Box>
+                                    ))}
+
                                     <Typography variant="body1">
                                         Date: {new Date(purchase.date).toLocaleDateString()}
                                     </Typography>
@@ -89,10 +112,9 @@ function MyPurchases() {
                                         Statut: {purchase.status}
                                     </Typography>
 
-                                    {/* Bouton pour demander un remboursement */}
                                     {purchase.status === 'Livré' && (
                                         <Box sx={{ marginTop: '10px' }}>
-                                            <button onClick={() => handleRefundRequest(purchase._id)}>
+                                            <button onClick={() => handleRefundRequest(purchase)}>
                                                 Demander un remboursement
                                             </button>
                                         </Box>

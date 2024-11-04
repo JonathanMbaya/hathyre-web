@@ -13,6 +13,7 @@ function PersonalData() {
     prenom: '',
     clientEmail: '',
     birthday: '',
+    mobile: '',
   });
   
   const [loading, setLoading] = useState(true); // État pour le chargement
@@ -53,6 +54,8 @@ function PersonalData() {
           prenom: response.data.prenom || '',
           clientEmail: response.data.clientEmail || '',
           birthday: formatDate(response.data.birthday) || '',
+          mobile: response.data.mobile || '',
+
         });
       } catch (error) {
         console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
@@ -79,6 +82,7 @@ function PersonalData() {
       prenom: formData.prenom,
       clientEmail: formData.clientEmail,
       birthday: formData.birthday,
+      mobile: formData.mobile
     };
 
     if (!formData.nom || !formData.prenom || !formData.clientEmail) {
@@ -194,10 +198,25 @@ function PersonalData() {
               type="date"
               name="birthday"
               value={formData.birthday}
+              variant="outlined"
               onChange={handleInputChange}
               InputLabelProps={{
                 shrink: true,
               }}
+            />
+          </Grid>
+
+          
+          {/* Mobile */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Téléphone"
+              type="mobile"
+              name="mobile"
+              variant="outlined"
+              value={formData.mobile}
+              onChange={handleInputChange}
             />
           </Grid>
         </Grid>

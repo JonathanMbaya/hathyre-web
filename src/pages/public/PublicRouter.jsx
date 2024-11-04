@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { Routes , Route } from "react-router-dom";
+import { Routes , Route  } from "react-router-dom";
 import Header from '../../components/Header/Header.jsx';
 import HomePage from './HomePage';
 import ProductPage from './ProductPage.jsx';
 import AboutPage from './AboutPage.jsx';
-import Login from "../admin/Connexion/Login.jsx";
+import SignUp from "../admin/Connexion/SignUp.jsx";
 import AccountPage from "./AccountPage.jsx";
 import SingleProductPage from './SingleProductPage.jsx';
 import StripeContainer from '../../components/Stripe/StripeContainer.jsx';
@@ -16,6 +16,7 @@ import Error from './Error.jsx';
 import ValidationPayment from './ValidationPayment.jsx';
 
 function PublicRouter ()  {
+
 
     const [ currentPage, setCurrentPage] = useState('');
     return (
@@ -53,13 +54,14 @@ function PublicRouter ()  {
                 />
 
                 <Route
-                    path="/login"
-                    element={<Login/>}
+                    path="/signup"
+                    element={<SignUp/>}
                     render={() => {
-                        setCurrentPage('account');
-                        return <Login/>;
+                        setCurrentPage('signup');
+                        return <SignUp/>;
                     }}
                 />
+
 
                 <Route
                     path="/account"

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PersonalData from "../../components/Account/PersonalData.jsx";
 import MyFavorites from "../../components/Account/MyFavorites.jsx";
 import MyPurchases from '../../components/Account/MyPurchases.jsx';
@@ -54,9 +54,14 @@ function AccountPage() {
         }
 
         // Rediriger vers la page de connexion
-        navigate('/login'); // Redirection après déconnexion
+        navigate('/'); // Redirection après déconnexion
     };
 
+    useEffect(() => {
+        if (!userConnected) {
+            navigate("/");
+        }
+    }, [userConnected, navigate]);
     return (
         <>
             {/* Bouton burger en mode mobile */}

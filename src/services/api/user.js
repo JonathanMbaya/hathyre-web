@@ -13,7 +13,7 @@ import { adminInstance, instance } from "./axiosInstance.js";
  * @throws {Error} Si la requête échoue, une erreur est renvoyée.
  */
 export async function signup(user) {
-   const response = await instance.post("add/client", user);
+   const response = await instance.post("/add/client", user);
    return response;
 }
 

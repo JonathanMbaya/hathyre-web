@@ -34,7 +34,13 @@ const ListProducts = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [sortByName, setSortByName] = useState('');
   const [sortByPrice, setSortByPrice] = useState('');
-  const [openLogin, setOpenLogin] = useState(false); // État pour ouvrir/fermer la modale
+  const [showLoginPopup, setShowLoginPopup] = useState(false); 
+
+  const handleCloseLogin = () => {
+
+    setShowLoginPopup(false); 
+  
+  };
 
   const [hoveredProductId, setHoveredProductId] = useState(null); // État pour le produit survolé
 
@@ -43,7 +49,7 @@ const ListProducts = () => {
 
   const handleLikeToggle = (productId) => {
     if (!userConnected) {
-      setOpenLogin(true); // Ouvrir la modale de connexion si l'utilisateur n'est pas connecté
+      setShowLoginPopup(true); 
       return;
     }
 
@@ -54,9 +60,6 @@ const ListProducts = () => {
     }
   };
 
-  const handleCloseLogin = () => {
-    setOpenLogin(false); // Fermer la modale
-  };
 
   // Filtrage et tri des produits
   const filteredProducts = products
@@ -190,7 +193,9 @@ const ListProducts = () => {
       </Grid>
 
       {/* Affichage du pop-up de connexion */}
-      <PopLogin open={openLogin} handleClose={handleCloseLogin} />
+      <PopLogin open={showLoginPopup} handleClose={handleCloseLogin} />
+
+      
     </Box>
   );
 };
