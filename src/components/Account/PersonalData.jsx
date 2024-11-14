@@ -1,12 +1,11 @@
-import React, { useContext, useState, useEffect} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Container, Typography, Grid, Box } from '@mui/material';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Container, Typography, Grid, Box, Snackbar, Alert, CircularProgress } from '@mui/material';
 import { LoginContext } from '../../context/login.context';
 
 function PersonalData() {
   const { userConnected, setUserConnected } = useContext(LoginContext);
-  
-  // État pour les données utilisateur
+
   const [formData, setFormData] = useState({
     civilite: '',
     nom: '',
@@ -15,39 +14,26 @@ function PersonalData() {
     birthday: '',
     mobile: '',
   });
-  
-  const [loading, setLoading] = useState(true); // État pour le chargement
+
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState('');
 
-  // Fonction utilitaire pour formater la date au format 'YYYY-MM-DD'
   const formatDate = (date) => {
     if (!date) return '';
     const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
+    return d.toISOString().split('T')[0];
   };
 
-  // Récupérer les données de l'utilisateur connecté lors du montage du composant
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
           `https://hathyre-server-api.onrender.com/api/client/${userConnected._id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          }
+          { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
         );
-        
-        // Mettre à jour l'état avec les données récupérées
+
         setFormData({
           civilite: response.data.civilite || '',
           nom: response.data.nom || '',
@@ -55,83 +41,62 @@ function PersonalData() {
           clientEmail: response.data.clientEmail || '',
           birthday: formatDate(response.data.birthday) || '',
           mobile: response.data.mobile || '',
-
         });
       } catch (error) {
-        console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
+        console.error('Erreur lors de la récupération des données :', error);
         setError('Erreur lors de la récupération des données. Veuillez réessayer.');
       } finally {
-        setLoading(false); // Fin du chargement
+        setLoading(false);
       }
     };
 
     fetchUserData();
-  }, [userConnected._id]); // Exécuter uniquement lorsque userConnected._id change
+  }, [userConnected._id]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(''); // Reset error on input change
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
-
-    const updatedUser = {
-      civilite: formData.civilite,
-      nom: formData.nom,
-      prenom: formData.prenom,
-      clientEmail: formData.clientEmail,
-      birthday: formData.birthday,
-      mobile: formData.mobile
-    };
-
     if (!formData.nom || !formData.prenom || !formData.clientEmail) {
       setError('Veuillez remplir tous les champs obligatoires.');
       return;
     }
 
-    // Utiliser startTransition pour envelopper la mise à jour de l'état
+    setSaving(true);
+    try {
+      const response = await axios.put(
+        `https://hathyre-server-api.onrender.com/api/update/client/${userConnected._id}`,
+        formData,
+        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+      );
 
-      try {
-        const response = await axios.put(
-          `https://hathyre-server-api.onrender.com/api/update/client/${userConnected._id}`,
-          updatedUser,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          }
-        );
-
-        setUserConnected(response.data);
-        setShowPopup(true);
-        setError('');
-
-        setTimeout(() => {
-          setShowPopup(false);
-        }, 3000);
-      } catch (error) {
-        console.error('Erreur lors de la mise à jour de l\'utilisateur :', error);
-        setError('Erreur lors de la mise à jour des données. Veuillez réessayer.');
-      }
-    
+      setUserConnected(response.data);
+      setShowPopup(true);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour :', error);
+      setError('Erreur lors de la mise à jour des données. Veuillez réessayer.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (loading) {
     return (
-      <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
-        <Typography variant="h5">Chargement des données...</Typography>
+      <Container maxWidth="md" sx={{ textAlign: 'center', mt: 5 }}>
+        <CircularProgress />
+        <Typography variant="h6">Chargement des données...</Typography>
       </Container>
     );
   }
 
   return (
-    <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column' }}>
-      <h2>
-        Données personnelles
-      </h2>
-
-      <Box component="form" noValidate autoComplete="off">
+    <Container maxWidth="md" sx={{ mt: 5 }}>
+      <Typography variant="h4" align="center" gutterBottom>Données personnelles</Typography>
+      
+      <Box component="form" noValidate autoComplete="off" onSubmit={handleSave}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
@@ -140,7 +105,6 @@ function PersonalData() {
                 labelId="civilite-label"
                 name="civilite"
                 value={formData.civilite}
-                label="Civilite"
                 onChange={handleInputChange}
               >
                 <MenuItem value="Monsieur">Monsieur</MenuItem>
@@ -150,94 +114,41 @@ function PersonalData() {
             </FormControl>
           </Grid>
 
-          {/* Nom */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Nom"
-              name="nom"
-              value={formData.nom}
-              onChange={handleInputChange}
-              variant="outlined"
-              required
-            />
+            <TextField fullWidth label="Nom" name="nom" value={formData.nom} onChange={handleInputChange} required />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label="Prénom" name="prenom" value={formData.prenom} onChange={handleInputChange} required />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label="Email" name="clientEmail" value={formData.clientEmail} onChange={handleInputChange} required type="email" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label="Date d'anniversaire" type="date" name="birthday" value={formData.birthday} onChange={handleInputChange} InputLabelProps={{ shrink: true }} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label="Téléphone" name="mobile" value={formData.mobile} onChange={handleInputChange} />
           </Grid>
 
-          {/* Prénom */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Prénom"
-              name="prenom"
-              value={formData.prenom}
-              onChange={handleInputChange}
-              variant="outlined"
-              required
-            />
-          </Grid>
-
-          {/* Email */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Email"
-              name="clientEmail"
-              value={formData.clientEmail}
-              onChange={handleInputChange}
-              variant="outlined"
-              required
-              type="email"
-            />
-          </Grid>
-
-          {/* Date de naissance */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Date d'anniversaire"
-              type="date"
-              name="birthday"
-              value={formData.birthday}
-              variant="outlined"
-              onChange={handleInputChange}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </Grid>
-
-          
-          {/* Mobile */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Téléphone"
-              type="mobile"
-              name="mobile"
-              variant="outlined"
-              value={formData.mobile}
-              onChange={handleInputChange}
-            />
+          <Grid xs={12} sm={12}>
+            <Box sx={{ textAlign: 'center', mt: 3 }}>
+              <Button variant="contained" color="primary" type="submit" disabled={saving}>
+                {saving ? <CircularProgress size={24} color="inherit" /> : 'Sauvegarder'}
+              </Button>
+            </Box>
           </Grid>
         </Grid>
-
-        {error && (
-          <Typography color="error.main">
-            {error}
-          </Typography>
-        )}
-        {showPopup && (
-          <Typography color="success.main">
-            Modifications sauvegardées avec succès !
-          </Typography>
-        )}
       </Box>
 
-      <Box sx={{ textAlign: 'center', marginTop: '2rem' }}>
-        <Button variant="contained" color="primary" onClick={handleSave}>
-          Sauvegarder
-        </Button>
-      </Box>
+      <Snackbar open={showPopup} autoHideDuration={3000} onClose={() => setShowPopup(false)} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+        <Alert onClose={() => setShowPopup(false)} severity="success">Modifications sauvegardées avec succès !</Alert>
+      </Snackbar>
+
+      {error && (
+        <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+          <Alert onClose={() => setError('')} severity="error">{error}</Alert>
+        </Snackbar>
+      )}
     </Container>
   );
 }

@@ -31,9 +31,8 @@ function LegalMentions() {
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
                         Nom de l’entreprise : <strong>KEKELI</strong><br />
-                        Forme juridique : SASU<br />
                         Capital social : 2000€<br />
-                        Adresse du siège social : 50 avenue des Champs Elysées<br />
+                        Adresse du siège social : 6 Passage Edith Piaf , Morsang sur Orge<br />
                         Immatriculation : 92479472000012<br />
                         Numéro de TVA intracommunautaire : FR66924794720
                     </Typography>
@@ -43,8 +42,7 @@ function LegalMentions() {
                         2. Coordonnées de Contact
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
-                        Email : info@welovekekel.com<br />
-                        Formulaire de contact : <a href="https://welovekekeli.com/pages/contact" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff' }}>Contactez-nous</a>
+                        Email : assistance.hathyreconsmetics@gmail.com<br />
                     </Typography>
 
                     {/* Troisième section */}
@@ -52,7 +50,7 @@ function LegalMentions() {
                         3. Hébergeur
                     </Typography>
                     <Typography paragraph style={{ textAlign: 'justify' }}>
-                        Nom de l’hébergeur : Shopify Inc.<br />
+                        Nom de l’hébergeur : IONOS<br />
                         Adresse de l’hébergeur : 150 Elgin Street, Suite 800, Ottawa, Ontario, K2P 1L4, Canada<br />
                         Téléphone de l’hébergeur : 1-888-746-7439
                     </Typography>

@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
+import axios from "axios";
 import PersonalData from "../../components/Account/PersonalData.jsx";
 import MyFavorites from "../../components/Account/MyFavorites.jsx";
 import MyPurchases from '../../components/Account/MyPurchases.jsx';
 import Footer from "../../components/Footer/Footer.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo, faHeart, faArrowRightFromBracket, faBars, faTimes, faTruck } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faHeart, faArrowRightFromBracket, faBars, faTimes, faTruck, faUserXmark } from "@fortawesome/free-solid-svg-icons";
 import { useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Importer useNavigate
 import { LoginContext } from "../../context/login.context.jsx";
@@ -57,6 +58,22 @@ function AccountPage() {
         navigate('/'); // Redirection après déconnexion
     };
 
+    const deleteAccount = () => {
+        axios
+            .delete(`https://hathyre-server-api.onrender.com/api/delete/client/${userConnected._id}`)
+            .then(response => {
+                console.log("Account deleted successfully:", response.data);
+                localStorage.removeItem('token');
+                localStorage.removeItem('id');
+                navigate('/');
+            })
+            .catch(error => {
+                console.error("Error deleting account:", error);
+                // Handle error
+            });
+    };
+    
+
     useEffect(() => {
         if (!userConnected) {
             navigate("/");
@@ -99,7 +116,7 @@ function AccountPage() {
                         </li>
                         <li onClick={() => { setActiveTab('purchases'); setIsSidebarOpen(false); }} style={{ cursor: 'pointer', marginBottom: '10px', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left' }}>
                             <span style={{ padding: ".5rem" }}>
-                                <FontAwesomeIcon icon={faHeart} />
+                                <FontAwesomeIcon icon={faTruck} />                                
                             </span>
                             Mes commandes
                         </li>
@@ -111,6 +128,15 @@ function AccountPage() {
                                 <FontAwesomeIcon icon={faArrowRightFromBracket} />
                             </span>
                             Déconnexion
+                        </li>
+                    </ul>
+
+                    <ul style={{ margin: "0", padding: "0" }}>
+                        <li onClick={deleteAccount} style={{ marginTop: '20px', cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left', color:'red' }}>
+                            <span style={{ padding: ".5rem" }}>
+                                <FontAwesomeIcon icon={faUserXmark} />
+                            </span>
+                            Supprimer mon compte
                         </li>
                     </ul>
                 </div>
@@ -150,6 +176,15 @@ function AccountPage() {
                                     <FontAwesomeIcon icon={faArrowRightFromBracket} />
                                 </span>
                                 Déconnexion
+                            </li>
+                        </ul>
+
+                        <ul style={{ margin: "0", padding: "0" }}>
+                            <li onClick={deleteAccount} style={{ marginTop: '20px', cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", textAlign: 'left', color:'red' }}>
+                                <span style={{ padding: ".5rem" }}>
+                                    <FontAwesomeIcon icon={faUserXmark} />
+                                </span>
+                                Supprimer mon compte
                             </li>
                         </ul>
                     </div>

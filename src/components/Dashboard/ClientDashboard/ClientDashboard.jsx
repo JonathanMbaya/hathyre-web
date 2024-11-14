@@ -81,10 +81,13 @@ const ClientDashboard = () => {
   };
 
   return (
+
+    <>
+    <div style={{ marginBottom: '1rem' }}>
+      <h1>Clients</h1>
+    </div>
+
     <Paper elevation={3} sx={{ padding: 2 }}>
-      <div style={{ marginBottom: '1rem' }}>
-        <h1>Clients</h1>
-      </div>
 
       <TableContainer>
         <Table>
@@ -158,6 +161,7 @@ const ClientDashboard = () => {
         </DialogActions>
       </Dialog>
     </Paper>
+    </>
   );
 };
 

@@ -93,7 +93,7 @@ function CheckoutForm() {
             const { id } = paymentMethod;
     
             // Envoyer la requête pour créer la commande avec le paiement
-            const response = await axios.post('https://hathyre-server-api.onrender.com/api/neworders', {
+            const response = await axios.post('http://localhost:8080/api/neworders', {
                 nom: customerInfo.lastName,
                 prenom: customerInfo.firstName,
                 email: customerInfo.email,
