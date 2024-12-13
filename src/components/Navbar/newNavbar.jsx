@@ -9,6 +9,7 @@ import { LoginContext } from "../../context/login.context.jsx";
 import Navbar from "./Navbar.jsx";
 import "./newNavbar.css";
 import "./BurgerMenu.css";
+import Carousel from "../InfoCarousel/Carousel.jsx";
 
 function NewNavbar() {
     const [results, setResults] = useState([]);
@@ -57,6 +58,7 @@ function NewNavbar() {
 
     return (
         <div className="nav">
+            <Carousel/>
             <div className="nav-high">
                 <div className={`page-search ${isOpenSearch ? 'openSearch' : ''}`}>
                     <div className='search'>
